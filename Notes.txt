@@ -1,0 +1,173 @@
+05/27/24
+JavaScript Tutorial Full Course - Beginner to Pro (2024)
+https://www.youtube.com/watch?v=EerdGm-ehJQ
+
+Type Coersion = Adding number to a string converts all to a string
+
+'$' + 20.95 = '$20.95'
+'$' + (20.95 + 7.99)
+<- '$28.93999999999998'
+
+Escape Chars:  \'  \"  \n
+
+Template Strings use back-ticks
+
+Interpolation
+
+`items (${1 + 1}): $${(2095 + 799) / 100}`
+
+Multi-Line Strings
+
+`line1
+line2
+line3`   => 'line1\nline2\nline3'
+
+Use 'str' by default
+If you need interpolation or multi-line use back-tick
+
+6/14/24
+
+Finished watching all of HTML / CSS class to reproduce the Youtube website
+
+6/16/24
+
+Continuing with Javascript video chapter 7 Functions 3:34:12
+https://www.youtube.com/watch?v=EerdGm-ehJQ
+
+return; returns undefined
+
+Multiline Strings
+In JavaScript the extra spaces show on the screen
+In HTML they are replaced with one space
+
+dot notation
+product.name
+product.delivery-time    -> Does not work.  Tries to do subtraction
+product['delivery-time'] -> Must be used in this case
+
+
+bracket notation
+product['name']
+
+
+Auto-Boxing - String has properties like length and methods like .ToUpperCase()
+Numbers:  3.0.toString()
+Boolean: true.toString()
+Not Allowed: null.property
+Not Allowed: undefined.method()
+
+Objects are references.  The object is in memory.  object1 gets a reference to the object.
+
+const object1 = {
+  message: 'hello'
+};
+
+Copy by reference 
+const object2 = object1;  //Both point to same object
+object1.message = 'Good Job!';  //Can do this because object1 is not changed
+
+Can't compare objects directly
+console.log(object3 === object1)  //Not equal if references are different 
+                                  //Does not compare members
+
+Destructuring Shortcut:
+ - Easier way to take properties out of an object:
+
+const object4 = {
+  message: 'Good job!',
+  price: 799
+};
+
+//const message = object4.message;
+const { message, price } = object4;
+
+
+Shorthand Property:
+
+const object5 = {
+  //message: message
+  message //short hand if variable name is same as object property
+};
+console.log(object5);
+
+Shorthand Method:
+
+const object5 = {
+  //message: message
+  message //short hand if variable name is same as object property
+  
+//  method: function function1() {
+//    console.log('method');
+
+  method() {
+    console.log('method');
+};
+console.log(object5);
+object5.method();
+
+Document Object Model (DOM)
+
+Models the web page
+
+DOM links together the JavaScript and the HTML
+Gives JavaScript full control of the web page
+
+document.querySelector()
+Lets us put any element inside JavaScript
+
+.innerText > Eliminates spaces so comparisons work
+
+Move the HTML code to a method
+
+For input elements use .value
+
+Type Coersion
+
+let cost = Number(inputElement.value);
+
+onkeydown attribute
+
+Every event listener gets an event object
+
+Type Coersion
+  Works for -, *, /
+console.log('25' - 5 );
+
+Always do math using numbers
+
+Window is the browser
+Document is the page
+
+7/4/24
+// First set command line to ~/Documents/repos folder
+// Next command will create a ~/Documents/repos/javascript-course folder
+// with a single .git folder inside and pull down all the code
+
+git clone https://github.com/SuperSimpleDev/javascript-course.git
+cd javascript-course
+git status
+> On branch main
+> Branch up to date with origin/main
+> Untracked files listed
+
+Create a New Repository on GitHub:
+Go to your GitHub account and create a new repository. Do not initialize it with a README, .gitignore, or license file as it may cause conflicts.
+
+// This sets the 'origin' URL for your repository on Github
+git remote set-url origin https://github.com/matadyshak/javascript-course.git
+// Or whatever the current branch is
+git push -u origin main 
+
+After running these commands, your cloned repository will be uploaded to your own GitHub account.
+
+
+
+
+
+
+
+
+
+Don't have to type window.
+lucidchart.com
+get.otter.com
