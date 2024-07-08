@@ -160,11 +160,23 @@ git push -u origin main
 
 After running these commands, your cloned repository will be uploaded to your own GitHub account.
 
+///////////////////////////////////////////////////////////////////////////////////
+// Starting the exercises
+///////////////////////////////////////////////////////////////////////////////////
+
+7/7/24
+
+This document requires 'TrustedHTML' assignment.
+
+Get this error if at www.google.com and assigning document.body.innerHTML
+
+Go to supersimple.dev/js-basics to enter commands into console
+
+and there is no error
 
 
-
-
-
+Amazon project is found at:
+https://supersimple.dev/projects/amazon
 
 
 
