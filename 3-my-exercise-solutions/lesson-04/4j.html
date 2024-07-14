@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Buttons</title>
+
+  <style>
+    .add-to-cart-button {
+      font-family: Arial;
+      font-size: x-large;
+      font-weight: normal;
+      background-color: yellow;
+      color: black;
+      border-width: 3px;
+      border-color: black;
+      margin: right 30px;
+    }
+
+    .buy-now-button {
+      font-family: Arial;
+      font-size: x-large;
+      font-weight: normal;
+      background-color: orange;
+      color: black;
+      border-width: 3px;
+      border-color: black;
+    }
+
+    .paragraph1,
+    .paragraph2 {
+      font-family: Times New Roman;
+      font-size: x-large;
+      //font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <p class="paragraph1">Adults Plain Cotton T-shirt</p>
+  <p class="paragraph2">Price: $7.99</p>
+  <button class="add-to-cart-button" onclick="
+    alert('Added');
+    ">Add to cart</button>
+  <button class="buy-now-button" onclick="
+    console.log('Loading...');
+    alert('Purchased')
+    ">Buy now</button>
+  <script>
+  </script>
+</body>
+
+</html>
