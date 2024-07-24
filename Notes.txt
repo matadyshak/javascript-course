@@ -178,8 +178,31 @@ and there is no error
 Amazon project is found at:
 https://supersimple.dev/projects/amazon
 
+/////////////////////////////////////////////////////////////////////
 
+const fruits = ["apple", "orange", "cherry"];
 
+// Example 1: Calls a function for each element in the array
+fruits.forEach((currentValue, index, arr) => {
+    console.log(`Element at index ${index}: ${currentValue}`);
+});
+
+// Example 2: Compute the sum of an array
+const numbers = [65, 44, 12, 4];
+let sum = 0;
+numbers.forEach((item) => {
+    sum += item;
+});
+console.log(`Sum of numbers: ${sum}`);
+
+// Example 3: Multiply each element by 10
+numbers.forEach((item, index, arr) => {
+    arr[index] = item * 10;
+});
+
+/////////////////////////////////////////////////////////////////////
+
+BabyEilif24!
 Don't have to type window.
 lucidchart.com
 get.otter.com

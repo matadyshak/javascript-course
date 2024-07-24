@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  </head>
+  <body>
+    <title>Discounts</title>
+    <script>
+      ages = [6, 7, 30, 64, 65];  
+      holidays = [false, true];
+
+      ages.forEach(age => {
+        holidays.forEach(holiday => {
+        if((age <= 6 || age >= 65) && !holiday)  {
+          console.log('Discount');
+        }
+        else {
+          console.log('No discount');
+        }
+      })});
+    </script>
+  </body>
+</html>

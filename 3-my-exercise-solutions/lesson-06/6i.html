@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    let guess = 'Tails';
+
+    <button onclick="
+      guess = 'Heads';
+      ">Guess Heads</button>
+
+    <button onclick="
+      guess = 'Tails';
+      ">Guess Tails</button>
+  </head>
+  <body>
+    <title>Coin Flip</title>
+    <script>
+      let random = Math.random();
+      let result = '';
+      if (random < 0.5) {
+        result = 'Heads';
+      } 
+      else {
+        result = 'Tails';
+      }
+
+      if( result === guess ) {
+        console.log('You win!');
+      }
+      else {
+        console.log('You lose!');
+      }
+    </script>
+  </body>
+</html>
+
+
+
+
+
