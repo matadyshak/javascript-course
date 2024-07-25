@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Convert Temperature</title>
+  </head>
+  <body>
+    <script>
+
+      function convertLength(length, from, to)
+      {
+        if (from === 'miles' && to === 'km') 
+        {
+          return(`${length * 1.6} km`);
+        }
+        else if (from === 'km' && to === 'miles')
+        {
+          return(`${length / 1.6} miles`);
+        }
+        else if (from === to && (from === 'miles' || from === 'km')) 
+        {
+          return(`${length} ${to}`);
+      	} 
+        else
+        {
+          return(`Invalid units: ${from} ${to}`);
+        }
+      }
+       
+      console.log(convertLength(50, 'miles', 'km'));
+      console.log(convertLength(32, 'km', 'miles'));
+      console.log(convertLength(50, 'km', 'km'));
+      console.log(convertLength(150, 'miles', 'miles'));
+      console.log(convertLength(250, 'yards', 'meters'));
+    </script>
+  </body>
+</html>
