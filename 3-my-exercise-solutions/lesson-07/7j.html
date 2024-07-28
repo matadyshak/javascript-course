@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Calculator</title>
+  </head>
+  <body>
+    <!-- HTML style comments work in the <body> except within the <script> section -->
+    <!-- Editor keeps indenting lines below <button> by 4 instead of 2 -->
+    <!-- Editor keeps indenting lines below console.log() by 2 instead of 0 -->
+    <!-- Fix this by disabling Detect Indentation and set Editor Tab Size to 2 -->
+    <p>
+      <button onclick="updateCalculation('1');">1</button>
+      <button onclick="updateCalculation('2');">2</button>
+      <button onclick="updateCalculation('3');">3</button>
+      <button onclick="updateCalculation('+');">+</button>
+    </p>
+
+    <p>
+      <button onclick="updateCalculation('4');">4</button>
+      <button onclick="updateCalculation('5');">5</button>
+      <button onclick="updateCalculation('6');">6</button>
+      <button onclick="updateCalculation('-');">-</button>
+    </p>
+
+    <p>
+      <button onclick="updateCalculation('7');">7</button>
+      <button onclick="updateCalculation('8');">8</button>
+      <button onclick="updateCalculation('9');">9</button>
+      <button onclick="updateCalculation('*');">*</button>
+    </p>
+
+    <p>
+      <button onclick="updateCalculation('0');">0</button>
+      <button onclick="updateCalculation('.');">.</button>
+      <button onclick="updateCalculation('=');">=</button>
+      <button onclick="updateCalculation('/');">/</button>
+    </p>
+
+    <p>
+      <button onclick="updateCalculation('C');">Clear</button>
+    </p>
+
+    <script>
+      /*
+      HTML style comments do not work within <script> section
+      */
+      let calculation = '';
+
+      function updateCalculation(key) {
+      
+        if(key[0] >= '0' && key[0] <= '9') {
+          calculation += key;  
+        }
+        else if (key[0] === '+') {
+          calculation += ' + ';
+        }
+        else if (key[0] === '-') {
+          calculation += ' - ';
+        }
+        else if (key[0] === '*') {
+          calculation += ' * ';
+        }
+        else if (key[0] === '/') {
+          calculation += ' / ';
+        }
+        else if (key[0] === '.') {
+          calculation += '.';
+        }
+        
+        /*
+          Note: eval() takes a string and runs it as code.
+          Avoid using eval() in real world projects since
+          it can potentially be given harmful code to run.
+          Only use eval() for learning purposes.
+        */
+
+        else if (key[0] === '=') {
+          calculation = eval(calculation);
+        }
+        else if (key[0] === 'C') {
+          calculation = '';
+        }
+        console.log(calculation);
+      }
+    </script>
+  </body>
+</html>

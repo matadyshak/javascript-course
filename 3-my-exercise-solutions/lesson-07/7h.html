@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Convert Length</title>
+  </head>
+  <body>
+    <script>
+
+      function convertLength(length, from, to) {
+        if (from === 'miles' && to === 'km') {
+          return `${length * 1.6} km`;
+        }
+        else if (from === 'km' && to === 'miles') {
+          return `${length / 1.6} miles`;
+        }
+
+        else if (from === 'miles' && to === 'feet') {
+          return `${length * 5280} feet`;
+        }
+        else if (from === 'feet' && to === 'miles') {
+          return `${length / 5280} miles`;
+        }
+
+        else if (from === 'km' && to === 'feet') {
+          return `${length * 3281} feet`;
+        }
+        else if (from === 'feet' && to === 'km') {
+          return `${length / 3281} km`;
+        }
+
+        else if (from === to && (from === 'miles' || from === 'km' || from === 'feet')) {
+          return `${length} ${from}`;
+	} 
+      }
+       
+      console.log(convertLength(5, 'miles', 'km'));       // 8 km
+      console.log(convertLength(5, 'miles', 'feet'));     // 26400 feet
+      console.log(convertLength(5, 'km', 'miles'));       // 3.125 miles 
+      console.log(convertLength(5, 'km', 'feet'));        // 16405 feet
+      console.log(convertLength(26400, 'feet', 'miles')); // 5 miles
+      console.log(convertLength(26400, 'feet', 'km'));    // 8.046327339225845 km
+      console.log(convertLength(15, 'miles', 'miles'));   // 15 miles
+      console.log(convertLength(25, 'km', 'km'));         // 25 km
+      console.log(convertLength(50, 'feet', 'feet'));     // 50 feet
+      console.log(convertLength(250, 'yards', 'feet'));   // Ignored
+      console.log(convertLength(250, 'feet', 'yards'));   // Ignored
+    </script>
+  </body>
+</html>
