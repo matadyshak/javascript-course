@@ -202,7 +202,93 @@ numbers.forEach((item, index, arr) => {
 
 /////////////////////////////////////////////////////////////////////
 
-BabyEilif24!
+7/27/24
+
+<!-- Editor keeps indenting lines below <button> by 4 instead of 2 -->
+<!-- Editor keeps indenting lines below console.log() by 2 instead of 0 -->
+<!-- Fix this by disabling Detect Indentation and set Editor Tab Size to 2-->
+
+/////////////////////////////////////////////////////////////////////
+
+OPERATOR PRECEDENCE
+Certainly! JavaScript has 21 levels of operator precedence. Let’s explore them:
+
+1. Grouping (Parentheses): Highest precedence. Use parentheses to control evaluation order.
+
+2. Exponentiation (**): Right-associative.
+
+3. Unary Operators: Including +, -, !, typeof, etc.
+
+4. Multiplication and Division (*, /, %): Left-associative.
+
+5. Addition and Subtraction (+, -): Left-associative.
+
+6. Bitwise Shifts (<<, >>, >>>): Left-associative.
+
+7. Relational Operators (<, >, <=, >=, instanceof, in): Left-associative.
+
+8. Equality Operators (==, !=, ===, !==): Left-associative.
+
+9. Bitwise AND (&): Left-associative.
+
+10. Bitwise XOR (^): Left-associative.
+
+11. Bitwise OR (|): Left-associative.
+
+12. Logical AND (&&): Left-associative.
+
+13. Logical OR (||): Left-associative.
+
+14. Conditional (Ternary) Operator (? :): Right-associative.
+
+15. Assignment Operators (=, +=, -=): Right-associative.
+
+16. Comma Operator (a, b): Left-associative (evaluates both operands).
+
+17. Spread/Rest Operators (...)
+
+18. Yield and yield*
+
+19. Arrow Function (=>): Right-associative.
+
+20. Template Literals (${})
+
+/////////////////////////////////////////////////////////////////////
+
+7/29/24
+
+localStorage
+
+Only supports strings
+
+// Get a single string from localStorage
+const message = localStorage.getItem('message');
+
+// save a single string in localStorage
+localStorage.setItem('message', "Hello");
+
+
+// Get strings from localStorage and convert strings to object score
+// If item does not exist in localStorage it returns a NULL
+let score = JSON.parse(localStorage.getItem('score')) || {
+  wins: 0,
+  losses: 0,
+  ties: 0
+};
+
+// convert object score to strings and save in localStorage
+localStorage.setItem('score', JSON.stringify(score));
+
+//To reset the score and remove stored data in localStorage
+localStorage.removeItem('score');
+
+
+/////////////////////////////////////////////////////////////////////
+
+EilifGit24!
 Don't have to type window.
 lucidchart.com
 get.otter.com
+
+/////////////////////////////////////////////////////////////////////
+

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Amazon</title>
+  </head>
+  <body>
+    <script>
+      const product1 = {
+        name: 'basketball',
+        price: 2095
+      };
+
+      const product2 = {
+        name: 'football',
+        price: 1999
+      };
+
+      const product3 = {
+        name: 'football',
+        price: 1999
+      };
+
+      if( isSameProduct(product1, product2) ) {
+        console.log("Product1 and Product2 are the same.");
+      } else {
+        console.log("Product1 and Product2 are different.");
+      } 
+
+      if( isSameProduct(product1, product3) ) {
+        console.log("Product1 and Product3 are the same.");
+      } else {
+        console.log("Product1 and Product3 are different.");
+      } 
+
+      if( isSameProduct(product2, product3) ) {
+        console.log("Product2 and Product3 are the same.");
+      } else {
+        console.log("Product2 and Product3 are different.");
+      } 
+      
+      function isSameProduct(product1, product2) {
+        if( product1.name === product2.name && product1.price === product2.price) {
+          return true;
+        }
+        return false;
+      }
+
+    </script>
+  </body>
+</html>
