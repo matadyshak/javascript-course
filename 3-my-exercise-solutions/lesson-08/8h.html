@@ -39,9 +39,11 @@
       <!-- Only use eval() for learning purposes.           -->
 
       <button onclick="
-        calculation = eval(calculation);
-        console.log(calculation);
-        localStorage.setItem('calc', calculation);
+        if(calculation.length > 0){
+          calculation = eval(calculation);
+          console.log(calculation);
+          localStorage.setItem('calc', calculation);
+        }
       ">=</button>
       
       <button onclick="updateCalculation(' / ');">/</button>
