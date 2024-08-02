@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Coin Flip</title>
+  </head>
+  <body>
+    <button onclick="
+      playGame('Heads');
+      ">Heads</button>
+
+    <button onclick="
+      playGame('Tails');
+      ">Tails</button>
+
+    <button onclick="
+      resetGame();
+      ">Reset Score</button>
+    <script>
+
+      // Get strings from localStorage and convert strings to object score
+      // If item does not exist in localStorage it returns a NULL
+      let score = JSON.parse(localStorage.getItem('score')) || {
+        wins: 0,
+        losses: 0
+      };
+
+      function playGame(guess) {
+        const random = Math.random();
+        const result = (random < 0.5) ? 'Heads' : 'Tails';
+        if (result === guess) {
+          score.wins++;
+        } else {
+          score.losses++;
+        }
+        localStorage.setItem('score', JSON.stringify(score));
+        console.log(`Wins: ${score.wins} Losses: ${score.losses}`);
+      }
+
+      function resetGame() {
+        score.wins = 0;
+        score.losses = 0;
+        localStorage.removeItem('score');
+        console.log(`Wins: ${score.wins} Losses: ${score.losses}`);
+      }
+
+    </script>
+  </body>
+</html>
