@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Coin Toss</title>
+  </head>
+  <body>
+    <button onclick="
+      buttonClick('heads');
+      ">heads</button>
+
+    <button onclick="
+      buttonClick('tails');
+      ">tails</button>
+
+    <p class="js-text"></p>
+
+    <script>
+      function buttonClick(coinFlip){
+        document.querySelector(".js-text").innerHTML = `You chose: ${coinFlip}`;
+      } 
+    </script
+  </body>
+</html>
