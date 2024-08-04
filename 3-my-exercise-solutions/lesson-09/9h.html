@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Name Input</title>
+  </head>
+  <body>
+
+    <input type="text" placeholder="Type something" class="js-input-name" onkeyup="
+      keyUp();
+    ">
+
+    <p class="js-text"></p>
+
+    <script>
+      function keyUp(){
+        const elementName = document.querySelector('.js-input-name');
+        document.querySelector('.js-text').innerHTML = elementName.value;
+      } 
+    </script
+  </body>
+</html>
