@@ -74,8 +74,8 @@
       }
 
       function displayCalculation(calculation) {
-        const elementDisplay = document.querySelector('.js-display');
-        elementDisplay.innerHTML = calculation;
+        document.querySelector('.js-display')
+          .innerHTML = calculation;
         //elementDisplay.innerHTML = `${calculation}`;  //works either way
       }
     </script>
