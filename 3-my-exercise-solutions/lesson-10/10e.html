@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <style>
+      body {
+        font-family: Arial;
+      }
+
+      .is-disabled {
+        font-size: 50%;     
+        background-color: rgb(240, 240, 240);
+        color: black;
+        padding-top: 4px;
+        padding-bottom: 4px;
+        padding-left: 8px;
+        padding-right: 8px;
+        font-weight: bold;
+        border-color: black;
+        border-width: 1px;
+        border-radius: 3px;
+        cursor: pointer;
+      }
+
+      .is-enabled {
+        background-color: black;
+        color: white;
+      }
+
+    </style>
+  </head>
+  <body>
+
+    <button onclick="
+      toggleButton('.js-gaming-button');
+    " class="js-gaming-button is-disabled">Gaming</button>
+      
+      <button onclick="
+      toggleButton('.js-music-button');
+    " class="js-music-button is-disabled">Music</button>
+      
+      <button onclick="
+      toggleButton('.js-tech-button');
+    " class="js-tech-button is-disabled">Tech</button>
+      
+    <script>
+
+      function toggleButton(theClass) {
+        const buttonElement = document.querySelector(theClass);      
+        if(buttonElement.classList.contains('is-enabled') ) {
+          buttonElement.classList.remove('is-enabled');
+        } else {
+          buttonElement.classList.add('is-enabled');
+        }
+      }
+
+    </script>
+  </body>
+</html>
+
+
