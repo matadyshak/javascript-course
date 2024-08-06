@@ -13,8 +13,8 @@
 <!--    <script src="file.js"></script> -->
 
     <script>
-      let oldArray = [1, 2, 3];
-      let newArray = [4, 5, 6];
+      const oldArray = [1, 2, 3];
+      const newArray = [];
       arrayIncrease(5, oldArray, newArray);
 
       console.log(oldArray);
@@ -23,7 +23,7 @@
 
       function arrayIncrease(amount, oldArray, newArray) {
         for(let i=0; i<oldArray.length; i++) {
-          newArray[i] += amount;
+          newArray.push(oldArray[i] + amount);
         }
       }
 
