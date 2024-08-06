@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Calculator</title>
+    <style>
+      body {
+        font-family: Arial;
+      }
+
+      .circular-button {
+        font-size: 50%;     
+        font-weight: bold;
+        background-color: rgb(64, 64, 64);
+        color: white;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        padding: 2px;
+        cursor: pointer;
+      }
+
+      .orange-button {
+        background-color: orange;
+      }
+      
+    </style>
+  </head>
+  <body>
+    <!-- HTML style comments work in the <body> except within the <script> section -->
+    <!-- Editor keeps indenting lines below <button> by 4 instead of 2 -->
+    <!-- Editor keeps indenting lines below console.log() by 2 instead of 0 -->
+    <!-- Fix this by disabling Detect Indentation and set Editor Tab Size to 2 -->
+    <p class="js-display"></p>
+    
+    <p>
+      <button onclick="updateCalculation('1');">1</button>
+      <button onclick="updateCalculation('2');">2</button>
+      <button onclick="updateCalculation('3');">3</button>
+      <button onclick="updateCalculation(' + ');">+</button>
+    </p>
+
+    <p>
+      <button onclick="updateCalculation('4');">4</button>
+      <button onclick="updateCalculation('5');">5</button>
+      <button onclick="updateCalculation('6');">6</button>
+      <button onclick="updateCalculation(' - ');">-</button>
+    </p>
+
+    <p>
+      <button onclick="updateCalculation('7');">7</button>
+      <button onclick="updateCalculation('8');">8</button>
+      <button onclick="updateCalculation('9');">9</button>
+      <button onclick="updateCalculation(' * ');">*</button>
+    </p>
+
+    <p>
+      <button onclick="updateCalculation('0');">0</button>
+      <button onclick="updateCalculation('.');">.</button>
+
+      <!-- Note: eval() takes a string and runs it as code. -->
+      <!-- Avoid using eval() in real world projects since  -->
+      <!-- it can potentially be given harmful code to run. -->
+      <!-- Only use eval() for learning purposes.           -->
+
+      <button onclick="
+        if(calculation.length > 0){
+          calculation = eval(calculation);
+          displayCalculation(calculation);
+          localStorage.setItem('calc', calculation);
+        }
+      ">=</button>
+      
+      <button onclick="updateCalculation(' / ');">/</button>
+    </p>
+
+    <p>
+      <button onclick="
+        calculation = '';
+        displayCalculation(calculation);
+        localStorage.removeItem('calc');
+        ">Clear</button>
+    </p>
+
+    <script>
+      /*
+      HTML style comments do not work within <script> section
+      */
+      let calculation = localStorage.getItem('calc') || '';
+      displayCalculation(calculation);
+      
+      function styleButtons() {
+        const clickedElement = document.querySelector(clickedButton);      
+
+        if(!clickedElement.classList.contains('is-enabled') ) {
+          turnOffPreviousButton();
+          clickedElement.classList.add('is-enabled');
+        } else {
+          clickedElement.classList.remove('is-enabled');
+        }
+      }
+
+      function updateCalculation(key) {
+      
+        calculation += key;  
+        localStorage.setItem('calc', calculation);
+        displayCalculation(calculation);
+      }
+
+      function displayCalculation(calculation) {
+        document.querySelector('.js-display')
+          .innerHTML = calculation;
+        //elementDisplay.innerHTML = `${calculation}`;  //works either way
+      }
+    </script>
+  </body>
+</html>
