@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>11g</title>
+
+<!--    <link rel="stylesheet" href="file.css"> -->
+    
+  </head>
+  <body>
+
+<!--    <script src="file.js"></script> -->
+
+    <script>
+      let oldArray = [1, 2, 3];
+      let newArray = [4, 5, 6];
+      arrayIncrease(5, oldArray, newArray);
+
+      console.log(oldArray);
+      console.log(newArray);
+      console.log(newArray === oldArray);
+
+      function arrayIncrease(amount, oldArray, newArray) {
+        for(let i=0; i<oldArray.length; i++) {
+          newArray[i] += amount;
+        }
+      }
+
+    </script>
+  </body>
+</html>
+  
