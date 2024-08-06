@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>11g</title>
+
+<!--    <link rel="stylesheet" href="file.css"> -->
+    
+  </head>
+  <body>
+
+<!--    <script src="file.js"></script> -->
+
+    <script>
+      const oldArray = [1, 2, 3];
+      const newArray = addOne(oldArray);
+
+      console.log(oldArray);
+      console.log(newArray);
+      console.log(newArray === oldArray);
+
+      function addOne(array) {
+        const dstArray = [];
+        for(let i=0; i<array.length; i++) {
+          dstArray.push(array[i] + 1);
+        }
+        console.log(dstArray);
+        return dstArray;
+      }
+
+    </script>
+  </body>
+</html>
+  
