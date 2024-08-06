@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>11c</title>
+
+<!--    <link rel="stylesheet" href="file.css"> -->
+    
+  </head>
+  <body>
+
+<!--    <script src="file.js"></script> -->
+
+    <script>
+      let arrayOfNumbers = arraySwap([1, 20, 22, 24, 5]);
+      let arrayOfStrings = arraySwap(['hi', 'hello', 'good']);
+       
+      console.log(arrayOfNumbers);
+      console.log(arrayOfStrings);
+
+      function arraySwap(array) {
+        lastIndex = array.length - 1;
+        lastValue = array[lastIndex];
+        array[lastIndex] = array[0];
+        array[0] = lastValue;
+        return array;
+      }
+
+    </script>
+  </body>
+</html>
+  
