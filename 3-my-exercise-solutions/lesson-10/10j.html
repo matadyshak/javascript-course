@@ -2,53 +2,7 @@
 <html>
   <head>
     <title>Calculator</title>
-    <style>
-      body {
-        font-family: Arial;
-      }
-      
-      .circular-button {
-        font-size: 100%;     
-        font-weight: bold;
-        background-color: rgb(64, 64, 64);
-        color: white;
-        width: 50px;
-        height: 50px;
-        border: none;
-        border-radius: 25px;
-        border-color: rgb(64, 64, 64);
-        padding: 2px;
-        cursor: pointer;
-      }
-      
-      .orange-button {
-        font-size: 100%;     
-        font-weight: bold;
-        background-color: orange;
-        color: white;
-        width: 50px;
-        height: 50px;
-        border: none;
-        border-radius: 25px;
-        border-color: orange;
-        padding: 2px;
-        cursor: pointer;
-      }
-      
-      .calculation-result {
-        font-size: 100%;     
-        font-weight: bold;
-        background-color: black;
-        color: white;
-        width: 200px;
-        height: 25px;
-        border: solid;
-        border-color: red;
-        border-width: thin;
-        padding: 2px;
-        cursor: pointer;
-      }
-    </style>
+    <link rel="stylesheet" href="10j.css">
   </head>
   <body>
     <!-- HTML style comments work in the <body> except within the <script> section -->
@@ -101,25 +55,9 @@
         localStorage.removeItem('calc');
         " class="circular-button">Clear</button>
     </p>
-    
-    <script>
-      document.body.style.background = 'black';
-      let calculation = localStorage.getItem('calc') || '';
-      displayCalculation(calculation);
 
-      function updateCalculation(key) {
+    <script src="10j.js"></script>
 
-        calculation += key;  
-        localStorage.setItem('calc', calculation);
-        displayCalculation(calculation);
-      }
-
-      function displayCalculation(calculation) {
-        document.querySelector('.js-display')
-          .innerHTML = calculation;
-        //elementDisplay.innerHTML = `${calculation}`;  //works either way
-      }
-      </script>
-    </body>
+  </body>
   </html>
   
