@@ -1,4 +1,3 @@
-document.body.style.background = 'black';
 let calculation = localStorage.getItem('calc') || '';
 displayCalculation(calculation);
 
@@ -12,5 +11,5 @@ function updateCalculation(key) {
 function displayCalculation(calculation) {
   document.querySelector('.js-display')
     .innerHTML = calculation;
-  //elementDisplay.innerHTML = `${calculation}`;  //works either way
+  //.innerHTML = `${calculation}`;  //works either way
 }

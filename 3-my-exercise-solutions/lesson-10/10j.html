@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculator</title>
     <link rel="stylesheet" href="10j.css">
   </head>
@@ -9,28 +11,27 @@
     <p class="js-display calculation-result"></p>
     
     <p>
-      <button onclick="updateCalculation('1')  ;" class="circular-button">1</button>
-      <button onclick="updateCalculation('2')  ;" class="circular-button">2</button>
-      <button onclick="updateCalculation('3')  ;" class="circular-button">3</button>
-      <button onclick="updateCalculation(' + ');" class="orange-button"  >+</button>
-    <p>
+      <button onclick="updateCalculation('1');" class="calculator-button grey-button">1</button>
+      <button onclick="updateCalculation('2');" class="calculator-button grey-button">2</button>
+      <button onclick="updateCalculation('3');" class="calculator-button grey-button">3</button>
+      <button onclick="updateCalculation(' + ');" class="calculator-button orange-button">+</button>
     </p>
-    <button onclick="updateCalculation('4')  ;" class="circular-button">4</button>
-    <button onclick="updateCalculation('5')  ;" class="circular-button">5</button>
-    <button onclick="updateCalculation('6')  ;" class="circular-button">6</button>
-    <button onclick="updateCalculation(' - ');" class="orange-button"  >-</button>
-    </p>
-
     <p>
-      <button onclick="updateCalculation('7')  ;" class="circular-button">7</button>
-      <button onclick="updateCalculation('8')  ;" class="circular-button">8</button>
-      <button onclick="updateCalculation('9')  ;" class="circular-button">9</button>
-      <button onclick="updateCalculation(' * ');" class="orange-button"  >*</button>
+      <button onclick="updateCalculation('4');" class="calculator-button grey-button">4</button>
+      <button onclick="updateCalculation('5');" class="calculator-button grey-button">5</button>
+      <button onclick="updateCalculation('6');" class="calculator-button grey-button">6</button>
+      <button onclick="updateCalculation(' - ');" class="calculator-button orange-button">-</button>
     </p>
-
     <p>
-      <button onclick="updateCalculation('0');" class="circular-button">0</button>
-      <button onclick="updateCalculation('.');" class="circular-button">.</button>
+      <button onclick="updateCalculation('7');" class="calculator-button grey-button">7</button>
+      <button onclick="updateCalculation('8');" class="calculator-button grey-button">8</button>
+      <button onclick="updateCalculation('9');" class="calculator-button grey-button">9</button>
+      <button onclick="updateCalculation(' * ');" class="calculator-button orange-button">*</button>
+    </p>
+    
+    <p>
+      <button onclick="updateCalculation('0');" class="calculator-button grey-button">0</button>
+      <button onclick="updateCalculation('.');" class="calculator-button grey-button">.</button>
 
       <!-- Note: eval() takes a string and runs it as code. -->
       <!-- Avoid using eval() in real world projects since  -->
@@ -43,9 +44,9 @@
           displayCalculation(calculation);
           localStorage.setItem('calc', calculation);
         }
-      " class="circular-button">=</button>
+      " class="calculator-button grey-button">=</button>
       
-      <button onclick="updateCalculation(' / ');" class="orange-button">/</button>
+      <button onclick="updateCalculation(' / ');" class="calculator-button orange-button">/</button>
     </p>
 
     <p>
@@ -53,7 +54,7 @@
         calculation = '';
         displayCalculation(calculation);
         localStorage.removeItem('calc');
-        " class="circular-button">Clear</button>
+        " class="calculator-button grey-button clear-button">Clear</button>
     </p>
 
     <script src="10j.js"></script>
