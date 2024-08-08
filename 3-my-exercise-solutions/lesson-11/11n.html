@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>11n</title>
+
+<!--    <link rel="stylesheet" href="file.css"> -->
+  <head>
+  <body>
+
+<!--    <script src="file.js"></script> -->
+
+    <script>
+
+      // Sample array of words
+      const wordsArray = ['apple', 'banana', 'apple', 'orange', 'banana', 'apple'];
+      console.log(wordsArray);
+      // Step 1: Create an object to store word counts
+      const wordCounts = {};
+      console.log(wordCounts);
+      // Step 2: Iterate through the words array and count occurrences
+      for (const word of wordsArray) {
+        // If the word is already in the object, increment its count
+        if (wordCounts[word]) {
+          wordCounts[word]++;
+        } else {
+          // If the word is not in the object, initialize its count to 1
+          wordCounts[word] = 1;
+        }
+        console.log(`${word} ${wordCounts[word]}`);
+      }
+
+      // Step 3: Convert the wordCounts object to an array of objects
+      const resultArray = Object.keys(wordCounts).map(word => ({
+        word: word,
+        count: wordCounts[word]
+      }));
+
+      console.log(resultArray);
+
+    </script>
+  </body>
+</html>
