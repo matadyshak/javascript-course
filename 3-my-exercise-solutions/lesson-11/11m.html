@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>11k</title>
+
+<!--    <link rel="stylesheet" href="file.css"> -->
+  <head>
+  <body>
+
+<!--    <script src="file.js"></script> -->
+
+    <script>
+
+      let limits = {
+        min: 0,
+        max: 0
+      };
+
+      limits = minMax([]);
+      console.log(limits);
+
+      limits = minMax([3]);
+      console.log(limits);
+      
+      function minMax(array) {
+
+        let myLimits = {
+          min: null,
+          max: null
+        };
+
+	if (array === null || array.length === 0 ) {
+          return myLimits;
+        }
+
+        myLimits.min = array[0];
+        myLimits.max = array[0];
+
+        for(let i=1; i<array.length; i++) {
+          if( array[i] < myLimits.min ) {
+            myLimits.min = array[i];
+          }
+
+          if( array[i] > myLimits.max ) {
+            myLimits.max = array[i];
+          }
+        }
+        return myLimits;
+      }
+
+    </script>
+  </body>
+</html>

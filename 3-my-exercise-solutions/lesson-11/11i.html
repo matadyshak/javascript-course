@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>11i</title>
+
+<!--    <link rel="stylesheet" href="file.css"> -->
+  <head>
+  <body>
+
+<!--    <script src="file.js"></script> -->
+
+    <script>
+      let oldArray = [1, 2, 3];
+      let newArray = addNum(oldArray, 2);
+      console.log(oldArray);
+      console.log(newArray);
+      console.log(newArray === oldArray);
+
+      oldArray = [1, 2, 3];
+      newArray = addNum(oldArray, 3);
+      console.log(oldArray);
+      console.log(newArray);
+      console.log(newArray === oldArray);
+
+      oldArray = [-2, -1, 0, 99];
+      newArray = addNum(oldArray, 2);
+      console.log(oldArray);
+      console.log(newArray);
+      console.log(newArray === oldArray);
+
+
+      function addNum(array, num) {
+        const dstArray = [];
+        for(let i=0; i<array.length; i++) {
+          dstArray.push(array[i] + num);
+        }
+        return dstArray;
+      }
+
+    </script>
+  </body>
+</html>

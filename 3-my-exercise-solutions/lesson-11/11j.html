@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>11j</title>
+
+<!--    <link rel="stylesheet" href="file.css"> -->
+  <head>
+  <body>
+
+<!--    <script src="file.js"></script> -->
+
+    <script>
+      let array1 = [1, 1, 2];
+      let array2 = [1, 1, 3];
+      let sumArray = addArrays(array1, array2);
+      console.log(array1);
+      console.log(array2);
+      console.log(sumArray);
+      
+      array1 = [1, 2, 3];
+      array2 = [4, 5, 6];
+      sumArray = addArrays(array1, array2);
+      console.log(array1);
+      console.log(array2);
+      console.log(sumArray);
+      
+      function addArrays(array1, array2) {
+        const dstArray = [];
+        for(let i=0; i<array1.length; i++) {
+          dstArray.push(array1[i] + array2[i]);
+        }
+        return dstArray;
+      }
+
+    </script>
+  </body>
+</html>
