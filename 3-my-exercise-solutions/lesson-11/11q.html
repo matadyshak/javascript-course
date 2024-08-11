@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>11p</title>
+    <!--    <link rel="stylesheet" href="file.css"> -->
+  </head>
+  <body>
+    <!--    <script src="file.js"></script> -->
+    <script>
+   
+      findIndex(['green', 'red', 'blue', 'red'], 'red');
+      findIndex(['green', 'red', 'blue', 'red'], 'yellow');
+      
+      function findIndex(words, match) {
+        //First way - Using indexOf()
+        console.log(words.indexOf(match));
+
+        //2nd way - Using Array.find()
+        firstSearch = words.find(word => word === match); // search
+        if(!firstSearch) {
+          console.log(-1);
+        } else {
+          console.log(`${words.indexOf(firstSearch)}`);
+        }
+
+        //3rd way - while loop (mimics Array.find())
+        let found = 0;
+        let i = 0;
+        while ( i < words.length )
+        {
+          if (words[i] === match) {
+            found = true;
+            console.log(i);
+            break;
+          }
+          i++
+        }
+
+        if (!found) {
+          console.log(-1);
+        }
+      }
+    </script>
+  </body>
+</html>
