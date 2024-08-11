@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>11t</title>
+    <!--    <link rel="stylesheet" href="file.css"> -->
+  </head>
+  <body>
+    <!--    <script src="file.js"></script> -->
+    <script>
+   
+       let result = removeEgg(['egg', 'apple', 'egg', 'egg', 'ham'], 2);
+   //let reversed = removeEgg(['ham', 'egg', 'egg', 'apple', 'egg'], 2);
+   
+
+      function removeEgg(foods, numberToRemove) {
+
+        // Make a shallow copy to preserve foods array
+        console.log(foods);
+        let reversedFoods = [...foods].reverse();
+        console.log(reversedFoods);
+        let resultArray = [];
+        let i = 0;
+        while ( i < reversedFoods.length )
+        {
+          if (reversedFoods[i] === 'egg' && numberToRemove >= 1 ) {
+            numberToRemove--;  
+            i++;
+            continue;
+          }
+
+          resultArray.push(reversedFoods[i]);
+          i++;
+        }
+        console.log(resultArray);
+        resultArray.reverse();
+        console.log(resultArray);
+        
+        return resultArray;
+      }
+    </script>
+  </body>
+</html>
