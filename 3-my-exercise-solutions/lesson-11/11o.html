@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>11o</title>
+    <!--    <link rel="stylesheet" href="file.css"> -->
+  </head>
+  <body>
+    <!--    <script src="file.js"></script> -->
+    <script>
+   
+      //First way - Using indexOf()
+      const words = ['hello', 'world', 'search', 'good'];
+      let firstIndex = words.indexOf('search');
+      if(firstIndex === -1) {
+        console.log(`\"search\" was not found.`);
+      } else {
+        console.log(`\"search\" was found at index ${firstIndex}`);
+      }
+
+      //2nd way - Using Array.find()
+      firstSearch = words.find(word => word === 'search'); // search
+      if(!firstSearch) {
+        console.log(`\"search\" was not found.`);
+      } else {
+        console.log(`\"search\" was found at index ${words.indexOf(firstSearch)}`);
+      }
+
+      //3rd way - while loop (mimics Array.find())
+      let found = false;
+      let i = 0;
+      while ( i < words.length )
+      {
+        if (words[i] === 'search') {
+          found = true;
+          console.log(`\"search\" was found at index ${i}`);
+          break;
+        }
+        i++
+      }
+
+      if (!found) {
+        console.log('\"search\" was not found');
+      }
+        </script>
+      </body>
+    </html>
