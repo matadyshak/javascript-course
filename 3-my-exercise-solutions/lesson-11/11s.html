@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>11s</title>
+    <!--    <link rel="stylesheet" href="file.css"> -->
+  </head>
+  <body>
+    <!--    <script src="file.js"></script> -->
+    <script>
+   
+      let result = removeEgg(['egg', 'apple', 'egg', 'egg', 'ham'], 2);
+      console.log(result);
+
+      function removeEgg(foods, numberToRemove) {
+
+        let resultArray = [];
+        let i = 0;
+        while ( i < foods.length )
+        {
+          if (foods[i] === 'egg' && numberToRemove >= 1 ) {
+            numberToRemove--;  
+            i++;
+            continue;
+          }
+
+          resultArray.push(foods[i]);
+          i++;
+        }
+        return resultArray;
+      }
+    </script>
+  </body>
+</html>
