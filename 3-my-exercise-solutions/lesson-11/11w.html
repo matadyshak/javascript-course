@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>11w</title>
+    <!--    <link rel="stylesheet" href="file.css"> -->
+  </head>
+  <body>
+    <!--    <script src="file.js"></script> -->
+    <script>
+   
+      function findIndex(words, match) {
+        let found = 0;
+        let i = 0;
+        while ( i < words.length )
+        {
+          if (words[i] === match) {
+            found = true;
+            return i;
+          }
+          i++
+        }
+
+        return -1;
+      }
+
+function unique(inputArray) {
+  let outputArray = [];
+  let iInput = 0;
+  // For each element of inputArray
+  //   If contained in output array skip it
+  //   If not contained, add it to output array
+  // Search the input array
+  while ( iInput < inputArray.length )
+  {
+    match = inputArray[iInput];
+    if (findIndex(outputArray, match) === -1) {
+      //I had outputArray[iOutput] = match;  and it still seemed to work!!!
+      outputArray.push(match);                
+    }
+    iInput++
+  }
+
+  return outputArray;
+}
+
+      console.log(unique(['green', 'red', 'blue', 'red']));
+      console.log(unique(['red', 'green', 'green', 'red']));
+      
+    </script>
+  </body>
+</html>
