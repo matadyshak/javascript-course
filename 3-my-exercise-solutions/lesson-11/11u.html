@@ -9,37 +9,31 @@
   <body>
     <!--    <script src="file.js"></script> -->
     <script>
-   
-       let result = removeEgg(['egg', 'apple', 'egg', 'egg', 'ham'], 2);
-   
-
-
       function removeEgg(foods, numberToRemove) {
         
-        console.log(foods);                    // Not reversed
-        let saveFoods = foods.slice();         // saveFoods is not reversed
-        foods.reverse();                       // foods is now reversed
-        console.log(foods);                    // Reversed
-
-        let resultArray = [];
+        const foodsCopy = foods.slice();              // foodsCopy is not reversed, foods is unchanged
+        const reversedFoods = foodsCopy.reverse();    // foodsCopy and reversedFoods are now reversed
+        const resultArray = [];
         let i = 0;
-        while ( i < foods.length )
+
+        while ( i < reversedFoods.length )
         {
-          if (foods[i] === 'egg' && numberToRemove >= 1 ) {
+          if (reversedFoods[i] === 'egg' && numberToRemove >= 1 ) {
             numberToRemove--;  
             i++;
             continue;
           }
 
-          resultArray.push(foods[i]);
+          resultArray.push(reversedFoods[i]);
           i++;
         }
-        console.log(resultArray);            // ham, apple, egg
-        resultArray.reverse();
-        console.log(resultArray);            // egg, apple, ham
-        console.log(saveFoods);              // 'egg', 'apple', 'egg', 'egg', 'ham'
-        return resultArray;
+        return resultArray.reverse(); // Return non-reversed result array, no change to foods
       }
+
+      const foods = ['egg', 'apple', 'egg', 'egg', 'ham'];
+      console.log(removeEgg(foods, 2));
+      console.log(foods);
+
     </script>
   </body>
 </html>
