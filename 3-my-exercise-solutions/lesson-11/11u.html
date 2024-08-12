@@ -11,39 +11,33 @@
     <script>
    
        let result = removeEgg(['egg', 'apple', 'egg', 'egg', 'ham'], 2);
-   //let reversed = removeEgg(['ham', 'egg', 'egg', 'apple', 'egg'], 2);
    
 
+
       function removeEgg(foods, numberToRemove) {
-        // Make a shallow copy to preserve foods array
-        console.log(foods);
+        
+        console.log(foods);                    // Not reversed
         let saveFoods = foods.slice();         // saveFoods is not reversed
-        console.log(saveFoods === foods);      // false
-        let reversedFoods = foods.reverse();   //foods and reversedFoods are reversed
-        console.log(reversedFoods === foods);  // true
-        console.log(saveFoods);     // Not reversed
-        console.log(foods);         // Reversed
-        console.log(reversedFoods); // Reversed
+        foods.reverse();                       // foods is now reversed
+        console.log(foods);                    // Reversed
 
         let resultArray = [];
         let i = 0;
-        while ( i < reversedFoods.length )
+        while ( i < foods.length )
         {
-          if (reversedFoods[i] === 'egg' && numberToRemove >= 1 ) {
+          if (foods[i] === 'egg' && numberToRemove >= 1 ) {
             numberToRemove--;  
             i++;
             continue;
           }
 
-          resultArray.push(reversedFoods[i]);
+          resultArray.push(foods[i]);
           i++;
         }
         console.log(resultArray);            // ham, apple, egg
-        SaveResult = resultArray.slice();    // Reversed
-        resultArray.reverse();               // Not reversed
-        console.log(resultArray);            // Not reversed
-        console.log(saveFoods);              // Not reversed
-        
+        resultArray.reverse();
+        console.log(resultArray);            // egg, apple, ham
+        console.log(saveFoods);              // 'egg', 'apple', 'egg', 'egg', 'ham'
         return resultArray;
       }
     </script>
