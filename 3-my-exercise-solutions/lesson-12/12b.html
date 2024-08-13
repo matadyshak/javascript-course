@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>12b</title>
+
+<!--    <link rel="stylesheet" href="file.css"> -->
+
+  </head>
+  <body>
+
+<!--    <script src="file.js"></script> -->
+
+    <script>
+
+      //add is the variable fcn pointer - function needs no name just use add
+      const add = function () {
+        console.log(2 + 3);
+      };
+
+      add();  //call
+      add();  //call
+
+      function runTwice(fun) {   //function
+        fun();
+        fun();
+      }
+
+      //This is a function call
+      //It calls function runTwice(fun) 
+      //It passes anonymous function to print 12b
+      runTwice(
+        // Anonymous function has no name
+        function () { console.log('12b'); }
+      );
+
+      //This is a function call
+      //It calls function runTwice(fun) 
+      //It passes add function to print 5 twice
+      runTwice(add); //call
+    </script>
+  </body>
+</html>
