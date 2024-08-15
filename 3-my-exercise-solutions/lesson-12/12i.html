@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title class="js-title">12i</title>
+
+<!--    <link rel="stylesheet" href="file.css"> -->
+
+  </head>
+  <body>
+    <button class="js-add-button">Add</button>
+    <button class="js-remove-button">Remove</button>
+    
+
+<!--    <script src="file.js"></script> -->
+
+    <script>
+      let messageCount = 0;
+      const addButtonElement = document.querySelector('.js-add-button');
+      const removeButtonElement = document.querySelector('.js-remove-button');
+      const titleTextElement = document.querySelector('.js-title');
+      
+      // This will run when the event happens
+      const addEventListenerX = () => {
+        messageCount++;
+        titleTextElement.innerHTML = `(${messageCount}) New messages`;
+      };
+
+      // This will run when the event happens
+      const removeEventListener = () => {
+        if (messageCount > 1) {
+          messageCount--;
+          titleTextElement.innerHTML = `(${messageCount}) New messages`;
+        } else {
+          titleTextElement.innerHTML = 'App';
+        }
+      };
+      
+      // This registers the event to happen on 'click'
+      addButtonElement.addEventListener('click', addEventListenerX);
+      removeButtonElement.addEventListener('click', removeEventListener);
+
+    </script>
+  </body>
+</html>
