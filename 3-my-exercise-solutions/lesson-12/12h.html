@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title class="js-title">12i</title>
+    <title class="js-title">12h</title>
 
 <!--    <link rel="stylesheet" href="file.css"> -->
 
@@ -11,6 +11,8 @@
   <body>
     <button class="js-add-button">Add</button>
     <button class="js-remove-button">Remove</button>
+
+
 
 <!--    <script src="file.js"></script> -->
 
@@ -20,32 +22,20 @@
       const addButtonElement = document.querySelector('.js-add-button');
       const removeButtonElement = document.querySelector('.js-remove-button');
 
-      const addEventListenerX = () => {
+      const eventListenerAdd = () => {
         messageCount++;
       };
 
-      const removeEventListener = () => {
-        if (messageCount > 0) {
-          messageCount--;
-        }
-      }
+      const eventListenerRemove = () => {
+        messageCount--;
+      };
 
-      addButtonElement.addEventListener('click', addEventListenerX);
-      removeButtonElement.addEventListener('click', removeEventListener);
+      addButtonElement.addEventListener('click', eventListenerAdd);
+      removeButtonElement.addEventListener('click', eventListenerRemove);
 
       // setInterval takes an anonymous function and a timeout value
       // In this case the system will log "(X) New Messages" every 1 second
-      setInterval(
-
-      function() {
- 
-        if (messageCount === 0) {
-          titleElement.innerHTML = 'App';
-        } else {
-          titleElement.innerHTML = `(${messageCount}) New messages`; 
-        }
-
-      }, 1000);
+      setInterval(function() { titleElement.innerHTML = `(${messageCount}) New messages` }, 1000);
 
     </script>
   </body>

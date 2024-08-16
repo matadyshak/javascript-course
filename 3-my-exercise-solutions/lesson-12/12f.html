@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>12e</title>
+    <title>12f</title>
 
 <!--    <link rel="stylesheet" href="file.css"> -->
 
@@ -15,14 +15,21 @@
 <!--    <script src="file.js"></script> -->
 
     <script>
+      let firstTime = true;
+      let myTimeoutId;
       const buttonElement = document.querySelector('.js-add-to-cart-button');
       const textElement = document.querySelector('.js-status-text');
       // This will run when the event happens
       const eventListener = () => {
-        textElement.innerHTML = "Added";
-        // setTimeout takes an anonymous function and a timeout value
-        // In this case the system will wait 1 second then log 'timeout' 'timeout2'
-        setTimeout(function() { textElement.innerHTML = ""; }, 2000);
+        if ( firstTime ) {
+          firstTime = false;
+        } else {
+          clearTimeout(myTimeoutId);
+        }
+      textElement.innerHTML = "Added";
+      // setTimeout takes an anonymous function and a timeout value
+      // In this case the system will wait 1 second then log 'timeout' 'timeout2'
+      myTimeoutId = setTimeout(function() { textElement.innerHTML = ""; }, 2000);
       };
       // This registers the event to happen on 'click'
       buttonElement.addEventListener('click', eventListener);
