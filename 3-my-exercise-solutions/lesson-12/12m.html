@@ -14,10 +14,14 @@
 
     <script>
       function addNum(array, num) {
-        array.map((value) => value + num);
-        
+        let result = [];
+        result = array.map((value, index) => { 
+          console.log(`value: ${value}`);
+          console.log(`index: ${index}`);
+          return value + num;
+        });
+        return result;
       }
-
 
       console.log(addNum([1, 2, 3], 2));
       console.log(addNum([-2, -1, 0, 99], 2));
