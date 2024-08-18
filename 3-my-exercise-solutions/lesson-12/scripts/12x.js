@@ -81,14 +81,12 @@ document.querySelector('.js-scissors-button')
 
   document.querySelector('.js-yes-button')
   .addEventListener('click', () => {
-    console.log('Yes button clicked.');
     resetScore();
     showResetScorePrompt(false);
   });
     
   document.querySelector('.js-no-button')
   .addEventListener('click', () => {
-    console.log('No button clicked.');
     showResetScorePrompt(false);
   });
 
