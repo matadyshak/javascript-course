@@ -19,6 +19,7 @@
       let myTimeoutId;
       const buttonElement = document.querySelector('.js-add-to-cart-button');
       const textElement = document.querySelector('.js-status-text');
+      
       // This will run when the event happens
       const eventListener = () => {
         if ( firstTime ) {
@@ -26,11 +27,13 @@
         } else {
           clearTimeout(myTimeoutId);
         }
-      textElement.innerHTML = "Added";
-      // setTimeout takes an anonymous function and a timeout value
-      // In this case the system will wait 1 second then log 'timeout' 'timeout2'
-      myTimeoutId = setTimeout(function() { textElement.innerHTML = ""; }, 2000);
-      };
+        textElement.innerHTML = "Added";
+        // setTimeout takes an anonymous function and a timeout value
+        // In this case the system will wait 1 second then log 'timeout' 'timeout2'
+        myTimeoutId = setTimeout(() => { 
+          textElement.innerHTML = ""; }, 2000);
+        };
+
       // This registers the event to happen on 'click'
       buttonElement.addEventListener('click', eventListener);
 

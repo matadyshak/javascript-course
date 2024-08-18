@@ -22,20 +22,23 @@
       const addButtonElement = document.querySelector('.js-add-button');
       const removeButtonElement = document.querySelector('.js-remove-button');
 
-      const eventListenerAdd = () => {
+      const addEventListenerX = () => {
         messageCount++;
       };
 
-      const eventListenerRemove = () => {
+      const removeEventListener = () => {
         messageCount--;
       };
 
-      addButtonElement.addEventListener('click', eventListenerAdd);
-      removeButtonElement.addEventListener('click', eventListenerRemove);
+      addButtonElement.addEventListener('click', addEventListenerX);
+      removeButtonElement.addEventListener('click', removeEventListener);
 
       // setInterval takes an anonymous function and a timeout value
       // In this case the system will log "(X) New Messages" every 1 second
-      setInterval(function() { titleElement.innerHTML = `(${messageCount}) New messages` }, 1000);
+
+      setInterval(() => { 
+        titleElement.innerHTML = `(${messageCount}) New messages`;
+      }, 1000);
 
     </script>
   </body>

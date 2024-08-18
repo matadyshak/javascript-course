@@ -22,7 +22,8 @@
         textElement.innerHTML = "Added";
         // setTimeout takes an anonymous function and a timeout value
         // In this case the system will wait 1 second then log 'timeout' 'timeout2'
-        setTimeout(function() { textElement.innerHTML = ""; }, 2000);
+        setTimeout(() => {
+          textElement.innerHTML = ""; }, 2000);
       };
       // This registers the event to happen on 'click'
       buttonElement.addEventListener('click', eventListener);

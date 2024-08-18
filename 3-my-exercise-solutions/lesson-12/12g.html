@@ -18,7 +18,11 @@
 
       // setInterval takes an anonymous function and a timeout value
       // In this case the system will log "(X) New Messages" every 1 second
-      setInterval(function() { messageCount++;  titleElement.innerHTML = `(${messageCount}) New messages` }, 1000);
+
+      setInterval(() => { 
+        messageCount++;
+        titleElement.innerHTML = `(${messageCount}) New messages`; 
+      }, 1000);
 
     </script>
   </body>

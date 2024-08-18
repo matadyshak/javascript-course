@@ -15,12 +15,14 @@
 
     <script>
       const buttonElement = document.querySelector('.js-click-me-button');
-      const eventListener = () => {
-        buttonElement.innerHTML = "Loading...";
-        // setTimeout takes an anonymous function and a timeout value
-        // In this case the system will wait 1 second then log 'timeout' 'timeout2'
-        setTimeout(function() { buttonElement.innerHTML = "Finished!"; }, 1000);
-      
+
+      // setTimeout takes an anonymous function and a timeout value
+      // In this case the system will wait 1 second then log 'timeout' 'timeout2'
+
+      const eventListener = () => { 
+        buttonElement.innerHTML = "Loading..."; 
+        setTimeout(() => {
+          buttonElement.innerHTML = "Finished!"; }, 1000);
       };
       buttonElement.addEventListener('click', eventListener);
 

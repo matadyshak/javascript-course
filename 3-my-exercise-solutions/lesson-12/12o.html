@@ -14,22 +14,26 @@
 
     <script>
 
-      const foods = ['egg', 'apple','egg', 'egg', 'ham']   // => ['apple', 'ham']
+      const foods = ['egg', 'apple','egg', 'egg', 'ham']   // => ['apple', 'egg', 'ham']
       let result = [];
       let removeLimit = 2;
+
       result = foods.filter((value, index) => { 
-        // If remove limit is 0 always return true
-        // If removeLimit > 0 && value === 'egg' removeLimit-- and return false
-        if (removeLimit <= 0) {
-          return true;
-        } else {
-          if (value === 'egg') {
-            removeLimit--;
-            return false;
-          } else {
-            return true;
-          }
-        }});
+
+      // If remove limit is 0, always return true
+      if (removeLimit <= 0) {
+        return true;
+      }
+
+      // If removeLimit > 0 && value === 'egg' removeLimit-- and return false
+      if (value === 'egg') {
+        removeLimit--;
+        return false;
+      }
+
+      return true;
+      });
+
       console.log(result);
 
     </script>
