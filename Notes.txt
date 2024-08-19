@@ -284,10 +284,23 @@ localStorage.removeItem('score');
 
 
 /////////////////////////////////////////////////////////////////////
-
 8/6/24
 
 For Go Live to work the HTML file must be selected.
+/////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////
+8/18/24
+
+Link to completed Amazon project:
+
+https://supersimple.dev/projects/amazon/
+
+Startup code for Lesson 13:
+https://github.com/SuperSimpleDev/javascript-amazon-project
+
+Will watch the videos and make same changes to lesson13 code
+Then copy all code to Lesson 14 folder and continue
 
 /////////////////////////////////////////////////////////////////////
 

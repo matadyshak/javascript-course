@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Variable in Head</title>
+    <script>
+        // Declare the variable in the <head> section
+        var myVariable = "Hello from the head!";
+    </script>
+</head>
+<body>
+    <h1>Accessing Variable from Head</h1>
+    <p id="display"></p>
+
+    <script>
+        // Access the variable in the <body> section
+        document.getElementById('display').innerText = myVariable;
+    </script>
+</body>
+</html>
+Explanation:
+Declaring the Variable:
+
+In the <head> section, you declare the variable myVariable using a <script> tag.
+Accessing the Variable:
+
+In the <body> section, another <script> tag accesses the previously declared variable and modifies the content of an HTML element with the id of display.
+This ensures that the variable is accessible throughout the document, as long as the script that uses the variable is placed after the script that declares it.

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title></title>
+  </head>
+  <body>
+  <script>
+  </script
+  </body>
+</html>
+  
+
+
+
+Reserved Words: 
+
+foreach(v,i)    => v = value   i = index
+
+Object.keys(obj).forEach(key => console.log(key));  => Object, keys, key
+
+Object.entries(obj).forEach(([key, value]) => {  => Object, entries, key, value
+
+
+1. The Basics
+
+['a', 'b', 'c'].forEach(v => console.log(v));  // Prints "a", "b", "c"
+
+
+
+2. Modifying the Array (although it’s generally better to use map() for this)
+
+const arr = ['a', 'b', 'c'];
+arr.forEach((v, i) => {
+    arr[i] = v.toUpperCase();
+});
+// Result: ['A', 'B', 'C']
+
+
+3. Object Keys (using Object.keys())
+
+const obj = { a: 1, b: 2, c: 3 };
+Object.keys(obj).forEach(key => console.log(key));
+// Prints "a", "b", "c"
+
+
+4. Object Keys and Values (using Object.entries())
+
+const obj = { a: 1, b: 2, c: 3 };
+Object.entries(obj).forEach(([key, value]) => {
+    console.log(key + ' ' + value);
+});
+// Prints "a 1", "b 2", "c 3"
+
+
+5. Nested Arrays and flat():
+
+const arr = ['a', ['b', 'c'], [['d', ['e']]]];
+arr.flat(3).forEach(v => console.log(v));
+// Prints "a", "b", "c", "d", "e"
+
+
+6. Adding Elements to the Array:
+
+const arr = ['a', 'b', 'c'];
+arr.forEach(v => {
+    arr.push(v.toUpperCase());
+    console.log(v);
+});
+// Prints "a", "b", "c" (even after adding new elements)
+
+
+7. thisArg Parameter (for setting the value of this):
+
+// Example using a Stack class
+// (Note: `thisArg` is the second parameter)
+
+
+Remember, forEach() is great for simple iterations, but consider other methods like map() or reduce() for more complex transformations. If you have any specific use case, feel free to ask! 😊

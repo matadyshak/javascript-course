@@ -1,0 +1,19 @@
+function findAllOccurrences(arr, searchString) {
+    let indices = [];
+    let startIndex = 0;
+
+    while (startIndex < arr.length) {
+        let index = arr.indexOf(searchString, startIndex);
+        if (index === -1) break;
+        indices.push(index);
+        startIndex = index + 1; // Move to the next position after the found index
+    }
+
+    return indices;
+}
+
+let array = ["apple", "banana", "apple", "cherry", "apple", "banana"];
+let searchString = "apple";
+let occurrences = findAllOccurrences(array, searchString);
+
+console.log(occurrences); // Output: [0, 2, 4]

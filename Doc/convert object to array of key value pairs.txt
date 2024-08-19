@@ -1,0 +1,53 @@
+//////////////////////////////////////////////////////////////////
+// Code snippet
+//////////////////////////////////////////////////////////////////
+
+      const resultArray = Object.keys(wordCounts).map(word => ({
+        word: word,
+        count: wordCounts[word]
+      }));
+
+//////////////////////////////////////////////////////////////////
+
+// wordCounts object is built up with multiple key/value pairs
+// {"apple":1} apple 1
+// {"apple":1,"banana":1} banana 1
+// {"apple":2,"banana":1} apple 2
+// {"apple":2,"banana":1,"orange":1} orange 1
+// {"apple":2,"banana":2,"orange":1} banana 2
+// {"apple":3,"banana":2,"orange":1} apple 3
+
+const resultArray = ...: 
+This line declares a constant variable named resultArray. The value assigned to it will be an array.
+
+Object.keys(wordCounts): 
+
+The Object.keys() method is used to extract all the keys (property names) from the wordCounts object. It returns an array containing these keys.
+
+Object.keys(wordCounts) = ["apple", "banana", "orange"];
+
+
+const resultArray = Object.keys(wordCounts).map(word => ({word: word, count: wordCounts[word] }));
+
+.map(word => ({ ... })): The .map() method is called on the array of keys obtained in the previous step. It iterates over each key (which represents a word) and creates a new object for each word. 
+
+The object has two properties:
+word: The word itself (taken from the key).
+count: The count of occurrences of that word (retrieved from the wordCounts object using the key).
+
+Putting it all together: The entire expression constructs an array of objects, where each object represents a word along with its corresponding count. The resulting resultArray will look something like this:
+
+[
+  { word: 'apple', count: 5 },
+  { word: 'banana', count: 3 },
+]
+
+AI-generated code. Review and use carefully. More info on FAQ.  Note that wordCounts should be defined elsewhere in your code, containing word-frequency data.
+
+In summary, this code snippet transforms a word-count object (where keys are words and values are their counts) into an array of objects, each containing a word and its count. It’s a common pattern for converting data structures in JavaScript.
+
+      // Array of objects each with 2 key/value pairs
+      // Does key have to be a string?  Can it be a number?
+      // 0: {word: 'apple', count: 3}
+      // 1: {word: 'banana', count: 2}
+      // 2: {word: 'orange', count: 1} 
