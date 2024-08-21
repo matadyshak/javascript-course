@@ -59,7 +59,8 @@ document.querySelector('.js-products-grid').innerHTML = productsHTML;
 document.querySelectorAll('.js-add-to-cart')
   .forEach((button) => {
     button.addEventListener('click', () => {
-      const productId = button.dataset.productId;
+    //attribute name product-id becomes camelCase productId in the dataset object
+    const productId = button.dataset.productId;
 
       let matchingItem;
 
@@ -68,13 +69,18 @@ document.querySelectorAll('.js-add-to-cart')
           matchingItem = item;
         }
       });
+      
+      debugger
+      const selectElement = document.querySelector(`.js-quantity-selector-${product.id}`);
+      const selectValue = selectElement.value;
+      const selectText = selectElement.options[selectElement.selectedIndex].text;
 
       if(matchingItem) {
-        matchingItem.quantity += 1;
+        matchingItem.quantity += selectValue + 1;
       } else {
         cart.push({
           productId: productId,
-          quantity: 1
+          quantity: selectValue +1;
         });
       }
 

@@ -325,3 +325,18 @@ Syntax for a data attribute
 
 console.log(button.dataset);
 dataset contains all data attributes that have been set for an element
+
+/////////////////////////////////////////////////////////////////////
+8/19/24
+/////////////////////////////////////////////////////////////////////
+
+For lessons 13-18 we will follow the video and make the same changes
+on branch main.  Then we will create branch "13-exercises" and implement 
+all exercises on the "13-exercises" branch. We will save the patch required 
+for each exercise as 13a.patch, etc.  Then we will merge the two
+branches and fix any conflicts.  The code will then be copied to
+the next folder "Lesson-14" and we will go back to working the main
+branch.  This will allow me to save the code at various stages for 
+comparison with the code in 2-copy-of-code.
+
+git diff HEAD HEAD~1 13b.patch
