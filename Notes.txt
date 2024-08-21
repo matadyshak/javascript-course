@@ -160,6 +160,11 @@ git push -u origin main
 
 After running these commands, your cloned repository will be uploaded to your own GitHub account.
 
+After starting a new-branch locally enter this
+git push -u origin new-branch
+
+Then push / pull commands with be to/from new-branch
+
 ///////////////////////////////////////////////////////////////////////////////////
 // Starting the exercises
 ///////////////////////////////////////////////////////////////////////////////////
@@ -317,3 +322,6 @@ Syntax for a data attribute
 
 -is an HTML attribute
 -Must start with "data-"
+
+console.log(button.dataset);
+dataset contains all data attributes that have been set for an element
