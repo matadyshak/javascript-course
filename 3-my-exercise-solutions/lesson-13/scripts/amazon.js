@@ -24,7 +24,7 @@ products.forEach((product) => {
       $${(product.priceCents / 100).toFixed(2)}
     </div>
 
-    <div class="product-quantity-container">
+    <div class="product-quantity-container js-quantity-selector-${product.id}>
       <select>
         <option selected value="1">1</option>amazon.html
         <option value="2">2</option>
