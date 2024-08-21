@@ -74,13 +74,15 @@ document.querySelectorAll('.js-add-to-cart')
       const selectElement = document.querySelector(`.js-quantity-selector-${product.id}`);
       const selectValue = selectElement.value;
       const selectText = selectElement.options[selectElement.selectedIndex].text;
+      console.log(`${selectElement} ${selectValue}  ${selectText}`);
+
 
       if(matchingItem) {
         matchingItem.quantity += selectValue + 1;
       } else {
         cart.push({
           productId: productId,
-          quantity: selectValue +1;
+          quantity: selectValue +1,
         });
       }
 
