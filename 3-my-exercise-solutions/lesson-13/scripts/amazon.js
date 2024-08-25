@@ -24,9 +24,9 @@ products.forEach((product) => {
       $${(product.priceCents / 100).toFixed(2)}
     </div>
 
-    <div class="product-quantity-container js-quantity-selector-${product.id}>
+    <div class="product-quantity-container js-quantity-selector-${product.id}">
       <select>
-        <option selected value="1">1</option>amazon.html
+        <option selected value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>
         <option value="4">4</option>
@@ -70,8 +70,8 @@ document.querySelectorAll('.js-add-to-cart')
         }
       });
       
-      debugger
-      const selectElement = document.querySelector(`.js-quantity-selector-${product.id}`);
+      console.log(`.js-quantity-selector-${productId}`);
+      const selectElement = document.querySelector(`.js-quantity-selector-${productId}`);
       const selectValue = selectElement.value;
       const selectText = selectElement.options[selectElement.selectedIndex].text;
       console.log(`${selectElement} ${selectValue}  ${selectText}`);
