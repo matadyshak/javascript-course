@@ -25,8 +25,8 @@ products.forEach((product) => {
       $${(product.priceCents / 100).toFixed(2)}
     </div>
 
-    <div class="product-quantity-container js-quantity-selector-${product.id}">
-      <select>
+    <div class="product-quantity-container">
+      <select class="js-quantity-selector-${product.id}">
         <option selected value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>
@@ -83,17 +83,15 @@ document.querySelectorAll('.js-add-to-cart')
       //Single or double quotes fail and result in literally .js-quantity-selector-${productId}
       //Must use back-tick to substitute in the productId
       //${productId} should be in blue color
-      const selectElement = document.querySelector(`.js-quantity-selector-${productId}`);
-      const selectValue = selectElement.value;
-      //const selectText = selectElement.options[selectElement.selectedIndex].text;
-
-
+      const selectValue = document.querySelector(`.js-quantity-selector-${productId}`).value;
+      // Convert to number to prevent appending to a string
+      let valueInt = Number(selectValue);
       if(matchingItem) {
-        matchingItem.quantity += selectValue;
+        matchingItem.quantity += valueInt;
       } else {
         cart.push({
           productId: productId,
-          quantity: selectValue
+          quantity: valueInt
         });
       }
 
