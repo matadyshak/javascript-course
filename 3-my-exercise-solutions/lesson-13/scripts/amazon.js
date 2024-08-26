@@ -67,7 +67,10 @@ document.querySelectorAll('.js-add-to-cart')
     //dataset contains data- attributes
     //attribute name product-id becomes camelCase productId in the dataset object
     //The code below will run for any individual button that gets clicked
-    const productId = button.dataset.productId;
+    //const productId = button.dataset.productId;
+    //Destructuring shortcut
+    const {dataset} = button;
+    const {productId} = dataset;
 
     let matchingItem;
 
@@ -90,7 +93,8 @@ document.querySelectorAll('.js-add-to-cart')
         matchingItem.quantity += valueInt;
       } else {
         cart.push({
-          productId: productId,
+          //Using shorthand property for productId since name and variable have same name
+          productId,
           quantity: valueInt
         });
       }
