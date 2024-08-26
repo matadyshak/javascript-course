@@ -1,6 +1,7 @@
 let productsHTML = '';
 
 products.forEach((product) => {
+  //Generate the HTML for all 42 products
   productsHTML += `
     <div class="product-container">
     <div class="product-image-container">
@@ -54,35 +55,45 @@ products.forEach((product) => {
   `;
 });
 
+//Display all products in the web page
 document.querySelector('.js-products-grid').innerHTML = productsHTML;
-//All add to cart buttons
+
+//Get selectors to all 42 Add to Cart buttons
 document.querySelectorAll('.js-add-to-cart')
   .forEach((button) => {
+    //Add a click event listener for each of the 42 buttons
     button.addEventListener('click', () => {
+    //For each button get the unique product id
+    //dataset contains data- attributes
     //attribute name product-id becomes camelCase productId in the dataset object
+    //The code below will run for any individual button that gets clicked
     const productId = button.dataset.productId;
 
-      let matchingItem;
+    let matchingItem;
 
-      cart.forEach((item) => {
-        if (productId === item.productId) {
+    //Check all the items in the cart for a match of the product id for the button
+    cart.forEach((item) => {
+      if (productId === item.productId) {
+          //Item is already in the cart
+          //Only one cart item can match
           matchingItem = item;
         }
       });
       
-      console.log(`.js-quantity-selector-${productId}`);
+      //Single or double quotes fail and result in literally .js-quantity-selector-${productId}
+      //Must use back-tick to substitute in the productId
+      //${productId} should be in blue color
       const selectElement = document.querySelector(`.js-quantity-selector-${productId}`);
       const selectValue = selectElement.value;
-      const selectText = selectElement.options[selectElement.selectedIndex].text;
-      console.log(`${selectElement} ${selectValue}  ${selectText}`);
+      //const selectText = selectElement.options[selectElement.selectedIndex].text;
 
 
       if(matchingItem) {
-        matchingItem.quantity += selectValue + 1;
+        matchingItem.quantity += selectValue;
       } else {
         cart.push({
           productId: productId,
-          quantity: selectValue +1,
+          quantity: selectValue
         });
       }
 
