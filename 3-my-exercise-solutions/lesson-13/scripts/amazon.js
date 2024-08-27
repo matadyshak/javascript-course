@@ -55,7 +55,7 @@ products.forEach((product) => {
     </button>
   </div>
   `;
-});
+});  //forEach((product
 
 //Display all products in the web page
 document.querySelector('.js-products-grid').innerHTML = productsHTML;
@@ -79,11 +79,11 @@ document.querySelectorAll('.js-add-to-cart')
     //Check all the items in the cart for a match of the product id for the button
     cart.forEach((item) => {
       if (productId === item.productId) {
-          //Item is already in the cart
-          //Only one cart item can match
-          matchingItem = item;
-        }
-      });
+        //Item is already in the cart
+        //Only one cart item can match
+        matchingItem = item;
+      }
+    });
       
     //Single or double quotes fail and result in literally .js-quantity-selector-${productId}
     //Must use back-tick to substitute in the productId
@@ -91,41 +91,41 @@ document.querySelectorAll('.js-add-to-cart')
     // Convert to number to prevent appending to a string
     const selectValue = Number(document.querySelector(`.js-quantity-selector-${productId}`).value);
       
-      if(matchingItem) {
-        matchingItem.quantity += selectValue;
-      } else {
-        cart.push({
-          //Using shorthand property for productId since name and variable have same name
-          productId,
-          quantity: selectValue
-        })};
+    if(matchingItem) {
+      matchingItem.quantity += selectValue;
+    } else {
+      cart.push({
+        //Using shorthand property for productId since name and variable have same name
+        productId,
+        quantity: selectValue
+      })};
 
-        const messageElement = document.querySelector(`.js-added-to-cart-${productId}`);
-        //messageElement.innerHTML = messageElement.innerText;
-        messageElement.classList.add(".is-showing");
-        //const textElement = document.querySelector(".is-showing");
-        //textElement.innerHTML = "Added";
+      const messageElement = document.querySelector(`.js-added-to-cart-${productId}`);
+      //messageElement.innerHTML = messageElement.innerText;
+      messageElement.classList.add(".is-showing");
+      //const textElement = document.querySelector(".is-showing");
+      //textElement.innerHTML = "Added";
         
       // This will run when the event happens
       // const eventListener = () => {
-        if ( firstTime ) {
-          firstTime = false;
-        } else {
-          clearTimeout(myTimeoutId);
-        }
+      if ( firstTime ) {
+        firstTime = false;
+      } else {
+        clearTimeout(myTimeoutId);
+      }
 
-        // setTimeout takes an anonymous function and a timeout value
-        // In this case the system will wait 1 second then log 'timeout' 'timeout2'
-        myTimeoutId = setTimeout(() => {  
-          messageElement.classList.remove(".is-showing");
-        }, 2000);
+      // setTimeout takes an anonymous function and a timeout value
+      // In this case the system will wait 1 second then log 'timeout' 'timeout2'
+      myTimeoutId = setTimeout(() => {  
+        messageElement.classList.remove(".is-showing");
+      }, 2000);
 
-        let cartQuantity = 0;
+      let cartQuantity = 0;
 
-        cart.forEach((item) => {
-          cartQuantity += item.quantity;
-        });
+      cart.forEach((item) => {
+        cartQuantity += item.quantity;
+      });
 
-        document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
-    }) //forEach(button)
-  }) // forEach product
+      document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
+    }) // button.addEventListener
+  }) //forEach(button)
