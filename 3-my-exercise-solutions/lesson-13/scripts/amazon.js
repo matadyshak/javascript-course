@@ -1,4 +1,6 @@
 let productsHTML = '';
+let firstTime = true;
+let myTimeoutId;
 
 products.forEach((product) => {
   //Generate the HTML for all 42 products
@@ -42,7 +44,7 @@ products.forEach((product) => {
 
     <div class="product-spacer"></div>
 
-    <div class="added-to-cart">
+    <div class="added-to-cart" "js-added-to-cart-${product.id}">
       <img src="images/icons/checkmark.png">
       Added
     </div>
@@ -83,28 +85,47 @@ document.querySelectorAll('.js-add-to-cart')
         }
       });
       
-      //Single or double quotes fail and result in literally .js-quantity-selector-${productId}
-      //Must use back-tick to substitute in the productId
-      //${productId} should be in blue color
-      const selectValue = document.querySelector(`.js-quantity-selector-${productId}`).value;
-      // Convert to number to prevent appending to a string
-      let valueInt = Number(selectValue);
+    //Single or double quotes fail and result in literally .js-quantity-selector-${productId}
+    //Must use back-tick to substitute in the productId
+    //${productId} should be in blue color
+    // Convert to number to prevent appending to a string
+    const selectValue = Number(document.querySelector(`.js-quantity-selector-${productId}`).value);
+      
       if(matchingItem) {
-        matchingItem.quantity += valueInt;
+        matchingItem.quantity += selectValue;
       } else {
         cart.push({
           //Using shorthand property for productId since name and variable have same name
           productId,
-          quantity: valueInt
+          quantity: selectValue
+        })};
+
+        const messageElement = document.querySelector(`.js-added-to-cart-${productId}`);
+        //messageElement.innerHTML = messageElement.innerText;
+        messageElement.classList.add(".is-showing");
+        //const textElement = document.querySelector(".is-showing");
+        //textElement.innerHTML = "Added";
+        
+      // This will run when the event happens
+      // const eventListener = () => {
+        if ( firstTime ) {
+          firstTime = false;
+        } else {
+          clearTimeout(myTimeoutId);
+        }
+
+        // setTimeout takes an anonymous function and a timeout value
+        // In this case the system will wait 1 second then log 'timeout' 'timeout2'
+        myTimeoutId = setTimeout(() => {  
+          messageElement.classList.remove(".is-showing");
+        }, 2000);
+
+        let cartQuantity = 0;
+
+        cart.forEach((item) => {
+          cartQuantity += item.quantity;
         });
-      }
 
-      let cartQuantity = 0;
-
-      cart.forEach((item) => {
-        cartQuantity += item.quantity;
-      });
-
-      document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
-    });
-  });
+        document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
+    }) //forEach(button)
+  }) // forEach product
