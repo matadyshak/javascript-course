@@ -44,7 +44,7 @@ products.forEach((product) => {
 
     <div class="product-spacer"></div>
 
-    <div class="added-to-cart" "js-added-to-cart-${product.id}">
+    <div class="added-to-cart js-added-to-cart-${product.id}">
       <img src="images/icons/checkmark.png">
       Added
     </div>
@@ -101,13 +101,8 @@ document.querySelectorAll('.js-add-to-cart')
       })};
 
       const messageElement = document.querySelector(`.js-added-to-cart-${productId}`);
-      //messageElement.innerHTML = messageElement.innerText;
-      messageElement.classList.add(".is-showing");
-      //const textElement = document.querySelector(".is-showing");
-      //textElement.innerHTML = "Added";
+      messageElement.classList.add("is-showing");
         
-      // This will run when the event happens
-      // const eventListener = () => {
       if ( firstTime ) {
         firstTime = false;
       } else {
@@ -117,7 +112,7 @@ document.querySelectorAll('.js-add-to-cart')
       // setTimeout takes an anonymous function and a timeout value
       // In this case the system will wait 1 second then log 'timeout' 'timeout2'
       myTimeoutId = setTimeout(() => {  
-        messageElement.classList.remove(".is-showing");
+        messageElement.classList.remove("is-showing");
       }, 2000);
 
       let cartQuantity = 0;
