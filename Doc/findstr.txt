@@ -1,1 +1,0 @@
-C:\Users\miket\Documents\Repos\javascript-course>findstr /s /i /n /c:"Todo List" *.html

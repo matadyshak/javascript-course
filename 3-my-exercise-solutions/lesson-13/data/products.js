@@ -642,17 +642,31 @@ const products = [
     ]
   },
   {
-    id: "bc2847e9-5323-403f-b7cf-57fde044a955",
-    image: "images/products/men-cozy-fleece-zip-up-hoodie-red.jpg",
-    name: "Men's Full-Zip Hooded Fleece Sweatshirt",
+    id: "id1",
+    image: "images/products/backpack.jpg",
+    name: "Men's Smokin' Hot Backpack",
+    rating: {
+      stars: 3.0,
+      count: 299
+    },
+    priceCents: 1999,
+    keywords: [
+      "backpacks",
+      "apparel",
+      "mens"
+    ]
+  },
+  {
+    id: "id2",
+    image: "images/products/umbrella.jpg",
+    name: "Men's Black Full-Size Umbrella",
     rating: {
       stars: 4.5,
-      count: 3157
+      count: 123
     },
-    priceCents: 2400,
+    priceCents: 4999,
     keywords: [
-      "sweaters",
-      "hoodies",
+      "umbrellas",
       "apparel",
       "mens"
     ]
