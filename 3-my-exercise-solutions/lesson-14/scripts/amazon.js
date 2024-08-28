@@ -75,32 +75,35 @@ document.querySelectorAll('.js-add-to-cart')
     //Destructuring shortcut
     const {dataset} = button;
     const {productId} = dataset;
+    addToCart();
 
-    let matchingItem;
+    function addToCart() {
+      let matchingItem;
 
-    //Check all the items in the cart for a match of the product id for the button
-    cart.forEach((item) => {
-      if (productId === item.productId) {
-        //Item is already in the cart
-        //Only one cart item can match
-        matchingItem = item;
-      }
-    });
-      
-    //Single or double quotes fail and result in literally .js-quantity-selector-${productId}
-    //Must use back-tick to substitute in the productId
-    //${productId} should be in blue color
-    // Convert to number to prevent appending to a string
-    const selectValue = Number(document.querySelector(`.js-quantity-selector-${productId}`).value);
-      
-    if(matchingItem) {
-      matchingItem.quantity += selectValue;
-    } else {
-      cart.push({
-        //Using shorthand property for productId since name and variable have same name
-        productId,
-        quantity: selectValue
-      })};
+      //Check all the items in the cart for a match of the product id for the button
+      cart.forEach((item) => {
+        if (productId === item.productId) {
+          //Item is already in the cart
+          //Only one cart item can match
+          matchingItem = item;
+        }
+      });
+        
+      //Single or double quotes fail and result in literally .js-quantity-selector-${productId}
+      //Must use back-tick to substitute in the productId
+      //${productId} should be in blue color
+      // Convert to number to prevent appending to a string
+      const selectValue = Number(document.querySelector(`.js-quantity-selector-${productId}`).value);
+        
+      if(matchingItem) {
+        matchingItem.quantity += selectValue;
+      } else {
+        cart.push({
+          //Using shorthand property for productId since name and variable have same name
+          productId,
+          quantity: selectValue
+        })};
+    }
 
       const messageElement = document.querySelector(`.js-added-to-cart-${productId}`);
       messageElement.classList.add("is-showing");
@@ -134,4 +137,5 @@ document.querySelectorAll('.js-add-to-cart')
 //
 // Put all imports at top of the file.
 // Must use Live Server to open HTML files that use modules.
+// 12:47:38
 ////////////////////////////////////////////////////////////////////////////////
