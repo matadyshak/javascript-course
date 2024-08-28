@@ -1,3 +1,5 @@
+import {cart} from '../data/cart.js';
+import {products} from '..data/products.js';
 let productsHTML = '';
 let firstTime = true;
 let myTimeoutId;
@@ -110,7 +112,6 @@ document.querySelectorAll('.js-add-to-cart')
       }
 
       // setTimeout takes an anonymous function and a timeout value
-      // In this case the system will wait 1 second then log 'timeout' 'timeout2'
       myTimeoutId = setTimeout(() => {  
         messageElement.classList.remove("is-showing");
       }, 2000);
@@ -124,3 +125,13 @@ document.querySelectorAll('.js-add-to-cart')
       document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
     }) // button.addEventListener
   }) //forEach(button)
+
+////////////////////////////////////////////////////////////////////////////////
+// Get a variable out of a file
+// 1. Add type="module" attribute
+// 2. Export
+// 3. Import
+//
+// Put all imports at top of the file.
+// Must use Live Server to open HTML files that use modules.
+////////////////////////////////////////////////////////////////////////////////
