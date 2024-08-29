@@ -1,8 +1,7 @@
-import {cart} from '../data/cart.js';
+import {cart, addToCart} from '../data/cart.js';
 import {products} from '../data/products.js';
+
 let productsHTML = '';
-let firstTime = true;
-let myTimeoutId;
 
 products.forEach((product) => {
   //Generate the HTML for all 42 products
@@ -62,11 +61,25 @@ products.forEach((product) => {
 //Display all products in the web page
 document.querySelector('.js-products-grid').innerHTML = productsHTML;
 
+function updateCartQuantity()
+{
+  let cartQuantity = 0;
+
+  cart.forEach((cartItem) => {
+    cartQuantity += cartItem.quantity;
+    });
+
+  document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
+}
+
+
 //Get selectors to all 42 Add to Cart buttons
 document.querySelectorAll('.js-add-to-cart')
   .forEach((button) => {
+
     //Add a click event listener for each of the 42 buttons
     button.addEventListener('click', () => {
+
     //For each button get the unique product id
     //dataset contains data- attributes
     //attribute name product-id becomes camelCase productId in the dataset object
@@ -75,59 +88,14 @@ document.querySelectorAll('.js-add-to-cart')
     //Destructuring shortcut
     const {dataset} = button;
     const {productId} = dataset;
-    addToCart();
 
-    function addToCart() {
-      let matchingItem;
+    addToCart(productId);
+    updateCartQuantity();
 
-      //Check all the items in the cart for a match of the product id for the button
-      cart.forEach((item) => {
-        if (productId === item.productId) {
-          //Item is already in the cart
-          //Only one cart item can match
-          matchingItem = item;
-        }
-      });
-        
-      //Single or double quotes fail and result in literally .js-quantity-selector-${productId}
-      //Must use back-tick to substitute in the productId
-      //${productId} should be in blue color
-      // Convert to number to prevent appending to a string
-      const selectValue = Number(document.querySelector(`.js-quantity-selector-${productId}`).value);
-        
-      if(matchingItem) {
-        matchingItem.quantity += selectValue;
-      } else {
-        cart.push({
-          //Using shorthand property for productId since name and variable have same name
-          productId,
-          quantity: selectValue
-        })};
-    }
-
-      const messageElement = document.querySelector(`.js-added-to-cart-${productId}`);
-      messageElement.classList.add("is-showing");
-        
-      if ( firstTime ) {
-        firstTime = false;
-      } else {
-        clearTimeout(myTimeoutId);
-      }
-
-      // setTimeout takes an anonymous function and a timeout value
-      myTimeoutId = setTimeout(() => {  
-        messageElement.classList.remove("is-showing");
-      }, 2000);
-
-      let cartQuantity = 0;
-
-      cart.forEach((item) => {
-        cartQuantity += item.quantity;
-      });
-
-      document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
     }) // button.addEventListener
   }) //forEach(button)
+
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // Get a variable out of a file
