@@ -74,6 +74,7 @@ products.forEach((product) => {
     </button>
   </div>
   `;
+
 });  //forEach((product
 
 //Display all products in the web page
