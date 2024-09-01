@@ -81,6 +81,8 @@ products.forEach((product) => {
 const element = document.querySelector('.js-products-grid');
 element.innerHTML = productsHTML;
 
+updateCartQuantity();
+
 //Get selectors to all 42 Add to Cart buttons
 document.querySelectorAll('.js-add-to-cart')
   .forEach((button) => {
