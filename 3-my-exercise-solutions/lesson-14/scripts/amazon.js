@@ -17,6 +17,7 @@ function updateCartQuantity()
 {
   const cartQuantity = calculateCartQuantity();
   document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
+  return;
 }
 
 let productsHTML = '';
@@ -78,6 +79,7 @@ products.forEach((product) => {
 });  //forEach((product
 
 //Display all products in the web page
+//This will return null if we are not on the main page
 const element = document.querySelector('.js-products-grid');
 element.innerHTML = productsHTML;
 
