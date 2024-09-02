@@ -5,7 +5,7 @@ import {formatCurrency} from './utils/money.js';
 
 let cartSummaryHTML = '';
 
-function calculateCartQuantity2() {
+function calculateCartQuantity() {
   let cartQuantity = 0;
 
   cart.forEach((cartItem) => {
@@ -13,6 +13,14 @@ function calculateCartQuantity2() {
   });
 
   return cartQuantity;
+}
+
+function updateCartQuantity()
+{
+  const cartQuantity = calculateCartQuantity();
+  document.querySelector('.js-return-to-home-link')
+    .innerHTML = `${cartQuantity} items`;
+  return;
 }
 
 cart.forEach((cartItem) => {
@@ -111,10 +119,7 @@ cart.forEach((cartItem) => {
 document.querySelector('.js-order-summary')
   .innerHTML = cartSummaryHTML;
 
-const quantity = calculateCartQuantity2();
-
-document.querySelector('.js-return-to-home-link')
-  .innerHTML = `${quantity} items`;
+  updateCartQuantity();
 
   document.querySelectorAll('.js-delete-link')
     .forEach((link) => {
@@ -126,6 +131,7 @@ document.querySelector('.js-return-to-home-link')
           `.js-cart-item-container-${productId}`
         );
         container.remove();
+        updateCartQuantity();
       }); // addEventListener
     }); // forEach((link
 
