@@ -1,10 +1,10 @@
 import {cart, removeFromCart} from '../data/cart.js';
 import {products} from '../data/products.js';
 import {formatCurrency} from './utils/money.js';
-import {calculateCartQuantity} from '../amazon.js';
+import {calculateCartQuantity} from './amazon.js';
 
 let cartSummaryHTML = '';
-
+console.log("I'm in checkout.js");
 cart.forEach((cartItem) => {
   const productId = cartItem.productId;
   let matchingProduct;
