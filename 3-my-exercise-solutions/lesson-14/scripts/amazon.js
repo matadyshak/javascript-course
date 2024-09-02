@@ -20,24 +20,6 @@ function updateCartQuantity()
   return;
 }
 
-export function calculateCartQuantity()
-{
-  let cartQuantity = 0;
-
-  cart.forEach((cartItem) => {
-    cartQuantity += cartItem.quantity;
-    });
-
-    return cartQuantity;
-}
-
-function updateCartQuantity()
-{
-  const cartQuantity = calculateCartQuantity();
-  document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
-  return;
-}
-
 let productsHTML = '';
 
 products.forEach((product) => {
