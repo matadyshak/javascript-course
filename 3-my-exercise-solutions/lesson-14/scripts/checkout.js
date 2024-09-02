@@ -1,8 +1,19 @@
 import {cart, removeFromCart} from '../data/cart.js';
 import {products} from '../data/products.js';
 import {formatCurrency} from './utils/money.js';
+//import {calculateCartQuantity} from './amazon.js';
 
 let cartSummaryHTML = '';
+
+function calculateCartQuantity2() {
+  let cartQuantity = 0;
+
+  cart.forEach((cartItem) => {
+  cartQuantity += cartItem.quantity;
+  });
+
+  return cartQuantity;
+}
 
 cart.forEach((cartItem) => {
   const productId = cartItem.productId;
@@ -101,6 +112,11 @@ cart.forEach((cartItem) => {
 document.querySelector('.js-order-summary')
   .innerHTML = cartSummaryHTML;
 
+const quantity = calculateCartQuantity2();
+
+document.querySelector('.js-return-to-home-link')
+  .innerHTML = `${quantity} items`;
+
   document.querySelectorAll('.js-delete-link')
     .forEach((link) => {
       link.addEventListener('click', () => {
@@ -113,3 +129,4 @@ document.querySelector('.js-order-summary')
         container.remove();
       }); // addEventListener
     }); // forEach((link
+
