@@ -153,8 +153,12 @@ document.querySelector('.js-order-summary')
         container = document.querySelector(
           `.js-cart-item-container-${productId}`
         );
-        container.classList.remove('is-editing-quantity');
         let quantityInput = Number(document.querySelector('.js-quantity-input').value);
+        if (isNaN(quantityInput) || quantityInput < 0 || quantityInput >= 1000) {
+          alert("Invalid quantity.  Defaulting to quantity 1.  Valid quantities are 0 - 999.");
+          quantityInput = 1;
+        }
+        container.classList.remove('is-editing-quantity');
         let actualQuantity = changeCartQuantity(productId, quantityInput);
         document.querySelector('.js-cart-item-quantity').innerHTML = actualQuantity;
         updateCartQuantity();
