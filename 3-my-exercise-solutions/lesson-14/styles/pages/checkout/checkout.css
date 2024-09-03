@@ -210,6 +210,17 @@
   margin-bottom: 15px;
 }
 
+.product-quantity {
+  display: flex;
+  align-items: center; /* Align items vertically in the center */
+  gap: 5px; /* Optional: Add space between elements */
+}
+
+.product-quantity span,
+.product-quantity input {
+  margin-right: 10px; /* Optional: Add space between elements */
+}
+
 .quantity-input {
   width: 30px;
   display: none;
@@ -227,13 +238,10 @@
   display: initial;
 }
 
-.product-quantity {
-  display: flex;
-  align-items: center; /* Align items vertically in the center */
-  gap: 5px; /* Optional: Add space between elements */
+.is-editing-quantity .quantity-label {
+  display: none;
 }
 
-.product-quantity span,
-.product-quantity input {
-  margin-right: 10px; /* Optional: Add space between elements */
+.is-editing-quantity .update-quantity-link {
+  display: none;
 }
