@@ -1,19 +1,9 @@
 import {cart, removeFromCart} from '../data/cart.js';
 import {products} from '../data/products.js';
 import {formatCurrency} from './utils/money.js';
-//import {calculateCartQuantity} from './amazon.js';
+import {calculateCartQuantity} from '../data/cart.js';
 
 let cartSummaryHTML = '';
-
-function calculateCartQuantity() {
-  let cartQuantity = 0;
-
-  cart.forEach((cartItem) => {
-  cartQuantity += cartItem.quantity;
-  });
-
-  return cartQuantity;
-}
 
 function updateCartQuantity()
 {
