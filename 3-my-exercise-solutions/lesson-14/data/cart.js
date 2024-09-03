@@ -10,7 +10,7 @@ export function calculateCartQuantity() {
   return cartQuantity;
 }
 
-showLocalStorage();
+//showLocalStorage();
 
 if (!cart) {
   cart = [{

@@ -46,7 +46,8 @@ cart.forEach((cartItem) => {
         <span>
           Quantity: <span class="quantity-label">${cartItem.quantity}</span>
         </span>
-        <span class="update-quantity-link link-primary">
+        <span class="update-quantity-link link-primary js-update-link"
+          data-product-id-update="${matchingProduct.id}">
           Update
         </span>
         <span class="delete-quantity-link link-primary js-delete-link" 
@@ -111,17 +112,33 @@ document.querySelector('.js-order-summary')
 
   updateCartQuantity();
 
+  let productId;
+  let container;
+
   document.querySelectorAll('.js-delete-link')
     .forEach((link) => {
       link.addEventListener('click', () => {
-        const productId = link.dataset.productId;
+        productId = link.dataset.productId;
         removeFromCart(productId);
         
-        const container = document.querySelector(
+        container = document.querySelector(
           `.js-cart-item-container-${productId}`
         );
         container.remove();
         updateCartQuantity();
+      }); // addEventListener
+    }); // forEach((link
+
+    document.querySelectorAll('.js-update-link')
+    .forEach((link) => {
+      link.addEventListener('click', () => {
+        productId = link.dataset.productIdUpdate;
+        console.log(productId);
+        //container = document.querySelector(
+        //  `.js-cart-item-container-${productId}`
+        //);
+        //container.remove();
+        //updateCartQuantity();
       }); // addEventListener
     }); // forEach((link
 
