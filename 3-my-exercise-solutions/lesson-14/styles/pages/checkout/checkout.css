@@ -209,3 +209,31 @@
   margin-top: 11px;
   margin-bottom: 15px;
 }
+
+.quantity-input {
+  width: 30px;
+  display: none;
+}
+
+.save-quantity-link {
+  display: none;
+}
+
+.is-editing-quantity .quantity-input {
+  display: initial;
+}
+
+.is-editing-quantity .save-quantity-link {
+  display: initial;
+}
+
+.product-quantity {
+  display: flex;
+  align-items: center; /* Align items vertically in the center */
+  gap: 5px; /* Optional: Add space between elements */
+}
+
+.product-quantity span,
+.product-quantity input {
+  margin-right: 10px; /* Optional: Add space between elements */
+}
