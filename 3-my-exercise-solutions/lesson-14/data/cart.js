@@ -10,6 +10,16 @@ export function calculateCartQuantity() {
   return cartQuantity;
 }
 
+export function changeCartQuantity(productId, newQuantity) {
+  cart.forEach((cartItem) => {
+     if (cartItem.productId === productId) {
+      cartItem.quantity = newQuantity;
+     }  
+    });
+    saveToStorage();
+    return newQuantity;
+}
+
 //showLocalStorage();
 
 if (!cart) {
