@@ -154,9 +154,10 @@ document.querySelector('.js-order-summary')
           `.js-cart-item-container-${productId}`
         );
         let quantityInput = Number(document.querySelector('.js-quantity-input').value);
-        if (isNaN(quantityInput) || quantityInput < 0 || quantityInput >= 1000) {
-          alert("Invalid quantity.  Defaulting to quantity 1.  Valid quantities are 0 - 999.");
+        if (isNaN(quantityInput) || quantityInput < 1 || quantityInput >= 1000) {
+          alert("Invalid quantity.  Defaulting to quantity 1.  Valid quantities are 1 - 999.");
           quantityInput = 1;
+          document.querySelector('.js-quantity-input').value = '1';
         }
         container.classList.remove('is-editing-quantity');
         let actualQuantity = changeCartQuantity(productId, quantityInput);
