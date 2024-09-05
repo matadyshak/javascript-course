@@ -25,10 +25,12 @@ export function changeCartQuantity(productId, newQuantity) {
 if (!cart) {
   cart = [{
     productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
-    quantity: 2
+    quantity: 2,
+    deliveryOptionid: '1'
   },{
     productId: "15b6fc6f-327a-4ec4-896f-486349e85a3d",
     quantity: 1
+    deliveryOptionid: '2'
   }];
 }
 
@@ -70,7 +72,8 @@ export function addToCart(productId) {
         cart.push({
           //Using shorthand property for productId since name and variable have same name
           productId,
-          quantity: selectValue
+          quantity: selectValue,
+          deliveryOptionId: '1'
         })};
 
       const messageElement = document.querySelector(`.js-added-to-cart-${productId}`);
