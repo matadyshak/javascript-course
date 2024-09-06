@@ -16,10 +16,6 @@ function updateCartQuantity()
   return;
 }
 
-function getDateString(deliveryDate) {
-  return deliveryDate.format('dddd, MMMM D');
-}
-
 function deliveryOptionsHTML(matchingProduct, cartItem) {
   let html = '';
 
@@ -30,7 +26,7 @@ function deliveryOptionsHTML(matchingProduct, cartItem) {
     'days'
   );
 
-  let dateString = getDateString(deliveryDate);
+  const dateString = deliveryDate.format('dddd, MMMM D');
 
   let priceString = deliveryOption.priceCents === 0
     ? 'FREE'
@@ -75,12 +71,28 @@ cart.forEach((cartItem) => {
     }
   })
 
+  const deliveryOptionId = cartItem.deliveryOptionId;
+  let deliveryOption;
+  deliveryOptions.forEach((option) => {
+  if (option.id === deliveryOptionId) {
+    deliveryOption = option;
+  }
+  });
+
+  const today = dayjs();
+  const deliveryDate = today.add(
+    deliveryOption.deliveryDays,
+    'days'
+  );
+
+  const dateString = deliveryDate.format('dddd, MMMM D');
+
   cartSummaryHTML +=
   `
   <div class="cart-item-container 
     js-cart-item-container-${matchingProduct.id}">
   <div class="delivery-date">
-    Delivery date: Tuesday October 23
+    Delivery date: ${dateString}
   </div>
 
   <div class="cart-item-details-grid">
