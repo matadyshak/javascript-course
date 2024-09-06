@@ -5,6 +5,7 @@ import {calculateCartQuantity, changeCartQuantity} from '../data/cart.js';
 import {hello} from 'https://unpkg.com/supersimpledev@1.0.1/hello.esm.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 import {deliveryOptions} from './deliveryOptions.js';
+import {updateDeliveryOptions} from '../data/cart.js';
 
 hello();
 
