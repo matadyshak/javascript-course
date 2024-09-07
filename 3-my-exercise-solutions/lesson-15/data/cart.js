@@ -20,6 +20,16 @@ export function changeCartQuantity(productId, newQuantity) {
     return newQuantity;
 }
 
+export function changeCartDeliveryOption(productId, newDeliveryOption} {
+  cart.forEach((cartItem) => {
+     if (cartItem.productId === productId) {
+      cartItem.deliveryOptionId = newDeliveryOption;
+     }  
+    });
+    saveToStorage();
+    return cartItem.deliveryOptionId;
+}
+
 //showLocalStorage();
 
 if (!cart) {
@@ -106,7 +116,7 @@ export function addToCart(productId) {
       saveToStorage();
     }
 
-    export function updateDeliveryOptions( productId, deliveryOptionId) {
+    export function updateDeliveryOption( productId, deliveryOptionId) {
       let matchingItem;
 
       //Check all the items in the cart for a match of the product id for the button
@@ -120,5 +130,7 @@ export function addToCart(productId) {
 
       matchingItem.deliverOptionId = deliveryOptionId;
       saveToStorage();
+      // Update radio buttons in the DOM
+
     }
     
