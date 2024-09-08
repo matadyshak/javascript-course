@@ -5,8 +5,8 @@ import {calculateCartQuantity, changeCartQuantity} from '../../data/cart.js';
 import {hello} from 'https://unpkg.com/supersimpledev@1.0.1/hello.esm.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 import {deliveryOptions, getDeliveryOption} from '../../data/deliveryOptions.js';
+import {renderPaymentSummary} from './paymentSummary.js';
 
-hello();
 ////////////////////////////////////////////////////////////////////////////////////////
 
 function updateCartQuantity()
@@ -147,7 +147,7 @@ cart.forEach((cartItem) => {
           `.js-cart-item-container-${productId}`
         );
         container.remove();
-        updateCartQuantity();
+        renderPaymentSummary();
       }); // addEventListener
     }); // forEach((link
 
@@ -188,7 +188,9 @@ cart.forEach((cartItem) => {
         element.addEventListener('click', () => {
           const {productId, deliveryOptionId} = element.dataset;
           updateDeliveryOption(productId, deliveryOptionId);
-          changeCartDeliveryOption(productId, deliveryOptionId);
+          renderOrderSummary();
+          renderPaymentSummary();
+          //changeCartDeliveryOption(productId, deliveryOptionId);
           //renderOrderSummary(); (recursive)
         }); // addEventListener
       }); // forEach((element

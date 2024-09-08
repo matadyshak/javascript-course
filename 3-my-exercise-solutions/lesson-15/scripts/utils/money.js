@@ -1,5 +1,6 @@
 export function formatCurrency(priceCents) {
-  return (priceCents / 100).toFixed(2);
+  //Get around rounding issue that occurs if Math.round() is not used here
+  return (Math.round(priceCents) / 100).toFixed(2);
 }
 
 //Default export - does not need {}
