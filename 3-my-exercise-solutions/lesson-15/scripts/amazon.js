@@ -3,8 +3,10 @@ import {products} from '../data/products.js';
 import {formatCurrency} from './utils/money.js'
 import {calculateCartQuantity} from '../data/cart.js';
 
-function updateCartQuantity()
-{
+function displayCartQuantity()
+{ 
+  // Reads and displays at top of order summary page the items count
+  // Does not update the cart or localStorage
   const cartQuantity = calculateCartQuantity();
   document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
   return;
@@ -73,7 +75,7 @@ products.forEach((product) => {
 const element = document.querySelector('.js-products-grid');
 element.innerHTML = productsHTML;
 
-updateCartQuantity();
+displayCartQuantity();
 
 //Get selectors to all 42 Add to Cart buttons
 document.querySelectorAll('.js-add-to-cart')
@@ -92,7 +94,7 @@ document.querySelectorAll('.js-add-to-cart')
     const {productId} = dataset;
 
     addToCart(productId);
-    updateCartQuantity();
+    displayCartQuantity();
 
     }) // button.addEventListener
   }) //forEach(button)
