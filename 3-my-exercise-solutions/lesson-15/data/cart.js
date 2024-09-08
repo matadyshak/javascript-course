@@ -27,7 +27,7 @@ export function changeCartDeliveryOption(productId, newDeliveryOption) {
      }  
     });
     saveToStorage();
-    return cartItem.deliveryOptionId;
+    return;
 }
 
 //showLocalStorage();
