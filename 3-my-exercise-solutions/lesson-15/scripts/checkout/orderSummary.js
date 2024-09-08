@@ -9,7 +9,7 @@ import {renderPaymentSummary} from './paymentSummary.js';
 
 ////////////////////////////////////////////////////////////////////////////////////////
 
-function updateCartQuantity()
+function displayCartQuantity()
 {
   const cartQuantity = calculateCartQuantity();
   document.querySelector('.js-return-to-home-link')
@@ -132,7 +132,8 @@ cart.forEach((cartItem) => {
   document.querySelector('.js-order-summary')
     .innerHTML = cartSummaryHTML;
 
-  updateCartQuantity();
+// This needs to go before the HTML update
+  displayCartQuantity();
   updateDeliveryOption(matchingProduct.id, deliveryOption.id);
 
   let container;
@@ -178,7 +179,7 @@ cart.forEach((cartItem) => {
         container.classList.remove('is-editing-quantity');
         let actualQuantity = changeCartQuantity(productId, quantityInput);
         document.querySelector('.js-cart-item-quantity').innerHTML = actualQuantity;
-        updateCartQuantity();
+        displayCartQuantity();
       }); // addEventListener
     }); // forEach((link
 
@@ -188,7 +189,7 @@ cart.forEach((cartItem) => {
         element.addEventListener('click', () => {
           const {productId, deliveryOptionId} = element.dataset;
           updateDeliveryOption(productId, deliveryOptionId);
-          renderOrderSummary();
+          renderOrderSummary(); //recursive
           renderPaymentSummary();
           //changeCartDeliveryOption(productId, deliveryOptionId);
           //renderOrderSummary(); (recursive)
