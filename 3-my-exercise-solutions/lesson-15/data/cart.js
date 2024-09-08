@@ -20,7 +20,7 @@ export function changeCartQuantity(productId, newQuantity) {
     return newQuantity;
 }
 
-export function changeCartDeliveryOption(productId, newDeliveryOption} {
+export function changeCartDeliveryOption(productId, newDeliveryOption) {
   cart.forEach((cartItem) => {
      if (cartItem.productId === productId) {
       cartItem.deliveryOptionId = newDeliveryOption;
