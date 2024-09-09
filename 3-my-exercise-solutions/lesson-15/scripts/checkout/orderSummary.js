@@ -132,6 +132,9 @@ cart.forEach((cartItem) => {
   document.querySelector('.js-order-summary')
     .innerHTML = cartSummaryHTML;
 
+  // Display the total quantity at top of page
+  displayCartQuantity();
+  
   let container;
 
   document.querySelectorAll('.js-delete-link')
@@ -146,6 +149,7 @@ cart.forEach((cartItem) => {
         container.remove();
         renderOrderSummary();
         renderPaymentSummary();
+        displayCartQuantity();
       }); // addEventListener
     }); // forEach((link
 
@@ -178,9 +182,10 @@ cart.forEach((cartItem) => {
         let actualQuantity = changeCartQuantity(productId, quantityInput);
 
          // This updates the checkout total quantity at the top
-        displayCartQuantity();
+        
         renderOrderSummary();
         renderPaymentSummary();
+        displayCartQuantity();
       }); // addEventListener
     }); // forEach((link
 
@@ -193,6 +198,7 @@ cart.forEach((cartItem) => {
           changeCartDeliveryOption(productId, deliveryOptionId);
           renderOrderSummary(); //recursive
           renderPaymentSummary();
+          displayCartQuantity();
         }); // addEventListener
       }); // forEach((element
   }); //cart.forEach((cartItem) 
