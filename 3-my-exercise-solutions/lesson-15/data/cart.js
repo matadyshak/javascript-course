@@ -114,23 +114,4 @@ export function addToCart(productId) {
 
       cart = newCart;
       saveToStorage();
-    }
-
-    export function updateDeliveryOption( productId, deliveryOptionId) {
-      let matchingItem;
-
-      //Check all the items in the cart for a match of the product id for the button
-      cart.forEach((cartItem) => {
-        if (productId === cartItem.productId) {
-          //Item is already in the cart
-          //Only one cart item can match
-          matchingItem = cartItem;
-        }
-      });
-
-      matchingItem.deliverOptionId = deliveryOptionId;
-      saveToStorage();
-      // Update radio buttons in the DOM
-
-    }
-    
+    }    

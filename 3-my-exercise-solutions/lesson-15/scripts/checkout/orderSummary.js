@@ -1,4 +1,4 @@
-import {cart, removeFromCart, updateDeliveryOption, changeCartDeliveryOption} from '../../data/cart.js';
+import {cart, removeFromCart, changeCartDeliveryOption} from '../../data/cart.js';
 import {products, getProduct} from '../../data/products.js';
 import formatCurrency from '../utils/money.js';
 import {calculateCartQuantity, changeCartQuantity} from '../../data/cart.js';
@@ -132,10 +132,6 @@ cart.forEach((cartItem) => {
   document.querySelector('.js-order-summary')
     .innerHTML = cartSummaryHTML;
 
-// This needs to go before the HTML update
-  displayCartQuantity();
-  updateDeliveryOption(matchingProduct.id, deliveryOption.id);
-
   let container;
 
   document.querySelectorAll('.js-delete-link')
@@ -148,6 +144,7 @@ cart.forEach((cartItem) => {
           `.js-cart-item-container-${productId}`
         );
         container.remove();
+        renderOrderSummary();
         renderPaymentSummary();
       }); // addEventListener
     }); // forEach((link
@@ -177,9 +174,13 @@ cart.forEach((cartItem) => {
           document.querySelector('.js-quantity-input').value = '1';
         }
         container.classList.remove('is-editing-quantity');
+        //This actually changes the cart quantity and localStorage
         let actualQuantity = changeCartQuantity(productId, quantityInput);
-        document.querySelector('.js-cart-item-quantity').innerHTML = actualQuantity;
+
+         // This updates the checkout total quantity at the top
         displayCartQuantity();
+        renderOrderSummary();
+        renderPaymentSummary();
       }); // addEventListener
     }); // forEach((link
 
@@ -188,11 +189,10 @@ cart.forEach((cartItem) => {
       .forEach((element) => {
         element.addEventListener('click', () => {
           const {productId, deliveryOptionId} = element.dataset;
-          updateDeliveryOption(productId, deliveryOptionId);
+          // This changes the cart and localStorage
+          changeCartDeliveryOption(productId, deliveryOptionId);
           renderOrderSummary(); //recursive
           renderPaymentSummary();
-          //changeCartDeliveryOption(productId, deliveryOptionId);
-          //renderOrderSummary(); (recursive)
         }); // addEventListener
       }); // forEach((element
   }); //cart.forEach((cartItem) 
