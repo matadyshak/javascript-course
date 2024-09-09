@@ -112,6 +112,7 @@ cart.forEach((cartItem) => {
           Delete
         </span>  
           <input class="quantity-input js-quantity-input">
+            data-product-id-input="${matchingProduct.id}">
           <span class="save-quantity-link link-primary js-save-link"
             data-product-id-save="${matchingProduct.id}">
             Save
@@ -164,6 +165,21 @@ cart.forEach((cartItem) => {
       }); // addEventListener
     }); // forEach((link
 
+    document.querySelectorAll('.js-quantity-input')
+    .forEach((input) => {
+      input.addEventListener('input', () => {
+        productId = input.dataset.productIdInput;
+        container = document.querySelector(
+          `.js-cart-item-container-${productId}`
+        );
+
+        let theInput = input.value;
+        theInput = theInput.replace(/[^0-9]/g, '');
+        input.value = theInput;
+        let quantityInput = Number(theInput);
+      }); // addEventListener
+    }); // forEach((input
+
     document.querySelectorAll('.js-save-link')
     .forEach((link) => {
       link.addEventListener('click', () => {
@@ -175,19 +191,14 @@ cart.forEach((cartItem) => {
         const input = element.value;
         let quantityInput = Number(input);
 
-
-
-        
         if (isNaN(quantityInput) || quantityInput < 1 || quantityInput >= 1000) {
-          alert("Invalid quantity.  Defaulting to quantity 1.  Valid quantities are 1 - 999.");
+          alert(`Invalid quantity: ${quantityInput}.  Defaulting to quantity 1.  Valid quantities are 1 - 999`);
           quantityInput = 1;
           document.querySelector('.js-quantity-input').value = '1';
         }
         container.classList.remove('is-editing-quantity');
         //This actually changes the cart quantity and localStorage
         let actualQuantity = changeCartQuantity(productId, quantityInput);
-
-         // This updates the checkout total quantity at the top
         
         renderOrderSummary();
         renderPaymentSummary();
