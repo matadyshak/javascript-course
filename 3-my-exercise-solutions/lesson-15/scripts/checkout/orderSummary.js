@@ -111,8 +111,8 @@ cart.forEach((cartItem) => {
           data-product-id-delete="${matchingProduct.id}">
           Delete
         </span>  
-          <input type="text" class=quantity-input js-quantity-input
-          js-quantity-input-"${matchingProduct.id}"
+          <input type="text" class="quantity-input js-quantity-input
+          js-quantity-input-${matchingProduct.id}"
             data-product-id-input="${matchingProduct.id}">
           <span class="save-quantity-link link-primary js-save-link"
             data-product-id-save="${matchingProduct.id}">
@@ -120,6 +120,11 @@ cart.forEach((cartItem) => {
         </span>
       </div>
     </div>
+
+
+    <div class="added-to-cart js-added-to-cart-${product.id}">
+
+
 
     <div class="delivery-options">
       <div class="delivery-options-title">
