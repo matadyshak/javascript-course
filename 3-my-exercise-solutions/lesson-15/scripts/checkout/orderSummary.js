@@ -111,8 +111,9 @@ cart.forEach((cartItem) => {
           data-product-id-delete="${matchingProduct.id}">
           Delete
         </span>  
-          <input class="quantity-input js-quantity-input">
+          <input type="text" class="quantity-input js-quantity-input">
             data-product-id-input="${matchingProduct.id}">
+          <span class="display-value"></span>   
           <span class="save-quantity-link link-primary js-save-link"
             data-product-id-save="${matchingProduct.id}">
             Save
@@ -173,10 +174,12 @@ cart.forEach((cartItem) => {
           `.js-cart-item-container-${productId}`
         );
 
-        let theInput = input.value;
-        theInput = theInput.replace(/[^0-9]/g, '');
-        input.value = theInput;
-        let quantityInput = Number(theInput);
+        input.value = input.value.replace(/[^0-9]/g, '');
+        const displayElement = container.querySelector('.display-value');
+        if (displayElement) {
+          displayElement.textContent = input.value;
+        }
+        //let quantityInput = Number(input.value);
       }); // addEventListener
     }); // forEach((input
 
@@ -187,6 +190,8 @@ cart.forEach((cartItem) => {
         container = document.querySelector(
           `.js-cart-item-container-${productId}`
         );
+    
+        //.js-quantity-input is a group of input elements
         const element = document.querySelector('.js-quantity-input');
         const input = element.value;
         let quantityInput = Number(input);
