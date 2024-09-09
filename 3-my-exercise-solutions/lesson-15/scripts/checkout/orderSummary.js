@@ -111,9 +111,9 @@ cart.forEach((cartItem) => {
           data-product-id-delete="${matchingProduct.id}">
           Delete
         </span>  
-          <input type="text" class="quantity-input js-quantity-input">
+          <input type="text" class="quantity-input js-quantity-input
+          js-quantity-input-"${matchingProduct.id}"
             data-product-id-input="${matchingProduct.id}">
-          <span class="display-value"></span>   
           <span class="save-quantity-link link-primary js-save-link"
             data-product-id-save="${matchingProduct.id}">
             Save
@@ -166,16 +166,30 @@ cart.forEach((cartItem) => {
       }); // addEventListener
     }); // forEach((link
 
-    document.querySelectorAll('.js-quantity-input')
-    .forEach((input) => {
-      input.addEventListener('input', () => {
+    let displayElement;
+    
+    const allElements = document.querySelectorAll('.js-quantity-input');
+    
+    /*
+    console.log("Before all elements.");
+    allElements.forEach(element => {
+      console.log(element); 
+    });
+    console.log("After all elements.")
+    */
+
+
+      allElements.forEach((input) => {
+        input.addEventListener('input', () => {
         productId = input.dataset.productIdInput;
         container = document.querySelector(
           `.js-cart-item-container-${productId}`
         );
 
         input.value = input.value.replace(/[^0-9]/g, '');
-        const displayElement = container.querySelector('.display-value');
+        displayElement = document.querySelector(`.js-quantity-input-${productId}`);
+        const prodId = displayElement.dataset.productIdInput;
+        
         if (displayElement) {
           displayElement.textContent = input.value;
         }
@@ -192,6 +206,7 @@ cart.forEach((cartItem) => {
         );
     
         //.js-quantity-input is a group of input elements
+        //This will grab the first one only
         const element = document.querySelector('.js-quantity-input');
         const input = element.value;
         let quantityInput = Number(input);
