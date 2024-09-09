@@ -171,7 +171,13 @@ cart.forEach((cartItem) => {
         container = document.querySelector(
           `.js-cart-item-container-${productId}`
         );
-        let quantityInput = Number(document.querySelector('.js-quantity-input').value);
+        const element = document.querySelector('.js-quantity-input');
+        const input = element.value;
+        let quantityInput = Number(input);
+
+
+
+        
         if (isNaN(quantityInput) || quantityInput < 1 || quantityInput >= 1000) {
           alert("Invalid quantity.  Defaulting to quantity 1.  Valid quantities are 1 - 999.");
           quantityInput = 1;
