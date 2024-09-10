@@ -2,7 +2,6 @@ import {cart, removeFromCart, changeCartDeliveryOption} from '../../data/cart.js
 import {products, getProduct} from '../../data/products.js';
 import formatCurrency from '../utils/money.js';
 import {calculateCartQuantity, changeCartQuantity} from '../../data/cart.js';
-import {hello} from 'https://unpkg.com/supersimpledev@1.0.1/hello.esm.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 import {deliveryOptions, getDeliveryOption} from '../../data/deliveryOptions.js';
 import {renderPaymentSummary} from './paymentSummary.js';
@@ -111,8 +110,7 @@ cart.forEach((cartItem) => {
           data-product-id-delete="${matchingProduct.id}">
           Delete
         </span>  
-          <input type="text" class="quantity-input js-quantity-input
-          js-quantity-input-${matchingProduct.id}"
+          <input type="text" class="quantity-input js-quantity-input js-quantity-input-${matchingProduct.id}"
             data-product-id-input="${matchingProduct.id}">
           <span class="save-quantity-link link-primary js-save-link"
             data-product-id-save="${matchingProduct.id}">
@@ -120,11 +118,6 @@ cart.forEach((cartItem) => {
         </span>
       </div>
     </div>
-
-
-    <div class="added-to-cart js-added-to-cart-${product.id}">
-
-
 
     <div class="delivery-options">
       <div class="delivery-options-title">
@@ -174,16 +167,6 @@ cart.forEach((cartItem) => {
     let displayElement;
     
     const allElements = document.querySelectorAll('.js-quantity-input');
-    
-    /*
-    console.log("Before all elements.");
-    allElements.forEach(element => {
-      console.log(element); 
-    });
-    console.log("After all elements.")
-    */
-
-
       allElements.forEach((input) => {
         input.addEventListener('input', () => {
         productId = input.dataset.productIdInput;
@@ -193,12 +176,9 @@ cart.forEach((cartItem) => {
 
         input.value = input.value.replace(/[^0-9]/g, '');
         displayElement = document.querySelector(`.js-quantity-input-${productId}`);
-        const prodId = displayElement.dataset.productIdInput;
-        
         if (displayElement) {
           displayElement.textContent = input.value;
         }
-        //let quantityInput = Number(input.value);
       }); // addEventListener
     }); // forEach((input
 
@@ -211,8 +191,7 @@ cart.forEach((cartItem) => {
         );
     
         //.js-quantity-input is a group of input elements
-        //This will grab the first one only
-        const element = document.querySelector('.js-quantity-input');
+        const element = document.querySelector(`.js-quantity-input-${productId}`);
         const input = element.value;
         let quantityInput = Number(input);
 
