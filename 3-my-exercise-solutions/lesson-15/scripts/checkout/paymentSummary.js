@@ -2,6 +2,7 @@ import {cart, calculateCartQuantity} from '../../data/cart.js';
 import {getProduct} from '../../data/products.js';
 import {getDeliveryOption} from '../../data/deliveryOptions.js';
 import {formatCurrency} from '../utils/money.js';
+import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 
 export function renderPaymentSummary() {
 
@@ -67,4 +68,14 @@ export function renderPaymentSummary() {
     .innerHTML = paymentSummaryHTML;
 }
 
+//Must go to cart page for this to run
+function GetNDaysFromNow(days) {
+  const today = dayjs();
+  const newDate = today.add(days, 'days');
+  const dateString = newDate.format('MMMM D');
+  return dateString;
+}
 
+console.log(GetNDaysFromNow(5));
+console.log(GetNDaysFromNow(0));
+console.log(GetNDaysFromNow(-5));
