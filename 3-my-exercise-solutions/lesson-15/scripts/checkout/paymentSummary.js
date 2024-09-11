@@ -69,13 +69,35 @@ export function renderPaymentSummary() {
 }
 
 //Must go to cart page for this to run
-function GetNDaysFromNow(days) {
+function GetDateFromNow(howmany, units) {
   const today = dayjs();
-  const newDate = today.add(days, 'days');
+  const newDate = today.add(howmany, units);
   const dateString = newDate.format('MMMM D');
   return dateString;
 }
 
-console.log(GetNDaysFromNow(5));
-console.log(GetNDaysFromNow(0));
-console.log(GetNDaysFromNow(-5));
+function GetDateFromDate(initialDate, howmany, units) {
+  const date = initialDate;
+  const newDate = date.add(howmany, units);
+  const dateString = newDate.format('MMMM D');
+  return dateString;
+}
+
+//Exercise 15A
+console.log(GetDateFromNow( 5, 'days'));
+console.log(GetDateFromNow( 0, 'days'));
+console.log(GetDateFromNow(-5, 'days'));
+
+//Exercise 15B
+console.log(GetDateFromNow( 1, 'months'));
+console.log(GetDateFromNow( 2, 'months'));
+console.log(GetDateFromNow( 3, 'months'));
+
+const date1 = dayjs('2024-01-31');
+console.log(GetDateFromDate(date1, 1, 'months');
+console.log(GetDateFromDate(date1, 2, 'months');
+console.log(GetDateFromDate(date1, 3, 'months');
+
+console.log(GetDateFromDate(date1, 30, 'days');
+console.log(GetDateFromDate(date1, 60, 'days');
+console.log(GetDateFromDate(date1, 90, 'days');
