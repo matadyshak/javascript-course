@@ -3,7 +3,7 @@ import {getProduct} from '../../data/products.js';
 import {getDeliveryOption} from '../../data/deliveryOptions.js';
 import {formatCurrency} from '../utils/money.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
-import isWeekend from '../utils/datetime.js';
+import isWeekend as isSatSun from '../utils/datetime.js';
 
 export function renderPaymentSummary() {
 
@@ -134,15 +134,15 @@ function GetDayOfWeek()
 console.log(GetDayOfWeek());
 
 
-function testIsWeekend() {
+function testIsSatSun() {
   const today = dayjs();
-  console.log(isWeekend(today))
-  console.log(isWeekend(today.add(1, 'days')));
-  console.log(isWeekend(today.add(2, 'days')));
-  console.log(isWeekend(today.add(3, 'days')));
-  console.log(isWeekend(today.add(4, 'days')));
-  console.log(isWeekend(today.add(5, 'days')));
-  console.log(isWeekend(today.add(6, 'days')));
+  console.log(isSatSun(today))
+  console.log(isSatSun(today.add(1, 'days')));
+  console.log(isSatSun(today.add(2, 'days')));
+  console.log(isSatSun(today.add(3, 'days')));
+  console.log(isSatSun(today.add(4, 'days')));
+  console.log(isSatSun(today.add(5, 'days')));
+  console.log(isSatSun(today.add(6, 'days')));
 }
 
-testIsWeekend();
+testIsSatSun();
