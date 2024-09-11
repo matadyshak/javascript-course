@@ -83,6 +83,13 @@ function GetDateFromDate(initialDate, howmany, units) {
   return dateString;
 }
 
+function GetDateFromDateBySubtract(initialDate, howmany, units) {
+  const date = initialDate;
+  const newDate = date.subtract(howmany, units);
+  const dateString = newDate.format('MMMM D');
+  return dateString;
+}
+
 //Exercise 15A
 console.log(GetDateFromNow( 5, 'days'));
 console.log(GetDateFromNow( 0, 'days'));
@@ -101,3 +108,19 @@ console.log(GetDateFromDate(date1, 3, 'months');
 console.log(GetDateFromDate(date1, 30, 'days');
 console.log(GetDateFromDate(date1, 60, 'days');
 console.log(GetDateFromDate(date1, 90, 'days');
+
+//Exercise 15C
+const date2 = dayjs('2024-02-28');
+console.log(GetDateFromDateBySubtract(date2, 1, 'months');
+console.log(GetDateFromDateBySubtract(date2, 2, 'months');
+console.log(GetDateFromDateBySubtract(date2, 3, 'months');
+
+console.log(GetDateFromDateBySubtract(date2, -1, 'months');
+console.log(GetDateFromDateBySubtract(date2, -2, 'months');
+console.log(GetDateFromDateBySubtract(date2, -3, 'months');
+
+console.log(GetDateFromDateBySubtract(date2, 30, 'days');
+console.log(GetDateFromDateBySubtract(date2, 60, 'days');
+console.log(GetDateFromDateBySubtract(date2, 90, 'days');
+
+
