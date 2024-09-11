@@ -69,24 +69,17 @@ export function renderPaymentSummary() {
 }
 
 //Must go to cart page for this to run
-function GetDateFromNow(howmany, units) {
+function GetDateFromNow(howmany, units, format = 'MMMM D') {
   const today = dayjs();
   const newDate = today.add(howmany, units);
-  const dateString = newDate.format('MMMM D');
+  const dateString = newDate.format(format);
   return dateString;
 }
 
-function GetDateFromDate(initialDate, howmany, units) {
+function GetDateFromDate(initialDate, howmany, units, format = 'MMMM D') {
   const date = initialDate;
   const newDate = date.add(howmany, units);
-  const dateString = newDate.format('MMMM D');
-  return dateString;
-}
-
-function GetDateFromDateBySubtract(initialDate, howmany, units) {
-  const date = initialDate;
-  const newDate = date.subtract(howmany, units);
-  const dateString = newDate.format('MMMM D');
+  const dateString = newDate.format(format);
   return dateString;
 }
 
@@ -122,5 +115,17 @@ console.log(GetDateFromDateBySubtract(date2, -3, 'months');
 console.log(GetDateFromDateBySubtract(date2, 30, 'days');
 console.log(GetDateFromDateBySubtract(date2, 60, 'days');
 console.log(GetDateFromDateBySubtract(date2, 90, 'days');
+
+//Exercise 15D
+function GetDayOfWeek() 
+{
+  const today = dayjs();
+  const dayOfWeek = today.format('dddd');
+  return dayOfWeek;
+}
+console.log(GetDayOfWeek());
+
+
+
 
 
