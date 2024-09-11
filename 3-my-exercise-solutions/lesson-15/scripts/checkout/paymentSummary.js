@@ -83,6 +83,13 @@ function GetDateFromDate(initialDate, howmany, units, format = 'MMMM D') {
   return dateString;
 }
 
+function GetDateFromDateBySubtract(initialDate, howmany, units, format = 'MMMM D') {
+  const date = initialDate;
+  const newDate = date.subtract(howmany, units);
+  const dateString = newDate.format(format);
+  return dateString;
+}
+
 //Exercise 15A
 console.log(GetDateFromNow( 5, 'days'));
 console.log(GetDateFromNow( 0, 'days'));
@@ -94,27 +101,27 @@ console.log(GetDateFromNow( 2, 'months'));
 console.log(GetDateFromNow( 3, 'months'));
 
 const date1 = dayjs('2024-01-31');
-console.log(GetDateFromDate(date1, 1, 'months');
-console.log(GetDateFromDate(date1, 2, 'months');
-console.log(GetDateFromDate(date1, 3, 'months');
+console.log(GetDateFromDate(date1, 1, 'months'));
+console.log(GetDateFromDate(date1, 2, 'months'));
+console.log(GetDateFromDate(date1, 3, 'months'));
 
-console.log(GetDateFromDate(date1, 30, 'days');
-console.log(GetDateFromDate(date1, 60, 'days');
-console.log(GetDateFromDate(date1, 90, 'days');
+console.log(GetDateFromDate(date1, 30, 'days'));
+console.log(GetDateFromDate(date1, 60, 'days'));
+console.log(GetDateFromDate(date1, 90, 'days'));
 
 //Exercise 15C
 const date2 = dayjs('2024-02-28');
-console.log(GetDateFromDateBySubtract(date2, 1, 'months');
-console.log(GetDateFromDateBySubtract(date2, 2, 'months');
-console.log(GetDateFromDateBySubtract(date2, 3, 'months');
+console.log(GetDateFromDateBySubtract(date2, 1, 'months'));
+console.log(GetDateFromDateBySubtract(date2, 2, 'months'));
+console.log(GetDateFromDateBySubtract(date2, 3, 'months'));
 
-console.log(GetDateFromDateBySubtract(date2, -1, 'months');
-console.log(GetDateFromDateBySubtract(date2, -2, 'months');
-console.log(GetDateFromDateBySubtract(date2, -3, 'months');
+console.log(GetDateFromDateBySubtract(date2, -1, 'months'));
+console.log(GetDateFromDateBySubtract(date2, -2, 'months'));
+console.log(GetDateFromDateBySubtract(date2, -3, 'months'));
 
-console.log(GetDateFromDateBySubtract(date2, 30, 'days');
-console.log(GetDateFromDateBySubtract(date2, 60, 'days');
-console.log(GetDateFromDateBySubtract(date2, 90, 'days');
+console.log(GetDateFromDateBySubtract(date2, 30, 'days'));
+console.log(GetDateFromDateBySubtract(date2, 60, 'days'));
+console.log(GetDateFromDateBySubtract(date2, 90, 'days'));
 
 //Exercise 15D
 function GetDayOfWeek() 
@@ -125,7 +132,25 @@ function GetDayOfWeek()
 }
 console.log(GetDayOfWeek());
 
+// Exercise 15E
+function isWeekend(date) {
+  const dayOfWeek = date.format('dddd');
+  if ((dayOfWeek === 'Saturday') || (dayOfWeek === 'Sunday')) {
+    return true;
+  }
+  
+  return false;
+}
 
+function testIsWeekend() {
+  const today = dayjs();
+  console.log(isWeekend(today))
+  console.log(isWeekend(today.add(1, 'days')));
+  console.log(isWeekend(today.add(2, 'days')));
+  console.log(isWeekend(today.add(3, 'days')));
+  console.log(isWeekend(today.add(4, 'days')));
+  console.log(isWeekend(today.add(5, 'days')));
+  console.log(isWeekend(today.add(6, 'days')));
+}
 
-
-
+testIsWeekend();
