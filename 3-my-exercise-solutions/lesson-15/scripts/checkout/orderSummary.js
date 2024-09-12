@@ -8,13 +8,13 @@ import {renderPaymentSummary} from './paymentSummary.js';
 
 ////////////////////////////////////////////////////////////////////////////////////////
 
-function displayCartQuantity()
-{
-  const cartQuantity = calculateCartQuantity();
-  document.querySelector('.js-return-to-home-link')
-    .innerHTML = `${cartQuantity} items`;
-  return;
-}
+//function displayCartQuantity()
+//{
+//  const cartQuantity = calculateCartQuantity();
+//  document.querySelector('.js-return-to-home-link')
+//    .innerHTML = `${cartQuantity} items`;
+//  return;
+//}
 
 ////////////////////////////////////////////////////////////////////////////////////////
 
@@ -133,7 +133,7 @@ cart.forEach((cartItem) => {
     .innerHTML = cartSummaryHTML;
 
   // Display the total quantity at top of page
-  displayCartQuantity();
+  //displayCartQuantity();
   
   let container;
 
@@ -143,13 +143,13 @@ cart.forEach((cartItem) => {
         productId = link.dataset.productIdDelete;
         removeFromCart(productId);
         
-        container = document.querySelector(
-          `.js-cart-item-container-${productId}`
-        );
-        container.remove();
+//        container = document.querySelector(
+//          `.js-cart-item-container-${productId}`
+//      );
+//      container.remove();
         renderOrderSummary();
         renderPaymentSummary();
-        displayCartQuantity();
+//        displayCartQuantity();
       }); // addEventListener
     }); // forEach((link
 
@@ -170,9 +170,9 @@ cart.forEach((cartItem) => {
       allElements.forEach((input) => {
         input.addEventListener('input', () => {
         productId = input.dataset.productIdInput;
-        container = document.querySelector(
-          `.js-cart-item-container-${productId}`
-        );
+//      container = document.querySelector(
+//        `.js-cart-item-container-${productId}`
+//        );
 
         input.value = input.value.replace(/[^0-9]/g, '');
         displayElement = document.querySelector(`.js-quantity-input-${productId}`);
@@ -191,9 +191,7 @@ cart.forEach((cartItem) => {
         );
     
         //.js-quantity-input is a group of input elements
-        const element = document.querySelector(`.js-quantity-input-${productId}`);
-        const input = element.value;
-        let quantityInput = Number(input);
+        let quantityInput = Number(document.querySelector(`.js-quantity-input-${productId}`).value);
 
         if (isNaN(quantityInput) || quantityInput < 1 || quantityInput >= 1000) {
           alert(`Invalid quantity: ${quantityInput}.  Defaulting to quantity 1.  Valid quantities are 1 - 999`);
@@ -206,7 +204,7 @@ cart.forEach((cartItem) => {
         
         renderOrderSummary();
         renderPaymentSummary();
-        displayCartQuantity();
+  //      displayCartQuantity();
       }); // addEventListener
     }); // forEach((link
 
@@ -219,10 +217,19 @@ cart.forEach((cartItem) => {
           changeCartDeliveryOption(productId, deliveryOptionId);
           renderOrderSummary(); //recursive
           renderPaymentSummary();
-          displayCartQuantity();
+//        displayCartQuantity();
         }); // addEventListener
       }); // forEach((element
   }); //cart.forEach((cartItem) 
+
+  const cartTotalQuantity = calculateCartQuantity();
+  const totalQuantityHTML = 
+    `    
+      Checkout (<a class="return-to-home-link js-return-to-home-link" href="amazon.html">${cartTotalQuantity} items</a>)
+    `;
+    
+   document.querySelector('.checkout-header-middle-section')
+    .innerHTML = totalQuantityHTML;
 } // renderOrderSummary() {
 
 renderOrderSummary();
