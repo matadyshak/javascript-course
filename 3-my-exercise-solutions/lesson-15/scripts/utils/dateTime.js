@@ -1,13 +1,9 @@
-export function isWeekend(date) {
+export default function isWeekend(date) {
   const dayOfWeek = date.format('dddd');
-  if ((dayOfWeek === 'Saturday') || (dayOfWeek === 'Sunday')) {
-    return true;
-  }
-  
-  return false;
+  return ((dayOfWeek === 'Saturday') || (dayOfWeek === 'Sunday')) ? true : false;
 }
 
 //Default export - does not need {}
 //Can only export one thing from file
-export default isWeekend;
+//export default isWeekend;
 

@@ -3,7 +3,7 @@ import {getProduct} from '../../data/products.js';
 import {getDeliveryOption} from '../../data/deliveryOptions.js';
 import {formatCurrency} from '../utils/money.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
-import isWeekend as isSatSun from '../utils/datetime.js';
+import isSatSun from '../utils/datetime.js';
 
 export function renderPaymentSummary() {
 
