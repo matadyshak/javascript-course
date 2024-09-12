@@ -8,16 +8,6 @@ import {renderPaymentSummary} from './paymentSummary.js';
 
 ////////////////////////////////////////////////////////////////////////////////////////
 
-//function displayCartQuantity()
-//{
-//  const cartQuantity = calculateCartQuantity();
-//  document.querySelector('.js-return-to-home-link')
-//    .innerHTML = `${cartQuantity} items`;
-//  return;
-//}
-
-////////////////////////////////////////////////////////////////////////////////////////
-
 function deliveryOptionsHTML(matchingProduct, cartItem) {
   let html = '';
 
@@ -132,10 +122,8 @@ cart.forEach((cartItem) => {
   document.querySelector('.js-order-summary')
     .innerHTML = cartSummaryHTML;
 
-  // Display the total quantity at top of page
-  //displayCartQuantity();
-  
-  let container;
+
+    let container;
 
   document.querySelectorAll('.js-delete-link')
     .forEach((link) => {
@@ -143,13 +131,12 @@ cart.forEach((cartItem) => {
         productId = link.dataset.productIdDelete;
         removeFromCart(productId);
         
-//        container = document.querySelector(
-//          `.js-cart-item-container-${productId}`
-//      );
-//      container.remove();
+        container = document.querySelector(
+          `.js-cart-item-container-${productId}`
+        );
+        container.remove();
         renderOrderSummary();
         renderPaymentSummary();
-//        displayCartQuantity();
       }); // addEventListener
     }); // forEach((link
 
@@ -170,10 +157,6 @@ cart.forEach((cartItem) => {
       allElements.forEach((input) => {
         input.addEventListener('input', () => {
         productId = input.dataset.productIdInput;
-//      container = document.querySelector(
-//        `.js-cart-item-container-${productId}`
-//        );
-
         input.value = input.value.replace(/[^0-9]/g, '');
         displayElement = document.querySelector(`.js-quantity-input-${productId}`);
         if (displayElement) {
@@ -204,7 +187,6 @@ cart.forEach((cartItem) => {
         
         renderOrderSummary();
         renderPaymentSummary();
-  //      displayCartQuantity();
       }); // addEventListener
     }); // forEach((link
 
@@ -217,7 +199,6 @@ cart.forEach((cartItem) => {
           changeCartDeliveryOption(productId, deliveryOptionId);
           renderOrderSummary(); //recursive
           renderPaymentSummary();
-//        displayCartQuantity();
         }); // addEventListener
       }); // forEach((element
   }); //cart.forEach((cartItem) 
