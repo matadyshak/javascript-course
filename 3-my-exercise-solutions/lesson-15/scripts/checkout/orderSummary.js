@@ -6,54 +6,13 @@ import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 import {deliveryOptions, getDeliveryOption} from '../../data/deliveryOptions.js';
 import {renderPaymentSummary} from './paymentSummary.js';
 
-////////////////////////////////////////////////////////////////////////////////////////
-
-function deliveryOptionsHTML(matchingProduct, cartItem) {
-  let html = '';
-
-  deliveryOptions.forEach((deliveryOption) => {
-  const today = dayjs();
-  const deliveryDate = today.add(
-    deliveryOption.deliveryDays,
-    'days'
-  );
-
-  const dateString = deliveryDate.format('dddd, MMMM D');
-
-  let priceString = deliveryOption.priceCents === 0
-    ? 'FREE'
-    : `$${formatCurrency(deliveryOption.priceCents)} -`;
-
-  //Set the corresponding radio button to "checked" and the other two to ""
-  const isChecked = (deliveryOption.id === cartItem.deliveryOptionId);
-
-  html += `
-  <div class="delivery-option js-delivery-option"
-    data-product-id="${matchingProduct.id}"
-    data-delivery-option-id="${deliveryOption.id}">
-    <input type="radio"
-      ${isChecked ? 'checked' : ''}
-      class="delivery-option-input"
-      name="delivery-option-${matchingProduct.id}">
-    <div>
-      <div class="delivery-option-date">
-      ${dateString}
-      </div>
-      <div class="delivery-option-price">
-      ${priceString} Shipping
-      </div>
-    </div>
-  </div>
-`
-});
-
-return html;
-}
+let cartSummaryHTML = '';
 
 ////////////////////////////////////////////////////////////////////////////////////////
 
 export function renderOrderSummary() {
-  let cartSummaryHTML = '';
+  
+  cartSummaryHTML = '';
 
 // Loop through all cart items
 cart.forEach((cartItem) => {
@@ -69,6 +28,7 @@ cart.forEach((cartItem) => {
 
   const dateString = deliveryDate.format('dddd, MMMM D');
 
+  
   cartSummaryHTML +=
   `
   <div class="cart-item-container 
@@ -118,24 +78,70 @@ cart.forEach((cartItem) => {
   </div>
 </div>
   `;
+});
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function deliveryOptionsHTML(matchingProduct, cartItem) {
+  let html = '';
+
+  deliveryOptions.forEach((deliveryOption) => {
+  const today = dayjs();
+  const deliveryDate = today.add(
+    deliveryOption.deliveryDays,
+    'days'
+  );
+
+  const dateString = deliveryDate.format('dddd, MMMM D');
+
+  let priceString = deliveryOption.priceCents === 0
+    ? 'FREE'
+    : `$${formatCurrency(deliveryOption.priceCents)} -`;
+
+  //Set the corresponding radio button to "checked" and the other two to ""
+  const isChecked = (deliveryOption.id === cartItem.deliveryOptionId);
+
+  html += `
+  <div class="delivery-option js-delivery-option"
+    data-product-id="${matchingProduct.id}"
+    data-delivery-option-id="${deliveryOption.id}">
+    <input type="radio"
+      ${isChecked ? 'checked' : ''}
+      class="delivery-option-input"
+      name="delivery-option-${matchingProduct.id}">
+    <div>
+      <div class="delivery-option-date">
+      ${dateString}
+      </div>
+      <div class="delivery-option-price">
+      ${priceString} Shipping
+      </div>
+    </div>
+  </div>
+`
+});
+
+return html;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////
 
   document.querySelector('.js-order-summary')
     .innerHTML = cartSummaryHTML;
 
 
-    let container;
-
   document.querySelectorAll('.js-delete-link')
     .forEach((link) => {
       link.addEventListener('click', () => {
-        productId = link.dataset.productIdDelete;
+        const productId = link.dataset.productIdDelete;
         removeFromCart(productId);
         
-        container = document.querySelector(
+        const container = document.querySelector(
           `.js-cart-item-container-${productId}`
         );
         container.remove();
-        renderOrderSummary();
+        //renderOrderSummary();
         renderPaymentSummary();
       }); // addEventListener
     }); // forEach((link
@@ -143,22 +149,20 @@ cart.forEach((cartItem) => {
     document.querySelectorAll('.js-update-link')
     .forEach((link) => {
       link.addEventListener('click', () => {
-        productId = link.dataset.productIdUpdate;
-        container = document.querySelector(
+        const productId = link.dataset.productIdUpdate;
+        const container = document.querySelector(
           `.js-cart-item-container-${productId}`
         );
         container.classList.add('is-editing-quantity');
       }); // addEventListener
     }); // forEach((link
 
-    let displayElement;
-    
-    const allElements = document.querySelectorAll('.js-quantity-input');
+      const allElements = document.querySelectorAll('.js-quantity-input');
       allElements.forEach((input) => {
         input.addEventListener('input', () => {
-        productId = input.dataset.productIdInput;
+        const productId = input.dataset.productIdInput;
         input.value = input.value.replace(/[^0-9]/g, '');
-        displayElement = document.querySelector(`.js-quantity-input-${productId}`);
+        let displayElement = document.querySelector(`.js-quantity-input-${productId}`);
         if (displayElement) {
           displayElement.textContent = input.value;
         }
@@ -168,8 +172,8 @@ cart.forEach((cartItem) => {
     document.querySelectorAll('.js-save-link')
     .forEach((link) => {
       link.addEventListener('click', () => {
-        productId = link.dataset.productIdSave;
-        container = document.querySelector(
+        const productId = link.dataset.productIdSave;
+        const container = document.querySelector(
           `.js-cart-item-container-${productId}`
         );
     
@@ -200,8 +204,7 @@ cart.forEach((cartItem) => {
           renderOrderSummary(); //recursive
           renderPaymentSummary();
         }); // addEventListener
-      }); // forEach((element
-  }); //cart.forEach((cartItem) 
+      }); // forEach((element 
 
   const cartTotalQuantity = calculateCartQuantity();
   const totalQuantityHTML = 
@@ -211,8 +214,7 @@ cart.forEach((cartItem) => {
     
    document.querySelector('.checkout-header-middle-section')
     .innerHTML = totalQuantityHTML;
-} // renderOrderSummary() {
 
-renderOrderSummary();
+   renderOrderSummary();
 
 ////////////////////////////////////////////////////////////////////////////////////////
