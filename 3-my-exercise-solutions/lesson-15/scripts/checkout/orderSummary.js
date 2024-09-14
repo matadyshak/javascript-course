@@ -1,31 +1,23 @@
 import {cart, removeFromCart, changeCartDeliveryOption} from '../../data/cart.js';
-import {products, getProduct} from '../../data/products.js';
+import {getProduct} from '../../data/products.js';
 import formatCurrency from '../utils/money.js';
 import {calculateCartQuantity, changeCartQuantity} from '../../data/cart.js';
-import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
-import {deliveryOptions, getDeliveryOption} from '../../data/deliveryOptions.js';
+import {deliveryOptions, getDeliveryOption, calculateDeliveryDate} from '../../data/deliveryOptions.js';
 import {renderPaymentSummary} from './paymentSummary.js';
-
-let cartSummaryHTML = '';
 
 ////////////////////////////////////////////////////////////////////////////////////////
 
 export function renderOrderSummary() {
-  
+  let cartSummaryHTML = '';
+let dateString = '';
+
 // Loop through all cart items
 cart.forEach((cartItem) => {
   let productId = cartItem.productId;
   const matchingProduct = getProduct(productId);
   const deliveryOptionId = cartItem.deliveryOptionId;
   const deliveryOption = getDeliveryOption(deliveryOptionId);
-  const today = dayjs();
-  const deliveryDate = today.add(
-    deliveryOption.deliveryDays,
-    'days'
-  );
-
-  const dateString = deliveryDate.format('dddd, MMMM D');
-
+  dateString = calculateDeliveryDate(deliveryOption);
   
   cartSummaryHTML +=
   `
@@ -77,52 +69,6 @@ cart.forEach((cartItem) => {
 </div>
   `;
 });
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Nested function
-//////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-function deliveryOptionsHTML(matchingProduct, cartItem) {
-  let html = '';
-
-  deliveryOptions.forEach((deliveryOption) => {
-  const today = dayjs();
-  const deliveryDate = today.add(
-    deliveryOption.deliveryDays,
-    'days'
-  );
-
-  const dateString = deliveryDate.format('dddd, MMMM D');
-
-  let priceString = deliveryOption.priceCents === 0
-    ? 'FREE'
-    : `$${formatCurrency(deliveryOption.priceCents)} -`;
-
-  //Set the corresponding radio button to "checked" and the other two to ""
-  const isChecked = (deliveryOption.id === cartItem.deliveryOptionId);
-
-  html += `
-  <div class="delivery-option js-delivery-option"
-    data-product-id="${matchingProduct.id}"
-    data-delivery-option-id="${deliveryOption.id}">
-    <input type="radio"
-      ${isChecked ? 'checked' : ''}
-      class="delivery-option-input"
-      name="delivery-option-${matchingProduct.id}">
-    <div>
-      <div class="delivery-option-date">
-      ${dateString}
-      </div>
-      <div class="delivery-option-price">
-      ${priceString} Shipping
-      </div>
-    </div>
-  </div>
-`
-});
-
-return html;
-}
 
 ////////////////////////////////////////////////////////////////////////////////////////
 
@@ -214,6 +160,46 @@ return html;
    document.querySelector('.checkout-header-middle-section')
     .innerHTML = totalQuantityHTML;
 }
-   //renderOrderSummary();
+
+function deliveryOptionsHTML(matchingProduct, cartItem) {
+  let html = '';
+  let dateString = '';
+
+  deliveryOptions.forEach((deliveryOption) => {
+  dateString = calculateDeliveryDate(deliveryOption);
+  
+  let priceString = deliveryOption.priceCents === 0
+    ? 'FREE'
+    : `$${formatCurrency(deliveryOption.priceCents)} -`;
+
+  //Set the corresponding radio button to "checked" and the other two to ""
+  const isChecked = (deliveryOption.id === cartItem.deliveryOptionId);
+
+  html += `
+  <div class="delivery-option js-delivery-option"
+    data-product-id="${matchingProduct.id}"
+    data-delivery-option-id="${deliveryOption.id}">
+    <input type="radio"
+      ${isChecked ? 'checked' : ''}
+      class="delivery-option-input"
+      name="delivery-option-${matchingProduct.id}">
+    <div>
+      <div class="delivery-option-date">
+      ${dateString}
+      </div>
+      <div class="delivery-option-price">
+      ${priceString} Shipping
+      </div>
+    </div>
+  </div>
+`
+});
+
+return html;
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////
+
+
+   //renderOrderSummary();
+
