@@ -30,7 +30,7 @@ export function changeCartDeliveryOption(productId, newDeliveryOption) {
     return;
 }
 
-//showLocalStorage();
+showLocalStorage();
 
 if (!cart) {
   cart = [{

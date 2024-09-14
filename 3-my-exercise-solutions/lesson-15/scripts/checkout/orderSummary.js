@@ -12,8 +12,6 @@ let cartSummaryHTML = '';
 
 export function renderOrderSummary() {
   
-  cartSummaryHTML = '';
-
 // Loop through all cart items
 cart.forEach((cartItem) => {
   let productId = cartItem.productId;
@@ -79,8 +77,9 @@ cart.forEach((cartItem) => {
 </div>
   `;
 });
-}
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Nested function
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function deliveryOptionsHTML(matchingProduct, cartItem) {
@@ -141,7 +140,7 @@ return html;
           `.js-cart-item-container-${productId}`
         );
         container.remove();
-        //renderOrderSummary();
+        renderOrderSummary();
         renderPaymentSummary();
       }); // addEventListener
     }); // forEach((link
@@ -214,7 +213,7 @@ return html;
     
    document.querySelector('.checkout-header-middle-section')
     .innerHTML = totalQuantityHTML;
-
-   renderOrderSummary();
+}
+   //renderOrderSummary();
 
 ////////////////////////////////////////////////////////////////////////////////////////
