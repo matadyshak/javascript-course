@@ -75,60 +75,6 @@ document.querySelector('.js-order-summary')
 
   renderCartTotalQuantity();
 
-return;
-}
-
-function renderCartTotalQuantity() {
-  const cartTotalQuantity = calculateCartQuantity();
-  const totalQuantityHTML = 
-    `    
-      Checkout (<a class="return-to-home-link js-return-to-home-link" href="amazon.html">${cartTotalQuantity} items</a>)
-    `;
-    
-   document.querySelector('.checkout-header-middle-section')
-    .innerHTML = totalQuantityHTML;
-}
-
-function deliveryOptionsHTML(matchingProduct, cartItem) {
-  let html = '';
-  let dateString = '';
-
-  deliveryOptions.forEach((deliveryOption) => {
-  dateString = calculateDeliveryDate(deliveryOption);
-  
-  let priceString = deliveryOption.priceCents === 0
-    ? 'FREE'
-    : `$${formatCurrency(deliveryOption.priceCents)} -`;
-
-  //Set the corresponding radio button to "checked" and the other two to ""
-  const isChecked = (deliveryOption.id === cartItem.deliveryOptionId);
-
-  html += `
-  <div class="delivery-option js-delivery-option"
-    data-product-id="${matchingProduct.id}"
-    data-delivery-option-id="${deliveryOption.id}">
-    <input type="radio"
-      ${isChecked ? 'checked' : ''}
-      class="delivery-option-input"
-      name="delivery-option-${matchingProduct.id}">
-    <div>
-      <div class="delivery-option-date">
-      ${dateString}
-      </div>
-      <div class="delivery-option-price">
-      ${priceString} Shipping
-      </div>
-    </div>
-  </div>
-`
-});
-
-return html;
-}
-
-////////////////////////////////////////////////////////////////////////////////////////
-document.addEventListener('DOMContentLoaded', (event) => {
-
   document.querySelectorAll('.js-delete-link')
   .forEach((link) => {
     link.addEventListener('click', () => {
@@ -203,7 +149,58 @@ document.addEventListener('DOMContentLoaded', (event) => {
         renderPaymentSummary();
       }); // addEventListener
     }); // forEach((element 
-});
-  //////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  //////////////////////////////////////////////////////////////////////////////////////////////////////
+    return;
+}
+
+function renderCartTotalQuantity() {
+  const cartTotalQuantity = calculateCartQuantity();
+  const totalQuantityHTML = 
+    `    
+      Checkout (<a class="return-to-home-link js-return-to-home-link" href="amazon.html">${cartTotalQuantity} items</a>)
+    `;
+    
+   document.querySelector('.checkout-header-middle-section')
+    .innerHTML = totalQuantityHTML;
+}
+
+function deliveryOptionsHTML(matchingProduct, cartItem) {
+  let html = '';
+  let dateString = '';
+
+  deliveryOptions.forEach((deliveryOption) => {
+  dateString = calculateDeliveryDate(deliveryOption);
+  
+  let priceString = deliveryOption.priceCents === 0
+    ? 'FREE'
+    : `$${formatCurrency(deliveryOption.priceCents)} -`;
+
+  //Set the corresponding radio button to "checked" and the other two to ""
+  const isChecked = (deliveryOption.id === cartItem.deliveryOptionId);
+
+  html += `
+  <div class="delivery-option js-delivery-option"
+    data-product-id="${matchingProduct.id}"
+    data-delivery-option-id="${deliveryOption.id}">
+    <input type="radio"
+      ${isChecked ? 'checked' : ''}
+      class="delivery-option-input"
+      name="delivery-option-${matchingProduct.id}">
+    <div>
+      <div class="delivery-option-date">
+      ${dateString}
+      </div>
+      <div class="delivery-option-price">
+      ${priceString} Shipping
+      </div>
+    </div>
+  </div>
+`
+});
+
+return html;
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+renderOrderSummary();
+//////////////////////////////////////////////////////////////////////////////////////////////////////
