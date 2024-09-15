@@ -146,3 +146,4 @@ function testIsSatSun() {
 }
 
 testIsSatSun();
+renderPaymentSummary();

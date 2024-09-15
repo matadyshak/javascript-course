@@ -4,7 +4,7 @@ import formatCurrency from '../utils/money.js';
 import {calculateCartQuantity, changeCartQuantity} from '../../data/cart.js';
 import {deliveryOptions, getDeliveryOption, calculateDeliveryDate} from '../../data/deliveryOptions.js';
 import {renderPaymentSummary} from './paymentSummary.js';
-
+import {renderCheckoutHeader} from './checkoutHeader.js';
 ////////////////////////////////////////////////////////////////////////////////////////
 
 export function renderOrderSummary() {
@@ -73,20 +73,14 @@ cart.forEach((cartItem) => {
 document.querySelector('.js-order-summary')
   .innerHTML = cartSummaryHTML;
 
-  renderCartTotalQuantity();
-
   document.querySelectorAll('.js-delete-link')
   .forEach((link) => {
     link.addEventListener('click', () => {
       const productId = link.dataset.productIdDelete;
       removeFromCart(productId);
-      
-//      const container = document.querySelector(
-//        `.js-cart-item-container-${productId}`
-//      );
-//      container.remove();
       renderOrderSummary();
       renderPaymentSummary();
+      renderCheckoutHeader();
     }); // addEventListener
   }); // forEach((link
 
@@ -131,10 +125,10 @@ document.querySelector('.js-order-summary')
       }
       container.classList.remove('is-editing-quantity');
       //This actually changes the cart quantity and localStorage
-      let actualQuantity = changeCartQuantity(productId, quantityInput);
-      
+      changeCartQuantity(productId, quantityInput);
       renderOrderSummary();
       renderPaymentSummary();
+      renderCheckoutHeader();
       }); // addEventListener
   });
 
@@ -147,21 +141,11 @@ document.querySelector('.js-order-summary')
         changeCartDeliveryOption(productId, deliveryOptionId);
         renderOrderSummary();
         renderPaymentSummary();
+        renderCheckoutHeader();
       }); // addEventListener
     }); // forEach((element 
 
     return;
-}
-
-function renderCartTotalQuantity() {
-  const cartTotalQuantity = calculateCartQuantity();
-  const totalQuantityHTML = 
-    `    
-      Checkout (<a class="return-to-home-link js-return-to-home-link" href="amazon.html">${cartTotalQuantity} items</a>)
-    `;
-    
-   document.querySelector('.checkout-header-middle-section')
-    .innerHTML = totalQuantityHTML;
 }
 
 function deliveryOptionsHTML(matchingProduct, cartItem) {
@@ -203,4 +187,5 @@ return html;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 renderOrderSummary();
+renderCheckoutHeader();
 //////////////////////////////////////////////////////////////////////////////////////////////////////
