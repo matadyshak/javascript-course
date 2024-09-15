@@ -78,9 +78,9 @@ document.querySelector('.js-order-summary')
     link.addEventListener('click', () => {
       const productId = link.dataset.productIdDelete;
       removeFromCart(productId);
+      renderCheckoutHeader();
       renderOrderSummary();
       renderPaymentSummary();
-      renderCheckoutHeader();
     }); // addEventListener
   }); // forEach((link
 
@@ -126,9 +126,9 @@ document.querySelector('.js-order-summary')
       container.classList.remove('is-editing-quantity');
       //This actually changes the cart quantity and localStorage
       changeCartQuantity(productId, quantityInput);
+      renderCheckoutHeader();
       renderOrderSummary();
       renderPaymentSummary();
-      renderCheckoutHeader();
       }); // addEventListener
   });
 
@@ -139,9 +139,9 @@ document.querySelector('.js-order-summary')
         const {productId, deliveryOptionId} = element.dataset;
         // This changes the cart and localStorage
         changeCartDeliveryOption(productId, deliveryOptionId);
+        renderCheckoutHeader();
         renderOrderSummary();
         renderPaymentSummary();
-        renderCheckoutHeader();
       }); // addEventListener
     }); // forEach((element 
 
@@ -186,6 +186,6 @@ return html;
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
-renderOrderSummary();
 renderCheckoutHeader();
+renderOrderSummary();
 //////////////////////////////////////////////////////////////////////////////////////////////////////
