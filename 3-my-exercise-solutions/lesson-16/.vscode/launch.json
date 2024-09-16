@@ -23,6 +23,19 @@
         "--remote-debugging-port=9222",
         "--new-window"
       ]
+    },
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Launch Chrome with debugging for automated tests",
+      "port": 9222,
+      "url": "http://localhost:5500/tests-jasmine/tests.html",
+      "webRoot": "${workspaceFolder}",
+      "runtimeExecutable": "C:\\Program Files\\Google\\Chrome\\Application\\Chrome.exe",
+      "runtimeArgs": [
+        "--remote-debugging-port=9222",
+        "--new-window"
+      ]
     }
   ]
 }
