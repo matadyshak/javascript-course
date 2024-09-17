@@ -91,7 +91,6 @@ function GetDateFromDateBySubtract(initialDate, howmany, units, format = 'MMMM D
   return dateString;
 }
 
-/*
 //Exercise 15A
 console.log(GetDateFromNow( 5, 'days'));
 console.log(GetDateFromNow( 0, 'days'));
@@ -147,6 +146,5 @@ function testIsSatSun() {
 }
 
 testIsSatSun();
-*/
 
 renderPaymentSummary();
