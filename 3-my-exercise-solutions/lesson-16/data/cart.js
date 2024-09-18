@@ -1,4 +1,9 @@
+//export {cart};
+//Exports must be const
 export let cart;
+
+//export let cart = JSON.parse(localStorage.getItem('cart'));
+
 
 loadFromStorage();
 

@@ -9,10 +9,48 @@ describe('test suite: renderOrderSummary', () => {
   spyOn(localStorage, 'setItem');
 
   document.querySelector('.js-test-container').innerHTML = `
-    <div class="js-order-summary"></div>
-    <div class="js-payment-summary"></div>
-    <div class="js-quantity-selector-${productId1}"></div>
+    <div class="checkout-header js-checkout-header"></div>
+    <div class="order-summary js-order-summary"></div>
+    <div class="payment-summary js-payment-summary"></div>
+    <div class="product-quantity-container">
+      <select class="js-quantity-selector-${productId1}">
+        <option selected value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+      </select>
+    </div>
+    <div class="product-quantity-container">
+      <select class="js-quantity-selector-${productId2}">
+        <option selected value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+      </select>
+    </div>
+    <div class="added-to-cart js-added-to-cart-${productId1}">
+      <img src="images/icons/checkmark.png">
+      Added
+    </div>
+    <div class="added-to-cart js-added-to-cart-${productId2}">
+      <img src="images/icons/checkmark.png">
+      Added
+    </div>
+    
     `;
+
     spyOn(localStorage, 'getItem').and.callFake(() => {
       return JSON.stringify(
         cart = [{
