@@ -45,6 +45,8 @@ describe('test suite: addToCart', () => {
     expect(localStorage.setItem).toHaveBeenCalledTimes(1);
     expect(cart[0].productId).toEqual('e43638ce-6aa0-4b85-b27f-e1d07eb678c6');
     expect(cart[0].quantity).toEqual(2);
+    // Remove HTML from test results page
+    document.querySelector('.js-test-container').innerHTML = '';
     });
 
   it('adds a new product to the cart', () => {
@@ -59,5 +61,7 @@ describe('test suite: addToCart', () => {
     expect(localStorage.setItem).toHaveBeenCalledTimes(1);
     expect(cart[0].productId).toEqual('e43638ce-6aa0-4b85-b27f-e1d07eb678c6');
     expect(cart[0].quantity).toEqual(1);
+    // Remove HTML from test results page
+    document.querySelector('.js-test-container').innerHTML = '';
   });
 });
