@@ -81,5 +81,5 @@ describe('test suite: addToCart', () => {
     expect(cart[0].quantity).toEqual(1);
     // Remove HTML from test results page
     document.querySelector('.js-test-container').innerHTML = '';
-  }); it()
+  }); // it()
 }); // describe()
