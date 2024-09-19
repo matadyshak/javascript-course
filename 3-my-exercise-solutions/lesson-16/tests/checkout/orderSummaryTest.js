@@ -1,5 +1,5 @@
 import {renderOrderSummary} from '../../scripts/checkout/orderSummary.js';
-import {loadFromStorage, cart} from '../../data/cart.js';
+import {loadFromStorage, cart, initCartForTest} from '../../data/cart.js';
 
 describe('test suite: renderOrderSummary', () => {
   const productId1 = 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6';
@@ -15,62 +15,30 @@ describe('test suite: renderOrderSummary', () => {
     <div class="product-quantity-container">
       <select class="js-quantity-selector-${productId1}">
         <option selected value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-        <option value="10">10</option>
       </select>
     </div>
     <div class="product-quantity-container">
       <select class="js-quantity-selector-${productId2}">
         <option selected value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-        <option value="10">10</option>
       </select>
     </div>
     <div class="added-to-cart js-added-to-cart-${productId1}">
-      <img src="images/icons/checkmark.png">
-      Added
     </div>
     <div class="added-to-cart js-added-to-cart-${productId2}">
-      <img src="images/icons/checkmark.png">
-      Added
     </div>
     
     `;
 
     spyOn(localStorage, 'getItem').and.callFake(() => {
-      return JSON.stringify(
-        cart = [{
-          productId: productId1,
-          quantity: 2,
-          deliveryOptionId: '1'
-        },{
-          productId: productId2,
-          quantity: 1,
-          deliveryOptionId: '2'
-        }]);
+      return initCartForTest();
     });
     loadFromStorage();
     renderOrderSummary();
-  })
+  });
 
   it('displays the cart', () => {
-      expect( 
-        document.querySelectorAll('.js-cart-item-container').length
-        .equalTo(2));
+    expect( 
+        document.querySelectorAll('.js-cart-item-container').length).toEqual(2);
       expect(
         document.querySelector(`.js-product-quantity-${productId1}`).innerText
       ).toContain('Quantity: 2');
@@ -88,7 +56,7 @@ describe('test suite: renderOrderSummary', () => {
 
       expect( 
         document.querySelectorAll('.js-cart-item-container').length
-       ).equalTo(1);
+       ).toEqual(1);
       expect(
         document.querySelector(`.js-cart-item-container-${productId1}`)
       ).toEqual(null);

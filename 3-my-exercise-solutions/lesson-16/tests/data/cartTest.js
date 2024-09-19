@@ -15,38 +15,16 @@ describe('test suite: addToCart', () => {
     <div class="product-quantity-container">
       <select class="js-quantity-selector-${productId1}">
         <option selected value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-        <option value="10">10</option>
       </select>
     </div>
     <div class="product-quantity-container">
       <select class="js-quantity-selector-${productId2}">
         <option selected value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-        <option value="10">10</option>
       </select>
     </div>
     <div class="added-to-cart js-added-to-cart-${productId1}">
-      <img src="images/icons/checkmark.png">
-      Added
     </div>
     <div class="added-to-cart js-added-to-cart-${productId2}">
-      <img src="images/icons/checkmark.png">
-      Added
     </div>
 
     `;
