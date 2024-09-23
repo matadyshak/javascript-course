@@ -1,4 +1,4 @@
-import {addToCart, cart, initCartForTest, loadFromStorage, removeFromCart} from '../../data/cart.js';
+import {addToCart, cart, initCartForTest, removeFromCart} from '../../data/cart.js';
 
 describe('test suite: addToCart', () => {
 
@@ -62,8 +62,7 @@ describe('test suite: addToCart', () => {
       { productId: productId1, quantity:  3, deliveryOptionId: '3' }   //coffeemaker
     ];
     initCartForTest(cartItems);  
-    //loadFromStorage();
-
+    
     //should add a qty of 10 from HTML above
     addToCart(productId1);
     expect(cart.length).toEqual(1);
@@ -85,7 +84,7 @@ describe('test suite: addToCart', () => {
     spyOn(localStorage, 'getItem').and.callFake(() => {
       return JSON.stringify([]);
     }); // spyOn()
-    //loadFromStorage();
+    
     let cartItems = [
       { productId: productId2, quantity:  7, deliveryOptionId: '2' } 
     ];
@@ -171,7 +170,6 @@ describe('test suite: removeFromCart', () => {
       spyOn(localStorage, 'getItem').and.callFake(() => {
         return JSON.stringify([]);
       }); // spyOn()
-      //loadFromStorage();
   
       let cartItems = [
         { productId: productId1, quantity: 4, deliveryOptionId: '3' },   //coffeemaker
@@ -195,7 +193,6 @@ describe('test suite: removeFromCart', () => {
       spyOn(localStorage, 'getItem').and.callFake(() => {
         return JSON.stringify([]);
       }); // spyOn()
-     // loadFromStorage();
   
       let cartItems = [
         { productId: productId1, quantity:  10, deliveryOptionId: '2' }   //coffeemaker

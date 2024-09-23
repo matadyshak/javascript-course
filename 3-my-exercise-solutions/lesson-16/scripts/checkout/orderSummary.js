@@ -80,9 +80,9 @@ document.querySelector('.js-order-summary')
     link.addEventListener('click', () => {
       const productId = link.dataset.productIdDelete;
       removeFromCart(productId);
-      renderCheckoutHeader();
       renderOrderSummary();
       renderPaymentSummary();
+      renderCheckoutHeader();
     }); // addEventListener
   }); // forEach((link
 
@@ -128,9 +128,9 @@ document.querySelector('.js-order-summary')
       container.classList.remove('is-editing-quantity');
       //This actually changes the cart quantity and localStorage
       changeCartQuantity(productId, quantityInput);
-      renderCheckoutHeader();
       renderOrderSummary();
       renderPaymentSummary();
+      renderCheckoutHeader();
       }); // addEventListener
   });
 
@@ -141,9 +141,9 @@ document.querySelector('.js-order-summary')
         const {productId, deliveryOptionId} = element.dataset;
         // This changes the cart and localStorage
         changeCartDeliveryOption(productId, deliveryOptionId);
-        renderCheckoutHeader();
         renderOrderSummary();
         renderPaymentSummary();
+        renderCheckoutHeader();
       }); // addEventListener
     }); // forEach((element 
 
@@ -165,12 +165,12 @@ function deliveryOptionsHTML(matchingProduct, cartItem) {
   const isChecked = (deliveryOption.id === cartItem.deliveryOptionId);
 
   html += `
-  <div class="delivery-option js-delivery-option"
+  <div class="delivery-option js-delivery-option js-delivery-option-${matchingProduct.id}-${deliveryOption.id}"
     data-product-id="${matchingProduct.id}"
     data-delivery-option-id="${deliveryOption.id}">
     <input type="radio"
       ${isChecked ? 'checked' : ''}
-      class="delivery-option-input"
+      class="delivery-option-input js-delivery-option-input-${matchingProduct.id}-${deliveryOption.id}"
       name="delivery-option-${matchingProduct.id}">
     <div>
       <div class="delivery-option-date">
@@ -181,7 +181,7 @@ function deliveryOptionsHTML(matchingProduct, cartItem) {
       </div>
     </div>
   </div>
-`
+  `
 });
 
 return html;
