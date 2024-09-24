@@ -116,7 +116,7 @@ describe('test suite: delivery options', () => {
 
     afterEach( () => {
       // Remove HTML from test results page
-      //document.querySelector('.js-test-container').innerHTML = '';
+      document.querySelector('.js-test-container').innerHTML = '';
     });
   
     it('click 3rd delivery option of first product in cart', () => {

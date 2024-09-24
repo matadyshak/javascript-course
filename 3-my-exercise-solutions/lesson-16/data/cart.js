@@ -51,6 +51,7 @@ export function changeCartQuantity(productId, newQuantity) {
 }
 
 export function changeCartDeliveryOption(productId, newDeliveryOption) {
+  
   cart.forEach((cartItem) => {
      if (cartItem.productId === productId) {
       cartItem.deliveryOptionId = newDeliveryOption;
