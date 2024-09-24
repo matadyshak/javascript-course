@@ -1,6 +1,6 @@
 import {addToCart, cart, initCartForTest, removeFromCart, changeCartDeliveryOption} from '../../data/cart.js';
 import {renderOrderSummary} from '../../scripts/checkout/orderSummary.js';
-import {renderPaymentSummary} from '../../scripts/checkout/pay+mentSummary.js';
+import {renderPaymentSummary} from '../../scripts/checkout/paymentSummary.js';
 
 describe('test suite: addToCart', () => {
 
