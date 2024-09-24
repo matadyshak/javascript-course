@@ -142,7 +142,7 @@ describe('test suite: removeFromCart', () => {
   
       let cartItems = [
         { productId: productId1, quantity: 4, deliveryOptionId: '3' },   //coffeemaker
-        { productId: productId2, quantity: 8, deliveryOptionId: '2' },   //blender
+        { productId: productId2, quantity: 8, deliveryOptionId: '2' }    //blender
       ];
       initCartForTest(cartItems);  
       removeFromCart(productId2);
