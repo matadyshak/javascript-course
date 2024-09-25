@@ -255,7 +255,7 @@ describe('test suite: change delivery option', () => {
       expect(document.querySelector('.js-payment-summary-shipping').innerText).toEqual('$14.98');
       expect(document.querySelector('.js-payment-summary-total').innerText).toEqual('$437.34');
 
-      // Update the viuew
+      // Update the view
       renderOrderSummary();
       renderPaymentSummary();
       renderCheckoutHeader();
@@ -281,26 +281,49 @@ describe('test suite: change delivery option', () => {
         ])); // expect
       }); // it()
 
-  it('change delivery option for a product not in the cart', () => {
+      it('change delivery option passing a product ID not in the cart', () => {
 
-    // Calling the function under test - this will fail and do nothing
-    changeCartDeliveryOption(productId4, '2');
+        // Calling the function under test - this will fail and do nothing
+        changeCartDeliveryOption(productId4, '2');
+    
+        // cart is unchanged
+        expect(cart.length).toEqual(3);
+        expect(cart[0].productId).toEqual(productId1);
+        expect(cart[0].quantity).toEqual(10);
+        expect(cart[0].deliveryOptionId).toEqual('1');
+    
+        expect(cart[1].productId).toEqual(productId2);
+        expect(cart[1].quantity).toEqual(8);
+        expect(cart[1].deliveryOptionId).toEqual('2');
+    
+        expect(cart[2].productId).toEqual(productId3);
+        expect(cart[2].quantity).toEqual(6);
+        expect(cart[2].deliveryOptionId).toEqual('3');
+    
+        expect(document.querySelectorAll('.js-cart-item-container').length).toEqual(3);
+        expect(localStorage.setItem).toHaveBeenCalledTimes(0);
+      }); // it()
+    
+      it('change delivery option passing an invalid deliveryOptionId', () => {
 
-    // cart is unchanged
-    expect(cart.length).toEqual(3);
-    expect(cart[0].productId).toEqual(productId1);
-    expect(cart[0].quantity).toEqual(10);
-    expect(cart[0].deliveryOptionId).toEqual('1');
-
-    expect(cart[1].productId).toEqual(productId2);
-    expect(cart[1].quantity).toEqual(8);
-    expect(cart[1].deliveryOptionId).toEqual('2');
-
-    expect(cart[2].productId).toEqual(productId3);
-    expect(cart[2].quantity).toEqual(6);
-    expect(cart[2].deliveryOptionId).toEqual('3');
-
-    expect(document.querySelectorAll('.js-cart-item-container').length).toEqual(3);
-    expect(localStorage.setItem).toHaveBeenCalledTimes(0);
-  }); // it()
-}); // describe()
+        // Calling the function under test - this will fail and do nothing
+        changeCartDeliveryOption(productId2, '4');
+    
+        // cart is unchanged
+        expect(cart.length).toEqual(3);
+        expect(cart[0].productId).toEqual(productId1);
+        expect(cart[0].quantity).toEqual(10);
+        expect(cart[0].deliveryOptionId).toEqual('1');
+    
+        expect(cart[1].productId).toEqual(productId2);
+        expect(cart[1].quantity).toEqual(8);
+        expect(cart[1].deliveryOptionId).toEqual('2');
+    
+        expect(cart[2].productId).toEqual(productId3);
+        expect(cart[2].quantity).toEqual(6);
+        expect(cart[2].deliveryOptionId).toEqual('3');
+    
+        expect(document.querySelectorAll('.js-cart-item-container').length).toEqual(3);
+        expect(localStorage.setItem).toHaveBeenCalledTimes(0);
+      }); // it()
+    }); // describe()
