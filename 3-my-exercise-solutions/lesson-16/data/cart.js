@@ -52,12 +52,17 @@ export function changeCartQuantity(productId, newQuantity) {
 
 export function changeCartDeliveryOption(productId, newDeliveryOption) {
   
+  let doSave = false;
   cart.forEach((cartItem) => {
      if (cartItem.productId === productId) {
       cartItem.deliveryOptionId = newDeliveryOption;
+      doSave = true;
      }  
     });
-    saveToStorage();
+
+    if (doSave) {
+      saveToStorage();
+    }
     return;
 }
 

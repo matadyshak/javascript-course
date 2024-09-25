@@ -182,11 +182,11 @@ describe('test suite: removeFromCart', () => {
     }); // it()
 }); // describe
 
-
-describe('test suite: changeDeliveryOptions', () => {
+describe('test suite: change delivery option', () => {
   const productId1 = 'aad29d11-ea98-41ee-9285-b916638cac4a'; // Round sunglasses
   const productId2 = 'a93a101d-79ef-4cf3-a6cf-6dbe532a1b4a'; // Bathroom rug
   const productId3 = '8a53b080-6d40-4a65-ab26-b24ecf700bce'; // Cotton bath towels
+  const productId4 = 'd37a651a-d501-483b-aae6-a9659b0757a0'; // Food storage containers (not in cart)
 
   beforeEach( () => {
     spyOn(localStorage, 'setItem');
@@ -217,7 +217,7 @@ describe('test suite: changeDeliveryOptions', () => {
       document.querySelector('.js-test-container').innerHTML = '';
     });
   
-    it('update delivery option of a product in the cart', () => {
+    it('change delivery option of a product in the cart', () => {
             
       let element = document.querySelector(`.js-delivery-option-input-${productId3}-1`);
       expect(element.checked).toEqual(false);
@@ -231,34 +231,31 @@ describe('test suite: changeDeliveryOptions', () => {
       // Calling the function under test
       changeCartDeliveryOption(productId3, '2');
 
+      // cart is updated to delivery option 2
+      expect(cart[2].productId).toEqual(productId3);
+      expect(cart[2].quantity).toEqual(6);
+      expect(cart[2].deliveryOptionId).toEqual('2');
+
+      // Radio buttons are not up to date with the cart - renderOrderSummary() must be run 
       element = document.querySelector(`.js-delivery-option-input-${productId3}-1`);
       expect(element.checked).toEqual(false); 
       
       element = document.querySelector(`.js-delivery-option-input-${productId3}-2`);
-      expect(element.checked).toEqual(false); //false
+      expect(element.checked).toEqual(false);
       
       element = document.querySelector(`.js-delivery-option-input-${productId3}-3`);
-      expect(element.checked).toEqual(true); //true
+      expect(element.checked).toEqual(true);
       
       expect(document.querySelectorAll('.js-cart-item-container').length).toEqual(3);
       expect(document.querySelector(`.js-cart-item-container-${productId3}`)).not.toEqual(null);
       expect(cart.length).toEqual(3);
-      expect(cart[2].productId).toEqual(productId3);
-      expect(cart[2].quantity).toEqual(6);
-      expect(cart[2].deliveryOptionId).toEqual('2');
       expect(document.querySelector(`.js-product-name-${productId3}`).innerText)
         .toContain('100% Cotton Bath Towels - 2 Pack, Light Teal');
       expect(document.querySelector(`.js-product-price-${productId3}`).innerText).toEqual('$21.10');
       expect(document.querySelector('.js-payment-summary-shipping').innerText).toEqual('$14.98');
       expect(document.querySelector('.js-payment-summary-total').innerText).toEqual('$437.34');
-      expect(localStorage.setItem).toHaveBeenCalledTimes(1);
-      expect(localStorage.setItem).toHaveBeenCalledWith('cart', JSON.stringify(
-        [
-          { productId: productId1, quantity:  10, deliveryOptionId: '1' },   // round sunglasses
-          { productId: productId2, quantity:  8, deliveryOptionId: '2' },   // bathroom rug
-          { productId: productId3, quantity:  6, deliveryOptionId: '2' }   // Cotton bath towels
-        ])); // expect
 
+      // Update the viuew
       renderOrderSummary();
       renderPaymentSummary();
       renderCheckoutHeader();
@@ -274,6 +271,7 @@ describe('test suite: changeDeliveryOptions', () => {
       
       expect(document.querySelector('.js-payment-summary-shipping').innerText).toEqual('$9.98');
       expect(document.querySelector('.js-payment-summary-total').innerText).toEqual('$431.84');
+
       expect(localStorage.setItem).toHaveBeenCalledTimes(1);
       expect(localStorage.setItem).toHaveBeenCalledWith('cart', JSON.stringify(
         [
@@ -282,4 +280,27 @@ describe('test suite: changeDeliveryOptions', () => {
           { productId: productId3, quantity:  6, deliveryOptionId: '2' }   // Cotton bath towels
         ])); // expect
       }); // it()
+
+  it('change delivery option for a product not in the cart', () => {
+
+    // Calling the function under test - this will fail and do nothing
+    changeCartDeliveryOption(productId4, '2');
+
+    // cart is unchanged
+    expect(cart.length).toEqual(3);
+    expect(cart[0].productId).toEqual(productId1);
+    expect(cart[0].quantity).toEqual(10);
+    expect(cart[0].deliveryOptionId).toEqual('1');
+
+    expect(cart[1].productId).toEqual(productId2);
+    expect(cart[1].quantity).toEqual(8);
+    expect(cart[1].deliveryOptionId).toEqual('2');
+
+    expect(cart[2].productId).toEqual(productId3);
+    expect(cart[2].quantity).toEqual(6);
+    expect(cart[2].deliveryOptionId).toEqual('3');
+
+    expect(document.querySelectorAll('.js-cart-item-container').length).toEqual(3);
+    expect(localStorage.setItem).toHaveBeenCalledTimes(0);
+  }); // it()
 }); // describe()
