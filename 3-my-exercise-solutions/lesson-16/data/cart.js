@@ -1,8 +1,9 @@
-//export {cart};
-//Exports must be const
+import {getDeliveryOption} from './deliveryOptions.js';
+
+
+//imports are const
 export let cart;
 
-//export let cart = JSON.parse(localStorage.getItem('cart'));
 
 
 loadFromStorage();
@@ -52,22 +53,26 @@ export function changeCartQuantity(productId, newQuantity) {
 
 export function changeCartDeliveryOption(productId, newDeliveryOption) {
   
+  let deliveryOption = null;
   let doSave = false;
-  cart.forEach((cartItem) => {
-     if (cartItem.productId === productId) {
-      cartItem.deliveryOptionId = newDeliveryOption;
-      doSave = true;
-     }  
-    });
 
-    if (doSave) {
-      saveToStorage();
-    }
-    return;
+  cart.forEach((cartItem) => {
+    if (cartItem.productId === productId) {
+      deliveryOption = getDeliveryOption(newDeliveryOption); 
+      if(deliveryOption) {
+        cartItem.deliveryOptionId = newDeliveryOption;
+        doSave = true;
+      }
+    }  
+  });
+
+  if (doSave) {
+    saveToStorage();
+  }
+  return;
 }
 
 //showLocalStorage();
-
 
 function saveToStorage() {
   localStorage.setItem('cart', JSON.stringify(cart));

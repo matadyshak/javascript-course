@@ -16,7 +16,7 @@ export const deliveryOptions = [{
 }];
 
 export function getDeliveryOption(deliveryOptionId) {
-  let deliveryOption;
+  let deliveryOption = null;
 
   deliveryOptions.forEach((option) => {
   if (option.id === deliveryOptionId) {
@@ -25,7 +25,7 @@ export function getDeliveryOption(deliveryOptionId) {
   }
   });
 
-  return deliveryOption || deliveryOptions[0];
+  return deliveryOption;
 }
 
 export function calculateDeliveryDate(deliveryOption) {
