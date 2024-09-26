@@ -1,5 +1,5 @@
 import {renderOrderSummary} from '../../scripts/checkout/orderSummary.js';
-import {cart, initCartForTest} from '../../data/cart.js';
+import {cart, addToCart, initCartForTest} from '../../data/cart.js';
 
 describe('test suite: End-to-End Mega-Test', () => {
 
@@ -9,6 +9,9 @@ describe('test suite: End-to-End Mega-Test', () => {
 
   beforeEach( () => {
     spyOn(localStorage, 'setItem');
+    spyOn(localStorage, 'getItem').and.callFake(() => {
+      return JSON.stringify([]);
+    });
 
   document.querySelector('.js-test-container').innerHTML = `
     <div class="checkout-header js-checkout-header"></div>
@@ -66,21 +69,34 @@ describe('test suite: End-to-End Mega-Test', () => {
     `;
   }); // beforeEach
 
+  afterEach( () => {
+    // Remove HTML from test results page
+    document.querySelector('.js-test-container').innerHTML = '';
+  });
 
+  it('add three items to empty cart', () => {
+  
+    let cartItems = [];
+    initCartForTest(cartItems);  
 
+    //should add a qty of 10 from HTML above
+    addToCart(productId1);
+    expect(cart.length).toEqual(1);
+    expect(cart[0].productId).toEqual(productId1);
+    expect(cart[0].quantity).toEqual(10);
+    expect(cart[0].deliveryOptionId).toEqual('1');
+    expect(localStorage.setItem).toHaveBeenCalledTimes(1);
+    expect(localStorage.setItem).toHaveBeenCalledWith('cart', JSON.stringify(
+      [
+        { productId: productId1,
+          quantity: 10,
+          deliveryOptionId: '1'
+        }
+      ]
+    )); //CalledWith stringify
 
-
-
-
-
-
-
-
-
-
-
-
-
+    expect(document.querySelector('.js-cart-quantity').value).toEqual(10);
+    }); // it()
 }); // describe
 
 
