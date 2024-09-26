@@ -29,7 +29,7 @@ export function renderPaymentSummary() {
       Order Summary
     </div>
 
-    <div class="payment-summary-row">
+    <div class="payment-summary-row js-total-cart-quantity">
       <div>Items (${totalCartQuantity}):</div>
       <div class="payment-summary-money js-payment-summary-price">
         $${formatCurrency(productPriceCents)}</div>
