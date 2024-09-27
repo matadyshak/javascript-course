@@ -10,20 +10,29 @@ export function renderPaymentSummary() {
   let productPriceCents = 0;
   let shippingPriceCents = 0;
 
-  cart.forEach((cartItem) => {
+  if(cart.length === 0) {
+    const productPriceCents = 0;
+    const shippingPriceCents = 0;
+    const totalBeforeTaxCents = 0;
+    const taxCents = 0;
+    const totalCents = 0;
+    const totalCartQuantity = 0;
+  } else {
+  
+    cart.forEach((cartItem) => {
     // product contains id, name, priceCents, image, rating
     const product = getProduct(cartItem.productId);  
     productPriceCents += product.priceCents * cartItem.quantity;
     const deliveryOption = getDeliveryOption(cartItem.deliveryOptionId);
     shippingPriceCents += deliveryOption.priceCents;
+    }); //forEach
 
-  });
-
-  const totalBeforeTaxCents = productPriceCents + shippingPriceCents;
-  const taxCents = totalBeforeTaxCents * 0.1;
-  const totalCents = totalBeforeTaxCents + taxCents;
-  const totalCartQuantity = calculateCartQuantity();
-
+    const totalBeforeTaxCents = productPriceCents + shippingPriceCents;
+    const taxCents = totalBeforeTaxCents * 0.1;
+    const totalCents = totalBeforeTaxCents + taxCents;
+    const totalCartQuantity = calculateCartQuantity();
+  }
+  
   const paymentSummaryHTML = `
     <div class="payment-summary-title">
       Order Summary
