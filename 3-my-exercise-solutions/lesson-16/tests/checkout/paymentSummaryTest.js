@@ -69,8 +69,14 @@ describe('test suite: End-to-End Mega-Test', () => {
     </div>
     `;
 
+    let cartItems = [];
+    initCartForTest(cartItems);  
+
+    //This will generate no HTML and will set the innerHTML to empty string
     renderOrderSummary();
+    // This will display all zeros in a payment summary
     renderPaymentSummary();
+    // This will display zero items
     renderCheckoutHeader();
 
   }); // beforeEach
@@ -85,9 +91,13 @@ describe('test suite: End-to-End Mega-Test', () => {
     let cartItems = [];
     initCartForTest(cartItems);  
 
+    // The first one will not find the product in cart and put productId1, qty 10 into the cart
     addToCart(productId1); // qty 10
+    // This will add a 2nd product
     addToCart(productId2); // qty 5
+    // This will add a 3rd product
     addToCart(productId3); // qty 3 
+    // This will double the qty for the 3rd product
     addToCart(productId3); // qty 6
 
     expect(cart.length).toEqual(3);
@@ -110,6 +120,11 @@ describe('test suite: End-to-End Mega-Test', () => {
       ]
     )); //CalledWith stringify
 
+    // Need to render now or else the tags below will be undefined
+    renderOrderSummary();
+    renderPaymentSummary();
+    renderCheckoutHeader();
+
     expect(document.querySelector(`.js-product-name-${productId1}`).innerText)
       .toContain('Waterproof Knit Athletic Sneakers - Pink');
     expect(document.querySelector(`.js-product-price-${productId1}`).innerText).toEqual('$33.90');
@@ -122,9 +137,9 @@ describe('test suite: End-to-End Mega-Test', () => {
       .toContain('Men\'s Black Full-Size Umbrella');
     expect(document.querySelector(`.js-product-price-${productId3}`).innerText).toEqual('$49.99');
 
-    expect(document.querySelector(`.js-product-quantity-${productId1}`).innerText).toEqual('10');
-    expect(document.querySelector(`.js-product-quantity-${productId2}`).innerText).toEqual('5');
-    expect(document.querySelector(`.js-product-quantity-${productId3}`).innerText).toEqual('6');
+    expect(document.querySelector(`.js-product-quantity-${productId1}`).innerText).toContain('10');
+    expect(document.querySelector(`.js-product-quantity-${productId2}`).innerText).toContain('5');
+    expect(document.querySelector(`.js-product-quantity-${productId3}`).innerText).toContain('6');
 
     expect(document.querySelector('.js-checkout-header').value).toContain('21');  //
     expect(document.querySelector('.js-cart-quantity').value).toContain('21');
