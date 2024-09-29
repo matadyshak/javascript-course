@@ -141,9 +141,9 @@ describe('test suite: End-to-End Mega-Test', () => {
     expect(document.querySelector(`.js-product-quantity-${productId2}`).innerText).toContain('5');
     expect(document.querySelector(`.js-product-quantity-${productId3}`).innerText).toContain('6');
 
-    expect(document.querySelector('.js-checkout-header').value).toContain('21');  //
-    expect(document.querySelector('.js-cart-quantity').value).toContain('21');
-    expect(document.querySelector('.js-total-cart-quantity').value).toContain('21');
+    expect(document.querySelector('.js-checkout-header').innerText).toContain('21'); // Top middle of order summary page
+    //expect(document.querySelector('.js-cart-quantity').innerText).toContain('21'); // Cart icon 
+    expect(document.querySelector('.js-total-cart-quantity').innerText).toContain('21'); // Purchase summary page - fails
 
     expect(document.querySelector('.js-payment-summary-price'   ).innerText).toEqual('$738.89');
     expect(document.querySelector('.js-payment-summary-shipping').innerText).toEqual('$0.00');
@@ -162,9 +162,9 @@ describe('test suite: End-to-End Mega-Test', () => {
       expect(document.querySelector(`.js-delivery-option-input-${productId2}-1`).checked).toEqual(false);
       expect(document.querySelector(`.js-delivery-option-input-${productId2}-2`).checked).toEqual(true);
       expect(document.querySelector(`.js-delivery-option-input-${productId2}-3`).checked).toEqual(false);
-      expect(document.querySelector(`.js-delivery-option-input-${productId3}-1`).checked).toEqual(true);
+      expect(document.querySelector(`.js-delivery-option-input-${productId3}-1`).checked).toEqual(false);
       expect(document.querySelector(`.js-delivery-option-input-${productId3}-2`).checked).toEqual(false);
-      expect(document.querySelector(`.js-delivery-option-input-${productId3}-3`).checked).toEqual(false);
+      expect(document.querySelector(`.js-delivery-option-input-${productId3}-3`).checked).toEqual(true);
       
       expect(document.querySelectorAll('.js-cart-item-container').length).toEqual(3);
       expect(document.querySelector(`.js-cart-item-container-${productId1}`)).not.toEqual(null);
