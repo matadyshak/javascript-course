@@ -9,7 +9,7 @@ describe('test suite: renderOrderSummary', () => {
   spyOn(localStorage, 'setItem');
 
   document.querySelector('.js-test-container').innerHTML = `
-    <div class="checkout-header js-checkout-header"></div>
+    <div class="checkout-header js-cart-quantity-order"></div>
     <div class="order-summary js-order-summary"></div>
     <div class="payment-summary js-payment-summary"></div>
     <div class="product-quantity-container">
@@ -100,7 +100,7 @@ describe('test suite: delivery options', () => {
     spyOn(localStorage, 'setItem');
   
     document.querySelector('.js-test-container').innerHTML = `
-      <div class="checkout-header js-checkout-header"></div>
+      <div class="checkout-header js-cart-quantity-order"></div>
       <div class="order-summary js-order-summary"></div>
       <div class="payment-summary js-payment-summary"></div>
       `;

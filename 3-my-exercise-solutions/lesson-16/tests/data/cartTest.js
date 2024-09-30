@@ -12,7 +12,7 @@ describe('test suite: addToCart', () => {
     spyOn(localStorage, 'setItem');
 
   document.querySelector('.js-test-container').innerHTML = `
-    <div class="checkout-header js-checkout-header"></div>
+    <div class="checkout-header js-cart-quantity-order"></div>
     <div class="order-summary js-order-summary"></div>
     <div class="payment-summary js-payment-summary"></div>
     <div class="product-quantity-container">
@@ -125,7 +125,7 @@ describe('test suite: removeFromCart', () => {
     spyOn(localStorage, 'setItem');
   
     document.querySelector('.js-test-container').innerHTML = `
-      <div class="checkout-header js-checkout-header"></div>
+      <div class="checkout-header js-cart-quantity-order"></div>
       <div class="order-summary js-order-summary"></div>
       <div class="payment-summary js-payment-summary"></div>
       `;
@@ -195,7 +195,7 @@ describe('test suite: change delivery option', () => {
     }); // spyOn()
 
     document.querySelector('.js-test-container').innerHTML = `
-      <div class="checkout-header js-checkout-header"></div>
+      <div class="checkout-header js-cart-quantity-order"></div>
       <div class="order-summary js-order-summary"></div>
       <div class="payment-summary js-payment-summary"></div>
       `;

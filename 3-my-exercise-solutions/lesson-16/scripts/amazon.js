@@ -5,10 +5,10 @@ import {calculateCartQuantity} from '../data/cart.js';
 
 function displayCartQuantity()
 { 
-  // Reads and displays at top of order summary page the items count
+  // Reads and displays cart total quantity on the go to cart page button
   // Does not update the cart or localStorage
   const cartQuantity = calculateCartQuantity();
-  document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
+  document.querySelector('.js-cart-quantity-amazon').innerHTML = cartQuantity;
   return;
 }
 

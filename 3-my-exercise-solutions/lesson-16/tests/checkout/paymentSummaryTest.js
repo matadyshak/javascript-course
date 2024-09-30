@@ -16,7 +16,7 @@ describe('test suite: End-to-End Mega-Test', () => {
   });
 
   document.querySelector('.js-test-container').innerHTML = `
-    <div class="checkout-header js-checkout-header"></div>
+    <div class="checkout-header js-cart-quantity-order"></div>
     <div class="order-summary js-order-summary"></div>
     <div class="payment-summary js-payment-summary"></div>
     <div class="product-quantity-container">
@@ -130,7 +130,7 @@ describe('test suite: End-to-End Mega-Test', () => {
     expect(document.querySelector(`.js-product-price-${productId1}`).innerText).toEqual('$33.90');
 
     expect(document.querySelector(`.js-product-name-${productId2}`).innerText)
-      .toContain('Men\'s Smokin\' Hot Backpack');
+         .toContain('Men\'s Smokin\' Hot Backpack');
     expect(document.querySelector(`.js-product-price-${productId2}`).innerText).toEqual('$19.99');
 
     expect(document.querySelector(`.js-product-name-${productId3}`).innerText)
@@ -141,9 +141,9 @@ describe('test suite: End-to-End Mega-Test', () => {
     expect(document.querySelector(`.js-product-quantity-${productId2}`).innerText).toContain('5');
     expect(document.querySelector(`.js-product-quantity-${productId3}`).innerText).toContain('6');
 
-    expect(document.querySelector('.js-checkout-header').innerText).toContain('21'); // Top middle of order summary page
-    //expect(document.querySelector('.js-cart-quantity').innerText).toContain('21'); // Cart icon 
-    expect(document.querySelector('.js-total-cart-quantity').innerText).toContain('21'); // Purchase summary page - fails
+    expect(document.querySelector('.js-cart-quantity-amazon').innerText)
+    expect(document.querySelector('.js-cart-quantity-purchase').innerText).toContain('21'); // Purchase summary page - fails
+    expect(document.querySelector('.js-cart-quantity-order').innerText).toContain('21');
 
     expect(document.querySelector('.js-payment-summary-price'   ).innerText).toEqual('$738.89');
     expect(document.querySelector('.js-payment-summary-shipping').innerText).toEqual('$0.00');

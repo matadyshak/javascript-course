@@ -24,7 +24,7 @@ export function renderCheckoutHeader() {
       </div>
     `;
     
-  // Insert the HTML after the js-checkout-header tag
-  document.querySelector('.js-checkout-header')
+  // Insert the HTML after the js-cart-quantity-order tag
+  document.querySelector('.js-cart-quantity-order')
     .innerHTML = totalCartQuantityHTML;
 }

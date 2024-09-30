@@ -47,6 +47,7 @@ export function changeCartQuantity(productId, newQuantity) {
       cartItem.quantity = newQuantity;
      }  
     });
+    updateCartQuantityIcon();
     saveToStorage();
     return newQuantity;
 }
@@ -133,6 +134,7 @@ export function addToCart(productId) {
         messageElement.classList.remove("is-showing");
       }, 2000);
 
+      updateCartQuantityIcon();
       saveToStorage();
     }
 
@@ -146,5 +148,11 @@ export function addToCart(productId) {
       });
 
       cart = newCart;
+      updateCartQuantityIcon();
       saveToStorage();
     }    
+
+export function updateCartQuantityIcon() {
+  const cartTotalQuantity = calculateCartQuantity();
+  document.querySelector('.js-cart-quantity-amazon').innerText = cartTotalQuantity; 
+}
