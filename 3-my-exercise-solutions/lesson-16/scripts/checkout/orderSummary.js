@@ -43,7 +43,7 @@ cart.forEach((cartItem) => {
         <span>
           Quantity: <span class="quantity-label js-cart-item-quantity">${cartItem.quantity}</span>
         </span>
-        <span class="update-quantity-link link-primary js-update-link"
+        <span class="update-quantity-link link-primary js-update-link js-update-link-${matchingProduct.id}"
           data-product-id-update="${matchingProduct.id}">
           Update
         </span>  
@@ -54,7 +54,7 @@ cart.forEach((cartItem) => {
         </span>  
           <input type="text" class="quantity-input js-quantity-input js-quantity-input-${matchingProduct.id}"
             data-product-id-input="${matchingProduct.id}">
-          <span class="save-quantity-link link-primary js-save-link"
+          <span class="save-quantity-link link-primary js-save-link js-save-link-${matchingProduct.id}"
             data-product-id-save="${matchingProduct.id}">
             Save
         </span>
@@ -102,6 +102,7 @@ document.querySelector('.js-order-summary')
       input.addEventListener('input', () => {
       const productId = input.dataset.productIdInput;
       input.value = input.value.replace(/[^0-9]/g, '');
+//      input.value = input.value.replace(/^[1-9][0-9]{0,2}/g, '');
       let displayElement = document.querySelector(`.js-quantity-input-${productId}`);
       if (displayElement) {
         displayElement.textContent = input.value;
