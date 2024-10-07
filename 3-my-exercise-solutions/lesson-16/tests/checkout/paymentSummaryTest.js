@@ -2,7 +2,8 @@ import {renderOrderSummary} from '../../scripts/checkout/orderSummary.js';
 import {renderPaymentSummary} from '../../scripts/checkout/paymentSummary.js';
 import {renderCheckoutHeader} from '../../scripts/checkout/checkoutHeader.js';
 import {cart, addToCart, initCartForTest, changeCartQuantity} from '../../data/cart.js';
-
+import {calculateDeliveryDateTest} from './orderSummaryTest.js';
+import {getDeliveryOption} from '../../data/deliveryOptions.js';
 describe('test suite: End-to-End Mega-Test', () => {
 
   const productId1 = '10ed8504-57db-433c-b0a3-fc71a35c88a1'; //Pink sneakers $33.90
@@ -86,7 +87,7 @@ describe('test suite: End-to-End Mega-Test', () => {
     document.querySelector('.js-test-container').innerHTML = '';
   });
 
-  it('add three items to empty cart', () => {
+  it('Mega-test using 3 products', () => {
   
     let cartItems = [];
     initCartForTest(cartItems);  
@@ -152,7 +153,7 @@ describe('test suite: End-to-End Mega-Test', () => {
     expect(document.querySelector('.js-payment-summary-total'   ).innerText).toEqual('$812.78');
 
       // Change delivery options - These will run the rendering code
-      document.querySelector(`.js-delivery-option-input-${productId1}-3`).click();
+      document.querySelector(`.js-delivery-option-input-${productId1}-3`).click();      
       document.querySelector(`.js-delivery-option-input-${productId2}-2`).click();
       document.querySelector(`.js-delivery-option-input-${productId3}-3`).click();
 
@@ -165,7 +166,19 @@ describe('test suite: End-to-End Mega-Test', () => {
       expect(document.querySelector(`.js-delivery-option-input-${productId3}-1`).checked).toEqual(false);
       expect(document.querySelector(`.js-delivery-option-input-${productId3}-2`).checked).toEqual(false);
       expect(document.querySelector(`.js-delivery-option-input-${productId3}-3`).checked).toEqual(true);
-      
+
+      let dateString = document.querySelector(`.js-delivery-option-date-${productId1}-3`).innerHTML;
+      let dateStringTest = calculateDeliveryDateTest(getDeliveryOption('3'));
+      expect(dateString).toContain(dateStringTest);
+
+      dateString = document.querySelector(`.js-delivery-option-date-${productId2}-2`).innerHTML;
+      dateStringTest = calculateDeliveryDateTest(getDeliveryOption('2'));
+      expect(dateString).toContain(dateStringTest);
+
+      dateString = document.querySelector(`.js-delivery-option-date-${productId3}-3`).innerHTML;
+      dateStringTest = calculateDeliveryDateTest(getDeliveryOption('3'));
+      expect(dateString).toContain(dateStringTest);
+
       expect(document.querySelectorAll('.js-cart-item-container').length).toEqual(3);
       expect(document.querySelector(`.js-cart-item-container-${productId1}`)).not.toEqual(null);
       expect(document.querySelector(`.js-cart-item-container-${productId2}`)).not.toEqual(null);
@@ -352,10 +365,6 @@ describe('test suite: End-to-End Mega-Test', () => {
       expect(document.querySelector('.js-payment-summary-subtotal').innerText).toEqual('$0.00');
       expect(document.querySelector('.js-payment-summary-tax'     ).innerText).toEqual('$0.00');
       expect(document.querySelector('.js-payment-summary-total'   ).innerText).toEqual('$0.00');
-
-      // Test scheduled delivery dates 
-    // Delete all products
-
     }); // it()
   }); // describe
 

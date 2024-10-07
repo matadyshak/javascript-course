@@ -174,10 +174,10 @@ function deliveryOptionsHTML(matchingProduct, cartItem) {
       class="delivery-option-input js-delivery-option-input-${matchingProduct.id}-${deliveryOption.id}"
       name="delivery-option-${matchingProduct.id}">
     <div>
-      <div class="delivery-option-date">
+      <div class="delivery-option-date js-delivery-option-date-${matchingProduct.id}-${deliveryOption.id}">
       ${dateString}
       </div>
-      <div class="delivery-option-price">
+      <div class="delivery-option-price js-delivery-option-price-${deliveryOption.id}">
       ${priceString} Shipping
       </div>
     </div>
