@@ -73,7 +73,7 @@ export function changeCartDeliveryOption(productId, newDeliveryOption) {
   return;
 }
 
-//showLocalStorage();
+showLocalStorage();
 
 function saveToStorage() {
   localStorage.setItem('cart', JSON.stringify(cart));
@@ -154,5 +154,10 @@ export function addToCart(productId) {
 
 export function updateCartQuantityIcon() {
   const cartTotalQuantity = calculateCartQuantity();
-  document.querySelector('.js-cart-quantity-amazon').innerText = cartTotalQuantity; 
+  const element = document.querySelector('.js-cart-quantity-amazon');
+  if (!element) {
+    console.log(`updateCartQuantityIcon(): ${element}`)
+  } else {
+    element.innerText = cartTotalQuantity; 
+   } 
 }
