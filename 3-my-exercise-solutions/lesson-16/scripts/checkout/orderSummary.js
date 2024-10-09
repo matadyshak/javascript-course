@@ -72,10 +72,13 @@ cart.forEach((cartItem) => {
   `;
 }); //forEach((cartItem
 
-document.querySelector('.js-order-summary')
-  .innerHTML = cartSummaryHTML;
+const orderSummaryElement = document.querySelector('.js-order-summary');
+orderSummaryElement.innerHTML = cartSummaryHTML;
+// Clone the order summary element to remove all existing event listeners
+const newOrderSummaryElement = orderSummaryElement.cloneNode(true);
+orderSummaryElement.parentNode.replaceChild(newOrderSummaryElement, orderSummaryElement);
 
-  document.querySelectorAll('.js-delete-link')
+newOrderSummaryElement.querySelectorAll('.js-delete-link')
   .forEach((link) => {
     link.addEventListener('click', () => {
       const productId = link.dataset.productIdDelete;
@@ -86,45 +89,45 @@ document.querySelector('.js-order-summary')
     }); // addEventListener
   }); // forEach((link
 
-  document.querySelectorAll('.js-update-link')
+  newOrderSummaryElement.querySelectorAll('.js-update-link')
   .forEach((link) => {
     link.addEventListener('click', () => {
       const productId = link.dataset.productIdUpdate;
-      const container = document.querySelector(
+      const container = newOrderSummaryElement.querySelector(
         `.js-cart-item-container-${productId}`
       );
       container.classList.add('is-editing-quantity');
     }); // addEventListener
   }); // forEach((link
 
-    const allElements = document.querySelectorAll('.js-quantity-input');
+    const allElements = newOrderSummaryElement.querySelectorAll('.js-quantity-input');
     allElements.forEach((input) => {
       input.addEventListener('input', () => {
       const productId = input.dataset.productIdInput;
-      input.value = input.value.replace(/[^0-9]/g, '');
+      input.value = input.value.replace(/^[1-9][0-9]{0,2}$/, '');
 //      input.value = input.value.replace(/^[1-9][0-9]{0,2}/g, '');
-      let displayElement = document.querySelector(`.js-quantity-input-${productId}`);
+      let displayElement = newOrderSummaryElement.querySelector(`.js-quantity-input-${productId}`);
       if (displayElement) {
         displayElement.textContent = input.value;
       }
     }); // addEventListener
   }); // forEach((input
 
-  document.querySelectorAll('.js-save-link')
+  newOrderSummaryElement.querySelectorAll('.js-save-link')
   .forEach((link) => {
     link.addEventListener('click', () => {
       const productId = link.dataset.productIdSave;
-      const container = document.querySelector(
+      const container = newOrderSummaryElement.querySelector(
         `.js-cart-item-container-${productId}`
       );
 
       //.js-quantity-input is a group of input elements
-      let quantityInput = Number(document.querySelector(`.js-quantity-input-${productId}`).value);
+      let quantityInput = Number(newOrderSummaryElement.querySelector(`.js-quantity-input-${productId}`).value);
 
       if (isNaN(quantityInput) || quantityInput < 1 || quantityInput >= 1000) {
         alert(`Invalid quantity: ${quantityInput}.  Defaulting to quantity 1.  Valid quantities are 1 - 999`);
         quantityInput = 1;
-        document.querySelector('.js-quantity-input').value = '1';
+        newOrderSummaryElement.querySelector('.js-quantity-input').value = '1';
       }
       container.classList.remove('is-editing-quantity');
       //This actually changes the cart quantity and localStorage
@@ -136,7 +139,7 @@ document.querySelector('.js-order-summary')
   });
 
   // Get delivery options for all products
-  document.querySelectorAll('.js-delivery-option')
+  newOrderSummaryElement.querySelectorAll('.js-delivery-option')
     .forEach((element) => {
       element.addEventListener('click', () => {
         const {productId, deliveryOptionId} = element.dataset;
