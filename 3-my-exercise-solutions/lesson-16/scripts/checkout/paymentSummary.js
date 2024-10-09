@@ -146,4 +146,9 @@ function testIsSatSun() {
 
 testIsSatSun();
 
-renderPaymentSummary();
+// Ensure renderPaymentSummary() is called on page load
+document.addEventListener('DOMContentLoaded', () => {
+  renderPaymentSummary();
+});
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
