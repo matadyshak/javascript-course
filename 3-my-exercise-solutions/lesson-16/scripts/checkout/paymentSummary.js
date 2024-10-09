@@ -64,7 +64,13 @@ export function renderPaymentSummary() {
   
   `;
 
-  document.querySelector('.js-payment-summary')
+  const paymentSummaryElement = document.querySelector('.js-payment-summary');
+  paymentSummaryElement.innerHTML = paymentSummaryHTML;
+
+  // Clone the payment summary element to remove all existing event listeners
+  const newPaymentSummaryElement = paymentSummaryElement.cloneNode(true);
+  paymentSummaryElement.parentNode.replaceChild(newPaymentSummaryElement, paymentSummaryElement);  
+  newPaymentSummaryElement.querySelector('.js-payment-summary')
     .innerHTML = paymentSummaryHTML;
 }
 
