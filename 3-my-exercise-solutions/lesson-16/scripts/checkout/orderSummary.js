@@ -79,7 +79,7 @@ if (element) {
   console.log("Error: document.querySelector('.js-order-summary') is NULL.");
 }
 
-  document.querySelectorAll('.js-delete-link')
+document.querySelectorAll('.js-delete-link')
   .forEach((link) => {
     link.addEventListener('click', () => {
       const productId = link.dataset.productIdDelete;
@@ -94,7 +94,7 @@ if (element) {
   .forEach((link) => {
     link.addEventListener('click', () => {
       const productId = link.dataset.productIdUpdate;
-      const container = document.querySelector(
+      const container = newOrderSummaryElement.querySelector(
         `.js-cart-item-container-${productId}`
       );
       container.classList.add('is-editing-quantity');
@@ -105,9 +105,9 @@ if (element) {
     allElements.forEach((input) => {
       input.addEventListener('input', () => {
       const productId = input.dataset.productIdInput;
-      input.value = input.value.replace(/[^0-9]/g, '');
+      input.value = input.value.replace(/^[1-9][0-9]{0,2}$/, '');
 //      input.value = input.value.replace(/^[1-9][0-9]{0,2}/g, '');
-      let displayElement = document.querySelector(`.js-quantity-input-${productId}`);
+      let displayElement = newOrderSummaryElement.querySelector(`.js-quantity-input-${productId}`);
       if (displayElement) {
         displayElement.textContent = input.value;
       }
