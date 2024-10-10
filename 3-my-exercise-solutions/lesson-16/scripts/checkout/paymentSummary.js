@@ -64,8 +64,12 @@ export function renderPaymentSummary() {
   
   `;
 
-  document.querySelector('.js-payment-summary')
-    .innerHTML = paymentSummaryHTML;
+  const element = document.querySelector('.js-payment-summary');
+  if (element) {
+    element.innerHTML = paymentSummaryHTML;
+  } else {
+    console.log("Error: document.querySelector('.js-payment-summary') is NULL.");
+  }
 }
 
 //Must go to cart page for this to run

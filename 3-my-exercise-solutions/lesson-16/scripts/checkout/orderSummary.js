@@ -72,8 +72,12 @@ cart.forEach((cartItem) => {
   `;
 }); //forEach((cartItem
 
-document.querySelector('.js-order-summary')
-  .innerHTML = cartSummaryHTML;
+const element = document.querySelector('.js-order-summary');
+if (element) {
+  element.innerHTML = cartSummaryHTML;
+} else {
+  console.log("Error: document.querySelector('.js-order-summary') is NULL.");
+}
 
   document.querySelectorAll('.js-delete-link')
   .forEach((link) => {
