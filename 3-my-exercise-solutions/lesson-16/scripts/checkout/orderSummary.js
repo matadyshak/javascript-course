@@ -94,7 +94,7 @@ document.querySelectorAll('.js-delete-link')
   .forEach((link) => {
     link.addEventListener('click', () => {
       const productId = link.dataset.productIdUpdate;
-      const container = newOrderSummaryElement.querySelector(
+      const container = document.querySelector(
         `.js-cart-item-container-${productId}`
       );
       container.classList.add('is-editing-quantity');
@@ -104,13 +104,12 @@ document.querySelectorAll('.js-delete-link')
     const allElements = document.querySelectorAll('.js-quantity-input');
     allElements.forEach((input) => {
       input.addEventListener('input', () => {
-      const productId = input.dataset.productIdInput;
-      input.value = input.value.replace(/^[1-9][0-9]{0,2}$/, '');
-//      input.value = input.value.replace(/^[1-9][0-9]{0,2}/g, '');
-      let displayElement = newOrderSummaryElement.querySelector(`.js-quantity-input-${productId}`);
-      if (displayElement) {
-        displayElement.textContent = input.value;
-      }
+        const productId = input.dataset.productIdInput;
+        input.value = input.value.match(/^[1-9][0-9]{0,2}/);
+        let displayElement = document.querySelector(`.js-quantity-input-${productId}`);
+        if (displayElement) {
+          displayElement.textContent = input.value;
+        }
     }); // addEventListener
   }); // forEach((input
 
