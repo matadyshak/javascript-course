@@ -1,10 +1,11 @@
 import {getDeliveryOption} from './deliveryOptions.js';
 
+function Cart(localStorageKey) {
 const cart = {
   cartItems: undefined,
 
   loadFromStorage() {
-    this.cartItems = JSON.parse(localStorage.getItem('cart-oop')); 
+    this.cartItems = JSON.parse(localStorage.getItem(localStorageKey)); 
 
   // Note: [] an empty array is a truthy value which makes !cart falsey so the below 
   // code does not run when testing
@@ -22,7 +23,7 @@ const cart = {
 },
 
 saveToStorage() {
-  localStorage.setItem('cart-oop', JSON.stringify(this.cartItems));
+  localStorage.setItem(localStorageKey, JSON.stringify(this.cartItems));
 },
 
 addToCart(productId) {
@@ -159,9 +160,12 @@ initCartForTest(cartItems) {
 
 };
 
+  return cart;
+}
+
+const cart = Cart('cart-oop');
+const businessCart = Cart('cart-business');
+
 cart.loadFromStorage();
-cart.addToCart('83d4ca15-0f35-48f5-b7a3-1ea210004f2e');
 //showLocalStorage();
-console.log(cart);
-//17:52:18
 
