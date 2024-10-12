@@ -93,7 +93,7 @@ addToCart(productId) {
       this.cartItems = newCart;
       this.updateCartQuantityIcon();
       this.saveToStorage();
-    },
+    }
 
 // Rename this to updateDeliveryOption
 changeCartDeliveryOption(productId, newDeliveryOption) {
@@ -168,7 +168,7 @@ const businessCart = new Cart('cart-business');
 
 console.log(cart);
 console.log(businessCart);
-console.log(businessCart instance of Cart);
+console.log(businessCart instanceof Cart);
 
 //showLocalStorage();
 
