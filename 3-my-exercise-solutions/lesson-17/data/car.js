@@ -10,7 +10,7 @@ class Car {
   }
 
   displayInfo() {
-    console.log(`${this.brand} ${this.model}, Speed: ${this.speed}`);
+    console.log(`${this.brand} ${this.model}, Speed: ${this.speed} km/h`);
   }
 
   go () {
@@ -22,6 +22,8 @@ class Car {
   brake () {
     if (this.speed >= 5) {
       this.speed -= 5;
+    } else {
+      this.speed = 0;
     }
   }
 }
@@ -35,13 +37,14 @@ console.log(car2);
 car1.displayInfo();
 car2.displayInfo();
 
-for( let i=0; i<40; i++) {
+for( let i=0; i<42; i++) {
   car1.go();
   car1.displayInfo();
   car2.go();
   car2.displayInfo();
 }
-for(let j=0; j<40; j++) {
+
+for(let j=0; j<42; j++) {
   car1.brake();
   car1.displayInfo();
   car2.brake();
