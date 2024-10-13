@@ -60,6 +60,46 @@ class Clothing extends Product {
   }
 }
 
+/*
+const date = new Date();
+console.log(date);
+console.log(date.toLocaleTimeString());
+
+
+console.log(this);
+
+const object2 = {
+  a: 2,
+  b: this.a
+};
+
+function logThis() {
+  console.log(this);
+}
+logThis();
+//sets this to 'hello'   
+logThis.call('hello');
+
+//this keeps the value it had outside the arrow function
+//Arrow functions do not change this
+const object3 = {
+  method: () => {
+    console.log(this);
+  }
+}
+object3.method();
+
+const object4 = {
+  method() {
+    console.log(this);
+    [1, 2, 3].forEach(() => {
+      console.log(this);
+    });
+  }
+};
+object4.method();
+*/
+
 export const products = [
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
