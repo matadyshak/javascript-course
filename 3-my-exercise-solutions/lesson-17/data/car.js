@@ -1,16 +1,16 @@
 class Car {
   brand;
   model;
+  topSpeed;
+  acceleration;
   speed;
   isTrunkOpen;
-  maxSpeed;
-  speedIncrement;
 
   constructor(carInfo){
     this.brand = carInfo.brand;
     this.model = carInfo.model;
-    this.maxSpeed = carInfo.maxSpeed;
-    this.speedIncrement = carInfo.speedIncrement;
+    this.topSpeed = carInfo.topSpeed;
+    this.acceleration = carInfo.acceleration;
     this.speed = 0;
     this.isTrunkOpen = false;
   }
@@ -25,14 +25,14 @@ class Car {
       return;
     }
     
-    if (this.speed <= this.maxSpeed - this.speedIncrement) {
-      this.speed += this.speedIncrement;
+    if (this.speed <= this.topSpeed - this.acceleration) {
+      this.speed += this.acceleration;
     }
   }
 
   brake () {
-    if (this.speed >= this.speedIncrement) {
-      this.speed -= this.speedIncrement;
+    if (this.speed >= this.acceleration) {
+      this.speed -= this.acceleration;
     } else if (this.speed > 0) {
       this.speed = 0;
     }
@@ -49,14 +49,34 @@ class Car {
   }
 }
 
-const car1 = new Car({brand: 'Toyota', model: 'Corolla', maxSpeed: 200, speedIncrement: 5});
-const car2 = new Car({brand: 'Tesla', model: 'Model 3', maxSpeed: 200, speedIncrement: 5});
+class RaceCar extends Car {
+
+  constructor(carInfo) {
+    super(carInfo);
+  }
+
+  openTrunk()  {
+  }
+
+  closeTrunk()  {
+  }
+
+  displayInfo() {
+    console.log(`${this.brand} ${this.model}, Speed: ${this.speed} km/h`);
+  }
+}
+
+const car1 = new Car({brand: 'Toyota', model: 'Corolla', topSpeed: 200, acceleration: 5});
+const car2 = new Car({brand: 'Tesla', model: 'Model 3', topSpeed: 200, acceleration: 5});
+const car3 = new RaceCar({brand: 'McLaren', model: 'F1', topSpeed: 300, acceleration: 20});
 
 console.log(car1);
 console.log(car2);
+console.log(car3);
 
 car1.displayInfo();
 car2.displayInfo();
+car3.displayInfo();
 
 for(let i=0; i<45; i++) {
   if( i === 0) {
@@ -80,7 +100,6 @@ for(let i=0; i<45; i++) {
     car1.openTrunk();
     car1.displayInfo();
   } else {
-    //I=
     car1.go();
     car1.displayInfo();
   } //if
@@ -119,3 +138,36 @@ for(let k=0; k<44; k++) {
   car2.brake();
   car2.displayInfo();
 }
+
+for(let l=0; l<45; l++) {
+  if( l === 0) {
+    //Open the trunk at speed = 0
+    car3.openTrunk();
+    car3.displayInfo();
+  } else if (l === 1 ) {
+    //Try to go with trunk open - fails
+    car3.go();
+    car3.displayInfo();
+  } else if (l === 2) {
+    // Close trunk
+    car3.closeTrunk();
+    car3.displayInfo();
+  } else if (l === 3) {
+    // Go should now work
+    car3.go();
+    car3.displayInfo();
+  } else if (l === 4) {
+    // Cannot open trunk if moving
+    car3.openTrunk();
+    car3.displayInfo();
+  } else {
+    car3.go();
+    car3.displayInfo();
+  } //if
+} // for
+
+for(let m=0; m<20; m++) {
+  car2.brake();
+  car2.displayInfo();
+}
+
