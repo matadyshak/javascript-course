@@ -1,23 +1,31 @@
 class Car {
-  brand;
-  model;
+  #brand;
+  #model;
   topSpeed;
   acceleration;
   speed;
   isTrunkOpen;
 
   constructor(carInfo){
-    this.brand = carInfo.brand;
-    this.model = carInfo.model;
+    this.#brand = carInfo.brand;
+    this.#model = carInfo.model;
     this.topSpeed = carInfo.topSpeed;
     this.acceleration = carInfo.acceleration;
     this.speed = 0;
     this.isTrunkOpen = false;
   }
 
+  getPrivateBrand() {
+    return this.#brand;
+  }
+
+  getPrivateModel() {
+    return this.#model;
+  }
+
   displayInfo() {
     const trunkStatus = (this.isTrunkOpen) ? 'Trunk: Open' : 'Trunk: Closed';
-    console.log(`${this.brand} ${this.model}, Speed: ${this.speed} km/h ${trunkStatus}`);
+    console.log(`${this.#brand} ${this.#model}, Speed: ${this.speed} km/h ${trunkStatus}`);
   }
 
   go () {
@@ -50,7 +58,6 @@ class Car {
 }
 
 class RaceCar extends Car {
-
   constructor(carInfo) {
     super(carInfo);
   }
@@ -62,7 +69,9 @@ class RaceCar extends Car {
   }
 
   displayInfo() {
-    console.log(`${this.brand} ${this.model}, Speed: ${this.speed} km/h`);
+    const brand = this.getPrivateBrand();
+    const model = this.getPrivateModel();
+    console.log(`${brand} ${model}, Speed: ${this.speed} km/h`);
   }
 }
 
@@ -139,7 +148,7 @@ for(let k=0; k<44; k++) {
   car2.displayInfo();
 }
 
-for(let l=0; l<45; l++) {
+for(let l=0; l<20; l++) {
   if( l === 0) {
     //Open the trunk at speed = 0
     car3.openTrunk();
@@ -167,7 +176,6 @@ for(let l=0; l<45; l++) {
 } // for
 
 for(let m=0; m<20; m++) {
-  car2.brake();
-  car2.displayInfo();
+  car3.brake();
+  car3.displayInfo();
 }
-
