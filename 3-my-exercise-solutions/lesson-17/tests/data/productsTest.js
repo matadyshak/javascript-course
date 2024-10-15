@@ -60,6 +60,7 @@ describe('test suite: Product class ', () => {
       priceCents: 1250
     });
 
+    expect(myProduct instanceof Product).toEqual(true);
     expect(myProduct.id).toEqual('a93a101d-79ef-4cf3-a6cf-6dbe532a1b4a');
     expect(myProduct.image).toEqual('images/products/bathroom-rug.jpg');
     expect(myProduct.name).toEqual('Bathroom Bath Rug Mat 20 x 31 Inch - Grey');
@@ -132,6 +133,7 @@ describe('test suite: Appliance class ', () => {
       warrantyLink: "images/appliance-warranty.png"
     });
 
+    expect(myProduct instanceof Appliance).toEqual(true);
     expect(myProduct.id).toEqual('0d7f9afa-2efe-4fd9-b0fd-ba5663e0a524');
     expect(myProduct.image).toEqual('images/products/coffeemaker-with-glass-carafe-black.jpg');
     expect(myProduct.name).toEqual('Coffeemaker with Glass Carafe and Reusable Filter - 25 Oz, Black');
@@ -209,6 +211,7 @@ describe('test suite: Clothing class ', () => {
       sizeChartLink: "images/clothing-size-chart.png"
     });
 
+    expect(myProduct instanceof Clothing).toEqual(true);
     expect(myProduct.id).toEqual('8b5a2ee1-6055-422a-a666-b34ba28b76d4');
     expect(myProduct.image).toEqual('images/products/men-golf-polo-t-shirt-blue.jpg');
     expect(myProduct.name).toEqual("Men's Regular-Fit Quick-Dry Golf Polo Shirt");
