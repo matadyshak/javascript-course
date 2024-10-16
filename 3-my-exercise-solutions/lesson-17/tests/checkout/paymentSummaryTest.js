@@ -4,11 +4,11 @@ import {renderCheckoutHeader} from '../../scripts/checkout/checkoutHeader.js';
 import {cart, addToCart, initCartForTest, changeCartQuantity} from '../../data/cart.js';
 import {calculateDeliveryDateTest} from './orderSummaryTest.js';
 import {getDeliveryOption} from '../../data/deliveryOptions.js';
-describe('test suite: End-to-End Mega-Test', () => {
+describe('test suite: Integration test', () => {
 
-  const productId1 = '10ed8504-57db-433c-b0a3-fc71a35c88a1'; //Pink sneakers $33.90
-  const productId2 = 'id1'; // Men's smokin' hot backpack $19.99
-  const productId3 = 'id2'; // Men's umbrella $49.99
+  const productId1 = '36c64692-677f-4f58-b5ec-0dc2cf109e27'; // 10-piece mixing bowl set (Product)
+  const productId2 = '5968897c-4d27-4872-89f6-5bcb052746d7'; // Women's Chiffon Beachware Cover Up (Clothing)
+  const productId3 = '77a845b1-16ed-4eac-bdf9-5b591882113d'; // Countertop Blender (Appliance)
 
   beforeEach( () => {
     spyOn(localStorage, 'setItem');
@@ -87,7 +87,7 @@ describe('test suite: End-to-End Mega-Test', () => {
     document.querySelector('.js-test-container').innerHTML = '';
   });
 
-  it('Mega-test using 3 products', () => {
+  it('Integration test using Product, Clothing and Appliance product classes', () => {
   
     let cartItems = [];
     initCartForTest(cartItems);  
@@ -119,7 +119,7 @@ describe('test suite: End-to-End Mega-Test', () => {
           deliveryOptionId: '1'
         }
       ]
-    )); //CalledWith stringify
+    ));
 
     // Need to render now or else the tags below will be undefined
     renderOrderSummary();
@@ -127,16 +127,16 @@ describe('test suite: End-to-End Mega-Test', () => {
     renderCheckoutHeader();
 
     expect(document.querySelector(`.js-product-name-${productId1}`).innerText)
-      .toContain('Waterproof Knit Athletic Sneakers - Pink');
-    expect(document.querySelector(`.js-product-price-${productId1}`).innerText).toEqual('$33.90');
+      .toContain('10-Piece Mixing Bowl Set with Lids - Floral');
+    expect(document.querySelector(`.js-product-price-${productId1}`).innerText).toEqual('$38.99');
 
     expect(document.querySelector(`.js-product-name-${productId2}`).innerText)
-         .toContain('Men\'s Smokin\' Hot Backpack');
-    expect(document.querySelector(`.js-product-price-${productId2}`).innerText).toEqual('$19.99');
+         .toContain("Women's Chiffon Beachwear Cover Up - Black");
+    expect(document.querySelector(`.js-product-price-${productId2}`).innerText).toEqual('$20.70');
 
     expect(document.querySelector(`.js-product-name-${productId3}`).innerText)
-      .toContain('Men\'s Black Full-Size Umbrella');
-    expect(document.querySelector(`.js-product-price-${productId3}`).innerText).toEqual('$49.99');
+      .toContain('Countertop Blender - 64oz, 1400 Watts');
+    expect(document.querySelector(`.js-product-price-${productId3}`).innerText).toEqual('$107.47');
 
     expect(document.querySelector(`.js-product-quantity-${productId1}`).innerText).toContain('10');
     expect(document.querySelector(`.js-product-quantity-${productId2}`).innerText).toContain('5');
@@ -146,11 +146,11 @@ describe('test suite: End-to-End Mega-Test', () => {
     expect(document.querySelector('.js-cart-quantity-order').innerText).toContain('21');
     expect(document.querySelector('.js-cart-quantity-purchase').innerText).toContain('21'); // Purchase summary page - fails
 
-    expect(document.querySelector('.js-payment-summary-price'   ).innerText).toEqual('$738.89');
+    expect(document.querySelector('.js-payment-summary-price'   ).innerText).toEqual('$1138.22');
     expect(document.querySelector('.js-payment-summary-shipping').innerText).toEqual('$0.00');
-    expect(document.querySelector('.js-payment-summary-subtotal').innerText).toEqual('$738.89');
-    expect(document.querySelector('.js-payment-summary-tax'     ).innerText).toEqual('$73.89');
-    expect(document.querySelector('.js-payment-summary-total'   ).innerText).toEqual('$812.78');
+    expect(document.querySelector('.js-payment-summary-subtotal').innerText).toEqual('$1138.22');
+    expect(document.querySelector('.js-payment-summary-tax'     ).innerText).toEqual('$113.82');
+    expect(document.querySelector('.js-payment-summary-total'   ).innerText).toEqual('$1252.04');
 
       // Change delivery options - These will run the rendering code
       document.querySelector(`.js-delivery-option-input-${productId1}-3`).click();      
@@ -194,11 +194,11 @@ describe('test suite: End-to-End Mega-Test', () => {
       expect(cart[2].quantity).toEqual(6);
       expect(cart[2].deliveryOptionId).toEqual('3');
             
-      expect(document.querySelector('.js-payment-summary-price'   ).innerText).toEqual('$738.89');
+      expect(document.querySelector('.js-payment-summary-price'   ).innerText).toEqual('$1138.22');
       expect(document.querySelector('.js-payment-summary-shipping').innerText).toEqual('$24.97');
-      expect(document.querySelector('.js-payment-summary-subtotal').innerText).toEqual('$763.86');
-      expect(document.querySelector('.js-payment-summary-tax'     ).innerText).toEqual('$76.39');
-      expect(document.querySelector('.js-payment-summary-total'   ).innerText).toEqual('$840.25');
+      expect(document.querySelector('.js-payment-summary-subtotal').innerText).toEqual('$1163.19');
+      expect(document.querySelector('.js-payment-summary-tax'     ).innerText).toEqual('$116.32');
+      expect(document.querySelector('.js-payment-summary-total'   ).innerText).toEqual('$1279.51');
   
       // Change quantities using Update, Text, Save
       let updateLink = document.querySelector(`.js-update-link-${productId1}`);
@@ -227,11 +227,11 @@ describe('test suite: End-to-End Mega-Test', () => {
       expect(cart[2].quantity).toEqual(6);
       expect(cart[2].deliveryOptionId).toEqual('3');
 
-      expect(document.querySelector('.js-payment-summary-price'   ).innerText).toEqual('$4569.59');
+      expect(document.querySelector('.js-payment-summary-price'   ).innerText).toEqual('$5544.09');
       expect(document.querySelector('.js-payment-summary-shipping').innerText).toEqual('$24.97');
-      expect(document.querySelector('.js-payment-summary-subtotal').innerText).toEqual('$4594.56');
-      expect(document.querySelector('.js-payment-summary-tax'     ).innerText).toEqual('$459.46');
-      expect(document.querySelector('.js-payment-summary-total'   ).innerText).toEqual('$5054.02');
+      expect(document.querySelector('.js-payment-summary-subtotal').innerText).toEqual('$5569.06');
+      expect(document.querySelector('.js-payment-summary-tax'     ).innerText).toEqual('$556.91');
+      expect(document.querySelector('.js-payment-summary-total'   ).innerText).toEqual('$6125.97');
       // Change quantities using Update, Text, Save
       updateLink = document.querySelector(`.js-update-link-${productId2}`);
       updateLink.click();
@@ -259,11 +259,11 @@ describe('test suite: End-to-End Mega-Test', () => {
       expect(cart[2].quantity).toEqual(6);
       expect(cart[2].deliveryOptionId).toEqual('3');
 
-      expect(document.querySelector('.js-payment-summary-price'   ).innerText).toEqual('$4489.63');
+      expect(document.querySelector('.js-payment-summary-price'   ).innerText).toEqual('$5461.29');
       expect(document.querySelector('.js-payment-summary-shipping').innerText).toEqual('$24.97');
-      expect(document.querySelector('.js-payment-summary-subtotal').innerText).toEqual('$4514.60');
-      expect(document.querySelector('.js-payment-summary-tax'     ).innerText).toEqual('$451.46');
-      expect(document.querySelector('.js-payment-summary-total'   ).innerText).toEqual('$4966.06');
+      expect(document.querySelector('.js-payment-summary-subtotal').innerText).toEqual('$5486.26');
+      expect(document.querySelector('.js-payment-summary-tax'     ).innerText).toEqual('$548.63');
+      expect(document.querySelector('.js-payment-summary-total'   ).innerText).toEqual('$6034.89');
 
       // Change productId2 to qty 100
       changeCartQuantity(productId2, 100);
@@ -285,11 +285,11 @@ describe('test suite: End-to-End Mega-Test', () => {
       expect(cart[2].quantity).toEqual(6);
       expect(cart[2].deliveryOptionId).toEqual('3');
 
-      expect(document.querySelector('.js-payment-summary-price'   ).innerText).toEqual('$6468.64');
+      expect(document.querySelector('.js-payment-summary-price'   ).innerText).toEqual('$7510.59');
       expect(document.querySelector('.js-payment-summary-shipping').innerText).toEqual('$24.97');
-      expect(document.querySelector('.js-payment-summary-subtotal').innerText).toEqual('$6493.61');
-      expect(document.querySelector('.js-payment-summary-tax'     ).innerText).toEqual('$649.36');
-      expect(document.querySelector('.js-payment-summary-total'   ).innerText).toEqual('$7142.97');
+      expect(document.querySelector('.js-payment-summary-subtotal').innerText).toEqual('$7535.56');
+      expect(document.querySelector('.js-payment-summary-tax'     ).innerText).toEqual('$753.56');
+      expect(document.querySelector('.js-payment-summary-total'   ).innerText).toEqual('$8289.12');
 
       // Change quantities using Update, Text, Save
       updateLink = document.querySelector(`.js-update-link-${productId3}`);
@@ -318,11 +318,11 @@ describe('test suite: End-to-End Mega-Test', () => {
       expect(cart[2].quantity).toEqual(999);
       expect(cart[2].deliveryOptionId).toEqual('3');
 
-      expect(document.querySelector('.js-payment-summary-price'   ).innerText).toEqual('$56108.71');
+      expect(document.querySelector('.js-payment-summary-price'   ).innerText).toEqual('$114228.30');
       expect(document.querySelector('.js-payment-summary-shipping').innerText).toEqual('$24.97');
-      expect(document.querySelector('.js-payment-summary-subtotal').innerText).toEqual('$56133.68');
-      expect(document.querySelector('.js-payment-summary-tax'     ).innerText).toEqual('$5613.37');
-      expect(document.querySelector('.js-payment-summary-total'   ).innerText).toEqual('$61747.05');
+      expect(document.querySelector('.js-payment-summary-subtotal').innerText).toEqual('$114253.27');
+      expect(document.querySelector('.js-payment-summary-tax'     ).innerText).toEqual('$11425.33');
+      expect(document.querySelector('.js-payment-summary-total'   ).innerText).toEqual('$125678.60');
 
       let deleteLink = document.querySelector(`.js-delete-link-${productId1}`);
       deleteLink.click();
@@ -335,11 +335,11 @@ describe('test suite: End-to-End Mega-Test', () => {
       expect(cart[1].quantity).toEqual(999);
       expect(cart[1].deliveryOptionId).toEqual('3');
 
-      expect(document.querySelector('.js-payment-summary-price'   ).innerText).toEqual('$51939.01');
+      expect(document.querySelector('.js-payment-summary-price'   ).innerText).toEqual('$109432.53');
       expect(document.querySelector('.js-payment-summary-shipping').innerText).toEqual('$14.98');
-      expect(document.querySelector('.js-payment-summary-subtotal').innerText).toEqual('$51953.99');
-      expect(document.querySelector('.js-payment-summary-tax'     ).innerText).toEqual('$5195.40');
-      expect(document.querySelector('.js-payment-summary-total'   ).innerText).toEqual('$57149.39');
+      expect(document.querySelector('.js-payment-summary-subtotal').innerText).toEqual('$109447.51');
+      expect(document.querySelector('.js-payment-summary-tax'     ).innerText).toEqual('$10944.75');
+      expect(document.querySelector('.js-payment-summary-total'   ).innerText).toEqual('$120392.26');
 
       deleteLink = document.querySelector(`.js-delete-link-${productId2}`);
       deleteLink.click();
@@ -349,11 +349,11 @@ describe('test suite: End-to-End Mega-Test', () => {
       expect(cart[0].quantity).toEqual(999);
       expect(cart[0].deliveryOptionId).toEqual('3');
 
-      expect(document.querySelector('.js-payment-summary-price'   ).innerText).toEqual('$49940.01');
+      expect(document.querySelector('.js-payment-summary-price'   ).innerText).toEqual('$107362.53');
       expect(document.querySelector('.js-payment-summary-shipping').innerText).toEqual('$9.99');
-      expect(document.querySelector('.js-payment-summary-subtotal').innerText).toEqual('$49950.00');
-      expect(document.querySelector('.js-payment-summary-tax'     ).innerText).toEqual('$4995.00');
-      expect(document.querySelector('.js-payment-summary-total'   ).innerText).toEqual('$54945.00');
+      expect(document.querySelector('.js-payment-summary-subtotal').innerText).toEqual('$107372.52');
+      expect(document.querySelector('.js-payment-summary-tax'     ).innerText).toEqual('$10737.25');
+      expect(document.querySelector('.js-payment-summary-total'   ).innerText).toEqual('$118109.77');
 
       deleteLink = document.querySelector(`.js-delete-link-${productId3}`);
       deleteLink.click();

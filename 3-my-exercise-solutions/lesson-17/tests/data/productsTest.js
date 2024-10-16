@@ -1,4 +1,4 @@
-import {initCartForTest} from '../../data/cart.js';
+import {initCartForTest, addToCart, cart} from '../../data/cart.js';
 import {Product} from '../../data/products.js';
 import {Clothing} from '../../data/products.js';
 import {Appliance} from '../../data/products.js';
@@ -6,6 +6,7 @@ import {Appliance} from '../../data/products.js';
 describe('test suite: Product class ', () => {
 
   const productId1 = 'a93a101d-79ef-4cf3-a6cf-6dbe532a1b4a'; // bathroom rug
+  const productId2 = '3fdfe8d6-9a15-4979-b459-585b0d0545b9'; // laundry detergent
 
   beforeEach( () => {
     spyOn(localStorage, 'setItem');
@@ -27,9 +28,21 @@ describe('test suite: Product class ', () => {
         <option value="9">9</option>
         <option selected value="10">10</option>
       </select>
+      <select class="js-quantity-selector-${productId2}">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option selected value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+      </select>
     </div>
-    <div class="added-to-cart js-added-to-cart-${productId1}">
-    </div>
+    <div class="added-to-cart js-added-to-cart-${productId1}"></div>
+    <div class="added-to-cart js-added-to-cart-${productId2}"></div>
     `;
 
     const cartItems = [
@@ -71,11 +84,54 @@ describe('test suite: Product class ', () => {
     expect(myProduct.getStarsUrl()).toEqual(`images/ratings/rating-${myProduct.rating.stars * 10}.png`);
     expect(myProduct.extraInfoHTML()).toEqual('');
   }); // it()
+
+  it('Add more quantity to an existing Product instance in the cart', () => {
+
+    addToCart(productId1); // adding qty 10
+    expect(cart.length).toEqual(1);
+    expect(localStorage.setItem).toHaveBeenCalledTimes(1);
+    expect(localStorage.setItem).toHaveBeenCalledWith('cart', JSON.stringify(
+    [
+      { productId: productId1,
+        quantity: 20,
+        deliveryOptionId: '3'   //new product gets set to '1'
+      }
+    ]
+    )); 
+
+    expect(cart[0].productId).toEqual(productId1);
+    expect(cart[0].quantity).toEqual(20);
+  }); // it()
+
+  it('Add new Product item to the cart', () => {
+
+    addToCart(productId2); // adding qty 5
+    expect(cart.length).toEqual(2);
+    expect(localStorage.setItem).toHaveBeenCalledTimes(1);
+    expect(localStorage.setItem).toHaveBeenCalledWith('cart', JSON.stringify(
+    [
+      { productId: productId1,
+        quantity: 10,
+        deliveryOptionId: '3'   //new product gets set to '1'
+      },
+      { productId: productId2,
+        quantity: 5,
+        deliveryOptionId: '1'   //new product gets set to '1'
+      }
+    ]
+    )); 
+
+    expect(cart[0].productId).toEqual(productId1);
+    expect(cart[0].quantity).toEqual(10);
+    expect(cart[1].productId).toEqual(productId2);
+    expect(cart[1].quantity).toEqual(5);
+  }); // it()
 }); // describe()
 
 describe('test suite: Appliance class ', () => {
 
   const productId1 = '0d7f9afa-2efe-4fd9-b0fd-ba5663e0a524'; // coffee maker
+  const productId2 = 'c2a82c5e-aff4-435f-9975-517cfaba2ece'; // Electric tea kettle
   
   beforeEach( () => {
     spyOn(localStorage, 'setItem');
@@ -97,9 +153,21 @@ describe('test suite: Appliance class ', () => {
         <option value="9">9</option>
         <option selected value="10">10</option>
       </select>
+      <select class="js-quantity-selector-${productId2}">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option selected value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+      </select>
     </div>
-    <div class="added-to-cart js-added-to-cart-${productId1}">
-    </div>
+    <div class="added-to-cart js-added-to-cart-${productId1}"></div>
+    <div class="added-to-cart js-added-to-cart-${productId2}"></div>
     `;
 
     const cartItems = [
@@ -150,12 +218,53 @@ describe('test suite: Appliance class ', () => {
     expect(myProduct.extraInfoHTML()).toContain('<a href="images/appliance-warranty.png" target="_blank">');
     expect(myProduct.extraInfoHTML()).toContain('Warranty');
   }); // it()
+
+  it('Add more quantity to an existing Clothing instance in the cart', () => {
+    addToCart(productId1); // adding qty 10
+    expect(cart.length).toEqual(1);
+    expect(localStorage.setItem).toHaveBeenCalledTimes(1);
+    expect(localStorage.setItem).toHaveBeenCalledWith('cart', JSON.stringify(
+    [
+      { productId: productId1,
+        quantity: 20,
+        deliveryOptionId: '3'   //new product gets set to '1'
+      }
+    ]
+    )); 
+
+    expect(cart[0].productId).toEqual(productId1);
+    expect(cart[0].quantity).toEqual(20);
+  }); // it()
+
+  it('Add new Clothing item to the cart', () => {
+
+    addToCart(productId2); // adding qty 5
+    expect(cart.length).toEqual(2);
+    expect(localStorage.setItem).toHaveBeenCalledTimes(1);
+    expect(localStorage.setItem).toHaveBeenCalledWith('cart', JSON.stringify(
+    [
+      { productId: productId1,
+        quantity: 10,
+        deliveryOptionId: '3'   //new product gets set to '1'
+      },
+      { productId: productId2,
+        quantity: 5,
+        deliveryOptionId: '1'   //new product gets set to '1'
+      }
+    ]
+    )); 
+
+    expect(cart[0].productId).toEqual(productId1);
+    expect(cart[0].quantity).toEqual(10);
+    expect(cart[1].productId).toEqual(productId2);
+    expect(cart[1].quantity).toEqual(5);
+  }); // it()
 }); // describe()
 
 describe('test suite: Clothing class ', () => {
 
   const productId1 = '8b5a2ee1-6055-422a-a666-b34ba28b76d4'; // men's golf polo t-shirt
-  
+  const productId2 = 'b0f17cc5-8b40-4ca5-9142-b61fe3d98c85'; // Women's Stretch Popover Hoodie
   beforeEach( () => {
     spyOn(localStorage, 'setItem');
 
@@ -176,9 +285,21 @@ describe('test suite: Clothing class ', () => {
         <option value="9">9</option>
         <option selected value="10">10</option>
       </select>
+      <select class="js-quantity-selector-${productId2}">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option selected value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+      </select>
     </div>
-    <div class="added-to-cart js-added-to-cart-${productId1}">
-    </div>
+    <div class="added-to-cart js-added-to-cart-${productId1}"></div>
+    <div class="added-to-cart js-added-to-cart-${productId2}"></div>
     `;
 
     const cartItems = [
@@ -224,5 +345,47 @@ describe('test suite: Clothing class ', () => {
     expect(myProduct.getStarsUrl()).toEqual(`images/ratings/rating-${myProduct.rating.stars * 10}.png`);
     expect(myProduct.extraInfoHTML()).toContain('<a href="images/clothing-size-chart.png" target="_blank">');
     expect(myProduct.extraInfoHTML()).toContain('Size chart');
+  }); // it()
+
+  it('Add more quantity to an existing Clothing instance in the cart', () => {
+
+    addToCart(productId1); // adding qty 10
+    expect(cart.length).toEqual(1);
+    expect(localStorage.setItem).toHaveBeenCalledTimes(1);
+    expect(localStorage.setItem).toHaveBeenCalledWith('cart', JSON.stringify(
+    [
+      { productId: productId1,
+        quantity: 20,
+        deliveryOptionId: '3'   //new product gets set to '1'
+      }
+    ]
+    )); 
+
+    expect(cart[0].productId).toEqual(productId1);
+    expect(cart[0].quantity).toEqual(20);
+  }); // it()
+
+  it('Add new Clothing item to the cart', () => {
+
+    addToCart(productId2); // adding qty 5
+    expect(cart.length).toEqual(2);
+    expect(localStorage.setItem).toHaveBeenCalledTimes(1);
+    expect(localStorage.setItem).toHaveBeenCalledWith('cart', JSON.stringify(
+    [
+      { productId: productId1,
+        quantity: 10,
+        deliveryOptionId: '3'   //new product gets set to '1'
+      },
+      { productId: productId2,
+        quantity: 5,
+        deliveryOptionId: '1'   //new product gets set to '1'
+      }
+    ]
+    )); 
+
+    expect(cart[0].productId).toEqual(productId1);
+    expect(cart[0].quantity).toEqual(10);
+    expect(cart[1].productId).toEqual(productId2);
+    expect(cart[1].quantity).toEqual(5);
   }); // it()
 }); // describe()
