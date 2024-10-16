@@ -1,7 +1,7 @@
 import {renderOrderSummary} from '../../scripts/checkout/orderSummary.js';
 import {renderPaymentSummary} from '../../scripts/checkout/paymentSummary.js';
 import {renderCheckoutHeader} from '../../scripts/checkout/checkoutHeader.js';
-import {cart, addToCart, initCartForTest, changeCartQuantity} from '../../data/cart.js';
+import {Cart} from '../../data/cart-class.js';
 import {calculateDeliveryDateTest} from './orderSummaryTest.js';
 import {getDeliveryOption} from '../../data/deliveryOptions.js';
 describe('test suite: Integration test', () => {

@@ -1,4 +1,5 @@
-class Cart {
+import {getDeliveryOption} from './deliveryOptions.js';
+export class Cart {
   cartItems;
   #localStorageKey;
   
@@ -163,12 +164,15 @@ initCartForTest(cartItems) {
 
 } //class cart
 
+/*
 const cart = new Cart('cart-oop');
 const businessCart = new Cart('cart-business');
 
 console.log(cart);
 console.log(businessCart);
 console.log(businessCart instanceof Cart);
+*/
+
 
 //showLocalStorage();
 

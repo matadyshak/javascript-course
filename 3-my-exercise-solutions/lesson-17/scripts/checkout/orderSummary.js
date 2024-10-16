@@ -1,7 +1,7 @@
-import {cart, removeFromCart, changeCartDeliveryOption} from '../../data/cart.js';
+//import {cart, removeFromCart, changeCartDeliveryOption, changeCartQuantity} from '../../data/cart-class.js';
+import {Cart} from '../../data/cart-class.js';
 import {getProduct} from '../../data/products.js';
 import formatCurrency from '../utils/money.js';
-import {changeCartQuantity} from '../../data/cart.js';
 import {deliveryOptions, getDeliveryOption, calculateDeliveryDate} from '../../data/deliveryOptions.js';
 import {renderPaymentSummary} from './paymentSummary.js';
 import {renderCheckoutHeader} from './checkoutHeader.js';
@@ -12,7 +12,7 @@ let cartSummaryHTML = '';
 let dateString = '';
 
 // Loop through all cart items
-cart.forEach((cartItem) => {
+Cart.cartItems.forEach((cartItem) => {
   let productId = cartItem.productId;
   const matchingProduct = getProduct(productId);
   const deliveryOptionId = cartItem.deliveryOptionId;
@@ -83,7 +83,7 @@ document.querySelectorAll('.js-delete-link')
   .forEach((link) => {
     link.addEventListener('click', () => {
       const productId = link.dataset.productIdDelete;
-      removeFromCart(productId);
+      Cart.removeFromCart(productId);
       renderOrderSummary();
       renderPaymentSummary();
       renderCheckoutHeader();
@@ -131,7 +131,7 @@ document.querySelectorAll('.js-delete-link')
       }
       container.classList.remove('is-editing-quantity');
       //This actually changes the cart quantity and localStorage
-      changeCartQuantity(productId, quantityInput);
+      Cart.changeCartQuantity(productId, quantityInput);
       renderOrderSummary();
       renderPaymentSummary();
       renderCheckoutHeader();
@@ -144,7 +144,7 @@ document.querySelectorAll('.js-delete-link')
       element.addEventListener('click', () => {
         const {productId, deliveryOptionId} = element.dataset;
         // This changes the cart and localStorage
-        changeCartDeliveryOption(productId, deliveryOptionId);
+        Cart.changeCartDeliveryOption(productId, deliveryOptionId);
         renderOrderSummary();
         renderPaymentSummary();
         renderCheckoutHeader();
