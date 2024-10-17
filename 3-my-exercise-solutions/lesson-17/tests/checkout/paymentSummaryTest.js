@@ -266,7 +266,7 @@ describe('test suite: Integration test', () => {
       expect(document.querySelector('.js-payment-summary-total'   ).innerText).toEqual('$6034.89');
 
       // Change productId2 to qty 100
-      changeCartQuantity(productId2, 100);
+      updateCartQuantity(productId2, 100);
       renderOrderSummary();
       renderPaymentSummary();
       renderCheckoutHeader();

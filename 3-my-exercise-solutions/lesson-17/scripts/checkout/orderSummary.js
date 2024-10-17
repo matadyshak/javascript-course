@@ -1,5 +1,5 @@
-//import {cart, removeFromCart, changeCartDeliveryOption, changeCartQuantity} from '../../data/cart-class.js';
-import {Cart} from '../../data/cart-class.js';
+//import {cart, removeFromCart, changeCartDeliveryOption, updateCartQuantity} from '../../data/cart-class.js';
+import {cart} from '../../data/cart-class.js';
 import {getProduct} from '../../data/products.js';
 import formatCurrency from '../utils/money.js';
 import {deliveryOptions, getDeliveryOption, calculateDeliveryDate} from '../../data/deliveryOptions.js';
@@ -131,7 +131,7 @@ document.querySelectorAll('.js-delete-link')
       }
       container.classList.remove('is-editing-quantity');
       //This actually changes the cart quantity and localStorage
-      Cart.changeCartQuantity(productId, quantityInput);
+      cart.updateCartQuantity(productId, quantityInput);
       renderOrderSummary();
       renderPaymentSummary();
       renderCheckoutHeader();
