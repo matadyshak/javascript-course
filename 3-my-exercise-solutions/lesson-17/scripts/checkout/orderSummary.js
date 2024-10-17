@@ -1,4 +1,3 @@
-//import {cart, removeFromCart, changeCartDeliveryOption, updateCartQuantity} from '../../data/cart-class.js';
 import {cart} from '../../data/cart-class.js';
 import {getProduct} from '../../data/products.js';
 import formatCurrency from '../utils/money.js';
@@ -12,8 +11,8 @@ let cartSummaryHTML = '';
 let dateString = '';
 
 // Loop through all cart items
-Cart.cartItems.forEach((cartItem) => {
-  let productId = cartItem.productId;
+cart.cartItems.forEach((cartItem) => {
+  let productId = cartItem.id;
   const matchingProduct = getProduct(productId);
   const deliveryOptionId = cartItem.deliveryOptionId;
   const deliveryOption = getDeliveryOption(deliveryOptionId);
@@ -83,7 +82,7 @@ document.querySelectorAll('.js-delete-link')
   .forEach((link) => {
     link.addEventListener('click', () => {
       const productId = link.dataset.productIdDelete;
-      Cart.removeFromCart(productId);
+      cart.removeFromCart(productId);
       renderOrderSummary();
       renderPaymentSummary();
       renderCheckoutHeader();
@@ -144,7 +143,7 @@ document.querySelectorAll('.js-delete-link')
       element.addEventListener('click', () => {
         const {productId, deliveryOptionId} = element.dataset;
         // This changes the cart and localStorage
-        Cart.changeCartDeliveryOption(productId, deliveryOptionId);
+        cart.changeCartDeliveryOption(productId, deliveryOptionId);
         renderOrderSummary();
         renderPaymentSummary();
         renderCheckoutHeader();
