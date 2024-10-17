@@ -1,4 +1,4 @@
-import {Cart} from '../../data/cart-class.js';
+import {cart} from '../../data/cart-class.js';
 import {Product, Clothing, Appliance} from '../../data/products.js';
 
 describe('test suite: Product class ', () => {
@@ -47,7 +47,7 @@ describe('test suite: Product class ', () => {
       //Product class
       { productId: productId1, quantity: 10, deliveryOptionId: '3'}
     ];
-    Cart.initCartForTest(cartItems);
+    cart.initCartForTest(cartItems);
   
     spyOn(localStorage, 'getItem').and.callFake(() => {
       return JSON.stringify([]);
@@ -59,7 +59,7 @@ describe('test suite: Product class ', () => {
     document.querySelector('.js-test-container').innerHTML = '';
   });
 
-  it('Creates a Product instance and test properties and methods', () => {
+  it('Create a Product instance and test properties and methods', () => {
     const myProduct = new Product({
       id: "a93a101d-79ef-4cf3-a6cf-6dbe532a1b4a",
       image: "images/products/bathroom-rug.jpg",
@@ -85,8 +85,8 @@ describe('test suite: Product class ', () => {
 
   it('Add more quantity to an existing Product instance in the cart', () => {
 
-    Cart.addToCart(productId1); // adding qty 10
-    expect(cart.length).toEqual(1);
+    cart.addToCart(productId1); // adding qty 10
+    expect(cart.cartItems.length).toEqual(1);
     expect(localStorage.setItem).toHaveBeenCalledTimes(1);
     expect(localStorage.setItem).toHaveBeenCalledWith('cart', JSON.stringify(
     [
