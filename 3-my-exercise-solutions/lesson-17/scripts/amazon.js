@@ -14,7 +14,6 @@ function displayCartQuantity()
 let productsHTML = '';
 
 products.forEach((product) => {
-  //Generate the HTML for all 42 products
   productsHTML += `
     <div class="product-container">
     <div class="product-image-container">
@@ -23,13 +22,11 @@ products.forEach((product) => {
     </div>
 
     <div class="product-name limit-text-to-2-lines">
-      //Polymorphic call
       ${product.name}
     </div>
 
     <div class="product-rating-container">
       <img class="product-rating-stars"
-        //Polymorphic call
         src="${product.getStarsUrl()}">
       <div class="product-rating-count link-primary">
         ${product.rating.count}
@@ -37,7 +34,6 @@ products.forEach((product) => {
     </div>
 
     <div class="product-price">
-      //Polymorphic call
       ${product.getPrice()}
     </div>
 
@@ -56,7 +52,6 @@ products.forEach((product) => {
       </select>
     </div>
     
-    //Polymorphic call
     ${product.extraInfoHTML()}
 
     <div class="product-spacer"></div>
@@ -103,8 +98,6 @@ document.querySelectorAll('.js-add-to-cart')
 
     }) // button.addEventListener
   }) //forEach(button)
-
-
 
 ////////////////////////////////////////////////////////////////////////////////
 // Get a variable out of a file
