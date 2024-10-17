@@ -6,7 +6,7 @@ function displayCartQuantity()
 { 
   // Reads and displays cart total quantity on the go to cart page button
   // Does not update the cart or localStorage
-  const cartQuantity = calculateCartQuantity();
+  const cartQuantity = cart.calculateCartQuantity();
   document.querySelector('.js-cart-quantity-amazon').innerHTML = cartQuantity;
   return;
 }
@@ -23,11 +23,13 @@ products.forEach((product) => {
     </div>
 
     <div class="product-name limit-text-to-2-lines">
+      //Polymorphic call
       ${product.name}
     </div>
 
     <div class="product-rating-container">
       <img class="product-rating-stars"
+        //Polymorphic call
         src="${product.getStarsUrl()}">
       <div class="product-rating-count link-primary">
         ${product.rating.count}
@@ -35,6 +37,7 @@ products.forEach((product) => {
     </div>
 
     <div class="product-price">
+      //Polymorphic call
       ${product.getPrice()}
     </div>
 
@@ -52,7 +55,8 @@ products.forEach((product) => {
         <option value="10">10</option>
       </select>
     </div>
-
+    
+    //Polymorphic call
     ${product.extraInfoHTML()}
 
     <div class="product-spacer"></div>
@@ -94,7 +98,7 @@ document.querySelectorAll('.js-add-to-cart')
     const {dataset} = button;
     const {productId} = dataset;
 
-    addToCart(productId);
+    cart.addToCart(productId);
     displayCartQuantity();
 
     }) // button.addEventListener
