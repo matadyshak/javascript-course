@@ -1,4 +1,4 @@
-import {addToCart, cart, initCartForTest, removeFromCart, changeCartDeliveryOption} from '../../data/cart.js';
+import {cart} from '../../data/cart-class.js';
 import {renderOrderSummary} from '../../scripts/checkout/orderSummary.js';
 import {renderPaymentSummary} from '../../scripts/checkout/paymentSummary.js';
 import {renderCheckoutHeader} from '../../scripts/checkout/checkoutHeader.js';
@@ -64,13 +64,13 @@ describe('test suite: addToCart', () => {
     let cartItems = [
       { productId: productId1, quantity:  3, deliveryOptionId: '3' }   //coffeemaker
     ];
-    initCartForTest(cartItems);  
+    cart.initCartForTest(cartItems);  
     
     //should add a qty of 10 from HTML above
-    addToCart(productId1);
-    expect(cart.length).toEqual(1);
+    cart.addToCart(productId1);
+    expect(cart.cartItems.length).toEqual(1);
     expect(localStorage.setItem).toHaveBeenCalledTimes(1);
-    expect(localStorage.setItem).toHaveBeenCalledWith('cart', JSON.stringify(
+    expect(localStorage.setItem).toHaveBeenCalledWith('cart-oop', JSON.stringify(
       [
         { productId: productId1,
           quantity: 13,
@@ -78,8 +78,8 @@ describe('test suite: addToCart', () => {
         }
       ]
     )); //CalledWith stringify
-    expect(cart[0].productId).toEqual(productId1);
-    expect(cart[0].quantity).toEqual(13);
+    expect(cart.cartItems[0].id).toEqual(productId1);
+    expect(cart.cartItems[0].quantity).toEqual(13);
     }); // it()
 
   it('adds a new product to the cart', () => {
@@ -91,12 +91,12 @@ describe('test suite: addToCart', () => {
     let cartItems = [
       { productId: productId2, quantity:  7, deliveryOptionId: '2' } 
     ];
-    initCartForTest(cartItems);  
+    cart.initCartForTest(cartItems);  
 
-    addToCart(productId1); // adding qty 10
-    expect(cart.length).toEqual(2);
+    cart.addToCart(productId1); // adding qty 10
+    expect(cart.cartItems.length).toEqual(2);
     expect(localStorage.setItem).toHaveBeenCalledTimes(1);
-    expect(localStorage.setItem).toHaveBeenCalledWith('cart', JSON.stringify(
+    expect(localStorage.setItem).toHaveBeenCalledWith('cart-oop', JSON.stringify(
     [
       { productId: productId2,
         quantity: 7,
