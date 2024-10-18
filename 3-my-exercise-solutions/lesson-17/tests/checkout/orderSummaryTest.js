@@ -84,7 +84,7 @@ describe('test suite: renderOrderSummary', () => {
         document.querySelector(`.js-cart-item-container-${productId2}`)
       ).not.toEqual(null);
       expect(cart.cartItems.length).toEqual(1);
-      expect(cart.cartItems[0].id).toEqual(productId2);
+      expect(cart.cartItems[0].productId).toEqual(productId2);
       expect(
         document.querySelector(`.js-product-name-${productId2}`).innerText
       ).toContain('Intermediate Size Basketball');
@@ -157,7 +157,7 @@ describe('test suite: delivery options', () => {
       expect(document.querySelectorAll('.js-cart-item-container').length).toEqual(1);
       expect(document.querySelector(`.js-cart-item-container-${productId1}`)).not.toEqual(null);
       expect(cart.cartItems.length).toEqual(1);
-      expect(cart.cartItems[0].id).toEqual(productId1);
+      expect(cart.cartItems[0].productId).toEqual(productId1);
       expect(cart.cartItems[0].quantity).toEqual(10);
       expect(cart.cartItems[0].deliveryOptionId).toEqual('3');
       expect(document.querySelector(`.js-product-name-${productId1}`).innerText).toContain('Round Sunglasses');
@@ -186,7 +186,7 @@ describe('test suite: delivery options', () => {
       expect(document.querySelectorAll('.js-cart-item-container').length).toEqual(1);
       expect(document.querySelector(`.js-cart-item-container-${productId1}`)).not.toEqual(null);
       expect(cart.cartItems.length).toEqual(1);
-      expect(cart.cartItems[0].id).toEqual(productId1);
+      expect(cart.cartItems[0].productId).toEqual(productId1);
       expect(cart.cartItems[0].quantity).toEqual(10);
       expect(cart.cartItems[0].deliveryOptionId).toEqual('2');
       expect(document.querySelector(`.js-product-name-${productId1}`).innerText).toContain('Round Sunglasses');
