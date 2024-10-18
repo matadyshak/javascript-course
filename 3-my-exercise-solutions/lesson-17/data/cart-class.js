@@ -1,5 +1,5 @@
 import {getDeliveryOption} from './deliveryOptions.js';
-export class Cart {
+class Cart {
   cartItems;
   #localStorageKey;
   
