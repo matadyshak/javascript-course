@@ -56,13 +56,13 @@ products.forEach((product) => {
 
     <div class="product-spacer"></div>
 
-    <div class="added-to-cart js-added-to-cart-${product.id}">
+    <div class="added-to-cart js-added-to-cart-${product.productId}">
       <img src="images/icons/checkmark.png">
       Added
     </div>
 
     <button class="add-to-cart-button button-primary js-add-to-cart"
-    data-product-id="${product.id}">
+    data-product-id="${product.productId}">
       Add to Cart
     </button>
   </div>
