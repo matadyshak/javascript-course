@@ -102,14 +102,14 @@ describe('test suite: Integration test', () => {
     // This will double the qty for the 3rd product
     cart.addToCart(productId3); // qty 6
 
-    expect(cart.length).toEqual(3);
-    expect(cart.cartItems[0].id).toEqual(productId1);
+    expect(cart.cartItems.length).toEqual(3);
+    expect(cart.cartItems[0].productId).toEqual(productId1);
     expect(cart.cartItems[0].quantity).toEqual(10);
     expect(cart.cartItems[0].deliveryOptionId).toEqual('1');
-    expect(cart.cartItems[1].id).toEqual(productId2);
+    expect(cart.cartItems[1].productId).toEqual(productId2);
     expect(cart.cartItems[1].quantity).toEqual(5);
     expect(cart.cartItems[1].deliveryOptionId).toEqual('1');
-    expect(cart.cartItems[2].id).toEqual(productId3);
+    expect(cart.cartItems[2].productId).toEqual(productId3);
     expect(cart.cartItems[2].quantity).toEqual(6);
     expect(cart.cartItems[2].deliveryOptionId).toEqual('1');
     expect(localStorage.setItem).toHaveBeenCalledTimes(4);
@@ -185,13 +185,13 @@ describe('test suite: Integration test', () => {
       expect(document.querySelector(`.js-cart-item-container-${productId2}`)).not.toEqual(null);
       expect(document.querySelector(`.js-cart-item-container-${productId3}`)).not.toEqual(null);
       
-      expect(cart.cartItems[0].id).toEqual(productId1);
+      expect(cart.cartItems[0].productId).toEqual(productId1);
       expect(cart.cartItems[0].quantity).toEqual(10);
       expect(cart.cartItems[0].deliveryOptionId).toEqual('3');
-      expect(cart.cartItems[1].id).toEqual(productId2);
+      expect(cart.cartItems[1].productId).toEqual(productId2);
       expect(cart.cartItems[1].quantity).toEqual(5);
       expect(cart.cartItems[1].deliveryOptionId).toEqual('2');
-      expect(cart.cartItems[2].id).toEqual(productId3);
+      expect(cart.cartItems[2].productId).toEqual(productId3);
       expect(cart.cartItems[2].quantity).toEqual(6);
       expect(cart.cartItems[2].deliveryOptionId).toEqual('3');
             
@@ -218,13 +218,13 @@ describe('test suite: Integration test', () => {
       expect(document.querySelector('.js-cart-quantity-order').innerText).toContain('134');
       expect(document.querySelector('.js-cart-quantity-purchase').innerText).toContain('134'); // Purchase summary page - fails
 
-      expect(cart.cartItems[0].id).toEqual(productId1);
+      expect(cart.cartItems[0].productId).toEqual(productId1);
       expect(cart.cartItems[0].quantity).toEqual(123);
       expect(cart.cartItems[0].deliveryOptionId).toEqual('3');
-      expect(cart.cartItems[1].id).toEqual(productId2);
+      expect(cart.cartItems[1].productId).toEqual(productId2);
       expect(cart.cartItems[1].quantity).toEqual(5);
       expect(cart.cartItems[1].deliveryOptionId).toEqual('2');
-      expect(cart.cartItems[2].id).toEqual(productId3);
+      expect(cart.cartItems[2].productId).toEqual(productId3);
       expect(cart.cartItems[2].quantity).toEqual(6);
       expect(cart.cartItems[2].deliveryOptionId).toEqual('3');
 
@@ -250,13 +250,13 @@ describe('test suite: Integration test', () => {
       expect(document.querySelector('.js-cart-quantity-order').innerText).toContain('130');
       expect(document.querySelector('.js-cart-quantity-purchase').innerText).toContain('130'); // Purchase summary page - fails
 
-      expect(cart.cartItems[0].id).toEqual(productId1);
+      expect(cart.cartItems[0].productId).toEqual(productId1);
       expect(cart.cartItems[0].quantity).toEqual(123);
       expect(cart.cartItems[0].deliveryOptionId).toEqual('3');
-      expect(cart.cartItems[1].id).toEqual(productId2);
+      expect(cart.cartItems[1].productId).toEqual(productId2);
       expect(cart.cartItems[1].quantity).toEqual(1);
       expect(cart.cartItems[1].deliveryOptionId).toEqual('2');
-      expect(cart.cartItems[2].id).toEqual(productId3);
+      expect(cart.cartItems[2].productId).toEqual(productId3);
       expect(cart.cartItems[2].quantity).toEqual(6);
       expect(cart.cartItems[2].deliveryOptionId).toEqual('3');
 
@@ -276,13 +276,13 @@ describe('test suite: Integration test', () => {
       expect(document.querySelector('.js-cart-quantity-order').innerText).toContain('229');
       expect(document.querySelector('.js-cart-quantity-purchase').innerText).toContain('229'); // Purchase summary page - fails
 
-      expect(cart.cartItems[0].id).toEqual(productId1);
+      expect(cart.cartItems[0].productId).toEqual(productId1);
       expect(cart.cartItems[0].quantity).toEqual(123);
       expect(cart.cartItems[0].deliveryOptionId).toEqual('3');
-      expect(cart.cartItems[1].id).toEqual(productId2);
+      expect(cart.cartItems[1].productId).toEqual(productId2);
       expect(cart.cartItems[1].quantity).toEqual(100);
       expect(cart.cartItems[1].deliveryOptionId).toEqual('2');
-      expect(cart.cartItems[2].id).toEqual(productId3);
+      expect(cart.cartItems[2].productId).toEqual(productId3);
       expect(cart.cartItems[2].quantity).toEqual(6);
       expect(cart.cartItems[2].deliveryOptionId).toEqual('3');
 
@@ -309,13 +309,13 @@ describe('test suite: Integration test', () => {
       expect(document.querySelector('.js-cart-quantity-order').innerText).toContain('1222');
       expect(document.querySelector('.js-cart-quantity-purchase').innerText).toContain('1222'); // Purchase summary page - fails
 
-      expect(cart.cartItems[0].id).toEqual(productId1);
+      expect(cart.cartItems[0].productId).toEqual(productId1);
       expect(cart.cartItems[0].quantity).toEqual(123);
       expect(cart.cartItems[0].deliveryOptionId).toEqual('3');
-      expect(cart.cartItems[1].id).toEqual(productId2);
+      expect(cart.cartItems[1].productId).toEqual(productId2);
       expect(cart.cartItems[1].quantity).toEqual(100);
       expect(cart.cartItems[1].deliveryOptionId).toEqual('2');
-      expect(cart.cartItems[2].id).toEqual(productId3);
+      expect(cart.cartItems[2].productId).toEqual(productId3);
       expect(cart.cartItems[2].quantity).toEqual(999);
       expect(cart.cartItems[2].deliveryOptionId).toEqual('3');
 
@@ -329,10 +329,10 @@ describe('test suite: Integration test', () => {
       deleteLink.click();
 
       expect(cart.length).toEqual(2);
-      expect(cart.cartItems[0].id).toEqual(productId2);
+      expect(cart.cartItems[0].productId).toEqual(productId2);
       expect(cart.cartItems[0].quantity).toEqual(100);
       expect(cart.cartItems[0].deliveryOptionId).toEqual('2');
-      expect(cart.cartItems[1].id).toEqual(productId3);
+      expect(cart.cartItems[1].productId).toEqual(productId3);
       expect(cart.cartItems[1].quantity).toEqual(999);
       expect(cart.cartItems[1].deliveryOptionId).toEqual('3');
 
@@ -345,8 +345,8 @@ describe('test suite: Integration test', () => {
       deleteLink = document.querySelector(`.js-delete-link-${productId2}`);
       deleteLink.click();
 
-      expect(cart.length).toEqual(1);
-      expect(cart.cartItems[0].id).toEqual(productId3);
+      expect(cart.cartItems.length).toEqual(1);
+      expect(cart.cartItems[0].productId).toEqual(productId3);
       expect(cart.cartItems[0].quantity).toEqual(999);
       expect(cart.cartItems[0].deliveryOptionId).toEqual('3');
 
@@ -359,7 +359,7 @@ describe('test suite: Integration test', () => {
       deleteLink = document.querySelector(`.js-delete-link-${productId3}`);
       deleteLink.click();
 
-      expect(cart.length).toEqual(0);
+      expect(cart.cartItems.length).toEqual(0);
 
       expect(document.querySelector('.js-payment-summary-price'   ).innerText).toEqual('$0.00');
       expect(document.querySelector('.js-payment-summary-shipping').innerText).toEqual('$0.00');
