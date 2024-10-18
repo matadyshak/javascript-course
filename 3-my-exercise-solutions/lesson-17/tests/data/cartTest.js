@@ -64,7 +64,7 @@ describe('test suite: addToCart', () => {
     let cartItems = [
       { productId: productId1, quantity:  3, deliveryOptionId: '3' }   //coffeemaker
     ];
-    cart.cart.initCartForTest(cartItems);  
+    cart.initCartForTest(cartItems);  
     
     //should add a qty of 10 from HTML above
     cart.addToCart(productId1);
@@ -78,7 +78,7 @@ describe('test suite: addToCart', () => {
         }
       ]
     )); //CalledWith stringify
-    expect(cart.cartItems[0].id).toEqual(productId1);
+    expect(cart.cartItems[0].productId).toEqual(productId1);
     expect(cart.cartItems[0].quantity).toEqual(13);
     }); // it()
 
@@ -91,7 +91,7 @@ describe('test suite: addToCart', () => {
     let cartItems = [
       { productId: productId2, quantity:  7, deliveryOptionId: '2' } 
     ];
-    cart.cart.initCartForTest(cartItems);  
+    cart.initCartForTest(cartItems);  
 
     cart.addToCart(productId1); // adding qty 10
     expect(cart.cartItems.length).toEqual(2);
@@ -109,9 +109,9 @@ describe('test suite: addToCart', () => {
     ]
     )); //CalledWith stringify
 
-    expect(cart.cartItems[0].id).toEqual(productId2);
+    expect(cart.cartItems[0].productId).toEqual(productId2);
     expect(cart.cartItems[0].quantity).toEqual(7);
-    expect(cart.cartItems[1].id).toEqual(productId1);
+    expect(cart.cartItems[1].productId).toEqual(productId1);
     expect(cart.cartItems[1].quantity).toEqual(10);
   }); // it()
 }); // describe()
@@ -154,7 +154,7 @@ describe('test suite: removeFromCart', () => {
         { productId: productId1, quantity: 4, deliveryOptionId: '3' }
       ]
       )); //CalledWith stringify
-      expect(cart.cartItems[0].id).toEqual(productId1);
+      expect(cart.cartItems[0].productId).toEqual(productId1);
       expect(cart.cartItems[0].quantity).toEqual(4);
       expect(cart.cartItems[0].deliveryOptionId).toContain('3');
     }); // it()
@@ -176,7 +176,7 @@ describe('test suite: removeFromCart', () => {
         { productId: productId1, quantity: 10, deliveryOptionId: '2' }
       ]
       )); //CalledWith stringify
-      expect(cart.cartItems[0].id).toEqual(productId1);
+      expect(cart.cartItems[0].productId).toEqual(productId1);
       expect(cart.cartItems[0].quantity).toEqual(10);
       expect(cart.cartItems[0].deliveryOptionId).toContain('2');
     }); // it()
@@ -229,10 +229,10 @@ describe('test suite: change delivery option', () => {
       expect(element.checked).toEqual(true);
      
       // Calling the function under test
-      changeCartDeliveryOption(productId3, '2');
+      cart.changeCartDeliveryOption(productId3, '2');
 
       // cart is updated to delivery option 2
-      expect(cart.cartItems[2].id).toEqual(productId3);
+      expect(cart.cartItems[2].productId).toEqual(productId3);
       expect(cart.cartItems[2].quantity).toEqual(6);
       expect(cart.cartItems[2].deliveryOptionId).toEqual('2');
 
@@ -288,15 +288,15 @@ describe('test suite: change delivery option', () => {
     
         // cart is unchanged
         expect(cart.cartItems.length).toEqual(3);
-        expect(cart.cartItems[0].id).toEqual(productId1);
+        expect(cart.cartItems[0].productId).toEqual(productId1);
         expect(cart.cartItems[0].quantity).toEqual(10);
         expect(cart.cartItems[0].deliveryOptionId).toEqual('1');
     
-        expect(cart.cartItems[1].id).toEqual(productId2);
+        expect(cart.cartItems[1].productId).toEqual(productId2);
         expect(cart.cartItems[1].quantity).toEqual(8);
         expect(cart.cartItems[1].deliveryOptionId).toEqual('2');
     
-        expect(cart.cartItems[2].id).toEqual(productId3);
+        expect(cart.cartItems[2].productId).toEqual(productId3);
         expect(cart.cartItems[2].quantity).toEqual(6);
         expect(cart.cartItems[2].deliveryOptionId).toEqual('3');
     
@@ -311,15 +311,15 @@ describe('test suite: change delivery option', () => {
     
         // cart is unchanged
         expect(cart.cartItems.length).toEqual(3);
-        expect(cart.cartItems[0].id).toEqual(productId1);
+        expect(cart.cartItems[0].productId).toEqual(productId1);
         expect(cart.cartItems[0].quantity).toEqual(10);
         expect(cart.cartItems[0].deliveryOptionId).toEqual('1');
     
-        expect(cart.cartItems[1].id).toEqual(productId2);
+        expect(cart.cartItems[1].productId).toEqual(productId2);
         expect(cart.cartItems[1].quantity).toEqual(8);
         expect(cart.cartItems[1].deliveryOptionId).toEqual('2');
     
-        expect(cart.cartItems[2].id).toEqual(productId3);
+        expect(cart.cartItems[2].productId).toEqual(productId3);
         expect(cart.cartItems[2].quantity).toEqual(6);
         expect(cart.cartItems[2].deliveryOptionId).toEqual('3');
     
