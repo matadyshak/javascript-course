@@ -54,6 +54,7 @@ function Cart(localStorageKey) {
           } else {
             this.cartItems.push({
               //Using shorthand property for productId since name and variable have same name
+              //CHECK THIS
               productId,
               quantity: selectValue,
               deliveryOptionId: '1'
