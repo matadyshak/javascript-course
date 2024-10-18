@@ -26,6 +26,10 @@ export function renderCheckoutHeader() {
     `;
     
   // Insert the HTML after the js-cart-quantity-order tag
-  document.querySelector('.js-cart-quantity-order')
-    .innerHTML = totalCartQuantityHTML;
+  const element = document.querySelector('.js-cart-quantity-order');
+  if(!element) {
+    console.log(`Element .js-cart-quantity-order is: ${element}`);
+  } else {
+    element.innerHTML = totalCartQuantityHTML;
+  }
 }
