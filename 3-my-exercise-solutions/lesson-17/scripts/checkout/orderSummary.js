@@ -12,8 +12,16 @@ let dateString = '';
 
 // Loop through all cart items
 cart.cartItems.forEach((cartItem) => {
+ 
+  console.log(`Cart Items: ${cart.cartItems.length}`); //2
+ 
   let productId = cartItem.id;
   const matchingProduct = getProduct(productId);
+
+  if (!matchingProduct) {
+    console.log('matchingProduct is NULL!');
+  }
+
   const deliveryOptionId = cartItem.deliveryOptionId;
   const deliveryOption = getDeliveryOption(deliveryOptionId);
   dateString = calculateDeliveryDate(deliveryOption);

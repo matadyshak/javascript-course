@@ -16,11 +16,11 @@ export class Cart {
     // code does not run when testing
     if (!this.cartItems) {
       this.cartItems = [{
-        productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
+        id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
         quantity: 2,
         deliveryOptionId: '1'
       },{
-        productId: "15b6fc6f-327a-4ec4-896f-486349e85a3d",
+        id: "15b6fc6f-327a-4ec4-896f-486349e85a3d",
         quantity: 1,
         deliveryOptionId: '2'
       }];
@@ -38,7 +38,7 @@ addToCart(productId) {
 
       //Check all the items in the cart for a match of the product id for the button
       this.cartItems.forEach((cartItem) => {
-        if (productId === cartItem.productId) {
+        if (productId === cartItem.id) {
           //Item is already in the cart
           //Only one cart item can match
           matchingItem = cartItem;
@@ -82,11 +82,11 @@ addToCart(productId) {
       this.saveToStorage();
     }
 
-      removeFromCart(productId) {
+    removeFromCart(productId) {
       const newCart = [];
 
       this.cartItems.forEach((cartItem) => {
-        if (cartItem.productId !== productId) {
+        if (cartItem.id !== productId) {
           newCart.push(cartItem);
         }
       });
