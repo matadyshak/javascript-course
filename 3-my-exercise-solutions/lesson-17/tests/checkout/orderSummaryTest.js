@@ -1,9 +1,8 @@
 import {renderOrderSummary} from '../../scripts/checkout/orderSummary.js';
 import {getDeliveryOption} from '../../data/deliveryOptions.js';
-import {cart, initCartForTest} from '../../data/cart.js';
+import {cart} from '../../data/cart-class.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 import isWeekend from '../../scripts/utils/datetime.js';
-//import {deliveryOptions} from '../../scripts/deliveryOptions.js';
 
 describe('test suite: renderOrderSummary', () => {
   const productId1 = 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6';
@@ -36,7 +35,7 @@ describe('test suite: renderOrderSummary', () => {
       { productId: productId1, quantity: 300, deliveryOptionId: '1'},
       { productId: productId2, quantity: 50, deliveryOptionId: '2'}
     ];
-    initCartForTest(cartItems);
+    cart.initCartForTest(cartItems);
 
     spyOn(localStorage, 'getItem').and.callFake(() => {
       return JSON.stringify([]);
@@ -84,8 +83,8 @@ describe('test suite: renderOrderSummary', () => {
       expect(
         document.querySelector(`.js-cart-item-container-${productId2}`)
       ).not.toEqual(null);
-      expect(cart.length).toEqual(1);
-      expect(cart[0].productId).toEqual(productId2);
+      expect(cart.cartItems.length).toEqual(1);
+      expect(cart.cartItems[0].id).toEqual(productId2);
       expect(
         document.querySelector(`.js-product-name-${productId2}`).innerText
       ).toContain('Intermediate Size Basketball');
@@ -112,7 +111,7 @@ describe('test suite: delivery options', () => {
       let cartItems = [
         { productId: productId1, quantity:  10, deliveryOptionId: '1' }   //coffeemaker
       ];
-      initCartForTest(cartItems);
+      cart.initCartForTest(cartItems);
       // This must be run to generate the HTML into tests.html
       // and to add all the event listeners
       renderOrderSummary();
@@ -157,10 +156,10 @@ describe('test suite: delivery options', () => {
 
       expect(document.querySelectorAll('.js-cart-item-container').length).toEqual(1);
       expect(document.querySelector(`.js-cart-item-container-${productId1}`)).not.toEqual(null);
-      expect(cart.length).toEqual(1);
-      expect(cart[0].productId).toEqual(productId1);
-      expect(cart[0].quantity).toEqual(10);
-      expect(cart[0].deliveryOptionId).toEqual('3');
+      expect(cart.cartItems.length).toEqual(1);
+      expect(cart.cartItems[0].id).toEqual(productId1);
+      expect(cart.cartItems[0].quantity).toEqual(10);
+      expect(cart.cartItems[0].deliveryOptionId).toEqual('3');
       expect(document.querySelector(`.js-product-name-${productId1}`).innerText).toContain('Round Sunglasses');
       expect(document.querySelector(`.js-product-price-${productId1}`).innerText).toEqual('$15.60');
       expect(document.querySelector('.js-payment-summary-shipping').innerText).toEqual('$9.99');
@@ -186,10 +185,10 @@ describe('test suite: delivery options', () => {
 
       expect(document.querySelectorAll('.js-cart-item-container').length).toEqual(1);
       expect(document.querySelector(`.js-cart-item-container-${productId1}`)).not.toEqual(null);
-      expect(cart.length).toEqual(1);
-      expect(cart[0].productId).toEqual(productId1);
-      expect(cart[0].quantity).toEqual(10);
-      expect(cart[0].deliveryOptionId).toEqual('2');
+      expect(cart.cartItems.length).toEqual(1);
+      expect(cart.cartItems[0].id).toEqual(productId1);
+      expect(cart.cartItems[0].quantity).toEqual(10);
+      expect(cart.cartItems[0].deliveryOptionId).toEqual('2');
       expect(document.querySelector(`.js-product-name-${productId1}`).innerText).toContain('Round Sunglasses');
       expect(document.querySelector(`.js-product-price-${productId1}`).innerText).toEqual('$15.60');
       expect(document.querySelector('.js-payment-summary-shipping').innerText).toEqual('$4.99');

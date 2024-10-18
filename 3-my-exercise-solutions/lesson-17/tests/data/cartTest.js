@@ -64,7 +64,7 @@ describe('test suite: addToCart', () => {
     let cartItems = [
       { productId: productId1, quantity:  3, deliveryOptionId: '3' }   //coffeemaker
     ];
-    cart.initCartForTest(cartItems);  
+    cart.cart.initCartForTest(cartItems);  
     
     //should add a qty of 10 from HTML above
     cart.addToCart(productId1);
@@ -91,7 +91,7 @@ describe('test suite: addToCart', () => {
     let cartItems = [
       { productId: productId2, quantity:  7, deliveryOptionId: '2' } 
     ];
-    cart.initCartForTest(cartItems);  
+    cart.cart.initCartForTest(cartItems);  
 
     cart.addToCart(productId1); // adding qty 10
     expect(cart.cartItems.length).toEqual(2);
@@ -109,10 +109,10 @@ describe('test suite: addToCart', () => {
     ]
     )); //CalledWith stringify
 
-    expect(cart[0].productId).toEqual(productId2);
-    expect(cart[0].quantity).toEqual(7);
-    expect(cart[1].productId).toEqual(productId1);
-    expect(cart[1].quantity).toEqual(10);
+    expect(cart.cartItems[0].id).toEqual(productId2);
+    expect(cart.cartItems[0].quantity).toEqual(7);
+    expect(cart.cartItems[1].id).toEqual(productId1);
+    expect(cart.cartItems[1].quantity).toEqual(10);
   }); // it()
 }); // describe()
 
@@ -145,18 +145,18 @@ describe('test suite: removeFromCart', () => {
         { productId: productId1, quantity: 4, deliveryOptionId: '3' },   //coffeemaker
         { productId: productId2, quantity: 8, deliveryOptionId: '2' }    //blender
       ];
-      initCartForTest(cartItems);  
-      removeFromCart(productId2);
-      expect(cart.length).toEqual(1);
+      cart.initCartForTest(cartItems);  
+      cart.removeFromCart(productId2);
+      expect(cart.cartItems.length).toEqual(1);
       expect(localStorage.setItem).toHaveBeenCalledTimes(1);
-      expect(localStorage.setItem).toHaveBeenCalledWith('cart', JSON.stringify(
+      expect(localStorage.setItem).toHaveBeenCalledWith('cart-oop', JSON.stringify(
       [
         { productId: productId1, quantity: 4, deliveryOptionId: '3' }
       ]
       )); //CalledWith stringify
-      expect(cart[0].productId).toEqual(productId1);
-      expect(cart[0].quantity).toEqual(4);
-      expect(cart[0].deliveryOptionId).toContain('3');
+      expect(cart.cartItems[0].id).toEqual(productId1);
+      expect(cart.cartItems[0].quantity).toEqual(4);
+      expect(cart.cartItems[0].deliveryOptionId).toContain('3');
     }); // it()
 
     it('try to remove a product Id not in the cart', () => {
@@ -167,18 +167,18 @@ describe('test suite: removeFromCart', () => {
       let cartItems = [
         { productId: productId1, quantity:  10, deliveryOptionId: '2' }   //coffeemaker
       ];
-      initCartForTest(cartItems);  
-      removeFromCart(productId3);
-      expect(cart.length).toEqual(1);
+      cart.initCartForTest(cartItems);  
+      cart.removeFromCart(productId3);
+      expect(cart.cartItems.length).toEqual(1);
       expect(localStorage.setItem).toHaveBeenCalledTimes(1);
       expect(localStorage.setItem).toHaveBeenCalledWith('cart', JSON.stringify(
       [
         { productId: productId1, quantity: 10, deliveryOptionId: '2' }
       ]
       )); //CalledWith stringify
-      expect(cart[0].productId).toEqual(productId1);
-      expect(cart[0].quantity).toEqual(10);
-      expect(cart[0].deliveryOptionId).toContain('2');
+      expect(cart.cartItems[0].id).toEqual(productId1);
+      expect(cart.cartItems[0].quantity).toEqual(10);
+      expect(cart.cartItems[0].deliveryOptionId).toContain('2');
     }); // it()
 }); // describe
 
@@ -205,7 +205,7 @@ describe('test suite: change delivery option', () => {
         { productId: productId2, quantity:  8, deliveryOptionId: '2' },   // bathroom rug
         { productId: productId3, quantity:  6, deliveryOptionId: '3' }   // Cotton bath towels
       ];
-      initCartForTest(cartItems);
+      cart.initCartForTest(cartItems);
       // This must be run to generate the HTML into tests.html
       // and to add all the event listeners
       renderOrderSummary();
@@ -232,9 +232,9 @@ describe('test suite: change delivery option', () => {
       changeCartDeliveryOption(productId3, '2');
 
       // cart is updated to delivery option 2
-      expect(cart[2].productId).toEqual(productId3);
-      expect(cart[2].quantity).toEqual(6);
-      expect(cart[2].deliveryOptionId).toEqual('2');
+      expect(cart.cartItems[2].id).toEqual(productId3);
+      expect(cart.cartItems[2].quantity).toEqual(6);
+      expect(cart.cartItems[2].deliveryOptionId).toEqual('2');
 
       // Radio buttons are not up to date with the cart - renderOrderSummary() must be run 
       element = document.querySelector(`.js-delivery-option-input-${productId3}-1`);
@@ -248,7 +248,7 @@ describe('test suite: change delivery option', () => {
       
       expect(document.querySelectorAll('.js-cart-item-container').length).toEqual(3);
       expect(document.querySelector(`.js-cart-item-container-${productId3}`)).not.toEqual(null);
-      expect(cart.length).toEqual(3);
+      expect(cart.cartItems.length).toEqual(3);
       expect(document.querySelector(`.js-product-name-${productId3}`).innerText)
         .toContain('100% Cotton Bath Towels - 2 Pack, Light Teal');
       expect(document.querySelector(`.js-product-price-${productId3}`).innerText).toEqual('$21.10');
@@ -284,21 +284,21 @@ describe('test suite: change delivery option', () => {
       it('change delivery option passing a product ID not in the cart', () => {
 
         // Calling the function under test - this will fail and do nothing
-        changeCartDeliveryOption(productId4, '2');
+        cart.changeCartDeliveryOption(productId4, '2');
     
         // cart is unchanged
-        expect(cart.length).toEqual(3);
-        expect(cart[0].productId).toEqual(productId1);
-        expect(cart[0].quantity).toEqual(10);
-        expect(cart[0].deliveryOptionId).toEqual('1');
+        expect(cart.cartItems.length).toEqual(3);
+        expect(cart.cartItems[0].id).toEqual(productId1);
+        expect(cart.cartItems[0].quantity).toEqual(10);
+        expect(cart.cartItems[0].deliveryOptionId).toEqual('1');
     
-        expect(cart[1].productId).toEqual(productId2);
-        expect(cart[1].quantity).toEqual(8);
-        expect(cart[1].deliveryOptionId).toEqual('2');
+        expect(cart.cartItems[1].id).toEqual(productId2);
+        expect(cart.cartItems[1].quantity).toEqual(8);
+        expect(cart.cartItems[1].deliveryOptionId).toEqual('2');
     
-        expect(cart[2].productId).toEqual(productId3);
-        expect(cart[2].quantity).toEqual(6);
-        expect(cart[2].deliveryOptionId).toEqual('3');
+        expect(cart.cartItems[2].id).toEqual(productId3);
+        expect(cart.cartItems[2].quantity).toEqual(6);
+        expect(cart.cartItems[2].deliveryOptionId).toEqual('3');
     
         expect(document.querySelectorAll('.js-cart-item-container').length).toEqual(3);
         expect(localStorage.setItem).toHaveBeenCalledTimes(0);
@@ -307,21 +307,21 @@ describe('test suite: change delivery option', () => {
       it('change delivery option passing an invalid deliveryOptionId', () => {
 
         // Calling the function under test - this will fail and do nothing
-        changeCartDeliveryOption(productId2, '4');
+        cart.changeCartDeliveryOption(productId2, '4');
     
         // cart is unchanged
-        expect(cart.length).toEqual(3);
-        expect(cart[0].productId).toEqual(productId1);
-        expect(cart[0].quantity).toEqual(10);
-        expect(cart[0].deliveryOptionId).toEqual('1');
+        expect(cart.cartItems.length).toEqual(3);
+        expect(cart.cartItems[0].id).toEqual(productId1);
+        expect(cart.cartItems[0].quantity).toEqual(10);
+        expect(cart.cartItems[0].deliveryOptionId).toEqual('1');
     
-        expect(cart[1].productId).toEqual(productId2);
-        expect(cart[1].quantity).toEqual(8);
-        expect(cart[1].deliveryOptionId).toEqual('2');
+        expect(cart.cartItems[1].id).toEqual(productId2);
+        expect(cart.cartItems[1].quantity).toEqual(8);
+        expect(cart.cartItems[1].deliveryOptionId).toEqual('2');
     
-        expect(cart[2].productId).toEqual(productId3);
-        expect(cart[2].quantity).toEqual(6);
-        expect(cart[2].deliveryOptionId).toEqual('3');
+        expect(cart.cartItems[2].id).toEqual(productId3);
+        expect(cart.cartItems[2].quantity).toEqual(6);
+        expect(cart.cartItems[2].deliveryOptionId).toEqual('3');
     
         expect(document.querySelectorAll('.js-cart-item-container').length).toEqual(3);
         expect(localStorage.setItem).toHaveBeenCalledTimes(0);

@@ -1,9 +1,10 @@
 import {renderOrderSummary} from '../../scripts/checkout/orderSummary.js';
 import {renderPaymentSummary} from '../../scripts/checkout/paymentSummary.js';
 import {renderCheckoutHeader} from '../../scripts/checkout/checkoutHeader.js';
-import {Cart} from '../../data/cart-class.js';
+import {cart} from '../../data/cart-class.js';
 import {calculateDeliveryDateTest} from './orderSummaryTest.js';
 import {getDeliveryOption} from '../../data/deliveryOptions.js';
+
 describe('test suite: Integration test', () => {
 
   const productId1 = '36c64692-677f-4f58-b5ec-0dc2cf109e27'; // 10-piece mixing bowl set (Product)
@@ -71,7 +72,7 @@ describe('test suite: Integration test', () => {
     `;
 
     let cartItems = [];
-    initCartForTest(cartItems);  
+    cart.initCartForTest(cartItems);  
 
     //This will generate no HTML and will set the innerHTML to empty string
     renderOrderSummary();
@@ -90,27 +91,27 @@ describe('test suite: Integration test', () => {
   it('Integration test using Product, Clothing and Appliance product classes', () => {
   
     let cartItems = [];
-    initCartForTest(cartItems);  
+    cart.initCartForTest(cartItems);  
 
     // The first one will not find the product in cart and put productId1, qty 10 into the cart
-    addToCart(productId1); // qty 10
+    cart.addToCart(productId1); // qty 10
     // This will add a 2nd product
-    addToCart(productId2); // qty 5
+    cart.addToCart(productId2); // qty 5
     // This will add a 3rd product
-    addToCart(productId3); // qty 3 
+    cart.addToCart(productId3); // qty 3 
     // This will double the qty for the 3rd product
-    addToCart(productId3); // qty 6
+    cart.addToCart(productId3); // qty 6
 
     expect(cart.length).toEqual(3);
-    expect(cart[0].productId).toEqual(productId1);
-    expect(cart[0].quantity).toEqual(10);
-    expect(cart[0].deliveryOptionId).toEqual('1');
-    expect(cart[1].productId).toEqual(productId2);
-    expect(cart[1].quantity).toEqual(5);
-    expect(cart[1].deliveryOptionId).toEqual('1');
-    expect(cart[2].productId).toEqual(productId3);
-    expect(cart[2].quantity).toEqual(6);
-    expect(cart[2].deliveryOptionId).toEqual('1');
+    expect(cart.cartItems[0].id).toEqual(productId1);
+    expect(cart.cartItems[0].quantity).toEqual(10);
+    expect(cart.cartItems[0].deliveryOptionId).toEqual('1');
+    expect(cart.cartItems[1].id).toEqual(productId2);
+    expect(cart.cartItems[1].quantity).toEqual(5);
+    expect(cart.cartItems[1].deliveryOptionId).toEqual('1');
+    expect(cart.cartItems[2].id).toEqual(productId3);
+    expect(cart.cartItems[2].quantity).toEqual(6);
+    expect(cart.cartItems[2].deliveryOptionId).toEqual('1');
     expect(localStorage.setItem).toHaveBeenCalledTimes(4);
     expect(localStorage.setItem).toHaveBeenCalledWith('cart', JSON.stringify(
       [
@@ -184,15 +185,15 @@ describe('test suite: Integration test', () => {
       expect(document.querySelector(`.js-cart-item-container-${productId2}`)).not.toEqual(null);
       expect(document.querySelector(`.js-cart-item-container-${productId3}`)).not.toEqual(null);
       
-      expect(cart[0].productId).toEqual(productId1);
-      expect(cart[0].quantity).toEqual(10);
-      expect(cart[0].deliveryOptionId).toEqual('3');
-      expect(cart[1].productId).toEqual(productId2);
-      expect(cart[1].quantity).toEqual(5);
-      expect(cart[1].deliveryOptionId).toEqual('2');
-      expect(cart[2].productId).toEqual(productId3);
-      expect(cart[2].quantity).toEqual(6);
-      expect(cart[2].deliveryOptionId).toEqual('3');
+      expect(cart.cartItems[0].id).toEqual(productId1);
+      expect(cart.cartItems[0].quantity).toEqual(10);
+      expect(cart.cartItems[0].deliveryOptionId).toEqual('3');
+      expect(cart.cartItems[1].id).toEqual(productId2);
+      expect(cart.cartItems[1].quantity).toEqual(5);
+      expect(cart.cartItems[1].deliveryOptionId).toEqual('2');
+      expect(cart.cartItems[2].id).toEqual(productId3);
+      expect(cart.cartItems[2].quantity).toEqual(6);
+      expect(cart.cartItems[2].deliveryOptionId).toEqual('3');
             
       expect(document.querySelector('.js-payment-summary-price'   ).innerText).toEqual('$1138.22');
       expect(document.querySelector('.js-payment-summary-shipping').innerText).toEqual('$24.97');
@@ -217,15 +218,15 @@ describe('test suite: Integration test', () => {
       expect(document.querySelector('.js-cart-quantity-order').innerText).toContain('134');
       expect(document.querySelector('.js-cart-quantity-purchase').innerText).toContain('134'); // Purchase summary page - fails
 
-      expect(cart[0].productId).toEqual(productId1);
-      expect(cart[0].quantity).toEqual(123);
-      expect(cart[0].deliveryOptionId).toEqual('3');
-      expect(cart[1].productId).toEqual(productId2);
-      expect(cart[1].quantity).toEqual(5);
-      expect(cart[1].deliveryOptionId).toEqual('2');
-      expect(cart[2].productId).toEqual(productId3);
-      expect(cart[2].quantity).toEqual(6);
-      expect(cart[2].deliveryOptionId).toEqual('3');
+      expect(cart.cartItems[0].id).toEqual(productId1);
+      expect(cart.cartItems[0].quantity).toEqual(123);
+      expect(cart.cartItems[0].deliveryOptionId).toEqual('3');
+      expect(cart.cartItems[1].id).toEqual(productId2);
+      expect(cart.cartItems[1].quantity).toEqual(5);
+      expect(cart.cartItems[1].deliveryOptionId).toEqual('2');
+      expect(cart.cartItems[2].id).toEqual(productId3);
+      expect(cart.cartItems[2].quantity).toEqual(6);
+      expect(cart.cartItems[2].deliveryOptionId).toEqual('3');
 
       expect(document.querySelector('.js-payment-summary-price'   ).innerText).toEqual('$5544.09');
       expect(document.querySelector('.js-payment-summary-shipping').innerText).toEqual('$24.97');
@@ -249,15 +250,15 @@ describe('test suite: Integration test', () => {
       expect(document.querySelector('.js-cart-quantity-order').innerText).toContain('130');
       expect(document.querySelector('.js-cart-quantity-purchase').innerText).toContain('130'); // Purchase summary page - fails
 
-      expect(cart[0].productId).toEqual(productId1);
-      expect(cart[0].quantity).toEqual(123);
-      expect(cart[0].deliveryOptionId).toEqual('3');
-      expect(cart[1].productId).toEqual(productId2);
-      expect(cart[1].quantity).toEqual(1);
-      expect(cart[1].deliveryOptionId).toEqual('2');
-      expect(cart[2].productId).toEqual(productId3);
-      expect(cart[2].quantity).toEqual(6);
-      expect(cart[2].deliveryOptionId).toEqual('3');
+      expect(cart.cartItems[0].id).toEqual(productId1);
+      expect(cart.cartItems[0].quantity).toEqual(123);
+      expect(cart.cartItems[0].deliveryOptionId).toEqual('3');
+      expect(cart.cartItems[1].id).toEqual(productId2);
+      expect(cart.cartItems[1].quantity).toEqual(1);
+      expect(cart.cartItems[1].deliveryOptionId).toEqual('2');
+      expect(cart.cartItems[2].id).toEqual(productId3);
+      expect(cart.cartItems[2].quantity).toEqual(6);
+      expect(cart.cartItems[2].deliveryOptionId).toEqual('3');
 
       expect(document.querySelector('.js-payment-summary-price'   ).innerText).toEqual('$5461.29');
       expect(document.querySelector('.js-payment-summary-shipping').innerText).toEqual('$24.97');
@@ -275,15 +276,15 @@ describe('test suite: Integration test', () => {
       expect(document.querySelector('.js-cart-quantity-order').innerText).toContain('229');
       expect(document.querySelector('.js-cart-quantity-purchase').innerText).toContain('229'); // Purchase summary page - fails
 
-      expect(cart[0].productId).toEqual(productId1);
-      expect(cart[0].quantity).toEqual(123);
-      expect(cart[0].deliveryOptionId).toEqual('3');
-      expect(cart[1].productId).toEqual(productId2);
-      expect(cart[1].quantity).toEqual(100);
-      expect(cart[1].deliveryOptionId).toEqual('2');
-      expect(cart[2].productId).toEqual(productId3);
-      expect(cart[2].quantity).toEqual(6);
-      expect(cart[2].deliveryOptionId).toEqual('3');
+      expect(cart.cartItems[0].id).toEqual(productId1);
+      expect(cart.cartItems[0].quantity).toEqual(123);
+      expect(cart.cartItems[0].deliveryOptionId).toEqual('3');
+      expect(cart.cartItems[1].id).toEqual(productId2);
+      expect(cart.cartItems[1].quantity).toEqual(100);
+      expect(cart.cartItems[1].deliveryOptionId).toEqual('2');
+      expect(cart.cartItems[2].id).toEqual(productId3);
+      expect(cart.cartItems[2].quantity).toEqual(6);
+      expect(cart.cartItems[2].deliveryOptionId).toEqual('3');
 
       expect(document.querySelector('.js-payment-summary-price'   ).innerText).toEqual('$7510.59');
       expect(document.querySelector('.js-payment-summary-shipping').innerText).toEqual('$24.97');
@@ -308,15 +309,15 @@ describe('test suite: Integration test', () => {
       expect(document.querySelector('.js-cart-quantity-order').innerText).toContain('1222');
       expect(document.querySelector('.js-cart-quantity-purchase').innerText).toContain('1222'); // Purchase summary page - fails
 
-      expect(cart[0].productId).toEqual(productId1);
-      expect(cart[0].quantity).toEqual(123);
-      expect(cart[0].deliveryOptionId).toEqual('3');
-      expect(cart[1].productId).toEqual(productId2);
-      expect(cart[1].quantity).toEqual(100);
-      expect(cart[1].deliveryOptionId).toEqual('2');
-      expect(cart[2].productId).toEqual(productId3);
-      expect(cart[2].quantity).toEqual(999);
-      expect(cart[2].deliveryOptionId).toEqual('3');
+      expect(cart.cartItems[0].id).toEqual(productId1);
+      expect(cart.cartItems[0].quantity).toEqual(123);
+      expect(cart.cartItems[0].deliveryOptionId).toEqual('3');
+      expect(cart.cartItems[1].id).toEqual(productId2);
+      expect(cart.cartItems[1].quantity).toEqual(100);
+      expect(cart.cartItems[1].deliveryOptionId).toEqual('2');
+      expect(cart.cartItems[2].id).toEqual(productId3);
+      expect(cart.cartItems[2].quantity).toEqual(999);
+      expect(cart.cartItems[2].deliveryOptionId).toEqual('3');
 
       expect(document.querySelector('.js-payment-summary-price'   ).innerText).toEqual('$114228.30');
       expect(document.querySelector('.js-payment-summary-shipping').innerText).toEqual('$24.97');
@@ -328,12 +329,12 @@ describe('test suite: Integration test', () => {
       deleteLink.click();
 
       expect(cart.length).toEqual(2);
-      expect(cart[0].productId).toEqual(productId2);
-      expect(cart[0].quantity).toEqual(100);
-      expect(cart[0].deliveryOptionId).toEqual('2');
-      expect(cart[1].productId).toEqual(productId3);
-      expect(cart[1].quantity).toEqual(999);
-      expect(cart[1].deliveryOptionId).toEqual('3');
+      expect(cart.cartItems[0].id).toEqual(productId2);
+      expect(cart.cartItems[0].quantity).toEqual(100);
+      expect(cart.cartItems[0].deliveryOptionId).toEqual('2');
+      expect(cart.cartItems[1].id).toEqual(productId3);
+      expect(cart.cartItems[1].quantity).toEqual(999);
+      expect(cart.cartItems[1].deliveryOptionId).toEqual('3');
 
       expect(document.querySelector('.js-payment-summary-price'   ).innerText).toEqual('$109432.53');
       expect(document.querySelector('.js-payment-summary-shipping').innerText).toEqual('$14.98');
@@ -345,9 +346,9 @@ describe('test suite: Integration test', () => {
       deleteLink.click();
 
       expect(cart.length).toEqual(1);
-      expect(cart[0].productId).toEqual(productId3);
-      expect(cart[0].quantity).toEqual(999);
-      expect(cart[0].deliveryOptionId).toEqual('3');
+      expect(cart.cartItems[0].id).toEqual(productId3);
+      expect(cart.cartItems[0].quantity).toEqual(999);
+      expect(cart.cartItems[0].deliveryOptionId).toEqual('3');
 
       expect(document.querySelector('.js-payment-summary-price'   ).innerText).toEqual('$107362.53');
       expect(document.querySelector('.js-payment-summary-shipping').innerText).toEqual('$9.99');

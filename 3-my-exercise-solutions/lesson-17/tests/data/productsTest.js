@@ -97,14 +97,14 @@ describe('test suite: Product class ', () => {
     ]
     )); 
 
-    expect(cart[0].productId).toEqual(productId1);
-    expect(cart[0].quantity).toEqual(20);
+    expect(cart.cartItems[0].id).toEqual(productId1);
+    expect(cart.cartItems[0].quantity).toEqual(20);
   }); // it()
 
   it('Add new Product item to the cart', () => {
 
     Cart.addToCart(productId2); // adding qty 5
-    expect(cart.length).toEqual(2);
+    expect(cart.cartItems.length).toEqual(2);
     expect(localStorage.setItem).toHaveBeenCalledTimes(1);
     expect(localStorage.setItem).toHaveBeenCalledWith('cart', JSON.stringify(
     [
@@ -119,10 +119,10 @@ describe('test suite: Product class ', () => {
     ]
     )); 
 
-    expect(cart[0].productId).toEqual(productId1);
-    expect(cart[0].quantity).toEqual(10);
-    expect(cart[1].productId).toEqual(productId2);
-    expect(cart[1].quantity).toEqual(5);
+    expect(cart.cartItems[0].id).toEqual(productId1);
+    expect(cart.cartItems[0].quantity).toEqual(10);
+    expect(cart.cartItems[1].id).toEqual(productId2);
+    expect(cart.cartItems[1].quantity).toEqual(5);
   }); // it()
 }); // describe()
 
@@ -219,7 +219,7 @@ describe('test suite: Appliance class ', () => {
 
   it('Add more quantity to an existing Clothing instance in the cart', () => {
     Cart.addToCart(productId1); // adding qty 10
-    expect(cart.length).toEqual(1);
+    expect(cart.cartItems.length).toEqual(1);
     expect(localStorage.setItem).toHaveBeenCalledTimes(1);
     expect(localStorage.setItem).toHaveBeenCalledWith('cart', JSON.stringify(
     [
@@ -230,14 +230,14 @@ describe('test suite: Appliance class ', () => {
     ]
     )); 
 
-    expect(cart[0].productId).toEqual(productId1);
-    expect(cart[0].quantity).toEqual(20);
+    expect(cart.cartItems[0].id).toEqual(productId1);
+    expect(cart.cartItems[0].quantity).toEqual(20);
   }); // it()
 
   it('Add new Clothing item to the cart', () => {
 
     Cart.addToCart(productId2); // adding qty 5
-    expect(cart.length).toEqual(2);
+    expect(cart.cartItems.length).toEqual(2);
     expect(localStorage.setItem).toHaveBeenCalledTimes(1);
     expect(localStorage.setItem).toHaveBeenCalledWith('cart', JSON.stringify(
     [
@@ -252,10 +252,10 @@ describe('test suite: Appliance class ', () => {
     ]
     )); 
 
-    expect(cart[0].productId).toEqual(productId1);
-    expect(cart[0].quantity).toEqual(10);
-    expect(cart[1].productId).toEqual(productId2);
-    expect(cart[1].quantity).toEqual(5);
+    expect(cart.cartItems[0].id).toEqual(productId1);
+    expect(cart.cartItems[0].quantity).toEqual(10);
+    expect(cart.cartItems[1].id).toEqual(productId2);
+    expect(cart.cartItems[1].quantity).toEqual(5);
   }); // it()
 }); // describe()
 
@@ -348,7 +348,7 @@ describe('test suite: Clothing class ', () => {
   it('Add more quantity to an existing Clothing instance in the cart', () => {
 
     Cart.addToCart(productId1); // adding qty 10
-    expect(cart.length).toEqual(1);
+    expect(cart.cartItems.length).toEqual(1);
     expect(localStorage.setItem).toHaveBeenCalledTimes(1);
     expect(localStorage.setItem).toHaveBeenCalledWith('cart', JSON.stringify(
     [
@@ -359,14 +359,14 @@ describe('test suite: Clothing class ', () => {
     ]
     )); 
 
-    expect(cart[0].productId).toEqual(productId1);
-    expect(cart[0].quantity).toEqual(20);
+    expect(cart.cartItems[0].id).toEqual(productId1);
+    expect(cart.cartItems[0].quantity).toEqual(20);
   }); // it()
 
   it('Add new Clothing item to the cart', () => {
 
     Cart.addToCart(productId2); // adding qty 5
-    expect(cart.length).toEqual(2);
+    expect(cart.cartItems.length).toEqual(2);
     expect(localStorage.setItem).toHaveBeenCalledTimes(1);
     expect(localStorage.setItem).toHaveBeenCalledWith('cart', JSON.stringify(
     [
@@ -381,9 +381,9 @@ describe('test suite: Clothing class ', () => {
     ]
     )); 
 
-    expect(Cart.cartItems[0].productId).toEqual(productId1);
-    expect(Cart.cartItems[0].quantity).toEqual(10);
-    expect(Cart.cartItems[1].productId).toEqual(productId2);
-    expect(Cart.cartItems[1].quantity).toEqual(5);
+    expect(cart.cartItems[0].id).toEqual(productId1);
+    expect(cart.cartItems[0].quantity).toEqual(10);
+    expect(cart.cartItems[1].id).toEqual(productId2);
+    expect(cart.cartItems[1].quantity).toEqual(5);
   }); // it()
 }); // describe()
