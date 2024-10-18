@@ -68,7 +68,7 @@ export function renderPaymentSummary() {
   if (element) {
     element.innerHTML = paymentSummaryHTML;
   } else {
-    console.log("Error: document.querySelector('.js-payment-summary') is NULL.");
+    console.log(`Error: document.querySelector('.js-payment-summary') is: ${element}`);
   }
 }
 
