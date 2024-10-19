@@ -61,7 +61,7 @@ describe('test suite: Product class ', () => {
 
   it('Create a Product instance and test properties and methods', () => {
     const myProduct = new Product({
-      id: "a93a101d-79ef-4cf3-a6cf-6dbe532a1b4a",
+      productId: "a93a101d-79ef-4cf3-a6cf-6dbe532a1b4a",
       image: "images/products/bathroom-rug.jpg",
       name: "Bathroom Bath Rug Mat 20 x 31 Inch - Grey",
       rating: {
@@ -72,7 +72,7 @@ describe('test suite: Product class ', () => {
     });
 
     expect(myProduct instanceof Product).toEqual(true);
-    expect(myProduct.id).toEqual('a93a101d-79ef-4cf3-a6cf-6dbe532a1b4a');
+    expect(myProduct.productId).toEqual('a93a101d-79ef-4cf3-a6cf-6dbe532a1b4a');
     expect(myProduct.image).toEqual('images/products/bathroom-rug.jpg');
     expect(myProduct.name).toEqual('Bathroom Bath Rug Mat 20 x 31 Inch - Grey');
     expect(myProduct.priceCents).toEqual(1250);
@@ -97,7 +97,7 @@ describe('test suite: Product class ', () => {
     ]
     )); 
 
-    expect(cart.cartItems[0].id).toEqual(productId1);
+    expect(cart.cartItems[0].productId).toEqual(productId1);
     expect(cart.cartItems[0].quantity).toEqual(20);
   }); // it()
 
@@ -119,9 +119,9 @@ describe('test suite: Product class ', () => {
     ]
     )); 
 
-    expect(cart.cartItems[0].id).toEqual(productId1);
+    expect(cart.cartItems[0].productId).toEqual(productId1);
     expect(cart.cartItems[0].quantity).toEqual(10);
-    expect(cart.cartItems[1].id).toEqual(productId2);
+    expect(cart.cartItems[1].productId).toEqual(productId2);
     expect(cart.cartItems[1].quantity).toEqual(5);
   }); // it()
 }); // describe()
@@ -172,7 +172,7 @@ describe('test suite: Appliance class ', () => {
       //Product class
       { productId: productId1, quantity: 10, deliveryOptionId: '3'}
     ];
-    Cart.initCartForTest(cartItems);
+    cart.initCartForTest(cartItems);
   
     spyOn(localStorage, 'getItem').and.callFake(() => {
       return JSON.stringify([]);
@@ -186,7 +186,7 @@ describe('test suite: Appliance class ', () => {
 
   it('Creates an Appliance instance and test properties and methods', () => {
     const myProduct = new Appliance({
-      id: "0d7f9afa-2efe-4fd9-b0fd-ba5663e0a524",
+      productId: "0d7f9afa-2efe-4fd9-b0fd-ba5663e0a524",
       image: "images/products/coffeemaker-with-glass-carafe-black.jpg",
       name: "Coffeemaker with Glass Carafe and Reusable Filter - 25 Oz, Black",
       rating: {
@@ -200,7 +200,7 @@ describe('test suite: Appliance class ', () => {
     });
 
     expect(myProduct instanceof Appliance).toEqual(true);
-    expect(myProduct.id).toEqual('0d7f9afa-2efe-4fd9-b0fd-ba5663e0a524');
+    expect(myProduct.productId).toEqual('0d7f9afa-2efe-4fd9-b0fd-ba5663e0a524');
     expect(myProduct.image).toEqual('images/products/coffeemaker-with-glass-carafe-black.jpg');
     expect(myProduct.name).toEqual('Coffeemaker with Glass Carafe and Reusable Filter - 25 Oz, Black');
     expect(myProduct.priceCents).toEqual(2250);
@@ -218,7 +218,7 @@ describe('test suite: Appliance class ', () => {
   }); // it()
 
   it('Add more quantity to an existing Clothing instance in the cart', () => {
-    Cart.addToCart(productId1); // adding qty 10
+    cart.addToCart(productId1); // adding qty 10
     expect(cart.cartItems.length).toEqual(1);
     expect(localStorage.setItem).toHaveBeenCalledTimes(1);
     expect(localStorage.setItem).toHaveBeenCalledWith('cart', JSON.stringify(
@@ -230,13 +230,13 @@ describe('test suite: Appliance class ', () => {
     ]
     )); 
 
-    expect(cart.cartItems[0].id).toEqual(productId1);
+    expect(cart.cartItems[0].productId).toEqual(productId1);
     expect(cart.cartItems[0].quantity).toEqual(20);
   }); // it()
 
   it('Add new Clothing item to the cart', () => {
 
-    Cart.addToCart(productId2); // adding qty 5
+    cart.addToCart(productId2); // adding qty 5
     expect(cart.cartItems.length).toEqual(2);
     expect(localStorage.setItem).toHaveBeenCalledTimes(1);
     expect(localStorage.setItem).toHaveBeenCalledWith('cart', JSON.stringify(
@@ -252,9 +252,9 @@ describe('test suite: Appliance class ', () => {
     ]
     )); 
 
-    expect(cart.cartItems[0].id).toEqual(productId1);
+    expect(cart.cartItems[0].productId).toEqual(productId1);
     expect(cart.cartItems[0].quantity).toEqual(10);
-    expect(cart.cartItems[1].id).toEqual(productId2);
+    expect(cart.cartItems[1].productId).toEqual(productId2);
     expect(cart.cartItems[1].quantity).toEqual(5);
   }); // it()
 }); // describe()
@@ -304,7 +304,7 @@ describe('test suite: Clothing class ', () => {
       //Product class
       { productId: productId1, quantity: 10, deliveryOptionId: '3'}
     ];
-    Cart.initCartForTest(cartItems);
+    cart.initCartForTest(cartItems);
   
     spyOn(localStorage, 'getItem').and.callFake(() => {
       return JSON.stringify([]);
@@ -318,7 +318,7 @@ describe('test suite: Clothing class ', () => {
 
   it('Creates a Clothing instance and test properties and methods', () => {
     const myProduct = new Clothing({
-      id: "8b5a2ee1-6055-422a-a666-b34ba28b76d4",
+      productId: "8b5a2ee1-6055-422a-a666-b34ba28b76d4",
       image: "images/products/men-golf-polo-t-shirt-blue.jpg",
       name: "Men's Regular-Fit Quick-Dry Golf Polo Shirt",
       rating: {
@@ -331,7 +331,7 @@ describe('test suite: Clothing class ', () => {
     });
 
     expect(myProduct instanceof Clothing).toEqual(true);
-    expect(myProduct.id).toEqual('8b5a2ee1-6055-422a-a666-b34ba28b76d4');
+    expect(myProduct.productId).toEqual('8b5a2ee1-6055-422a-a666-b34ba28b76d4');
     expect(myProduct.image).toEqual('images/products/men-golf-polo-t-shirt-blue.jpg');
     expect(myProduct.name).toEqual("Men's Regular-Fit Quick-Dry Golf Polo Shirt");
     expect(myProduct.priceCents).toEqual(1599);
@@ -347,7 +347,7 @@ describe('test suite: Clothing class ', () => {
 
   it('Add more quantity to an existing Clothing instance in the cart', () => {
 
-    Cart.addToCart(productId1); // adding qty 10
+    cart.addToCart(productId1); // adding qty 10
     expect(cart.cartItems.length).toEqual(1);
     expect(localStorage.setItem).toHaveBeenCalledTimes(1);
     expect(localStorage.setItem).toHaveBeenCalledWith('cart', JSON.stringify(
@@ -359,13 +359,13 @@ describe('test suite: Clothing class ', () => {
     ]
     )); 
 
-    expect(cart.cartItems[0].id).toEqual(productId1);
+    expect(cart.cartItems[0].productId).toEqual(productId1);
     expect(cart.cartItems[0].quantity).toEqual(20);
   }); // it()
 
   it('Add new Clothing item to the cart', () => {
 
-    Cart.addToCart(productId2); // adding qty 5
+    cart.addToCart(productId2); // adding qty 5
     expect(cart.cartItems.length).toEqual(2);
     expect(localStorage.setItem).toHaveBeenCalledTimes(1);
     expect(localStorage.setItem).toHaveBeenCalledWith('cart', JSON.stringify(
@@ -381,9 +381,9 @@ describe('test suite: Clothing class ', () => {
     ]
     )); 
 
-    expect(cart.cartItems[0].id).toEqual(productId1);
+    expect(cart.cartItems[0].productId).toEqual(productId1);
     expect(cart.cartItems[0].quantity).toEqual(10);
-    expect(cart.cartItems[1].id).toEqual(productId2);
+    expect(cart.cartItems[1].productId).toEqual(productId2);
     expect(cart.cartItems[1].quantity).toEqual(5);
   }); // it()
 }); // describe()
