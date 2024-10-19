@@ -12,9 +12,7 @@ let dateString = '';
 
 // Loop through all cart items
 cart.cartItems.forEach((cartItem) => {
- 
-  console.log(`Cart Items: ${cart.cartItems.length}`); //2
- 
+   
   let productId = cartItem.productId;
   const matchingProduct = getProduct(productId);
 

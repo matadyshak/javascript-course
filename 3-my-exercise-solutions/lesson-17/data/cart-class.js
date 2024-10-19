@@ -50,9 +50,18 @@ addToCart(productId) {
       //${productId} should be in blue color
       // Convert to number to prevent appending to a string
       //In test mode has amazon.js run already?
+      let value;
+      let selectValue;
+
       const element = document.querySelector(`.js-quantity-selector-${productId}`);
-      const value = element.value;
-      const selectValue = Number(value);
+      if (!element) {
+        console.log(`.js-quantity-selector-${productId} is ${element}` );
+        value = '1';
+        selectValue = 1;
+      } else {
+        value = element.value;
+        selectValue = Number(value);
+      }
         
       if(matchingItem) {
         matchingItem.quantity += selectValue;
