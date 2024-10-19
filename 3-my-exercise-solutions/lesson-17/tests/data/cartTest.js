@@ -70,7 +70,7 @@ describe('test suite: addToCart', () => {
     cart.addToCart(productId1);
     expect(cart.cartItems.length).toEqual(1);
     expect(localStorage.setItem).toHaveBeenCalledTimes(1);
-    expect(localStorage.setItem).toHaveBeenCalledWith('cart-oop', JSON.stringify(
+    expect(localStorage.setItem).toHaveBeenCalledWith('cart-class', JSON.stringify(
       [
         { productId: productId1,
           quantity: 13,
@@ -96,7 +96,7 @@ describe('test suite: addToCart', () => {
     cart.addToCart(productId1); // adding qty 10
     expect(cart.cartItems.length).toEqual(2);
     expect(localStorage.setItem).toHaveBeenCalledTimes(1);
-    expect(localStorage.setItem).toHaveBeenCalledWith('cart-oop', JSON.stringify(
+    expect(localStorage.setItem).toHaveBeenCalledWith('cart-class', JSON.stringify(
     [
       { productId: productId2,
         quantity: 7,
@@ -149,7 +149,7 @@ describe('test suite: removeFromCart', () => {
       cart.removeFromCart(productId2);
       expect(cart.cartItems.length).toEqual(1);
       expect(localStorage.setItem).toHaveBeenCalledTimes(1);
-      expect(localStorage.setItem).toHaveBeenCalledWith('cart-oop', JSON.stringify(
+      expect(localStorage.setItem).toHaveBeenCalledWith('cart-class', JSON.stringify(
       [
         { productId: productId1, quantity: 4, deliveryOptionId: '3' }
       ]
@@ -171,7 +171,7 @@ describe('test suite: removeFromCart', () => {
       cart.removeFromCart(productId3);
       expect(cart.cartItems.length).toEqual(1);
       expect(localStorage.setItem).toHaveBeenCalledTimes(1);
-      expect(localStorage.setItem).toHaveBeenCalledWith('cart', JSON.stringify(
+      expect(localStorage.setItem).toHaveBeenCalledWith('cart-class', JSON.stringify(
       [
         { productId: productId1, quantity: 10, deliveryOptionId: '2' }
       ]
@@ -229,7 +229,7 @@ describe('test suite: change delivery option', () => {
       expect(element.checked).toEqual(true);
      
       // Calling the function under test
-      cart.changeCartDeliveryOption(productId3, '2');
+      cart.updateDeliveryOption(productId3, '2');
 
       // cart is updated to delivery option 2
       expect(cart.cartItems[2].productId).toEqual(productId3);
@@ -273,7 +273,7 @@ describe('test suite: change delivery option', () => {
       expect(document.querySelector('.js-payment-summary-total').innerText).toEqual('$431.84');
 
       expect(localStorage.setItem).toHaveBeenCalledTimes(1);
-      expect(localStorage.setItem).toHaveBeenCalledWith('cart', JSON.stringify(
+      expect(localStorage.setItem).toHaveBeenCalledWith('cart-class', JSON.stringify(
         [
           { productId: productId1, quantity:  10, deliveryOptionId: '1' },   // round sunglasses
           { productId: productId2, quantity:  8, deliveryOptionId: '2' },   // bathroom rug
@@ -284,7 +284,7 @@ describe('test suite: change delivery option', () => {
       it('change delivery option passing a product ID not in the cart', () => {
 
         // Calling the function under test - this will fail and do nothing
-        cart.changeCartDeliveryOption(productId4, '2');
+        cart.updateDeliveryOption(productId4, '2');
     
         // cart is unchanged
         expect(cart.cartItems.length).toEqual(3);
@@ -307,7 +307,7 @@ describe('test suite: change delivery option', () => {
       it('change delivery option passing an invalid deliveryOptionId', () => {
 
         // Calling the function under test - this will fail and do nothing
-        cart.changeCartDeliveryOption(productId2, '4');
+        cart.updateDeliveryOption(productId2, '4');
     
         // cart is unchanged
         expect(cart.cartItems.length).toEqual(3);

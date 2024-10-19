@@ -9,7 +9,7 @@ export let cart;
 loadFromStorage();
 
 export function loadFromStorage() {
-  cart = JSON.parse(localStorage.getItem('cart')); 
+  cart = JSON.parse(localStorage.getItem('cart-class')); 
 
   // Note: [] an empty array is a truthy value which makes !cart falsey so the below code does not run when testing
   if (!cart) {
@@ -52,7 +52,7 @@ export function updateCartQuantity(productId, newQuantity) {
     return newQuantity;
 }
 
-export function changeCartDeliveryOption(productId, newDeliveryOption) {
+export function updateDeliveryOption(productId, newDeliveryOption) {
   
   let deliveryOption = null;
   let doSave = false;
@@ -76,7 +76,7 @@ export function changeCartDeliveryOption(productId, newDeliveryOption) {
 showLocalStorage();
 
 function saveToStorage() {
-  localStorage.setItem('cart', JSON.stringify(cart));
+  localStorage.setItem('cart-class', JSON.stringify(cart));
 }
 
 function showLocalStorage() {

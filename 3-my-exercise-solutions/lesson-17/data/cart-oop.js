@@ -93,8 +93,8 @@ function Cart(localStorageKey) {
           this.saveToStorage();
         },
 
-    // Rename this to updateDeliveryOption
-    changeCartDeliveryOption(productId, newDeliveryOption) {
+    // Renamed this to updateDeliveryOption
+    updateDeliveryOption(productId, newDeliveryOption) {
       let deliveryOption = null;
       let doSave = false;
 

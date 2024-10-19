@@ -151,7 +151,7 @@ document.querySelectorAll('.js-delete-link')
       element.addEventListener('click', () => {
         const {productId, deliveryOptionId} = element.dataset;
         // This changes the cart and localStorage
-        cart.changeCartDeliveryOption(productId, deliveryOptionId);
+        cart.updateDeliveryOption(productId, deliveryOptionId);
         renderOrderSummary();
         renderPaymentSummary();
         renderCheckoutHeader();

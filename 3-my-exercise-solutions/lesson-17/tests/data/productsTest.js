@@ -88,7 +88,7 @@ describe('test suite: Product class ', () => {
     cart.addToCart(productId1); // adding qty 10
     expect(cart.cartItems.length).toEqual(1);
     expect(localStorage.setItem).toHaveBeenCalledTimes(1);
-    expect(localStorage.setItem).toHaveBeenCalledWith('cart', JSON.stringify(
+    expect(localStorage.setItem).toHaveBeenCalledWith('cart-class', JSON.stringify(
     [
       { productId: productId1,
         quantity: 20,
@@ -103,10 +103,10 @@ describe('test suite: Product class ', () => {
 
   it('Add new Product item to the cart', () => {
 
-    Cart.addToCart(productId2); // adding qty 5
+    cart.addToCart(productId2); // adding qty 5
     expect(cart.cartItems.length).toEqual(2);
     expect(localStorage.setItem).toHaveBeenCalledTimes(1);
-    expect(localStorage.setItem).toHaveBeenCalledWith('cart', JSON.stringify(
+    expect(localStorage.setItem).toHaveBeenCalledWith('cart-class', JSON.stringify(
     [
       { productId: productId1,
         quantity: 10,
@@ -221,7 +221,7 @@ describe('test suite: Appliance class ', () => {
     cart.addToCart(productId1); // adding qty 10
     expect(cart.cartItems.length).toEqual(1);
     expect(localStorage.setItem).toHaveBeenCalledTimes(1);
-    expect(localStorage.setItem).toHaveBeenCalledWith('cart', JSON.stringify(
+    expect(localStorage.setItem).toHaveBeenCalledWith('cart-class', JSON.stringify(
     [
       { productId: productId1,
         quantity: 20,
@@ -239,7 +239,7 @@ describe('test suite: Appliance class ', () => {
     cart.addToCart(productId2); // adding qty 5
     expect(cart.cartItems.length).toEqual(2);
     expect(localStorage.setItem).toHaveBeenCalledTimes(1);
-    expect(localStorage.setItem).toHaveBeenCalledWith('cart', JSON.stringify(
+    expect(localStorage.setItem).toHaveBeenCalledWith('cart-class', JSON.stringify(
     [
       { productId: productId1,
         quantity: 10,
@@ -350,7 +350,7 @@ describe('test suite: Clothing class ', () => {
     cart.addToCart(productId1); // adding qty 10
     expect(cart.cartItems.length).toEqual(1);
     expect(localStorage.setItem).toHaveBeenCalledTimes(1);
-    expect(localStorage.setItem).toHaveBeenCalledWith('cart', JSON.stringify(
+    expect(localStorage.setItem).toHaveBeenCalledWith('cart-class', JSON.stringify(
     [
       { productId: productId1,
         quantity: 20,
@@ -368,7 +368,7 @@ describe('test suite: Clothing class ', () => {
     cart.addToCart(productId2); // adding qty 5
     expect(cart.cartItems.length).toEqual(2);
     expect(localStorage.setItem).toHaveBeenCalledTimes(1);
-    expect(localStorage.setItem).toHaveBeenCalledWith('cart', JSON.stringify(
+    expect(localStorage.setItem).toHaveBeenCalledWith('cart-class', JSON.stringify(
     [
       { productId: productId1,
         quantity: 10,

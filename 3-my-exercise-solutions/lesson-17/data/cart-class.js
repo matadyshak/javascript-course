@@ -96,8 +96,8 @@ addToCart(productId) {
       this.saveToStorage();
     }
 
-// Rename this to updateDeliveryOption
-changeCartDeliveryOption(productId, newDeliveryOption) {
+// Renamed this to updateDeliveryOption
+updateDeliveryOption(productId, newDeliveryOption) {
   let deliveryOption = null;
   let doSave = false;
 
@@ -164,7 +164,7 @@ initCartForTest(cartItems) {
 
 } //class cart
 
-export const cart = new Cart('cart-oop');
+export const cart = new Cart('cart-class');
 
 //showLocalStorage();
 

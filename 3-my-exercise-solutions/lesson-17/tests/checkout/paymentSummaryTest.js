@@ -113,7 +113,7 @@ describe('test suite: Integration test', () => {
     expect(cart.cartItems[2].quantity).toEqual(6);
     expect(cart.cartItems[2].deliveryOptionId).toEqual('1');
     expect(localStorage.setItem).toHaveBeenCalledTimes(4);
-    expect(localStorage.setItem).toHaveBeenCalledWith('cart', JSON.stringify(
+    expect(localStorage.setItem).toHaveBeenCalledWith('cart-class', JSON.stringify(
       [
         { productId: productId1,
           quantity: 10,
@@ -267,7 +267,7 @@ describe('test suite: Integration test', () => {
       expect(document.querySelector('.js-payment-summary-total'   ).innerText).toEqual('$6034.89');
 
       // Change productId2 to qty 100
-      updateCartQuantity(productId2, 100);
+      cart.updateCartQuantity(productId2, 100);
       renderOrderSummary();
       renderPaymentSummary();
       renderCheckoutHeader();
@@ -328,7 +328,7 @@ describe('test suite: Integration test', () => {
       let deleteLink = document.querySelector(`.js-delete-link-${productId1}`);
       deleteLink.click();
 
-      expect(cart.length).toEqual(2);
+      expect(cart.cartItems.length).toEqual(2);
       expect(cart.cartItems[0].productId).toEqual(productId2);
       expect(cart.cartItems[0].quantity).toEqual(100);
       expect(cart.cartItems[0].deliveryOptionId).toEqual('2');
