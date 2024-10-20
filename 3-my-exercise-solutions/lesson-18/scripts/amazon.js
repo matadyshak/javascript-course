@@ -33,7 +33,7 @@ function renderProductsGrid() {
       </div>
 
       <div class="product-quantity-container">
-        <select class="js-quantity-selector-${product.productId}">
+        <select class="js-quantity-selector-${product.id}">
           <option selected value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
@@ -51,13 +51,13 @@ function renderProductsGrid() {
 
       <div class="product-spacer"></div>
 
-      <div class="added-to-cart js-added-to-cart-${product.productId}">
+      <div class="added-to-cart js-added-to-cart-${product.id}">
         <img src="images/icons/checkmark.png">
         Added
       </div>
 
       <button class="add-to-cart-button button-primary js-add-to-cart"
-      data-product-id="${product.productId}">
+      data-product-id="${product.id}">
         Add to Cart
       </button>
     </div>

@@ -28,7 +28,7 @@ cart.cartItems.forEach((cartItem) => {
   `
   <div class="cart-item-container 
     js-cart-item-container
-    js-cart-item-container-${matchingProduct.productId}">
+    js-cart-item-container-${matchingProduct.id}">
   <div class="delivery-date">
     Delivery date: ${dateString}
   </div>
@@ -38,29 +38,29 @@ cart.cartItems.forEach((cartItem) => {
       src="${matchingProduct.image}"
 
          <div class="cart-item-details">
-      <div class="product-name js-product-name-${matchingProduct.productId}">
+      <div class="product-name js-product-name-${matchingProduct.id}">
         ${matchingProduct.name}
       </div>
-      <div class="product-price js-product-price-${matchingProduct.productId}">
+      <div class="product-price js-product-price-${matchingProduct.id}">
        ${matchingProduct.getPrice()} 
       </div>
-      <div class="product-quantity js-product-quantity-${matchingProduct.productId}">
+      <div class="product-quantity js-product-quantity-${matchingProduct.id}">
         <span>
           Quantity: <span class="quantity-label js-cart-item-quantity">${cartItem.quantity}</span>
         </span>
-        <span class="update-quantity-link link-primary js-update-link js-update-link-${matchingProduct.productId}"
-          data-product-id-update="${matchingProduct.productId}">
+        <span class="update-quantity-link link-primary js-update-link js-update-link-${matchingProduct.id}"
+          data-product-id-update="${matchingProduct.id}">
           Update
         </span>  
         <span class="delete-quantity-link link-primary js-delete-link
-          js-delete-link-${matchingProduct.productId}"
-          data-product-id-delete="${matchingProduct.productId}">
+          js-delete-link-${matchingProduct.id}"
+          data-product-id-delete="${matchingProduct.id}">
           Delete
         </span>  
-          <input type="text" class="quantity-input js-quantity-input js-quantity-input-${matchingProduct.productId}"
-            data-product-id-input="${matchingProduct.productId}">
-          <span class="save-quantity-link link-primary js-save-link js-save-link-${matchingProduct.productId}"
-            data-product-id-save="${matchingProduct.productId}">
+          <input type="text" class="quantity-input js-quantity-input js-quantity-input-${matchingProduct.id}"
+            data-product-id-input="${matchingProduct.id}">
+          <span class="save-quantity-link link-primary js-save-link js-save-link-${matchingProduct.id}"
+            data-product-id-save="${matchingProduct.id}">
             Save
         </span>
       </div>
@@ -174,15 +174,15 @@ function deliveryOptionsHTML(matchingProduct, cartItem) {
   const isChecked = (deliveryOption.id === cartItem.deliveryOptionId);
 
   html += `
-  <div class="delivery-option js-delivery-option js-delivery-option-${matchingProduct.productId}-${deliveryOption.id}"
-    data-product-id="${matchingProduct.productId}"
+  <div class="delivery-option js-delivery-option js-delivery-option-${matchingProduct.id}-${deliveryOption.id}"
+    data-product-id="${matchingProduct.id}"
     data-delivery-option-id="${deliveryOption.id}">
     <input type="radio"
       ${isChecked ? 'checked' : ''}
-      class="delivery-option-input js-delivery-option-input-${matchingProduct.productId}-${deliveryOption.id}"
-      name="delivery-option-${matchingProduct.productId}">
+      class="delivery-option-input js-delivery-option-input-${matchingProduct.id}-${deliveryOption.id}"
+      name="delivery-option-${matchingProduct.id}">
     <div>
-      <div class="delivery-option-date js-delivery-option-date-${matchingProduct.productId}-${deliveryOption.id}">
+      <div class="delivery-option-date js-delivery-option-date-${matchingProduct.id}-${deliveryOption.id}">
       ${dateString}
       </div>
       <div class="delivery-option-price js-delivery-option-price-${deliveryOption.id}">

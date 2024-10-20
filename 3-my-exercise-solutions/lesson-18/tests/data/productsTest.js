@@ -61,7 +61,7 @@ describe('test suite: Product class ', () => {
 
   it('Create a Product instance and test properties and methods', () => {
     const myProduct = new Product({
-      productId: "a93a101d-79ef-4cf3-a6cf-6dbe532a1b4a",
+      id: "a93a101d-79ef-4cf3-a6cf-6dbe532a1b4a",
       image: "images/products/bathroom-rug.jpg",
       name: "Bathroom Bath Rug Mat 20 x 31 Inch - Grey",
       rating: {
@@ -72,7 +72,7 @@ describe('test suite: Product class ', () => {
     });
 
     expect(myProduct instanceof Product).toEqual(true);
-    expect(myProduct.productId).toEqual('a93a101d-79ef-4cf3-a6cf-6dbe532a1b4a');
+    expect(myProduct.id).toEqual('a93a101d-79ef-4cf3-a6cf-6dbe532a1b4a');
     expect(myProduct.image).toEqual('images/products/bathroom-rug.jpg');
     expect(myProduct.name).toEqual('Bathroom Bath Rug Mat 20 x 31 Inch - Grey');
     expect(myProduct.priceCents).toEqual(1250);
@@ -186,7 +186,7 @@ describe('test suite: Appliance class ', () => {
 
   it('Creates an Appliance instance and test properties and methods', () => {
     const myProduct = new Appliance({
-      productId: "0d7f9afa-2efe-4fd9-b0fd-ba5663e0a524",
+      id: "0d7f9afa-2efe-4fd9-b0fd-ba5663e0a524",
       image: "images/products/coffeemaker-with-glass-carafe-black.jpg",
       name: "Coffeemaker with Glass Carafe and Reusable Filter - 25 Oz, Black",
       rating: {
@@ -200,7 +200,7 @@ describe('test suite: Appliance class ', () => {
     });
 
     expect(myProduct instanceof Appliance).toEqual(true);
-    expect(myProduct.productId).toEqual('0d7f9afa-2efe-4fd9-b0fd-ba5663e0a524');
+    expect(myProduct.id).toEqual('0d7f9afa-2efe-4fd9-b0fd-ba5663e0a524');
     expect(myProduct.image).toEqual('images/products/coffeemaker-with-glass-carafe-black.jpg');
     expect(myProduct.name).toEqual('Coffeemaker with Glass Carafe and Reusable Filter - 25 Oz, Black');
     expect(myProduct.priceCents).toEqual(2250);
@@ -318,7 +318,7 @@ describe('test suite: Clothing class ', () => {
 
   it('Creates a Clothing instance and test properties and methods', () => {
     const myProduct = new Clothing({
-      productId: "8b5a2ee1-6055-422a-a666-b34ba28b76d4",
+      id: "8b5a2ee1-6055-422a-a666-b34ba28b76d4",
       image: "images/products/men-golf-polo-t-shirt-blue.jpg",
       name: "Men's Regular-Fit Quick-Dry Golf Polo Shirt",
       rating: {
@@ -331,7 +331,7 @@ describe('test suite: Clothing class ', () => {
     });
 
     expect(myProduct instanceof Clothing).toEqual(true);
-    expect(myProduct.productId).toEqual('8b5a2ee1-6055-422a-a666-b34ba28b76d4');
+    expect(myProduct.id).toEqual('8b5a2ee1-6055-422a-a666-b34ba28b76d4');
     expect(myProduct.image).toEqual('images/products/men-golf-polo-t-shirt-blue.jpg');
     expect(myProduct.name).toEqual("Men's Regular-Fit Quick-Dry Golf Polo Shirt");
     expect(myProduct.priceCents).toEqual(1599);

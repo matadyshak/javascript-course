@@ -72,6 +72,7 @@ export function renderPaymentSummary() {
   }
 }
 
+/*
 //Must go to cart page for this to run
 function GetDateFromNow(howmany, units, format = 'MMMM D') {
   const today = dayjs();
@@ -149,6 +150,8 @@ function testIsSatSun() {
 }
 
 testIsSatSun();
+*/
+
 
 // Ensure renderPaymentSummary() is called on page load
 document.addEventListener('DOMContentLoaded', () => {
