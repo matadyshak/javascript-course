@@ -119,7 +119,7 @@ describe('test suite: addToCart', () => {
 describe('test suite: removeFromCart', () => {
   const productId1 = '0d7f9afa-2efe-4fd9-b0fd-ba5663e0a524';
   const productId2 = '77a845b1-16ed-4eac-bdf9-5b591882113d';
-  const productId3 = 'id2';
+  const productId3 = '8a53b080-6d40-4a65-ab26-b24ecf700bce'; // Cotton bath towels
 
   beforeEach( () => {
     spyOn(localStorage, 'setItem');

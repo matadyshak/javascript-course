@@ -18,6 +18,8 @@ cart.cartItems.forEach((cartItem) => {
 
   if (!matchingProduct) {
     console.log(`matchingProduct is: ${matchingProduct}`);
+  } else {
+    let x = 0;
   }
 
   const deliveryOptionId = cartItem.deliveryOptionId;
@@ -81,7 +83,7 @@ const element = document.querySelector('.js-order-summary');
 if (element) {
   element.innerHTML = cartSummaryHTML;
 } else {
-  console.log(`Error: document.querySelector('.js-order-summary') is: ${element}`);
+  console.log(`Error: Element js-order-summary is: ${element}`);
 }
 
 document.querySelectorAll('.js-delete-link')

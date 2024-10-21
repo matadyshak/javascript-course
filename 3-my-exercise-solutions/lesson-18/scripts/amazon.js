@@ -68,7 +68,11 @@ function renderProductsGrid() {
   //Display all products in the web page
   //This will return null if we are not on the main page
   const element = document.querySelector('.js-products-grid');
-  element.innerHTML = productsHTML;
+  if (!element) {
+    console.log(`Element .js-products-grid is: ${element}`);
+  } else {
+    element.innerHTML = productsHTML;
+  }
 
   displayCartQuantity();
 
