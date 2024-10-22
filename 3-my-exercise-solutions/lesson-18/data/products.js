@@ -1,14 +1,55 @@
 import formatCurrency from '../scripts/utils/money.js';
 
+if (!window.products) {
+  window.products = [];
+}
+
+export function loadProducts() {
+  return new Promise((resolve, reject) => {
+    if (window.products.length > 0) {
+      resolve();
+      return;
+    }
+
+    const xhr = new XMLHttpRequest();
+    xhr.addEventListener('load', () => {
+      try {
+        console.log(`xhr.response: ${xhr.response}`);
+        console.log(`JSON.parse(xhr.response): ${JSON.parse(xhr.response)}`);
+    
+        window.products = JSON.parse(xhr.response).map((productDetails) => {
+          if (productDetails.type === 'clothing') {
+            return new Clothing(productDetails);
+          } else if (productDetails.type === 'appliance') {
+            return new Appliance(productDetails);
+          }
+          return new Product(productDetails);
+        }); //.map
+
+        console.log('Products loaded');
+        resolve(); // Resolve the promise when the products are loaded
+      } catch (error) {
+        reject(error); // Reject the promise if there is an error
+      }
+    }); //addEventListener()
+
+    xhr.open('GET', 'https://supersimplebackend.dev/products');
+    xhr.send();
+  }); // return new Promise
+}
+
 export function getProduct(productId) {
   let matchingProduct;
 
-  products.forEach((product) => {
+  window.products.forEach((product) => {
     if (product.id === productId) {
       matchingProduct = product;
     }
   });
-
+  
+  if(!matchingProduct) {
+    console.log(`Could not find product with id: ${productId}.  matchingProduct is: ${matchingProduct}  Length of products array: ${products.length}`);
+  }
   return matchingProduct;
 }
 
@@ -125,34 +166,6 @@ const object4 = {
 };
 object4.method();
 */
-
-export let products = [];
-export let productsLoaded = false;
-
-export function loadProducts(fun) {
-  const xhr = new XMLHttpRequest();
-
-  xhr.addEventListener('load', () => {
-
-    console.log(`xhr.response: ${xhr.response}`);
-    console.log(`JSON.parse(xhr.response): ${JSON.parse(xhr.response)}`);
-
-    products = JSON.parse(xhr.response).map((productDetails) => {
-      if (productDetails.type === 'clothing') {
-        return new Clothing(productDetails);
-      } else if (productDetails.type === 'appliance') {
-        return new Appliance(productDetails);
-      }
-      return new Product(productDetails);
-    }); //.map
-    console.log('load products');
-    fun();
-    productsLoaded = true;
-  }); // addEventListener
-
-  xhr.open('GET', 'https://supersimplebackend.dev/products');
-  xhr.send();
-}
 
 /*
 export const products = [

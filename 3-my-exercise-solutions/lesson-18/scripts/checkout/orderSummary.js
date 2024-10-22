@@ -18,8 +18,6 @@ cart.cartItems.forEach((cartItem) => {
 
   if (!matchingProduct) {
     console.log(`matchingProduct is: ${matchingProduct}`);
-  } else {
-    let x = 0;
   }
 
   const deliveryOptionId = cartItem.deliveryOptionId;

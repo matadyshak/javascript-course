@@ -1,14 +1,23 @@
 import {cart} from '../data/cart-class.js';
-import {products, loadProducts} from '../data/products.js';
+import {loadProducts} from '../data/products.js';
 import {formatCurrency} from './utils/money.js'
 
-loadProducts(renderProductsGrid);
+// Top level code - runs after module loads
+//document.addEventListener('DOMContentLoaded', () => {
+
+  loadProducts().then(() => {
+    renderProductsGrid();
+  }) // loadProducts().then
+  .catch((error) => {
+    console.error(`Error: Failed to load products:  ${error}`);
+  }); // .catch
+
+//}); // addEventListener()
 
 function renderProductsGrid() {
-
   let productsHTML = '';
 
-  products.forEach((product) => {
+  window.products.forEach((product) => {
     productsHTML += `
       <div class="product-container">
       <div class="product-image-container">
