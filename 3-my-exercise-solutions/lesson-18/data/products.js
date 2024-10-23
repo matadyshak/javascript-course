@@ -1,12 +1,18 @@
 import formatCurrency from '../scripts/utils/money.js';
+import {loadProductsData} from '../amazon.js';
 
-if (!window.products) {
-  window.products = [];
+export const products = [];
+
+if (products.length > 0) {
+  console.log(`Skipping load of products data: products.length is: ${products.length}`); 
+} else {
+  console.log('Calling loadProductsData()');
+  loadProductsData();
 }
 
 export function loadProducts() {
   return new Promise((resolve, reject) => {
-    if (window.products.length > 0) {
+    if (products.length > 0) {
       resolve();
       return;
     }
@@ -17,7 +23,7 @@ export function loadProducts() {
         console.log(`xhr.response: ${xhr.response}`);
         console.log(`JSON.parse(xhr.response): ${JSON.parse(xhr.response)}`);
     
-        window.products = JSON.parse(xhr.response).map((productDetails) => {
+        products = JSON.parse(xhr.response).map((productDetails) => {
           if (productDetails.type === 'clothing') {
             return new Clothing(productDetails);
           } else if (productDetails.type === 'appliance') {
@@ -41,7 +47,7 @@ export function loadProducts() {
 export function getProduct(productId) {
   let matchingProduct;
 
-  window.products.forEach((product) => {
+  products.forEach((product) => {
     if (product.id === productId) {
       matchingProduct = product;
     }
