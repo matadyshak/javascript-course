@@ -3,12 +3,14 @@ import {loadProductsData} from '../amazon.js';
 
 export const products = [];
 
+/*
 if (products.length > 0) {
   console.log(`Skipping load of products data: products.length is: ${products.length}`); 
 } else {
   console.log('Calling loadProductsData()');
   loadProductsData();
 }
+  */
 
 export function loadProducts() {
   return new Promise((resolve, reject) => {

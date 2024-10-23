@@ -2,16 +2,16 @@ import {cart} from '../data/cart-class.js';
 import {loadProducts} from '../data/products.js';
 
 // Top level code - runs after module loads
-loadProductsData();
+//loadProductsData();
 
-export function loadProductsData() {
+//export function loadProductsData() {
   loadProducts().then(() => {
     renderProductsGrid();
   })
   .catch((error) => {
     console.error(`Error: Failed to load products:  ${error}`);
   });
-}
+//loading products data}
 
 function renderProductsGrid() {
   let productsHTML = '';
