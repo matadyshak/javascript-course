@@ -9,7 +9,7 @@ export function loadProductsData() {
     renderProductsGrid();
   })
   .catch((error) => {
-    console.error(`Error: Failed to load products:  ${error}`);
+    console.log(`Error: Failed to load products:`);
   });
 }
 

@@ -1,7 +1,7 @@
 import formatCurrency from '../scripts/utils/money.js';
 import {loadProductsData} from '../scripts/amazon.js';
 
-export const products = [];
+export let products = [];
 
 if (products.length > 0) {
   console.log(`Skipping load of products data: products.length is: ${products.length}`); 
@@ -36,7 +36,7 @@ export function loadProducts() {
         console.log('Products loaded');
         resolve(); // Resolve the promise when the products are loaded
       } catch (error) {
-        reject(error); // Reject the promise if there is an error
+          reject(error); // Reject the promise if there is an error
       }
     }); //addEventListener()
 
