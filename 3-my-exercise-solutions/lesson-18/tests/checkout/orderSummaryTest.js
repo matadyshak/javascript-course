@@ -113,8 +113,14 @@ describe('test suite: delivery options', () => {
       <div class="checkout-header js-cart-quantity-order"></div>
       <div class="order-summary js-order-summary"></div>
       <div class="payment-summary js-payment-summary"></div>
-      `;
+      <div class="main">
+        <div class="products-grid js-products-grid">
+        </div>
+      </div>
+    `;
 
+    loadProductsData();
+    
       let cartItems = [
         { productId: productId1, quantity:  10, deliveryOptionId: '1' }   //coffeemaker
       ];
