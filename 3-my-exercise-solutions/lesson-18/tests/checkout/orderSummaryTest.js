@@ -3,6 +3,7 @@ import {getDeliveryOption} from '../../data/deliveryOptions.js';
 import {cart} from '../../data/cart-class.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 import isWeekend from '../../scripts/utils/datetime.js';
+import {loadProductsData} from '../../scripts/amazon.js';
 
 describe('test suite: renderOrderSummary', () => {
   const productId1 = 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6';
@@ -29,8 +30,13 @@ describe('test suite: renderOrderSummary', () => {
     </div>
     <div class="added-to-cart js-added-to-cart-${productId2}">
     </div>
+    <div class="main">
+      <div class="products-grid js-products-grid">
+      </div>
+    </div>
     `;
 
+    loadProductsData();
     const cartItems = [
       { productId: productId1, quantity: 300, deliveryOptionId: '1'},
       { productId: productId2, quantity: 50, deliveryOptionId: '2'}
@@ -40,6 +46,7 @@ describe('test suite: renderOrderSummary', () => {
     spyOn(localStorage, 'getItem').and.callFake(() => {
       return JSON.stringify([]);
     }); // spyOn()
+    
     renderOrderSummary();
   }); // beforeEach
 
