@@ -69,7 +69,13 @@ describe('test suite: Integration test', () => {
     </div>
     <div class="added-to-cart js-added-to-cart-${productId3}">
     </div>
+    <div class="main">
+      <div class="products-grid js-products-grid">
+      </div>
+    </div>
     `;
+
+    loadProductsData();
 
     let cartItems = [];
     cart.initCartForTest(cartItems);  
