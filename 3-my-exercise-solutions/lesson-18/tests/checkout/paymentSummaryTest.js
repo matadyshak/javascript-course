@@ -4,6 +4,7 @@ import {renderCheckoutHeader} from '../../scripts/checkout/checkoutHeader.js';
 import {cart} from '../../data/cart-class.js';
 import {calculateDeliveryDateTest} from './orderSummaryTest.js';
 import {getDeliveryOption} from '../../data/deliveryOptions.js';
+import {loadProductsData} from '../../scripts/amazon.js';
 
 describe('test suite: Integration test', () => {
 
