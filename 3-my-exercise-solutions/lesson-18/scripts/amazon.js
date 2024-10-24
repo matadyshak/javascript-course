@@ -2,7 +2,7 @@ import {cart} from '../data/cart-class.js';
 import {products, loadProducts} from '../data/products.js';
 
 // Top level code - runs after module loads
-loadProductsData();
+loadProducts(renderProductsGrid);
 
 export function loadProductsData() {
   loadProducts().then(() => {
