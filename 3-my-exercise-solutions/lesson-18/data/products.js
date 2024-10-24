@@ -1,14 +1,16 @@
 import formatCurrency from '../scripts/utils/money.js';
-import {loadProductsData} from '../scripts/amazon.js';
+//import {loadProductsData} from '../scripts/amazon.js';
 
 export let products = [];
 
+/*
 if (products.length > 0) {
   console.log(`Skipping load of products data: products.length is: ${products.length}`); 
 } else {
   console.log('Calling loadProductsData()');
   loadProductsData();
 }
+*/
 
 export function loadProducts(fun) {
   const xhr = new XMLHttpRequest();
