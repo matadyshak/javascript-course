@@ -26,12 +26,12 @@ export function loadProducts(fun) {
           return new Product(productDetails);
         }); //.map
         console.log('Products loaded');
+        fun();
     }); //addEventListener()
 
     xhr.open('GET', 'https://supersimplebackend.dev/products');
     xhr.send();
-    fun();
-}
+  }
 
 
 /*

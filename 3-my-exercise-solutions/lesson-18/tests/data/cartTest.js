@@ -2,6 +2,7 @@ import {cart} from '../../data/cart-class.js';
 import {renderOrderSummary} from '../../scripts/checkout/orderSummary.js';
 import {renderPaymentSummary} from '../../scripts/checkout/paymentSummary.js';
 import {renderCheckoutHeader} from '../../scripts/checkout/checkoutHeader.js';
+import {loadProducts} from '../../data/products.js';
 
 describe('test suite: addToCart', () => {
 
@@ -208,8 +209,10 @@ describe('test suite: change delivery option', () => {
       cart.initCartForTest(cartItems);
       // This must be run to generate the HTML into tests.html
       // and to add all the event listeners
-      renderOrderSummary();
-      renderPaymentSummary();
+      loadProducts(() => {
+        renderOrderSummary();
+        renderPaymentSummary();
+      });
     }); // beforeEach
 
     afterEach( () => {

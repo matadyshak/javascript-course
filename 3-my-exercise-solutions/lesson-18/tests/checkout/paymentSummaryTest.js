@@ -1,10 +1,10 @@
 import {renderOrderSummary} from '../../scripts/checkout/orderSummary.js';
 import {renderPaymentSummary} from '../../scripts/checkout/paymentSummary.js';
 import {renderCheckoutHeader} from '../../scripts/checkout/checkoutHeader.js';
-import {cart} from '../../data/cart-class.js';
 import {calculateDeliveryDateTest} from './orderSummaryTest.js';
 import {getDeliveryOption} from '../../data/deliveryOptions.js';
-import {loadProductsData} from '../../scripts/amazon.js';
+import {loadProducts} from '../../data/products.js';
+import {cart} from '../../data/cart-class.js';
 
 describe('test suite: Integration test', () => {
 
@@ -76,18 +76,17 @@ describe('test suite: Integration test', () => {
     </div>
     `;
 
-    loadProductsData();
-
-    let cartItems = [];
-    cart.initCartForTest(cartItems);  
-
-    //This will generate no HTML and will set the innerHTML to empty string
-    renderOrderSummary();
-    // This will display all zeros in a payment summary
-    renderPaymentSummary();
-    // This will display zero items
-    renderCheckoutHeader();
-
+  let cartItems = [];
+  cart.initCartForTest(cartItems);  
+  
+    loadProducts(() => {
+      //This will generate no HTML and will set the innerHTML to empty string
+      renderOrderSummary();
+      // This will display all zeros in a payment summary
+      renderPaymentSummary();
+      // This will display zero items
+      renderCheckoutHeader();
+    });
   }); // beforeEach
 
   afterEach( () => {

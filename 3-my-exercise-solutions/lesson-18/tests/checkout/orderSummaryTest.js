@@ -3,7 +3,7 @@ import {getDeliveryOption} from '../../data/deliveryOptions.js';
 import {cart} from '../../data/cart-class.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 import isWeekend from '../../scripts/utils/datetime.js';
-import {loadProductsData} from '../../scripts/amazon.js';
+import {loadProducts} from '../../data/products.js';
 
 describe('test suite: renderOrderSummary', () => {
   const productId1 = 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6';
@@ -36,7 +36,6 @@ describe('test suite: renderOrderSummary', () => {
     </div>
     `;
 
-    loadProductsData();
     const cartItems = [
       { productId: productId1, quantity: 300, deliveryOptionId: '1'},
       { productId: productId2, quantity: 50, deliveryOptionId: '2'}
@@ -47,7 +46,7 @@ describe('test suite: renderOrderSummary', () => {
       return JSON.stringify([]);
     }); // spyOn()
     
-    renderOrderSummary();
+    loadProducts(renderOrderSummary);
   }); // beforeEach
 
   afterEach( () => {
@@ -119,15 +118,13 @@ describe('test suite: delivery options', () => {
       </div>
     `;
 
-    loadProductsData();
-    
-      let cartItems = [
+    let cartItems = [
         { productId: productId1, quantity:  10, deliveryOptionId: '1' }   //coffeemaker
       ];
       cart.initCartForTest(cartItems);
       // This must be run to generate the HTML into tests.html
       // and to add all the event listeners
-      renderOrderSummary();
+      loadProducts(renderOrderSummary);
     }); // beforeEach
 
     afterEach( () => {

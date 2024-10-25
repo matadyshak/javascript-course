@@ -4,6 +4,7 @@ import {products, loadProducts} from '../data/products.js';
 // Top level code - runs after module loads
 loadProducts(renderProductsGrid);
 
+/*
 export function loadProductsData() {
   loadProducts().then(() => {
     renderProductsGrid();
@@ -12,6 +13,7 @@ export function loadProductsData() {
     console.log(`Error: Failed to load products:`);
   });
 }
+*/
 
 function renderProductsGrid() {
   let productsHTML = '';

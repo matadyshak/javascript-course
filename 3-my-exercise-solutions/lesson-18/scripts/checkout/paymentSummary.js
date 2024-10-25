@@ -68,7 +68,7 @@ export function renderPaymentSummary() {
   if (element) {
     element.innerHTML = paymentSummaryHTML;
   } else {
-    console.log(`Error: document.querySelector('.js-payment-summary') is: ${element}`);
+    console.log(`Error: .js-payment-summary is: ${element}`);
   }
 }
 
@@ -154,8 +154,8 @@ testIsSatSun();
 
 
 // Ensure renderPaymentSummary() is called on page load
-document.addEventListener('DOMContentLoaded', () => {
-  renderPaymentSummary();
-});
+//document.addEventListener('DOMContentLoaded', () => {
+//  renderPaymentSummary();
+//});
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
