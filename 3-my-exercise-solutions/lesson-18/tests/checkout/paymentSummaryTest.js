@@ -12,6 +12,12 @@ describe('test suite: Integration test', () => {
   const productId2 = '5968897c-4d27-4872-89f6-5bcb052746d7'; // Women's Chiffon Beachware Cover Up (Clothing)
   const productId3 = '77a845b1-16ed-4eac-bdf9-5b591882113d'; // Countertop Blender (Appliance)
 
+  beforeAll((done) => {
+    loadProducts(() => {
+      done();
+    });
+  })
+
   beforeEach( () => {
     spyOn(localStorage, 'setItem');
     spyOn(localStorage, 'getItem').and.callFake(() => {
@@ -79,14 +85,12 @@ describe('test suite: Integration test', () => {
   let cartItems = [];
   cart.initCartForTest(cartItems);  
   
-    loadProducts(() => {
       //This will generate no HTML and will set the innerHTML to empty string
       renderOrderSummary();
       // This will display all zeros in a payment summary
       renderPaymentSummary();
       // This will display zero items
       renderCheckoutHeader();
-    });
   }); // beforeEach
 
   afterEach( () => {

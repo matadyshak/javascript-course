@@ -189,6 +189,12 @@ describe('test suite: change delivery option', () => {
   const productId3 = '8a53b080-6d40-4a65-ab26-b24ecf700bce'; // Cotton bath towels
   const productId4 = 'd37a651a-d501-483b-aae6-a9659b0757a0'; // Food storage containers (not in cart)
 
+  beforeAll((done) => {
+    loadProducts(() => {
+      done();
+    });
+  })
+  
   beforeEach( () => {
     spyOn(localStorage, 'setItem');
     spyOn(localStorage, 'getItem').and.callFake(() => {
@@ -209,10 +215,8 @@ describe('test suite: change delivery option', () => {
       cart.initCartForTest(cartItems);
       // This must be run to generate the HTML into tests.html
       // and to add all the event listeners
-      loadProducts(() => {
-        renderOrderSummary();
-        renderPaymentSummary();
-      });
+      renderOrderSummary();
+      renderPaymentSummary();
     }); // beforeEach
 
     afterEach( () => {
