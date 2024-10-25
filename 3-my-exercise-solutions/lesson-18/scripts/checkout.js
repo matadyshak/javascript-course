@@ -6,6 +6,7 @@ import '../data/cart-class.js';
 //import '../data/backend-practice.js';
 //import '../data/car.js';
 
+
 new Promise((resolve) => {
   console.log('start promise');
   loadProducts(() => {
@@ -15,6 +16,7 @@ new Promise((resolve) => {
 }).then(() => {
   console.log('next step');
 })
+
 
 /*
 loadProducts(() => {
