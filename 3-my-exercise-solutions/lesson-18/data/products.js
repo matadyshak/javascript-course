@@ -15,8 +15,8 @@ if (products.length > 0) {
 export function loadProducts(fun) {
   const xhr = new XMLHttpRequest();
   xhr.addEventListener('load', () => {
-        console.log(`xhr.response: ${xhr.response}`);
-        console.log(`JSON.parse(xhr.response): ${JSON.parse(xhr.response)}`);
+        //console.log(`xhr.response: ${xhr.response}`);
+        //console.log(`JSON.parse(xhr.response): ${JSON.parse(xhr.response)}`);
         products = JSON.parse(xhr.response).map((productDetails) => {
           if (productDetails.type === 'clothing') {
             return new Clothing(productDetails);
