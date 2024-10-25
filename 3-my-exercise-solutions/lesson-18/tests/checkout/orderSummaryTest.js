@@ -3,17 +3,17 @@ import {getDeliveryOption} from '../../data/deliveryOptions.js';
 import {cart} from '../../data/cart-class.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 import isWeekend from '../../scripts/utils/datetime.js';
-import {loadProducts} from '../../data/products.js';
+import {loadProducts, loadProductsFetch} from '../../data/products.js';
 
 describe('test suite: renderOrderSummary', () => {
   const productId1 = 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6';
   const productId2 = '15b6fc6f-327a-4ec4-896f-486349e85a3d';
 
   beforeAll((done) => {
-    loadProducts(() => {
+    loadProductsFetch().then(() => {
       done();
     });
-  })
+  });
   
   beforeEach( () => {
   spyOn(localStorage, 'setItem');
@@ -112,10 +112,10 @@ describe('test suite: delivery options', () => {
   const productId3 = '8a53b080-6d40-4a65-ab26-b24ecf700bce'; // Cotton bath towels
 
   beforeAll((done) => {
-    loadProducts(() => {
+    loadProductsFetch().then(() => {
       done();
     });
-  })
+  });
 
   beforeEach( () => {
     spyOn(localStorage, 'setItem');
