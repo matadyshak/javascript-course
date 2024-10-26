@@ -171,7 +171,7 @@ initCartForTest(cartItems) {
   return this.cartItems;
 }
 
-function loadCart(fun) {
+loadCart(fun) {
   const xhr = new XMLHttpRequest();
   xhr.addEventListener('load', () => {
         console.log('xhr.response');
