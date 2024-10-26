@@ -190,10 +190,10 @@ describe('test suite: change delivery option', () => {
   const productId4 = 'd37a651a-d501-483b-aae6-a9659b0757a0'; // Food storage containers (not in cart)
 
   beforeAll((done) => {
-    loadProducts(() => {
+    loadProductsFetch().then(() => {
       done();
     });
-  })
+  });
   
   beforeEach( () => {
     spyOn(localStorage, 'setItem');
