@@ -8,12 +8,22 @@ import '../data/cart-class.js';
 //import '../data/car.js';
 
 async function loadPage() {
-  await loadProductsFetch();
-  const value = await new Promise((resolve) => {
+  try {
+    // throw 'error1';
+    await loadProductsFetch();
+    // Cannot throw an error in the future
+    // reject lets you throw an error in the future
+    const value = await new Promise((resolve, reject) => {
+      // throw 'error2';
     cart.loadCart(() => {
+      // reject('error3')
       resolve('value3');
       });
-    });
+    });   
+  } catch (error) {
+    console.log('Unexpected error. Please try again later.');
+  }
+ 
 
     renderOrderSummary();
     renderPaymentSummary();
