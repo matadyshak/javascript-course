@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Lesson 18</title>
+  </head>
+  <body>
+    <script>
+      function requestGreeting() {
+        const xhr = new XMLHttpRequest();
+
+        xhr.addEventListener('load', () => {
+        console.log(xhr.response);
+        }); //addEventListener()
+
+        xhr.addEventListener('error', (error) => {
+          console.log('Unexpected error.  Please try again later.');
+        });
+  
+    xhr.open('GET', 'https://supersimplebackend.dev/greeting');
+    xhr.send();
+  }
+  requestGreeting();
+    </script>
+  </body>
+</html>
