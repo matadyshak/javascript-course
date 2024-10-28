@@ -1,5 +1,4 @@
 import formatCurrency from '../scripts/utils/money.js';
-//import {loadProductsData} from '../scripts/amazon.js';
 
 export let products = [];
 
@@ -13,12 +12,13 @@ if (products.length > 0) {
 */
 
 export function loadProductsFetch() {
-  const promise = fetch(
-    'https://supersimplebackend.dev/products'
-    ).then((response) => {
+  const promise = fetch('https://supersimplebackend.dev/products')
+    
+    .then((response) => {
     return response.json();
-
-  }).then((productsData) => {
+    })
+  
+    .then((productsData) => {
     products = productsData.map((productDetails) => {
       if (productDetails.type === 'clothing') {
         return new Clothing(productDetails);
@@ -26,12 +26,14 @@ export function loadProductsFetch() {
         return new Appliance(productDetails);
       }
       return new Product(productDetails);
-    }); //.map
+      }); //.map
 
     console.log('load products');
-  }).catch((error) => {
+    })
+  
+    .catch((error) => {
     console.log('Unexpected error.  Please try again later.');
-  });
+    });
   return promise;
 }
 

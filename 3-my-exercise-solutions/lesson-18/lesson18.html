@@ -5,7 +5,9 @@
   </head>
   <body>
     <script>
-//      function requestGreeting() {
+
+      //Works in the debugger      
+      function requestGreeting() {
         const xhr = new XMLHttpRequest();
 
         xhr.addEventListener('load', () => {
@@ -13,13 +15,36 @@
         }); //addEventListener()
 
         xhr.addEventListener('error', (error) => {
-          console.log('Unexpected error.  Please try again later.');
+          console.log(`Unexpected error.  Please try again later. Error code: ${error}`);
         });
   
-    xhr.open('GET', 'https://supersimplebackend.dev/greeting');
-    xhr.send();
-//  }
-//  requestGreeting();
+        xhr.open('GET', 'https://supersimplebackend.dev/greeting');
+        xhr.send();
+      }
+
+      //Gets error in the debugger at return response.text();
+      //That is because response.text was also in the watch window
+      function requestGreetingFetch() {
+        fetch('https://supersimplebackend.dev/greeting')
+
+          .then((response) => {
+            return response.text(); //Error: Body stream already read
+          })
+                  
+          .then((text) => {
+            console.log(text);
+          })
+
+          .catch((error) => {
+            console.log(`Unexpected error.  Please try again later. Error code: ${error}`);
+            console.error('Error:', error);
+          });
+
+        return;
+      }
+      
+      requestGreeting();
+      requestGreetingFetch();
     </script>
   </body>
-</html>
+</html> 
