@@ -7,7 +7,7 @@
     <script>
 
       //Works in the debugger      
-      function requestGreeting() {
+      function requestGreetingXhr() {
         const xhr = new XMLHttpRequest();
 
         xhr.addEventListener('load', () => {
@@ -79,9 +79,34 @@
         return;
       }
       
-      requestGreeting();
+      async function requestGreetingPost() {
+        try {
+          const response = await fetch('https://supersimplebackend.dev/greeting', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              name: 'Michael Anthony Tadyshak'
+            }) // stringify
+          }) // fetch
+    
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+
+          const textMessage = await response.text();
+          console.log(textMessage);
+
+        } catch (error) {
+          console.log(`Error: ${error}`);
+        }
+      }
+      
+      requestGreetingXhr();
       requestGreetingFetch();
-      requestGreetingAsyncAwait()
+      requestGreetingAsyncAwait();
+      requestGreetingPost();
 
 </script>
   </body>

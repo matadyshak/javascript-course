@@ -91,8 +91,7 @@ export function renderPaymentSummary() {
         console.log('Unexpected error.  Try again later.');
       }
       
-      window.location.href = 'orders.html'
-      // 21:59:01
+      window.location.href = 'orders.html';
     });
 }
 
