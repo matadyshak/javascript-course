@@ -15,7 +15,7 @@
         }); //addEventListener()
 
         xhr.addEventListener('error', (error) => {
-          console.log(`Unexpected error.  Please try again later. Error code: ${error}`);
+          console.log(`Unexpected error: ${error}`);
         });
   
         xhr.open('GET', 'https://supersimplebackend.dev/greeting');
@@ -28,7 +28,10 @@
         fetch('https://supersimplebackend.dev/greeting')
 
           .then((response) => {
-            return response.text(); //Error: Body stream already read
+            if (response.ok) {
+              return response.text();
+            }
+            throw new Error('Network response was not OK');
           })
                   
           .then((text) => {
@@ -36,8 +39,7 @@
           })
 
           .catch((error) => {
-            console.log(`Unexpected error.  Please try again later. Error code: ${error}`);
-            console.error('Error:', error);
+            console.log(`Unexpected error: ${error}`);
           });
 
         return;
