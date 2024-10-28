@@ -103,11 +103,32 @@
         }
       }
       
+      // CORS (Cross-Origin Resource Sharing) error occurs
+      function requestAmazon() {
+        const xhr = new XMLHttpRequest();
+
+        xhr.addEventListener('load', () => {
+        console.log(xhr.response);
+        }); //addEventListener()
+
+        xhr.addEventListener('error', () => {
+        console.log('Network error or CORS error: Request blocked by the back end.');
+        });
+  
+        xhr.addEventListener('abort', () => {
+        console.log('Request was aborted.');
+        });
+  
+        xhr.open('GET', 'https://amazon.com');
+        xhr.send();
+      }
+
       requestGreetingXhr();
       requestGreetingFetch();
       requestGreetingAsyncAwait();
       requestGreetingPost();
+      requestAmazon();
 
-</script>
+    </script>
   </body>
 </html> 
