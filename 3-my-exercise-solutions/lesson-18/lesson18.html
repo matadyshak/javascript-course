@@ -123,12 +123,38 @@
         xhr.send();
       }
 
+      async function requestGreetingPostNoBody() {
+        try {
+          const response = await fetch('https://supersimplebackend.dev/greeting', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          }) // fetch
+    
+          if (response.status >= 400) {
+            throw response;
+          }
+
+          const textMessage = await response.text();
+          console.log(textMessage);
+
+        } catch (error) {
+          if (error.status === 400) {
+            const errorMessage = await error.json();
+            console.log(errorMessage);
+          } else {
+            console.log(`Network error.  Please try again later: ${error}`);
+          }
+        }
+      }
+      
       requestGreetingXhr();
       requestGreetingFetch();
       requestGreetingAsyncAwait();
       requestGreetingPost();
       requestAmazon();
-
+      requestGreetingPostNoBody();
     </script>
   </body>
 </html> 
