@@ -171,7 +171,7 @@ initCartForTest(cartItems) {
   return this.cartItems;
 }
 
-loadCart(fun) {
+loadCartXhr(fun) {
   const xhr = new XMLHttpRequest();
   xhr.addEventListener('load', () => {
         console.log('xhr.response');
@@ -181,7 +181,42 @@ loadCart(fun) {
     xhr.open('GET', 'https://supersimplebackend.dev/cart');
     xhr.send();
   }
-  
+
+  loadCartFetch() {
+    fetch('https://supersimplebackend.dev/cart')
+
+    .then((response) => {
+      if (response.ok) {
+        return response.text();
+      }
+      throw new Error('Network response was not OK');
+    })
+            
+    .then((text) => {
+      console.log(text);
+    })
+
+    .catch((error) => {
+      console.log(`Unexpected error: ${error} Status: ${error.status}`);
+    });
+  }
+
+  async loadCartAsyncAwait() {
+    try {
+      const response = await fetch('https://supersimplebackend.dev/cart');
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const textMessage = await response.text();
+      console.log(textMessage);
+
+    } catch (error) {
+      console.log(`Error: ${error} Status: ${error.status}`);
+    }
+  }
+
 } //class cart
 
 export const cart = new Cart('cart-class');

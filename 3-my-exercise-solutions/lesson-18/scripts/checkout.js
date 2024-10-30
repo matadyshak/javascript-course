@@ -15,7 +15,7 @@ async function loadPage() {
     // reject lets you throw an error in the future
     const value = await new Promise((resolve, reject) => {
       // throw 'error2';
-    cart.loadCart(() => {
+    cart.loadCartFetch(() => {
       // reject('error3')
       resolve('value3');
       });
@@ -23,8 +23,6 @@ async function loadPage() {
   } catch (error) {
     console.log('Unexpected error. Please try again later.');
   }
- 
-
     renderOrderSummary();
     renderPaymentSummary();
     renderCheckoutHeader();
@@ -36,7 +34,7 @@ loadPage();
 Promise.all([
   loadProductsFetch(),
   new Promise((resolve) => {
-  cart.loadCart(() => {
+  cart.loadCartXhr(() => {
     resolve();
     });
   })
@@ -59,7 +57,7 @@ new Promise((resolve) => {
 }).then((value) => {
   console.log(value);
   return new Promise((resolve) => {
-    cart.loadCart(() => {
+    cart.loadCartXhr(() => {
       resolve();
     });
   });
@@ -74,7 +72,7 @@ new Promise((resolve) => {
 /*
 //Multiple callbacks causes complex nested code that is hard to work with
 loadProducts(() => {
-  cart.loadCart(() => {
+  cart.loadCartXhr(() => {
     renderOrderSummary();
     renderPaymentSummary();
     renderCheckoutHeader();
