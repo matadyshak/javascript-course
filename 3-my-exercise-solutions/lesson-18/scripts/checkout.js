@@ -30,21 +30,23 @@ async function loadPage() {
 
 loadPage();
 
-/*
-Promise.all([
-  loadProductsFetch(),
-  new Promise((resolve) => {
-  cart.loadCartXhr(() => {
-    resolve();
-    });
-  })
-]).then(() => {
-  renderOrderSummary();
-  renderPaymentSummary();
-  renderCheckoutHeader();
-});
-*/
+async function loadProductsAndCart() {
+  Promise.all([
+    loadProductsFetch(),
+    new Promise((resolve) => {
+    cart.loadCartFetch(() => {
+      resolve();
+      });
+    })
+  ]).then(() => {
+    renderOrderSummary();
+    renderPaymentSummary();
+    renderCheckoutHeader();
+  });
+  
+}
 
+loadProductsAndCart();
 /*
 //Top-level code
 //Promises keep our code more flat instead of nested
