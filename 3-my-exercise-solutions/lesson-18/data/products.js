@@ -1,4 +1,5 @@
 import formatCurrency from '../scripts/utils/money.js';
+import {cart} from './cart-class.js';
 
 export let products = [];
 
@@ -10,6 +11,20 @@ if (products.length > 0) {
   loadProductsData();
 }
 */
+
+// Function to run both functions in parallel
+async function runParallel() {
+  try {
+    console.log("Running in parallel...");
+    const [productsResult, cartResult] = await Promise.all([loadProductsFetch(), cart.loadCartFetch()]);
+    console.log("All tasks completed. Results:", productsResult, cartResult);
+  } catch (error) {
+    console.error('Error during parallel execution:', error);
+  }
+}
+
+// Call runParallel to execute
+runParallel();
 
 export function loadProductsFetch() {
   //Returns a Promise
