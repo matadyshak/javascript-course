@@ -12,13 +12,14 @@ if (products.length > 0) {
 */
 
 export function loadProductsFetch() {
-  const promise = fetch('https://supersimplebackend.dev/products')
+  //Returns a Promise
+  return fetch('https://supersimplebackend.dev/products')
     
-    .then((response) => {
+  .then((response) => {
     return response.json();
-    })
+  })
   
-    .then((productsData) => {
+  .then((productsData) => {
     products = productsData.map((productDetails) => {
       if (productDetails.type === 'clothing') {
         return new Clothing(productDetails);
@@ -28,13 +29,14 @@ export function loadProductsFetch() {
       return new Product(productDetails);
       }); //.map
 
-    console.log('load products');
+    console.log('load products', products
+    return products; // Return products data for Promise.all
     })
   
     .catch((error) => {
     console.log('Unexpected error.  Please try again later.');
+    return []; // Return empty array in case of an error
     });
-  return promise;
 }
 
 /*
