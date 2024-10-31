@@ -54,12 +54,6 @@ export function loadProductsFetch() {
     });
 }
 
-/*
-loadProductsFetch().then(() => {
-  console.log('next step');
-});
-*/
-
 export function loadProducts(fun) {
   const xhr = new XMLHttpRequest();
   xhr.addEventListener('load', () => {
@@ -84,44 +78,6 @@ export function loadProducts(fun) {
     xhr.open('GET', 'https://supersimplebackend.dev/products');
     xhr.send();
   }
-
-
-/*
-export function loadProducts() {
-  return new Promise((resolve, reject) => {
-    if (products.length > 0) {
-      console.log(`loadProducts() found products.length: ${products.length} and skipped the remote load of products data`);
-      resolve();
-      return;
-    }
-
-    const xhr = new XMLHttpRequest();
-    xhr.addEventListener('load', () => {
-      try {
-        console.log(`xhr.response: ${xhr.response}`);
-        console.log(`JSON.parse(xhr.response): ${JSON.parse(xhr.response)}`);
-    
-        products = JSON.parse(xhr.response).map((productDetails) => {
-          if (productDetails.type === 'clothing') {
-            return new Clothing(productDetails);
-          } else if (productDetails.type === 'appliance') {
-            return new Appliance(productDetails);
-          }
-          return new Product(productDetails);
-        }); //.map
-
-        console.log('Products loaded');
-        resolve(); // Resolve the promise when the products are loaded
-      } catch (error) {
-          reject(error); // Reject the promise if there is an error
-      }
-    }); //addEventListener()
-
-    xhr.open('GET', 'https://supersimplebackend.dev/products');
-    xhr.send();
-  }); // return new Promise
-}
-*/
 
 export function getProduct(productId) {
   let matchingProduct;
