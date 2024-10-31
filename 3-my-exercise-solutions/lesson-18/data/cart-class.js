@@ -183,7 +183,7 @@ loadCartXhr(fun) {
   }
 
   loadCartFetch() {
-    fetch('https://supersimplebackend.dev/cart')
+    return fetch('https://supersimplebackend.dev/cart')
 
     .then((response) => {
       if (response.ok) {
@@ -193,11 +193,13 @@ loadCartXhr(fun) {
     })
             
     .then((text) => {
-      console.log(text);
+      console.log('Cart:', text);
+      return text; // Return text data for promise.all
     })
 
     .catch((error) => {
-      console.log(`Unexpected error: ${error} Status: ${error.status}`);
+      console.log(`Unexpected error: ${error.message} Status: ${error.status}`);
+      return 'Error';
     });
   }
 
