@@ -13,7 +13,7 @@ describe('test suite: Integration test', () => {
   const productId3 = '77a845b1-16ed-4eac-bdf9-5b591882113d'; // Countertop Blender (Appliance)
 
   beforeAll(async () => {
-    await loadProductsFetch()
+    await loadProductsFetch();
     console.log('Products loaded');
   });
   
