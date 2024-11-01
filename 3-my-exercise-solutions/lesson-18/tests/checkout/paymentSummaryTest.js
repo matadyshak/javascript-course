@@ -12,12 +12,11 @@ describe('test suite: Integration test', () => {
   const productId2 = '5968897c-4d27-4872-89f6-5bcb052746d7'; // Women's Chiffon Beachware Cover Up (Clothing)
   const productId3 = '77a845b1-16ed-4eac-bdf9-5b591882113d'; // Countertop Blender (Appliance)
 
-  beforeAll((done) => {
-    loadProductsFetch().then(() => {
-      done();
-    });
+  beforeAll(async () => {
+    await loadProductsFetch()
+    console.log('Products loaded');
   });
- 
+  
   beforeEach( () => {
     spyOn(localStorage, 'setItem');
     spyOn(localStorage, 'getItem').and.callFake(() => {
