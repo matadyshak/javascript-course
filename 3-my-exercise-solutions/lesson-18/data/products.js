@@ -44,7 +44,7 @@ export function loadProductsFetch() {
       return new Product(productDetails);
       }); //.map
 
-    console.log('load products', products
+    console.log('load products', products);
     return products; // Return products data for Promise.all
     })
   
