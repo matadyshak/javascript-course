@@ -189,12 +189,11 @@ describe('test suite: change delivery option', () => {
   const productId3 = '8a53b080-6d40-4a65-ab26-b24ecf700bce'; // Cotton bath towels
   const productId4 = 'd37a651a-d501-483b-aae6-a9659b0757a0'; // Food storage containers (not in cart)
 
-  beforeAll((done) => {
-    loadProductsFetch().then(() => {
-      done();
-    });
+  beforeAll(async() => {
+  await loadProductsFetch();
+  console.log('loaded products');
   });
-  
+
   beforeEach( () => {
     spyOn(localStorage, 'setItem');
     spyOn(localStorage, 'getItem').and.callFake(() => {
