@@ -9,10 +9,9 @@ describe('test suite: renderOrderSummary', () => {
   const productId1 = 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6';
   const productId2 = '15b6fc6f-327a-4ec4-896f-486349e85a3d';
 
-  beforeAll((done) => {
-    loadProductsFetch().then(() => {
-      done();
-    });
+  beforeAll(async () => {
+    await loadProductsFetch()
+    console.log('Products loaded');
   });
   
   beforeEach( () => {
@@ -111,10 +110,9 @@ describe('test suite: delivery options', () => {
   const productId2 = 'a93a101d-79ef-4cf3-a6cf-6dbe532a1b4a'; // Bathroom rug
   const productId3 = '8a53b080-6d40-4a65-ab26-b24ecf700bce'; // Cotton bath towels
 
-  beforeAll((done) => {
-    loadProductsFetch().then(() => {
-      done();
-    });
+  beforeAll(async() => {
+    await loadProductsFetch();
+    console.log('loaded products');
   });
 
   beforeEach( () => {
@@ -186,8 +184,6 @@ describe('test suite: delivery options', () => {
       expect(document.querySelector(`.js-product-price-${productId1}`).innerText).toEqual('$15.60');
       expect(document.querySelector('.js-payment-summary-shipping').innerText).toEqual('$9.99');
       expect(document.querySelector('.js-payment-summary-total').innerText).toEqual('$182.59');
-
-
 
       element = document.querySelector(`.js-delivery-option-input-${productId1}-2`);
       element.click();
