@@ -1,20 +1,20 @@
 import {cart} from '../data/cart-class.js';
 import {products, loadProductsFetch} from '../data/products.js';
 
-// Top level code - runs after module loads
-loadAmazonPage(renderProductsGrid);
+async function loadAmazonPage(fcn) {
+  try {
+    await loadProductsFetch();
+    await new Promise((resolve) => {
+    resolve('value1');
+    });
 
-export function loadAmazonPage(fcn) {
-  loadProductsFetch()
-  
-  .then(() => {
     fcn();
-  })
-  
-  .catch((error) => {
-    console.log(`Error: ${error} Failed to load products`);
-  });
+
+  } catch (error) {
+    console.log(`Unexpected error in loadAmazonPage(): ${error}. Please try again later.`);
+  }
 }
+loadAmazonPage(renderProductsGrid);
 
 function renderProductsGrid() {
   let productsHTML = '';

@@ -6,7 +6,6 @@ import '../data/cart-class.js';
 //import '../data/backend-practice.js';
 //import '../data/car.js';
 
-
 async function loadCheckoutPage() {
   try {
     await loadProductsFetch();
@@ -23,7 +22,6 @@ async function loadCheckoutPage() {
   }
 }
 loadCheckoutPage();
-
 
 /*
 async function loadProductsAndCart() {
