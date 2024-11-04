@@ -4,14 +4,16 @@ import formatCurrency from '../scripts/utils/money.js';
 export let products = [];
 
 export async function loadProductsFetch() {
-  //Returns a Promise
-  return fetch('https://supersimplebackend.dev/products')
+  try {
+    //Returns a Promise
+    const response = await fetch('https://supersimplebackend.dev/products');
+
+    if (!response.ok) {
+      throw new Error(`HTTP error in loadProductsFetch(). Status: ${response.status}`);
+    }
+
+    const productsData = await response.json(); 
     
-  .then((response) => {
-    return response.json();
-  })
-  
-  .then((productsData) => {
     products = productsData.map((productDetails) => {
       if (productDetails.type === 'clothing') {
         return new Clothing(productDetails);
@@ -19,16 +21,15 @@ export async function loadProductsFetch() {
         return new Appliance(productDetails);
       }
       return new Product(productDetails);
-      }); //.map
+    }); //.map
 
-    console.log('load products', products);
+    console.log('Loaded products', products);
     return products; // Return products data for Promise.all
-    })
-  
-    .catch((error) => {
-    console.log(`Unexpected error: ${error}.  Please try again later.`);
+
+  } catch (error) {
+    console.log(`Unexpected error in loadProductsFetch(): ${error}.  Please try again later.`);
     return []; // Return empty array in case of an error
-    });
+  }
 }
 
 /*

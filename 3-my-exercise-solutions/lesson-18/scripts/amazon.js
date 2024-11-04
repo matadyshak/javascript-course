@@ -2,9 +2,9 @@ import {cart} from '../data/cart-class.js';
 import {products, loadProductsFetch} from '../data/products.js';
 
 // Top level code - runs after module loads
-loadProductsArray(renderProductsGrid);
+loadAmazonPage(renderProductsGrid);
 
-export function loadProductsArray(fcn) {
+export function loadAmazonPage(fcn) {
   loadProductsFetch()
   
   .then(() => {

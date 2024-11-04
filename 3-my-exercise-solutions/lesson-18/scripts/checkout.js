@@ -7,23 +7,23 @@ import '../data/cart-class.js';
 //import '../data/car.js';
 
 
-loadPage();
-
-async function loadPage() {
+async function loadCheckoutPage() {
   try {
     await loadProductsFetch();
-    // Cannot throw an error in the future
-    // reject lets you throw an error in the future
-    //const value = await new Promise((resolve, reject) => {
-    //resolve('value1');
-    //});
-  } catch (error) {
-    console.log(`Unexpected error: ${error}. Please try again later.`);
-  }
+    await new Promise((resolve) => {
+    resolve('value1');
+    });
+
     renderOrderSummary();
     renderPaymentSummary();
     renderCheckoutHeader();
+
+  } catch (error) {
+    console.log(`Unexpected error in loadPage(): ${error}. Please try again later.`);
+  }
 }
+loadCheckoutPage();
+
 
 /*
 async function loadProductsAndCart() {
