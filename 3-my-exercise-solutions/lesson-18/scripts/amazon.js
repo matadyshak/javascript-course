@@ -1,19 +1,20 @@
 import {cart} from '../data/cart-class.js';
-import {products, loadProducts} from '../data/products.js';
+import {products, loadProductsFetch} from '../data/products.js';
 
 // Top level code - runs after module loads
-loadProducts(renderProductsGrid);
+loadProductsArray(renderProductsGrid);
 
-/*
-export function loadProductsData() {
-  loadProducts().then(() => {
-    renderProductsGrid();
+export function loadProductsArray(fcn) {
+  loadProductsFetch()
+  
+  .then(() => {
+    fcn();
   })
+  
   .catch((error) => {
-    console.log(`Error: Failed to load products:`);
+    console.log(`Error: ${error} Failed to load products`);
   });
 }
-*/
 
 function renderProductsGrid() {
   let productsHTML = '';

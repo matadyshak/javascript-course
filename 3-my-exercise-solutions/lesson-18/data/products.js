@@ -1,32 +1,9 @@
 import formatCurrency from '../scripts/utils/money.js';
-import {cart} from './cart-class.js';
+// import {cart} from './cart-class.js';
 
 export let products = [];
 
-/*
-if (products.length > 0) {
-  console.log(`Skipping load of products data: products.length is: ${products.length}`); 
-} else {
-  console.log('Calling loadProductsData()');
-  loadProductsData();
-}
-*/
-
-// Function to run both functions in parallel
-async function runParallel() {
-  try {
-    console.log("Running in parallel...");
-    const [productsResult, cartResult] = await Promise.all([loadProductsFetch(), cart.loadCartFetch()]);
-    console.log("All tasks completed. Results:", productsResult, cartResult);
-  } catch (error) {
-    console.error('Error during parallel execution:', error);
-  }
-}
-
-// Call runParallel to execute
-runParallel();
-
-export function loadProductsFetch() {
+export async function loadProductsFetch() {
   //Returns a Promise
   return fetch('https://supersimplebackend.dev/products')
     
@@ -49,11 +26,27 @@ export function loadProductsFetch() {
     })
   
     .catch((error) => {
-    console.log('Unexpected error.  Please try again later.');
+    console.log(`Unexpected error: ${error}.  Please try again later.`);
     return []; // Return empty array in case of an error
     });
 }
 
+/*
+// Function to run both functions in parallel
+async function runParallel() {
+  try {
+    console.log("Running in parallel...");
+    const [productsResult, cartResult] = await Promise.all([loadProductsFetch(), cart.loadCartFetch()]);
+    console.log("All tasks completed. Results:", productsResult, cartResult);
+  } catch (error) {
+    console.error('Error during parallel execution:', error);
+  }
+}
+// Call runParallel to execute
+// runParallel();
+*/
+
+/*
 export function loadProducts(fun) {
   const xhr = new XMLHttpRequest();
   xhr.addEventListener('load', () => {
@@ -78,6 +71,7 @@ export function loadProducts(fun) {
     xhr.open('GET', 'https://supersimplebackend.dev/products');
     xhr.send();
   }
+*/
 
 export function getProduct(productId) {
   let matchingProduct;

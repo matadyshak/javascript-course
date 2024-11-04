@@ -1,35 +1,31 @@
 import {renderOrderSummary} from './checkout/orderSummary.js';
 import {renderPaymentSummary} from './checkout/paymentSummary.js';
 import {renderCheckoutHeader} from './checkout/checkoutHeader.js';
-import {loadProducts, loadProductsFetch} from '../data/products.js';
-import {cart} from '../data/cart-class.js';
+import {loadProductsFetch} from '../data/products.js';
 import '../data/cart-class.js';
 //import '../data/backend-practice.js';
 //import '../data/car.js';
 
+
+loadPage();
+
 async function loadPage() {
   try {
-    // throw 'error1';
     await loadProductsFetch();
     // Cannot throw an error in the future
     // reject lets you throw an error in the future
-    const value = await new Promise((resolve, reject) => {
-      // throw 'error2';
-    cart.loadCartFetch(() => {
-      // reject('error3')
-      resolve('value3');
-      });
-    });   
+    //const value = await new Promise((resolve, reject) => {
+    //resolve('value1');
+    //});
   } catch (error) {
-    console.log('Unexpected error. Please try again later.');
+    console.log(`Unexpected error: ${error}. Please try again later.`);
   }
     renderOrderSummary();
     renderPaymentSummary();
     renderCheckoutHeader();
 }
 
-loadPage();
-
+/*
 async function loadProductsAndCart() {
   Promise.all([
     loadProductsFetch(),
@@ -43,10 +39,10 @@ async function loadProductsAndCart() {
     renderPaymentSummary();
     renderCheckoutHeader();
   });
-  
 }
-
 loadProductsAndCart();
+*/  
+
 /*
 //Top-level code
 //Promises keep our code more flat instead of nested

@@ -3,7 +3,7 @@ import {renderPaymentSummary} from '../../scripts/checkout/paymentSummary.js';
 import {renderCheckoutHeader} from '../../scripts/checkout/checkoutHeader.js';
 import {calculateDeliveryDateTest} from './orderSummaryTest.js';
 import {getDeliveryOption} from '../../data/deliveryOptions.js';
-import {loadProducts, loadProductsFetch} from '../../data/products.js';
+import {loadProductsFetch} from '../../data/products.js';
 import {cart} from '../../data/cart-class.js';
 
 describe('test suite: Integration test', () => {

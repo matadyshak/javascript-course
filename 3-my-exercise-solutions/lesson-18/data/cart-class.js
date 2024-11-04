@@ -171,6 +171,7 @@ initCartForTest(cartItems) {
   return this.cartItems;
 }
 
+/*
 loadCartXhr(fun) {
   const xhr = new XMLHttpRequest();
   xhr.addEventListener('load', () => {
@@ -182,7 +183,7 @@ loadCartXhr(fun) {
     xhr.send();
   }
 
-  loadCartFetch() {
+  async loadCartFetch() {
     return fetch('https://supersimplebackend.dev/cart')
 
     .then((response) => {
@@ -218,6 +219,7 @@ loadCartXhr(fun) {
       console.log(`Error: ${error} Status: ${error.status}`);
     }
   }
+*/
 
 } //class cart
 
