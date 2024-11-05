@@ -1,9 +1,11 @@
-export default function isWeekend(date) {
+import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
+
+export function isWeekend(date) {
   const dayOfWeek = date.format('dddd');
   return (dayOfWeek === 'Saturday') || (dayOfWeek === 'Sunday');
 }
 
-//Default export - does not need {}
-//Can only export one thing from file
-//export default isWeekend;
+export function convertToMonthDate(date) {
+  return dayjs(date).format('MMMM D');
+}
 

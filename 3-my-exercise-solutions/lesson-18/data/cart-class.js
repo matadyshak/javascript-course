@@ -171,6 +171,12 @@ initCartForTest(cartItems) {
   return this.cartItems;
 }
 
+clearCart() {
+  this.cartItems = [];
+  //updateCartQuantityIcon(); => causes error
+  this.saveToStorage();
+}
+
 /*
 loadCartXhr(fun) {
   const xhr = new XMLHttpRequest();

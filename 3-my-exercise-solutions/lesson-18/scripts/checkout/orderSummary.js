@@ -1,9 +1,9 @@
 import {cart} from '../../data/cart-class.js';
-import {getProduct} from '../../data/products.js';
 import formatCurrency from '../utils/money.js';
 import {deliveryOptions, getDeliveryOption, calculateDeliveryDate} from '../../data/deliveryOptions.js';
 import {renderPaymentSummary} from './paymentSummary.js';
 import {renderCheckoutHeader} from './checkoutHeader.js';
+import {getProduct} from '../../data/products.js';
 ////////////////////////////////////////////////////////////////////////////////////////
 
 export function renderOrderSummary() {
@@ -17,7 +17,7 @@ cart.cartItems.forEach((cartItem) => {
   const matchingProduct = getProduct(productId);
 
   if (!matchingProduct) {
-    console.log(`matchingProduct is: ${matchingProduct}`);
+    console.log(`Error in renderOrderSummary(): matchingProduct is: ${matchingProduct}`);
   }
 
   const deliveryOptionId = cartItem.deliveryOptionId;

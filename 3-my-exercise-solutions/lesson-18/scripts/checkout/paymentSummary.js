@@ -3,6 +3,7 @@ import {getProduct} from '../../data/products.js';
 import {getDeliveryOption} from '../../data/deliveryOptions.js';
 import {formatCurrency} from '../utils/money.js';
 import {addOrder} from '../../data/orders.js';
+import {renderOrderSummary} from './orderSummary.js';
 //import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 //import isSatSun from '../utils/datetime.js';
 
@@ -85,10 +86,15 @@ export function renderPaymentSummary() {
           })
         })
   
+        if (!response.ok) {
+          throw new Error(`HTTP error in renderPaymentSummary(). Status: ${response.status}`);
+        }
+        
         const order = await response.json();
         addOrder(order);
+        cart.clearCart();
       } catch (error) {
-        console.log('Unexpected error.  Try again later.');
+        console.log(`Unexpected error: ${error}  Try again later.`);
       }
       
       window.location.href = 'orders.html';

@@ -2,7 +2,7 @@ import {renderOrderSummary} from './checkout/orderSummary.js';
 import {renderPaymentSummary} from './checkout/paymentSummary.js';
 import {renderCheckoutHeader} from './checkout/checkoutHeader.js';
 import {loadProductsFetch} from '../data/products.js';
-import '../data/cart-class.js';
+//import '../data/cart-class.js';
 //import '../data/backend-practice.js';
 //import '../data/car.js';
 
@@ -18,7 +18,7 @@ async function loadCheckoutPage() {
     renderCheckoutHeader();
 
   } catch (error) {
-    console.log(`Unexpected error in loadPage(): ${error}. Please try again later.`);
+    console.log(`Unexpected error in loadCheckoutPage(): ${error}. Please try again later.`);
   }
 }
 loadCheckoutPage();
