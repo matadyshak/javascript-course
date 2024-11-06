@@ -59,6 +59,31 @@ export function renderOrdersGrid() {
   } else {
     element.innerHTML = ordersHTML;
   }
+
+  document.querySelectorAll('.js-buy-again-button')
+  .forEach((button) => {
+    button.addEventListener('click', () => {
+      const orderId = button.dataset.orderIdBuy;
+      const productId = button.dataset.productIdBuy;
+      cart.addToCart(productId);
+      //renderOrderSummary();
+      //renderPaymentSummary();
+      //renderCheckoutHeader();
+    }); // addEventListener
+  }); // forEach((button
+
+  document.querySelectorAll('.js-track-package-button')
+  .forEach((button) => {
+    button.addEventListener('click', () => {
+      const orderId = button.dataset.orderIdTrack;
+      const productId = button.dataset.productIdTrack;
+      //Change to tracking page with URL parameters for orderId and productId
+      renderOrdersGrid();
+      //renderOrderSummary();
+      //renderPaymentSummary();
+      //renderCheckoutHeader();
+    }); // addEventListener
+  }); // forEach((button
 }
 
 export function renderOrderProductsHTML(order) {
@@ -85,14 +110,18 @@ export function renderOrderProductsHTML(order) {
         <div class="product-quantity">
           Quantity: ${product.quantity}
         </div>
-        <button class="buy-again-button js-buy-again-button button-primary">
+        <button class="buy-again-button js-buy-again-button button-primary"
+          data-order-id-buy="${order.id}"
+          data-product-id-buy="${product.productId}">
           <img class="buy-again-icon" src="images/icons/buy-again.png">
           <span class="buy-again-message">Buy it again</span>
         </button>
       </div>
       <div class="product-actions">
-        <a href="tracking.html?orderId=123&productId=456">
-          <button class="track-package-button js-track-package-button button-secondary">
+        <a href="tracking.html?orderId=${order.id}&productId=${product.productId}">
+          <button class="track-package-button js-track-package-button button-secondary"
+          data-order-id-track="${order.id}"
+          data-product-id-track="${product.productId}">
             Track package
           </button>
         </a>
@@ -148,6 +177,5 @@ export function renderOrdersHeader() {
     element.innerHTML = totalCartQuantityHTML;
   }
 }
-
 
 loadOrdersPage(renderOrdersGrid);
