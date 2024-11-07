@@ -7,12 +7,7 @@ import {cart} from '../data/cart-class.js';
 async function loadOrdersPage(fcn) {
   try {
     await loadProductsFetch();
-    await new Promise((resolve) => {
-    resolve('value1');
-    });
-
     fcn();
-
   } catch (error) {
     console.log(`Unexpected error in loadOrdersPage(): ${error}. Please try again later.`);
   }
