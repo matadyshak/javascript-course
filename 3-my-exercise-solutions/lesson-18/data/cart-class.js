@@ -50,15 +50,11 @@ addToCart(productId) {
       //${productId} should be in blue color
       // Convert to number to prevent appending to a string
       //In test mode has amazon.js run already?
-      let value;
-      let selectValue;
+      let value = '1';
+      let selectValue = 1;
 
       const element = document.querySelector(`.js-quantity-selector-${productId}`);
-      if (!element) {
-        console.log(`.js-quantity-selector-${productId} is ${element}` );
-        value = '1';
-        selectValue = 1;
-      } else {
+      if (element) {
         value = element.value;
         selectValue = Number(value);
       }
@@ -75,7 +71,6 @@ addToCart(productId) {
 
       const messageElement = document.querySelector(`.js-added-to-cart-${productId}`);
       if (messageElement) {
-        
         messageElement.classList.add("is-showing");
         
         if ( firstTime ) {
@@ -90,9 +85,9 @@ addToCart(productId) {
         }, 2000);
 
         this.updateCartQuantityIcon();
-      }
+      } // if(messageElement
       this.saveToStorage();
-    }
+    } 
 
     removeFromCart(productId) {
       const newCart = [];
