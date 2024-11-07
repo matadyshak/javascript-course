@@ -2,7 +2,7 @@ import {renderOrderSummary} from '../../scripts/checkout/orderSummary.js';
 import {getDeliveryOption} from '../../data/deliveryOptions.js';
 import {cart} from '../../data/cart-class.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
-import isWeekend from '../../scripts/utils/datetime.js';
+import {isWeekend} from '../../scripts/utils/datetime.js';
 import {loadProductsFetch} from '../../data/products.js';
 
 describe('test suite: renderOrderSummary', () => {
