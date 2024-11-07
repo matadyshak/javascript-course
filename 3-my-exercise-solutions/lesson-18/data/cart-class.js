@@ -74,20 +74,23 @@ addToCart(productId) {
         })};
 
       const messageElement = document.querySelector(`.js-added-to-cart-${productId}`);
-      messageElement.classList.add("is-showing");
+      if (messageElement) {
         
-      if ( firstTime ) {
-        firstTime = false;
-      } else {
-        clearTimeout(myTimeoutId);
+        messageElement.classList.add("is-showing");
+        
+        if ( firstTime ) {
+          firstTime = false;
+        } else {
+          clearTimeout(myTimeoutId);
+        }
+
+        // setTimeout takes an anonymous function and a timeout value
+        myTimeoutId = setTimeout(() => {  
+          messageElement.classList.remove("is-showing");
+        }, 2000);
+
+        this.updateCartQuantityIcon();
       }
-
-      // setTimeout takes an anonymous function and a timeout value
-      myTimeoutId = setTimeout(() => {  
-        messageElement.classList.remove("is-showing");
-      }, 2000);
-
-      this.updateCartQuantityIcon();
       this.saveToStorage();
     }
 
