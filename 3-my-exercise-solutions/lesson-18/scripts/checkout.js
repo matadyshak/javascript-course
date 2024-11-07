@@ -9,14 +9,9 @@ import {loadProductsFetch} from '../data/products.js';
 async function loadCheckoutPage() {
   try {
     await loadProductsFetch();
-    await new Promise((resolve) => {
-    resolve('value1');
-    });
-
     renderOrderSummary();
     renderPaymentSummary();
     renderCheckoutHeader();
-
   } catch (error) {
     console.log(`Unexpected error in loadCheckoutPage(): ${error}. Please try again later.`);
   }
