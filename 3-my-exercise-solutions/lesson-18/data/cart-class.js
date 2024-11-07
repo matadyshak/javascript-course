@@ -148,11 +148,9 @@ updateCartQuantity(productId, newQuantity) {
 updateCartQuantityIcon() {
   const cartTotalQuantity = this.calculateCartQuantity();
   const element = document.querySelector('.js-cart-quantity-amazon');
-  if (!element) {
-    console.log(`updateCartQuantityIcon(): ${element}`)
-  } else {
+  if (element) {
     element.innerText = cartTotalQuantity; 
-   } 
+  }
 }
 
 showLocalStorage() {
