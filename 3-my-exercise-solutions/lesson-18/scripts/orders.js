@@ -62,9 +62,6 @@ export function renderOrdersGrid() {
       const productId = button.dataset.productIdBuy;
       cart.addToCart(productId);
       renderOrdersGrid();
-      //renderOrderSummary();
-      //renderPaymentSummary();
-      //renderCheckoutHeader();
     }); // addEventListener
   }); // forEach((button
 
@@ -75,9 +72,6 @@ export function renderOrdersGrid() {
       const productId = button.dataset.productIdTrack;
       //Change to tracking page with URL parameters for orderId and productId
       renderOrdersGrid();
-      //renderOrderSummary();
-      //renderPaymentSummary();
-      //renderCheckoutHeader();
     }); // addEventListener
   }); // forEach((button
 }
