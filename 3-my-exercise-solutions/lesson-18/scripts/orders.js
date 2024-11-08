@@ -60,9 +60,8 @@ export function renderOrdersGrid() {
     button.addEventListener('click', () => {
       const orderId = button.dataset.orderIdBuy;
       const productId = button.dataset.productIdBuy;
-      console.log(cart);
       cart.addToCart(productId);
-      console.log(cart);
+      renderOrdersGrid();
       //renderOrderSummary();
       //renderPaymentSummary();
       //renderCheckoutHeader();
