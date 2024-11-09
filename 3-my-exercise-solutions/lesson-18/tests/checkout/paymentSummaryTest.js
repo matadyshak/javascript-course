@@ -1,6 +1,5 @@
 import {renderOrderSummary} from '../../scripts/checkout/orderSummary.js';
 import {renderPaymentSummary} from '../../scripts/checkout/paymentSummary.js';
-import {renderCheckoutHeader} from '../../scripts/checkout/checkoutHeader.js';
 import {calculateDeliveryDateTest} from './orderSummaryTest.js';
 import {getDeliveryOption} from '../../data/deliveryOptions.js';
 import {loadProductsFetch} from '../../data/products.js';
@@ -88,8 +87,6 @@ describe('test suite: Integration test', () => {
       renderOrderSummary();
       // This will display all zeros in a payment summary
       renderPaymentSummary();
-      // This will display zero items
-      renderCheckoutHeader();
   }); // beforeEach
 
   afterEach( () => {
@@ -134,8 +131,7 @@ describe('test suite: Integration test', () => {
     // Need to render now or else the tags below will be undefined
     renderOrderSummary();
     renderPaymentSummary();
-    renderCheckoutHeader();
-
+    
     expect(document.querySelector(`.js-product-name-${productId1}`).innerText)
       .toContain('10-Piece Mixing Bowl Set with Lids - Floral');
     expect(document.querySelector(`.js-product-price-${productId1}`).innerText).toEqual('$38.99');
@@ -279,8 +275,7 @@ describe('test suite: Integration test', () => {
       cart.updateCartQuantity(productId2, 100);
       renderOrderSummary();
       renderPaymentSummary();
-      renderCheckoutHeader();
-
+      
       expect(document.querySelector('.js-cart-quantity-amazon').innerText).toContain('229');
       expect(document.querySelector('.js-cart-quantity-order').innerText).toContain('229');
       expect(document.querySelector('.js-cart-quantity-purchase').innerText).toContain('229'); // Purchase summary page - fails

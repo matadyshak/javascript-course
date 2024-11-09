@@ -2,13 +2,53 @@ import {cart} from '../../data/cart-class.js';
 import formatCurrency from '../utils/money.js';
 import {deliveryOptions, getDeliveryOption, calculateDeliveryDate} from '../../data/deliveryOptions.js';
 import {renderPaymentSummary} from './paymentSummary.js';
-import {renderCheckoutHeader} from './checkoutHeader.js';
 import {getProduct} from '../../data/products.js';
+
 ////////////////////////////////////////////////////////////////////////////////////////
+
+function renderCheckoutHeader() {
+  const totalCartQuantity = cart.calculateCartQuantity();
+  let totalCartQuantityHTML = '';
+ 
+  totalCartQuantityHTML += `
+  
+      <div class="header-content">
+      <div class="checkout-header-left-section">
+        <a href="amazon.html">
+          <img class="amazon-logo" src="images/amazon-logo.png">
+          <img class="amazon-mobile-logo" src="images/amazon-mobile-logo.png">
+        </a>
+      </div>
+
+      <div class="checkout-header-middle-section">
+        Checkout (<a class="return-to-home-link"
+          href="amazon.html">${totalCartQuantity} items</a>)
+      </div>
+
+      <div class="checkout-header-right-section">
+        <img src="images/icons/checkout-lock-icon.png">
+      </div>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="page-title">Review your order</div>
+      <div class="checkout-grid">
+  `;
+
+  const element = document.querySelector('.js-cart-quantity-order');
+  if (element) {
+    element.innerHTML = totalCartQuantityHTML;
+  } else {
+    console.log(`Error: Element .js-cart-quantity-order: ${element}`);
+  }
+}
 
 export function renderOrderSummary() {
 let cartSummaryHTML = '';
 let dateString = '';
+
+renderCheckoutHeader();
 
 // Loop through all cart items
 cart.cartItems.forEach((cartItem) => {
@@ -91,7 +131,6 @@ document.querySelectorAll('.js-delete-link')
       cart.removeFromCart(productId);
       renderOrderSummary();
       renderPaymentSummary();
-      renderCheckoutHeader();
     }); // addEventListener
   }); // forEach((link
 
@@ -139,7 +178,6 @@ document.querySelectorAll('.js-delete-link')
       cart.updateCartQuantity(productId, quantityInput);
       renderOrderSummary();
       renderPaymentSummary();
-      renderCheckoutHeader();
       }); // addEventListener
   });
 
@@ -152,7 +190,6 @@ document.querySelectorAll('.js-delete-link')
         cart.updateDeliveryOption(productId, deliveryOptionId);
         renderOrderSummary();
         renderPaymentSummary();
-        renderCheckoutHeader();
       }); // addEventListener
     }); // forEach((element 
 
@@ -195,14 +232,3 @@ function deliveryOptionsHTML(matchingProduct, cartItem) {
 
 return html;
 }
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////
-//renderCheckoutHeader();
-//////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// Ensure renderOrderSummary() is called on page load
-//document.addEventListener('DOMContentLoaded', () => {
-//  renderOrderSummary();
-//});
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////
