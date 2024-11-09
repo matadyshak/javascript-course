@@ -10,6 +10,8 @@ export function renderOrderSummary() {
 let cartSummaryHTML = '';
 let dateString = '';
 
+cartSummaryHTML += cartTotalQuantityHTML();
+   
 // Loop through all cart items
 cart.cartItems.forEach((cartItem) => {
    
@@ -77,11 +79,11 @@ cart.cartItems.forEach((cartItem) => {
   `;
 }); //forEach((cartItem
 
-const element = document.querySelector('.js-order-summary');
+const element = document.querySelector('.js-cart-quantity-order');
 if (element) {
   element.innerHTML = cartSummaryHTML;
 } else {
-  console.log(`Error: Element js-order-summary is: ${element}`);
+  console.log(`Error: Element js-cart-quantity-order is: ${element}`);
 }
 
 document.querySelectorAll('.js-delete-link')
@@ -157,6 +159,39 @@ document.querySelectorAll('.js-delete-link')
     }); // forEach((element 
 
     return;
+}
+
+function cartTotalQuantityHTML() {
+  let html = '';
+
+  const totalCartQuantity = cart.calculateCartQuantity();
+  const totalCartQuantityHTML = 
+    `    
+  <div class="header-content">
+    <div class="checkout-header-left-section">
+      <a href="amazon.html">
+        <img class="amazon-logo" src="images/amazon-logo.png">
+        <img class="amazon-mobile-logo" src="images/amazon-mobile-logo.png">
+      </a>
+    </div>
+
+    <div class="checkout-header-middle-section">
+      Checkout (<a class="return-to-home-link"
+      href="amazon.html">3 items</a>)
+    </div>
+
+    <div class="checkout-header-right-section">
+      <img src="images/icons/checkout-lock-icon.png">
+    </div>
+  </div>
+</div>
+<div class="main">
+  <div class="page-title">Review your order</div>
+    <div class="checkout-grid">
+      <div class="order-summary">
+  `; 
+
+   return html;
 }
 
 function deliveryOptionsHTML(matchingProduct, cartItem) {
