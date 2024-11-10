@@ -1,6 +1,5 @@
 import {renderOrderSummary} from './checkout/orderSummary.js';
 import {renderPaymentSummary} from './checkout/paymentSummary.js';
-import {renderCheckoutHeader} from './checkout/checkoutHeader.js';
 import {loadProductsFetch} from '../data/products.js';
 //import '../data/cart-class.js';
 //import '../data/backend-practice.js';
@@ -11,7 +10,7 @@ async function loadCheckoutPage() {
     await loadProductsFetch();
     renderOrderSummary();
     renderPaymentSummary();
-    renderCheckoutHeader();
+    
   } catch (error) {
     console.log(`Unexpected error in loadCheckoutPage(): ${error}. Please try again later.`);
   }
@@ -30,7 +29,7 @@ async function loadProductsAndCart() {
   ]).then(() => {
     renderOrderSummary();
     renderPaymentSummary();
-    renderCheckoutHeader();
+    
   });
 }
 loadProductsAndCart();
@@ -56,7 +55,7 @@ new Promise((resolve) => {
 }).then(() => {
   renderOrderSummary();
   renderPaymentSummary();
-  renderCheckoutHeader();
+  
 });
 */
 
@@ -66,7 +65,7 @@ loadProducts(() => {
   cart.loadCartXhr(() => {
     renderOrderSummary();
     renderPaymentSummary();
-    renderCheckoutHeader();
+    
   });
 });
 */
