@@ -1,6 +1,7 @@
 import {cart} from '../../data/cart-class.js';
 import {renderOrderSummary} from '../../scripts/checkout/orderSummary.js';
 import {renderPaymentSummary} from '../../scripts/checkout/paymentSummary.js';
+import {renderCheckoutHeader} from '../../scripts/checkout/checkoutHeader.js';
 import {loadProductsFetch} from '../../data/products.js';
 
 describe('test suite: addToCart', () => {
@@ -263,7 +264,8 @@ describe('test suite: change delivery option', () => {
       // Update the view
       renderOrderSummary();
       renderPaymentSummary();
-      
+      renderCheckoutHeader();
+
       element = document.querySelector(`.js-delivery-option-input-${productId3}-1`);
       expect(element.checked).toEqual(false); 
       
