@@ -3,7 +3,6 @@ import {getProduct} from '../../data/products.js';
 import {getDeliveryOption} from '../../data/deliveryOptions.js';
 import {formatCurrency} from '../utils/money.js';
 import {addOrder} from '../../data/orders.js';
-import {renderOrderSummary} from './orderSummary.js';
 //import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 //import isSatSun from '../utils/datetime.js';
 
