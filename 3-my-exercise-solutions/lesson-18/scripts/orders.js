@@ -58,7 +58,7 @@ export function renderOrdersGrid() {
   document.querySelectorAll('.js-buy-again-button')
   .forEach((button) => {
     button.addEventListener('click', () => {
-      const orderId = button.dataset.orderIdBuy;
+      //const orderId = button.dataset.orderIdBuy;
       const productId = button.dataset.productIdBuy;
       cart.addToCart(productId);
       renderOrdersGrid();
@@ -70,8 +70,13 @@ export function renderOrdersGrid() {
     button.addEventListener('click', () => {
       const orderId = button.dataset.orderIdTrack;
       const productId = button.dataset.productIdTrack;
+      let url;
       //Change to tracking page with URL parameters for orderId and productId
-      renderOrdersGrid();
+      window.location.href = 'tracking.html';
+      url = new URL(window.location);
+      url.searchParams.set('orderId', orderId);
+      url.searchParams.set('productId', productId);
+      window.history.pushState({}, '', url);
     }); // addEventListener
   }); // forEach((button
 }
