@@ -228,6 +228,10 @@ return html;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 
+//This does not need to be called here.  It is called by checkout.js when the checkout page loads
+//the products array and calls renderOrderSummary() and renderPaymentSummary()
+
+
 // Ensure renderOrderSummary() is called on page load
 //document.addEventListener('DOMContentLoaded', () => {
 //  renderOrderSummary();

@@ -9,7 +9,6 @@ async function loadAmazonPage(fcn) {
     console.log(`Unexpected error in loadAmazonPage(): ${error}. Please try again later.`);
   }
 }
-loadAmazonPage(renderProductsGrid);
 
 function renderProductsGrid() {
   let productsHTML = '';
@@ -113,14 +112,5 @@ function renderProductsGrid() {
     document.querySelector('.js-cart-quantity-amazon').innerHTML = cartQuantity;
     return;
   }
-  
-  ////////////////////////////////////////////////////////////////////////////////
-// Get a variable out of a file
-// 1. Add type="module" attribute
-// 2. Export
-// 3. Import
-//
-// Put all imports at top of the file.
-// Must use Live Server to open HTML files that use modules.
-// 13:04:04
-////////////////////////////////////////////////////////////////////////////////
+
+  loadAmazonPage(renderProductsGrid);

@@ -10,12 +10,10 @@ async function loadCheckoutPage() {
     await loadProductsFetch();
     renderOrderSummary();
     renderPaymentSummary();
-    
   } catch (error) {
     console.log(`Unexpected error in loadCheckoutPage(): ${error}. Please try again later.`);
   }
 }
-loadCheckoutPage();
 
 /*
 async function loadProductsAndCart() {
@@ -69,3 +67,5 @@ loadProducts(() => {
   });
 });
 */
+
+loadCheckoutPage();

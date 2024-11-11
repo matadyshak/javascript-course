@@ -210,6 +210,11 @@
   margin-bottom: 15px;
 }
 
+.js-place-order-button:disabled {
+  opacity: 0.5;
+  pointer-events: none; // Optional, to prevent clicks
+}
+
 .product-quantity {
   display: flex;
   align-items: center; /* Align items vertically in the center */

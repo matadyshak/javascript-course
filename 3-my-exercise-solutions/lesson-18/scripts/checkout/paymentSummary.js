@@ -59,22 +59,36 @@ export function renderPaymentSummary() {
         $${formatCurrency(totalCents)}</div>
     </div>
 
-    <button class="place-order-button js-place-order button-primary">
+    <button class="place-order-button js-place-order-button button-primary">
       Place your order
     </button> 
   
   `;
 
-  const element = document.querySelector('.js-payment-summary');
+  let element = document.querySelector('.js-payment-summary');
   if (element) {
     element.innerHTML = paymentSummaryHTML;
   } else {
-    console.log(`Error: .js-payment-summary is: ${element}`);
+    console.log(`Element: .js-payment-summary is: ${element}`);
   }
 
-  document.querySelector('.js-place-order')
+  // Enable or disable the place order button
+  element = document.querySelector('.js-place-order-button');
+  if(element) {
+    element.disabled = (totalCartQuantity === 0 ) ? true : false; 
+  } else {
+    console.log(`Element .js-place-order-button is: ${element}`);
+  }
+  
+  document.querySelector('.js-place-order-button')
     .addEventListener('click', async () => {
       try {
+        
+        if (cart.cartItems.length === 0) {
+          console.log('Error: Placing an order with an empty cart.');
+          return;
+        }
+        
         const response = await fetch('https://supersimplebackend.dev/orders', {
           method: 'POST',
           headers: {
@@ -92,11 +106,11 @@ export function renderPaymentSummary() {
         const order = await response.json();
         addOrder(order);
         cart.clearCart();
+        window.location.href = 'orders.html';
+
       } catch (error) {
-        console.log(`Unexpected error: ${error}  Try again later.`);
+        console.log(`HTTP error in renderPaymentSummary(). Status: ${error}`);
       }
-      
-      window.location.href = 'orders.html';
     });
 }
 
@@ -180,6 +194,8 @@ function testIsSatSun() {
 testIsSatSun();
 */
 
+//This does not need to be called here.  It is called by checkout.js when the checkout page loads
+//the products array and calls renderOrderSummary() and renderPaymentSummary()
 
 // Ensure renderPaymentSummary() is called on page load
 //document.addEventListener('DOMContentLoaded', () => {
