@@ -2,6 +2,7 @@ import {loadProductsFetch, getProduct} from '../data/products.js';
 import {cart} from '../data/cart-class.js';
 import {getOrder, getProductInOrder} from '../data/orders.js';
 import {convertToMonthDate} from './utils/datetime.js';
+import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 
 const url = new URL(window.location.href);
 const orderId = url.searchParams.get('orderId');
@@ -38,8 +39,6 @@ export function renderTrackingPage() {
   }
 
   const totalCartQuantity = cart.calculateCartQuantity();
-
-  // renderTrackingHeader();
 
   trackingHTML += `
     <div class="amazon-header-left-section">
@@ -82,7 +81,7 @@ export function renderTrackingPage() {
     </a>
 
     <div class="delivery-date js-delivery-date">
-    Arriving on: ${convertToMonthDate(productInOrder.estimatedDeliveryTime)}}
+    Arriving on: ${convertToMonthDate(productInOrder.estimatedDeliveryTime)}
     </div>
 
     <div class="product-info js-product-name">
@@ -96,13 +95,13 @@ export function renderTrackingPage() {
     <img class="product-image js-product-image" src=${matchingProduct.image}">
 
     <div class="progress-labels-container">
-      <div class="progress-label js-progress-label-preparing">
+      <div class="progress-label js-progress-label-Preparing">
       Preparing
       </div>
-      <div class="progress-label current-status js-progress-label-shipped">
+      <div class="progress-label current-status js-progress-label-Shipped">
       Shipped
       </div>
-      <div class="progress-label js-progress-label-delivered">
+      <div class="progress-label js-progress-label-Delivered">
       Delivered
       </div>
     </div>
@@ -119,8 +118,58 @@ export function renderTrackingPage() {
     if (element) {
       element.innerHTML = trackingHTML;
     } else {
-      console.log(`Element .js-tracking-page is: ${element}`);
+      console.log(`Element .js-amazon-header is: ${element}`);
     }
+
+    const currentTime = dayjs();
+    const percentProgress = ((currentTime - order.orderTime) / 
+      (productInOrder.estimatedDeliveryTime - order.orderTime)) * 100;
+
+    if(percentProgress > 100) {
+      percentProgress = 100;
+    }
+
+  //  updateProgressBar(percentProgress);
+    updateProgressBar(10);
+  }
+
+function updateProgressBar(percent)
+{
+
+  const element = document.querySelector('.js-progress-bar');
+
+  if (element) {
+    element.style.width = `${percent}%`;
+  } else {
+    console.log(`Element .js-progress-bar is: ${element}`);
+  }
+
+  updateProgressLabel(percent);
+}
+
+function updateProgressLabel(percent)
+{
+  const status = '';
+
+  if (percent < 50) {
+    status = 'Preparing';
+  } else if (percent < 100) {
+    status = 'Shipped';
+  } else {
+    status = 'Delivered';
+  }
+
+  const labels = document.querySelectorAll('.js-progress-label');
+
+  if (labels) {
+    labels.forEach(label => label.classList.remove('current-status'));
+    const newStatusLabel = document.querySelector(`.js-progress-label-${status}`);
+    if (newStatusLabel) {
+      newStatusLabel.classList.add('current-status');
+    }
+  } else {
+    console.log(`Element .js-progress-label is: ${labels}`);
+  }
 }
 
 loadTrackingPage(renderTrackingPage);
