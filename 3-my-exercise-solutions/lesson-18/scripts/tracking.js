@@ -129,8 +129,7 @@ export function renderTrackingPage() {
       percentProgress = 100;
     }
 
-  //  updateProgressBar(percentProgress);
-    updateProgressBar(10);
+    updateProgressBar(percentProgress);
   }
 
 function updateProgressBar(percent)
