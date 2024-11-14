@@ -124,7 +124,7 @@ export function renderTrackingPage() {
     }
 
     const currentTime = dayjs();
-    const percentProgress = ((currentTime - order.orderTime) / 
+    let percentProgress = ((currentTime - order.orderTime) / 
       (productInOrder.estimatedDeliveryTime - order.orderTime)) * 100;
 
     if(percentProgress > 100) {
@@ -150,7 +150,7 @@ function updateProgressBar(percent)
 
 function updateProgressLabel(percent)
 {
-  const status = '';
+  let status = '';  //This caused an error if const
 
   if (percent < 50) {
     status = 'Preparing';
