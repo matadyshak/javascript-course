@@ -41,6 +41,7 @@ export function renderTrackingPage() {
   const totalCartQuantity = cart.calculateCartQuantity();
 
   trackingHTML += `
+  <div class="amazon-header">
     <div class="amazon-header-left-section">
     <a href="amazon.html" class="header-link">
       <img class="amazon-logo"
@@ -67,31 +68,31 @@ export function renderTrackingPage() {
     <a class="cart-link header-link" href="checkout.html">
       <img class="cart-icon" src="images/icons/cart-icon.png">
       <div class="cart-quantity">
-        ${totalCartQuantity}
+      Quantity: ${totalCartQuantity}
       </div>
       <div class="cart-text">Cart</div>
     </a>
     </div>
 
-    <!-- The next line closes the <div class="amazon-header js-amazon-header"> in tracking.html and the div count becomes zero -->
+    <!-- The next line closes the <div class="amazon-header js-amazon-header">  -->
     </div>     
 
     <div class="main">
     <div class="order-tracking">
     <a class="back-to-orders-link link-primary" href="orders.html">
-      View all orders
+    View all orders
     </a>
 
     <div class="delivery-date js-delivery-date">
-      Arriving on: ${convertToMonthDate(productInOrder.estimatedDeliveryTime)}
+    Arriving on: ${convertToMonthDate(productInOrder.estimatedDeliveryTime)}
     </div>
 
     <div class="product-info js-product-name">
-      ${matchingProduct.name}
+    ${matchingProduct.name}
     </div>
 
     <div class="product-info js-product-quantity">
-      ${productInOrder.quantity}
+    Quantity: ${productInOrder.quantity}
     </div>
 
     <img class="product-image js-product-image" src="${matchingProduct.image}">
@@ -111,17 +112,12 @@ export function renderTrackingPage() {
     <div class="progress-bar-container">
       <div class="progress-bar js-progress-bar"></div>
     </div>
-    </div>
-    </div>
 
+    </div>
+    </div>
     `;
 
-    const element = document.querySelector('.js-amazon-header');
-    if (element) {
-      element.innerHTML = trackingHTML;
-    } else {
-      console.log(`Element .js-amazon-header is: ${element}`);
-    }
+    document.body.innerHTML = trackingHTML;
 
     const currentTime = dayjs();
     let percentProgress = ((currentTime - order.orderTime) / 
