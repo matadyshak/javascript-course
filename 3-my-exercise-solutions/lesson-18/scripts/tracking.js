@@ -66,7 +66,9 @@ export function renderTrackingPage() {
 
     <a class="cart-link header-link" href="checkout.html">
       <img class="cart-icon" src="images/icons/cart-icon.png">
-      <div class="cart-quantity">${totalCartQuantity}</div>
+      <div class="cart-quantity">
+        ${totalCartQuantity}
+      </div>
       <div class="cart-text">Cart</div>
     </a>
     </div>
@@ -81,7 +83,7 @@ export function renderTrackingPage() {
     </a>
 
     <div class="delivery-date js-delivery-date">
-    Arriving on: ${convertToMonthDate(productInOrder.estimatedDeliveryTime)}
+      Arriving on: ${convertToMonthDate(productInOrder.estimatedDeliveryTime)}
     </div>
 
     <div class="product-info js-product-name">
@@ -89,10 +91,10 @@ export function renderTrackingPage() {
     </div>
 
     <div class="product-info js-product-quantity">
-    ${productInOrder.quantity}
+      ${productInOrder.quantity}
     </div>
 
-    <img class="product-image js-product-image" src=${matchingProduct.image}">
+    <img class="product-image js-product-image" src="${matchingProduct.image}">
 
     <div class="progress-labels-container">
       <div class="progress-label js-progress-label-Preparing">
