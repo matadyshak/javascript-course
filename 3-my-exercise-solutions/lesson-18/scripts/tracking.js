@@ -118,7 +118,8 @@ export function renderTrackingPage() {
 
     document.body.innerHTML = trackingHTML;
 
-    const currentDate = dayjs().add(4, 'day');
+    //const currentDate = dayjs().add(2, 'day');
+    const currentDate = dayjs();
     const orderDate = dayjs(order.orderTime).tz('America/Chicago');
     const deliveryDate = dayjs(productInOrder.estimatedDeliveryTime).tz('America/Chicago');
     const daysSinceOrdered = currentDate.diff(orderDate, 'day');
@@ -150,7 +151,7 @@ function updateProgressBar(percent)
 function updateProgressLabel(percent)
 {
   let status = '';  //This caused an error if const
-
+  
   if (percent < 50) {
     status = 'Preparing';
   } else if (percent < 100) {
@@ -159,12 +160,11 @@ function updateProgressLabel(percent)
     status = 'Delivered';
   }
 
+  const newStatusLabel = document.querySelector(`.js-progress-label-${status}`);
   const labels = document.querySelectorAll('.js-progress-label');
 
   if (labels) {
     labels.forEach(label => label.classList.remove('.current-status'));
-    const newStatusLabel = document.querySelector(`.js-progress-label-${status}`);
-    //This is broken - newStatusLabel is never null
     if (newStatusLabel) {
       newStatusLabel.classList.add('.current-status');
     }
