@@ -20,8 +20,15 @@
   </head>
   <body>
 
-    <script type="module" src="scripts/tracking.js">
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/plugin/utc.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/plugin/timezone.min.js"></script>
+    <script>
+      dayjs.extend(window.dayjs_plugin_utc);
+      dayjs.extend(window.dayjs_plugin_timezone);
     </script>
+
+    <script type="module" src="scripts/tracking.js"></script>
 
   </body>
 </html>

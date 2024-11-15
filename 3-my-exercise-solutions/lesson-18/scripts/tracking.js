@@ -2,7 +2,6 @@ import {loadProductsFetch, getProduct} from '../data/products.js';
 import {cart} from '../data/cart-class.js';
 import {getOrder, getProductInOrder} from '../data/orders.js';
 import {convertToMonthDate} from './utils/datetime.js';
-import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 
 const url = new URL(window.location.href);
 const orderId = url.searchParams.get('orderId');
@@ -68,7 +67,7 @@ export function renderTrackingPage() {
     <a class="cart-link header-link" href="checkout.html">
       <img class="cart-icon" src="images/icons/cart-icon.png">
       <div class="cart-quantity">
-      Quantity: ${totalCartQuantity}
+      ${totalCartQuantity}
       </div>
       <div class="cart-text">Cart</div>
     </a>
@@ -119,9 +118,13 @@ export function renderTrackingPage() {
 
     document.body.innerHTML = trackingHTML;
 
-    const currentTime = dayjs();
-    let percentProgress = ((currentTime - order.orderTime) / 
-      (productInOrder.estimatedDeliveryTime - order.orderTime)) * 100;
+    const currentDate = dayjs().add(4, 'day');
+    const orderDate = dayjs(order.orderTime).tz('America/Chicago');
+    const deliveryDate = dayjs(productInOrder.estimatedDeliveryTime).tz('America/Chicago');
+    const daysSinceOrdered = currentDate.diff(orderDate, 'day');
+    const daysToProcess = deliveryDate.diff(orderDate, 'day');
+
+    let percentProgress = ( daysSinceOrdered / daysToProcess ) * 100;
 
     if(percentProgress > 100) {
       percentProgress = 100;
@@ -159,10 +162,11 @@ function updateProgressLabel(percent)
   const labels = document.querySelectorAll('.js-progress-label');
 
   if (labels) {
-    labels.forEach(label => label.classList.remove('current-status'));
+    labels.forEach(label => label.classList.remove('.current-status'));
     const newStatusLabel = document.querySelector(`.js-progress-label-${status}`);
+    //This is broken - newStatusLabel is never null
     if (newStatusLabel) {
-      newStatusLabel.classList.add('current-status');
+      newStatusLabel.classList.add('.current-status');
     }
   } else {
     console.log(`Element .js-progress-label is: ${labels}`);
