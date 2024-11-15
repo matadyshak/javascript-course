@@ -97,13 +97,13 @@ export function renderTrackingPage() {
     <img class="product-image js-product-image" src="${matchingProduct.image}">
 
     <div class="progress-labels-container">
-      <div class="progress-label js-progress-label-Preparing">
+      <div class="progress-label js-progress-label js-progress-label-Preparing">
       Preparing
       </div>
-      <div class="progress-label current-status js-progress-label-Shipped">
+      <div class="progress-label current-status js-progress-label js-progress-label-Shipped">
       Shipped
       </div>
-      <div class="progress-label js-progress-label-Delivered">
+      <div class="progress-label js-progress-label js-progress-label-Delivered">
       Delivered
       </div>
     </div>
