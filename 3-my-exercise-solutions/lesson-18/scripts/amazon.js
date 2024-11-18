@@ -1,6 +1,13 @@
 import {cart} from '../data/cart-class.js';
 import {products, loadProductsFetch} from '../data/products.js';
 
+export let gSearchURL = new URL(window.location.href);
+export let gSearchString = gSearchURL.searchParams.get('search');
+
+if (gSearchString === null) {
+  gSearchString = '';
+}
+
 async function loadAmazonPage(fcn) {
   try {
     await loadProductsFetch();
@@ -12,8 +19,17 @@ async function loadAmazonPage(fcn) {
 
 function renderProductsGrid() {
   let productsHTML = '';
+  let numberIncluded = 0;
 
   products.forEach((product) => {
+    numberIncluded += product.setSearchIncluded(product.name, gSearchString);
+  });
+
+  products.forEach((product) => {
+    if (!product.getSearchIncluded()) {
+      return; // skip this iteration
+    }
+
     productsHTML += `
       <div class="product-container">
       <div class="product-image-container">
@@ -99,9 +115,34 @@ function renderProductsGrid() {
 
       cart.addToCart(productId);
       displayCartQuantity();
-
       }) // button.addEventListener
     }) //forEach(button)
+
+    // Triggered by clicking search button on Amazon page
+    //Add a click event listener for the search button
+    const buttonElement = document.querySelector('.js-search-button');
+    const textElement = document.querySelector('.js-search-bar');
+    buttonElement.addEventListener('click', () => {
+      gSearchString = textElement.value;
+      gSearchURL = new URL(window.location);
+      gSearchURL.searchParams.set('search', gSearchString);
+      renderProductsGrid();
+      displayCartQuantity();
+    }) // searchButton.addEventListener
+
+    // Triggered by ENTER key while in the search text box
+    // Add a click event listener for the ENTER button
+    const searchInput = document.querySelector('.js-search-bar');
+    searchInput.addEventListener('keydown', function(event) {
+      //Get the search box text
+      if (event.key === 'Enter') {
+        gSearchString = searchInput.value;
+        gSearchURL = new URL(window.location);
+        gSearchURL.searchParams.set('search', gSearchString);
+        renderProductsGrid();
+        displayCartQuantity();
+      }
+    }); // searchInput.addEventListener
   }
 
   function displayCartQuantity()

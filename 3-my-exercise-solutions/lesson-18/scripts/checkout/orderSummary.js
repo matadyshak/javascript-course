@@ -99,9 +99,7 @@ document.querySelectorAll('.js-delete-link')
   .forEach((link) => {
     link.addEventListener('click', () => {
       const productId = link.dataset.productIdUpdate;
-      const container = document.querySelector(
-        `.js-cart-item-container-${productId}`
-      );
+      const container = document.querySelector(`.js-cart-item-container-${productId}`);
       container.classList.add('is-editing-quantity');
     }); // addEventListener
   }); // forEach((link
@@ -122,9 +120,7 @@ document.querySelectorAll('.js-delete-link')
   .forEach((link) => {
     link.addEventListener('click', () => {
       const productId = link.dataset.productIdSave;
-      const container = document.querySelector(
-        `.js-cart-item-container-${productId}`
-      );
+      const container = document.querySelector(`.js-cart-item-container-${productId}`);
 
       //.js-quantity-input is a group of input elements
       let quantityInput = Number(document.querySelector(`.js-quantity-input-${productId}`).value);

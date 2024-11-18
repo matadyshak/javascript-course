@@ -1,7 +1,10 @@
 import formatCurrency from '../scripts/utils/money.js';
+import {gSearchString} from '../scripts/amazon.js';
+
 // import {cart} from './cart-class.js';
 
 export let products = [];
+
 
 export async function loadProductsFetch() {
   try {
@@ -89,12 +92,19 @@ export function getProduct(productId) {
   return matchingProduct;
 }
 
+export function setSearchIncludedAll() {
+  products.forEach((product) => {
+    product.setSearchIncluded(true);
+  });
+}
+
 export class Product {
   id;
   image;
   name;
   rating;
   priceCents;
+  searchIncluded;
 
   constructor(productDetails) {
     this.id = productDetails.id;
@@ -102,6 +112,7 @@ export class Product {
     this.name = productDetails.name;
     this.rating = productDetails.rating;
     this.priceCents = productDetails.priceCents;
+    this.searchIncluded = true;
   }
 
   getPrice() {
@@ -115,6 +126,20 @@ export class Product {
   extraInfoHTML() {
     return('');  
   }
+
+  getSearchIncluded() {
+    return this.searchIncluded;
+  }
+
+  setSearchIncluded(productName, searchString) {
+    this.searchIncluded = false; 
+    if (productName.includes(searchString)) {
+      this.searchIncluded = true; 
+      return 1;
+    }
+    return 0;
+  }
+
 }
 
 export class Clothing extends Product {
