@@ -79,6 +79,30 @@ export function renderOrdersGrid() {
       window.history.pushState({}, '', url);
     }); // addEventListener
   }); // forEach((button
+
+  // Triggered by clicking search button on Amazon page
+  //Add a click event listener for the search button
+  const buttonElement = document.querySelector('.js-search-button');
+  buttonElement.addEventListener('click', () => {
+    const textElement = document.querySelector('.js-search-bar');
+    const searchString = textElement.value;
+    const searchURL = new URL('amazon.html', window.location.origin);
+    searchURL.searchParams.set('search', searchString);
+    window.location.href = searchURL;
+  }) // buttonElement.addEventListener
+
+  // Triggered by ENTER key while in the search text box
+  // Add a click event listener for the ENTER button
+  const searchInput = document.querySelector('.js-search-bar');
+  searchInput.addEventListener('keydown', function(event) {
+    //Get the search box text
+    if (event.key === 'Enter') {
+      const searchString = searchInput.value;
+      const searchURL = new URL('amazon.html', window.location.origin);
+      searchURL.searchParams.set('search', searchString);
+      window.location.href = searchURL;
+    }
+  }); // searchInput.addEventListener
 }
 
 export function renderOrderProductsHTML(order) {
@@ -141,9 +165,9 @@ export function renderOrdersHeader() {
     </div>
 
     <div class="amazon-header-middle-section">
-      <input class="search-bar" type="text" placeholder="Search">
+      <input class="search-bar js-search-bar" type="text" placeholder="Search">
 
-      <button class="search-button">
+      <button class="search-button js-search-button">
         <img class="search-icon" src="images/icons/search-icon.png">
       </button>
     </div>

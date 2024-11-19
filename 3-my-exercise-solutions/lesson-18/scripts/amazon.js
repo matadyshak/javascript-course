@@ -115,15 +115,15 @@ function renderProductsGrid() {
     // Triggered by clicking search button on Amazon page
     //Add a click event listener for the search button
     const buttonElement = document.querySelector('.js-search-button');
-    const textElement = document.querySelector('.js-search-bar');
-    buttonElement.addEventListener('click', () => {
+      buttonElement.addEventListener('click', () => {
+      const textElement = document.querySelector('.js-search-bar');
       const searchString = textElement.value;
-      const searchURL = new URL(window.location);
+      const searchURL = new URL('amazon.html', window.location.origin);
       searchURL.searchParams.set('search', searchString);
       renderProductsGrid();
       displayCartQuantity();
       window.history.pushState({}, '', searchURL);
-    }) // searchButton.addEventListener
+    }) // buttonElement.addEventListener
 
     // Triggered by ENTER key while in the search text box
     // Add a click event listener for the ENTER button
@@ -132,7 +132,7 @@ function renderProductsGrid() {
       //Get the search box text
       if (event.key === 'Enter') {
         const searchString = searchInput.value;
-        const searchURL = new URL(window.location);
+        const searchURL = new URL('amazon.html', window.location.origin);
         searchURL.searchParams.set('search', searchString);
         renderProductsGrid();
         displayCartQuantity();
