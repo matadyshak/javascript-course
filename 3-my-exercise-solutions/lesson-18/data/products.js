@@ -1,10 +1,6 @@
 import formatCurrency from '../scripts/utils/money.js';
-import {gSearchString} from '../scripts/amazon.js';
-
-// import {cart} from './cart-class.js';
 
 export let products = [];
-
 
 export async function loadProductsFetch() {
   try {
@@ -139,7 +135,6 @@ export class Product {
     }
     return 0;
   }
-
 }
 
 export class Clothing extends Product {
