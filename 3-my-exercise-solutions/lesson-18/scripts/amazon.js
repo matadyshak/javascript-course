@@ -116,13 +116,13 @@ function renderProductsGrid() {
     //Add a click event listener for the search button
     const buttonElement = document.querySelector('.js-search-button');
       buttonElement.addEventListener('click', () => {
-      const textElement = document.querySelector('.js-search-bar');
-      const searchString = textElement.value;
+      const searchString = document.querySelector('.js-search-bar').value; 
       const searchURL = new URL('amazon.html', window.location.origin);
       searchURL.searchParams.set('search', searchString);
+      //Update URL without reloading
+      history.pushState(null, '', searchURL); 
       renderProductsGrid();
       displayCartQuantity();
-      window.history.pushState({}, '', searchURL);
     }) // buttonElement.addEventListener
 
     // Triggered by ENTER key while in the search text box
@@ -134,10 +134,12 @@ function renderProductsGrid() {
         const searchString = searchInput.value;
         const searchURL = new URL('amazon.html', window.location.origin);
         searchURL.searchParams.set('search', searchString);
+        //Update URL without reloading
+        history.pushState(null, '', searchURL); 
         renderProductsGrid();
         displayCartQuantity();
-        window.history.pushState({}, '', searchURL);
       }
+    
     }); // searchInput.addEventListener
   }
 
