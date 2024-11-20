@@ -16,7 +16,7 @@ function renderProductsGrid() {
   const searchString = new URLSearchParams(window.location.search).get('search') || '';
 
   products.forEach((product) => {
-    numberIncluded += product.setSearchIncluded(product.name, searchString);
+    numberIncluded += product.setSearchIncluded(product.name, searchString, product.keywords);
   });
 
   products.forEach((product) => {

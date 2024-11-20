@@ -101,6 +101,7 @@ export class Product {
   rating;
   priceCents;
   searchIncluded;
+  keywords;
 
   constructor(productDetails) {
     this.id = productDetails.id;
@@ -109,6 +110,7 @@ export class Product {
     this.rating = productDetails.rating;
     this.priceCents = productDetails.priceCents;
     this.searchIncluded = true;
+    this.keywords = productDetails.keywords || [];
   }
 
   getPrice() {
@@ -127,12 +129,25 @@ export class Product {
     return this.searchIncluded;
   }
 
-  setSearchIncluded(productName, searchString) {
+  setSearchIncluded(productName, searchString, keywords) {
     this.searchIncluded = false; 
-    if (productName.includes(searchString)) {
-      this.searchIncluded = true; 
-      return 1;
-    }
+    let name = productName.toLowerCase();
+    let subSearchStrings = searchString.split(" ");
+
+    subSearchStrings.forEach((subSearchString) => {
+      if (name.includes(subSearchString.toLowerCase())) {
+        this.searchIncluded = true; 
+        return 1;
+      }
+    });
+
+    keywords.forEach((keyword ) => {
+      if (keyword.toLowerCase().includes(searchString.toLowerCase())) {
+        this.searchIncluded = true;
+        return 1;
+      }
+    });
+    
     return 0;
   }
 }
