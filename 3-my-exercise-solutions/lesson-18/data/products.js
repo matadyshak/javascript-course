@@ -132,26 +132,32 @@ export class Product {
   setSearchIncluded(productName, searchString, keywords) {
     this.searchIncluded = false; 
     let name = productName.toLowerCase();
-    let subSearchStrings = searchString.split(" ");
+    let search = searchString.toLowerCase();
+    let subSearchStrings = search.split(" ");
+
+    if (search.length === 0) {
+      this.searchIncluded = true; 
+      return 1;
+    }
 
     subSearchStrings.forEach((subSearchString) => {
-      if (name.includes(subSearchString.toLowerCase())) {
+      if (name.includes(subSearchString)) {
         this.searchIncluded = true; 
-        return 1;
       }
     });
 
-    keywords.forEach((keyword ) => {
-      if (keyword.toLowerCase().includes(searchString.toLowerCase())) {
-        this.searchIncluded = true;
-        return 1;
-      }
+    keywords.forEach((keyword) => {
+      let key = keyword.toLowerCase();
+      subSearchStrings.forEach((subSearchString) => {
+        if (key.includes(subSearchString)) {
+          this.searchIncluded = true;
+        }
+      });
     });
     
-    return 0;
+    return (this.searchIncluded ? 1 : 0);
   }
 }
-
 export class Clothing extends Product {
   sizeChartLink;
   type;

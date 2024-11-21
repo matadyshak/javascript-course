@@ -19,6 +19,13 @@ function renderProductsGrid() {
     numberIncluded += product.setSearchIncluded(product.name, searchString, product.keywords);
   });
 
+  const errorMessage = document.querySelector('.js-error-message');
+  if (numberIncluded === 0) {
+    errorMessage.classList.remove('hidden');
+  } else {
+    errorMessage.classList.add('hidden');
+  }
+
   products.forEach((product) => {
     if (!product.getSearchIncluded()) {
       return; // skip this iteration
