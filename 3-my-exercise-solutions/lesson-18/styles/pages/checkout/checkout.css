@@ -201,6 +201,7 @@
 }
 
 .place-order-button {
+  background-color: rgb(254, 189, 105);
   width: 100%;
   padding-top: 12px;
   padding-bottom: 12px;
@@ -249,4 +250,19 @@
 
 .is-editing-quantity .update-quantity-link {
   display: none;
+}
+
+.hidden {
+  display: none;
+}
+
+.view-products-button {
+  color: black;
+  background-color: rgb(254, 189, 105);
+  margin-top: 20px;
+  height: 50px;
+  width: 150px;
+  font-size: 16px;
+  font-weight: 250;
+  border-radius: 8px;
 }

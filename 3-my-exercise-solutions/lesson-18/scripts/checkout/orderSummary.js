@@ -11,6 +11,17 @@ let dateString = '';
 
 renderCheckoutHeader();
 
+const cartEmpty = document.querySelector('.js-cart-empty');
+const viewProducts = document.querySelector('.js-view-products-button');
+
+if (cart.cartItems.length === 0) {
+  cartEmpty.classList.remove('hidden');
+  viewProducts.classList.remove('hidden');
+} else {
+  cartEmpty.classList.add('hidden');
+  viewProducts.classList.add('hidden');
+}
+
 // Loop through all cart items
 cart.cartItems.forEach((cartItem) => {
    
@@ -149,6 +160,11 @@ document.querySelectorAll('.js-delete-link')
         renderPaymentSummary();
       }); // addEventListener
     }); // forEach((element 
+
+    const viewProductsButton = document.querySelector('.js-view-products-button');
+    viewProductsButton.addEventListener('click', () => {
+    window.location.href = 'amazon.html';
+    });
 
     return;
 }

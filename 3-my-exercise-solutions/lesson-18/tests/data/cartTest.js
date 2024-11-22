@@ -13,6 +13,8 @@ describe('test suite: addToCart', () => {
 
   document.querySelector('.js-test-container').innerHTML = `
     <div class="checkout-header js-cart-quantity-order"></div>
+    <div class="cart-empty js-cart-empty hidden">Your cart is empty.</div>
+    <button class="view-products-button js-view-products-button hidden">View products</button>
     <div class="order-summary js-order-summary"></div>
     <div class="payment-summary js-payment-summary"></div>
     <div class="product-quantity-container">
@@ -126,6 +128,8 @@ describe('test suite: removeFromCart', () => {
   
     document.querySelector('.js-test-container').innerHTML = `
       <div class="checkout-header js-cart-quantity-order"></div>
+      <div class="cart-empty js-cart-empty hidden">Your cart is empty.</div>
+      <button class="view-products-button js-view-products-button hidden">View products</button>
       <div class="order-summary js-order-summary"></div>
       <div class="payment-summary js-payment-summary"></div>
       `;
@@ -201,6 +205,8 @@ describe('test suite: change delivery option', () => {
 
     document.querySelector('.js-test-container').innerHTML = `
       <div class="checkout-header js-cart-quantity-order"></div>
+      <div class="cart-empty js-cart-empty hidden">Your cart is empty.</div>
+      <button class="view-products-button js-view-products-button hidden">View products</button>
       <div class="order-summary js-order-summary"></div>
       <div class="payment-summary js-payment-summary"></div>
       `;
