@@ -1,17 +1,27 @@
 import {cart} from '../../data/cart-class.js';
-import {getProduct} from '../../data/products.js';
 import formatCurrency from '../utils/money.js';
 import {deliveryOptions, getDeliveryOption, calculateDeliveryDate} from '../../data/deliveryOptions.js';
 import {renderPaymentSummary} from './paymentSummary.js';
-import {renderCheckoutHeader} from './checkoutHeader.js';
+import {getProduct} from '../../data/products.js';
 ////////////////////////////////////////////////////////////////////////////////////////
 
 export function renderOrderSummary() {
 let cartSummaryHTML = '';
 let dateString = '';
 
-cartSummaryHTML += cartTotalQuantityHTML();
-   
+renderCheckoutHeader();
+
+const cartEmpty = document.querySelector('.js-cart-empty');
+const viewProducts = document.querySelector('.js-view-products-button');
+
+if (cart.cartItems.length === 0) {
+  cartEmpty.classList.remove('hidden');
+  viewProducts.classList.remove('hidden');
+} else {
+  cartEmpty.classList.add('hidden');
+  viewProducts.classList.add('hidden');
+}
+
 // Loop through all cart items
 cart.cartItems.forEach((cartItem) => {
    
@@ -19,7 +29,7 @@ cart.cartItems.forEach((cartItem) => {
   const matchingProduct = getProduct(productId);
 
   if (!matchingProduct) {
-    console.log(`matchingProduct is: ${matchingProduct}`);
+    console.log(`Error in renderOrderSummary(): matchingProduct is: ${matchingProduct}`);
   }
 
   const deliveryOptionId = cartItem.deliveryOptionId;
@@ -93,7 +103,6 @@ document.querySelectorAll('.js-delete-link')
       cart.removeFromCart(productId);
       renderOrderSummary();
       renderPaymentSummary();
-      renderCheckoutHeader();
     }); // addEventListener
   }); // forEach((link
 
@@ -101,9 +110,7 @@ document.querySelectorAll('.js-delete-link')
   .forEach((link) => {
     link.addEventListener('click', () => {
       const productId = link.dataset.productIdUpdate;
-      const container = document.querySelector(
-        `.js-cart-item-container-${productId}`
-      );
+      const container = document.querySelector(`.js-cart-item-container-${productId}`);
       container.classList.add('is-editing-quantity');
     }); // addEventListener
   }); // forEach((link
@@ -124,9 +131,7 @@ document.querySelectorAll('.js-delete-link')
   .forEach((link) => {
     link.addEventListener('click', () => {
       const productId = link.dataset.productIdSave;
-      const container = document.querySelector(
-        `.js-cart-item-container-${productId}`
-      );
+      const container = document.querySelector(`.js-cart-item-container-${productId}`);
 
       //.js-quantity-input is a group of input elements
       let quantityInput = Number(document.querySelector(`.js-quantity-input-${productId}`).value);
@@ -141,7 +146,6 @@ document.querySelectorAll('.js-delete-link')
       cart.updateCartQuantity(productId, quantityInput);
       renderOrderSummary();
       renderPaymentSummary();
-      renderCheckoutHeader();
       }); // addEventListener
   });
 
@@ -154,44 +158,47 @@ document.querySelectorAll('.js-delete-link')
         cart.updateDeliveryOption(productId, deliveryOptionId);
         renderOrderSummary();
         renderPaymentSummary();
-        renderCheckoutHeader();
       }); // addEventListener
     }); // forEach((element 
+
+    const viewProductsButton = document.querySelector('.js-view-products-button');
+    viewProductsButton.addEventListener('click', () => {
+    window.location.href = 'amazon.html';
+    });
 
     return;
 }
 
-function cartTotalQuantityHTML() {
-  let html = '';
-
+function renderCheckoutHeader() {
   const totalCartQuantity = cart.calculateCartQuantity();
   const totalCartQuantityHTML = 
     `    
-  <div class="header-content">
-    <div class="checkout-header-left-section">
-      <a href="amazon.html">
-        <img class="amazon-logo" src="images/amazon-logo.png">
-        <img class="amazon-mobile-logo" src="images/amazon-mobile-logo.png">
-      </a>
-    </div>
+      <div class="header-content">
+        <div class="checkout-header-left-section">
+          <a href="amazon.html">
+            <img class="amazon-logo" src="images/amazon-logo.png">
+            <img class="amazon-mobile-logo" src="images/amazon-mobile-logo.png">
+          </a>
+        </div>
 
-    <div class="checkout-header-middle-section">
-      Checkout (<a class="return-to-home-link"
-      href="amazon.html">3 items</a>)
-    </div>
+        <div class="checkout-header-middle-section">
+        Checkout (<a class="return-to-home-link js-return-to-home-link"
+        href="amazon.html">${totalCartQuantity} items</a>)
+        </div>
 
-    <div class="checkout-header-right-section">
-      <img src="images/icons/checkout-lock-icon.png">
-    </div>
-  </div>
-</div>
-<div class="main">
-  <div class="page-title">Review your order</div>
-    <div class="checkout-grid">
-      <div class="order-summary">
-  `; 
-
-   return html;
+        <div class="checkout-header-right-section">
+          <img src="images/icons/checkout-lock-icon.png">
+        </div>
+      </div>
+    `;
+    
+  // Insert the HTML after the js-cart-quantity-order tag
+  const element = document.querySelector('.js-cart-quantity-order');
+  if(!element) {
+    console.log(`Element .js-cart-quantity-order is: ${element}`);
+  } else {
+    element.innerHTML = totalCartQuantityHTML;
+  }
 }
 
 function deliveryOptionsHTML(matchingProduct, cartItem) {
@@ -232,8 +239,10 @@ return html;
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
-//renderCheckoutHeader();
-//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//This does not need to be called here.  It is called by checkout.js when the checkout page loads
+//the products array and calls renderOrderSummary() and renderPaymentSummary()
+
 
 // Ensure renderOrderSummary() is called on page load
 //document.addEventListener('DOMContentLoaded', () => {

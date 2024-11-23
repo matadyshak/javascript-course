@@ -1,24 +1,18 @@
 import formatCurrency from '../scripts/utils/money.js';
-//import {loadProductsData} from '../scripts/amazon.js';
 
 export let products = [];
 
-/*
-if (products.length > 0) {
-  console.log(`Skipping load of products data: products.length is: ${products.length}`); 
-} else {
-  console.log('Calling loadProductsData()');
-  loadProductsData();
-}
-*/
+export async function loadProductsFetch() {
+  try {
+    //Returns a Promise
+    const response = await fetch('https://supersimplebackend.dev/products');
 
-export function loadProductsFetch() {
-  const promise = fetch(
-    'https://supersimplebackend.dev/products'
-    ).then((response) => {
-    return response.json();
+    if (!response.ok) {
+      throw new Error(`HTTP error in loadProductsFetch(). Status: ${response.status}`);
+    }
 
-  }).then((productsData) => {
+    const productsData = await response.json(); 
+    
     products = productsData.map((productDetails) => {
       if (productDetails.type === 'clothing') {
         return new Clothing(productDetails);
@@ -28,19 +22,31 @@ export function loadProductsFetch() {
       return new Product(productDetails);
     }); //.map
 
-    console.log('load products');
-  }).catch((error) => {
-    console.log('Unexpected error.  Please try again later.');
-  });
-  return promise;
+    console.log('Loaded products', products);
+    return products; // Return products data for Promise.all
+
+  } catch (error) {
+    console.log(`Unexpected error in loadProductsFetch(): ${error}.  Please try again later.`);
+    return []; // Return empty array in case of an error
+  }
 }
 
 /*
-loadProductsFetch().then(() => {
-  console.log('next step');
-});
+// Function to run both functions in parallel
+async function runParallel() {
+  try {
+    console.log("Running in parallel...");
+    const [productsResult, cartResult] = await Promise.all([loadProductsFetch(), cart.loadCartFetch()]);
+    console.log("All tasks completed. Results:", productsResult, cartResult);
+  } catch (error) {
+    console.error('Error during parallel execution:', error);
+  }
+}
+// Call runParallel to execute
+// runParallel();
 */
 
+/*
 export function loadProducts(fun) {
   const xhr = new XMLHttpRequest();
   xhr.addEventListener('load', () => {
@@ -65,43 +71,6 @@ export function loadProducts(fun) {
     xhr.open('GET', 'https://supersimplebackend.dev/products');
     xhr.send();
   }
-
-
-/*
-export function loadProducts() {
-  return new Promise((resolve, reject) => {
-    if (products.length > 0) {
-      console.log(`loadProducts() found products.length: ${products.length} and skipped the remote load of products data`);
-      resolve();
-      return;
-    }
-
-    const xhr = new XMLHttpRequest();
-    xhr.addEventListener('load', () => {
-      try {
-        console.log(`xhr.response: ${xhr.response}`);
-        console.log(`JSON.parse(xhr.response): ${JSON.parse(xhr.response)}`);
-    
-        products = JSON.parse(xhr.response).map((productDetails) => {
-          if (productDetails.type === 'clothing') {
-            return new Clothing(productDetails);
-          } else if (productDetails.type === 'appliance') {
-            return new Appliance(productDetails);
-          }
-          return new Product(productDetails);
-        }); //.map
-
-        console.log('Products loaded');
-        resolve(); // Resolve the promise when the products are loaded
-      } catch (error) {
-          reject(error); // Reject the promise if there is an error
-      }
-    }); //addEventListener()
-
-    xhr.open('GET', 'https://supersimplebackend.dev/products');
-    xhr.send();
-  }); // return new Promise
-}
 */
 
 export function getProduct(productId) {
@@ -119,12 +88,20 @@ export function getProduct(productId) {
   return matchingProduct;
 }
 
+export function setSearchIncludedAll() {
+  products.forEach((product) => {
+    product.setSearchIncluded(true);
+  });
+}
+
 export class Product {
   id;
   image;
   name;
   rating;
   priceCents;
+  searchIncluded;
+  keywords;
 
   constructor(productDetails) {
     this.id = productDetails.id;
@@ -132,6 +109,8 @@ export class Product {
     this.name = productDetails.name;
     this.rating = productDetails.rating;
     this.priceCents = productDetails.priceCents;
+    this.searchIncluded = true;
+    this.keywords = productDetails.keywords || [];
   }
 
   getPrice() {
@@ -145,8 +124,40 @@ export class Product {
   extraInfoHTML() {
     return('');  
   }
-}
 
+  getSearchIncluded() {
+    return this.searchIncluded;
+  }
+
+  setSearchIncluded(productName, searchString, keywords) {
+    this.searchIncluded = false; 
+    let name = productName.toLowerCase();
+    let search = searchString.toLowerCase();
+    let subSearchStrings = search.split(" ");
+
+    if (search.length === 0) {
+      this.searchIncluded = true; 
+      return 1;
+    }
+
+    subSearchStrings.forEach((subSearchString) => {
+      if (name.includes(subSearchString)) {
+        this.searchIncluded = true; 
+      }
+    });
+
+    keywords.forEach((keyword) => {
+      let key = keyword.toLowerCase();
+      subSearchStrings.forEach((subSearchString) => {
+        if (key.includes(subSearchString)) {
+          this.searchIncluded = true;
+        }
+      });
+    });
+    
+    return (this.searchIncluded ? 1 : 0);
+  }
+}
 export class Clothing extends Product {
   sizeChartLink;
   type;

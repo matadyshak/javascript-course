@@ -19,21 +19,29 @@
     <link rel="stylesheet" href="styles/pages/checkout/checkout.css">
   </head>
   <body>
+
+    <!-- Verified that all the inserted HTML code blocks have equal <div> and </div>
+         Deleted extra </div> that was before class="main"
+    -->
+         
     <div class="checkout-header js-cart-quantity-order"></div>
-    </div>
 
-    <div class="main">
-      <div class="page-title">Review your order</div>
 
-      <div class="checkout-grid">
-        <div class="order-summary js-order-summary">
-        </div>
+      <div class="main">
+        <div class="page-title">Review your order</div>
+        <div class="cart-empty js-cart-empty hidden">Your cart is empty.</div>
+        <button class="view-products-button js-view-products-button hidden">View products</button>
+        <div class="checkout-grid">
 
-        <div class="payment-summary js-payment-summary">
 
-        </div>
+        <div class="order-summary js-order-summary"></div>
+
+
+        <div class="payment-summary js-payment-summary"></div>
       </div>
     </div>
-      <script type="module" src="scripts/checkout.js"></script>
+    
+  <script type="module" src="scripts/checkout.js"></script>
+  
   </body>
 </html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Lesson 18</title>
+  </head>
+  <body>
+    <script>
+
+      //Works in the debugger      
+      function requestGreetingXhr() {
+        const xhr = new XMLHttpRequest();
+
+        xhr.addEventListener('load', () => {
+        console.log(xhr.response);
+        }); //addEventListener()
+
+        xhr.addEventListener('error', (error) => {
+          console.log(`Unexpected error: ${error}`);
+        });
+  
+        xhr.open('GET', 'https://supersimplebackend.dev/greeting');
+        xhr.send();
+      }
+
+      //Gets error in the debugger at return response.text();
+      //That is because response.text was also in the watch window
+      function requestGreetingFetch() {
+        fetch('https://supersimplebackend.dev/greeting')
+
+          .then((response) => {
+            if (response.ok) {
+              return response.text();
+            }
+            throw new Error('Network response was not OK');
+          })
+                  
+          .then((text) => {
+            console.log(text);
+          })
+
+          .catch((error) => {
+            console.log(`Unexpected error: ${error}`);
+          });
+
+        return;
+      }
+      
+      async function requestGreetingAsyncAwait() {
+        try {
+          // throw 'error1';
+          // Returns a Response object
+          const response = await fetch('https://supersimplebackend.dev/greeting');
+          //const response = await fetch('https://superstupidbackend.dev/greeting');
+          // Cannot throw an error in the future
+          // reject lets you throw an error in the future
+          // throw 'error2'
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+
+          //Extract the text from the response
+          //Returns a Promise that resolves to the response's body content as a string
+          //Halts execution until the entire response has been received
+          const text = await response.text();
+          console.log(text);
+
+          // Return a value using a promise with resolve / reject
+          const value = await new Promise((resolve, reject) => {
+            resolve('value3');
+            //reject('error3')
+          });
+
+          // Log the resolved value from the promise
+          //console.log(value);
+        } // try
+        catch (error) {
+          console.log(`Error: ${error}`);
+        }
+        return;
+      }
+      
+      async function requestGreetingPost() {
+        try {
+          const response = await fetch('https://supersimplebackend.dev/greeting', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              name: 'Michael Anthony Tadyshak'
+            }) // stringify
+          }) // fetch
+    
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+
+          const textMessage = await response.text();
+          console.log(textMessage);
+
+        } catch (error) {
+          console.log(`Error: ${error}`);
+        }
+      }
+      
+      // CORS (Cross-Origin Resource Sharing) error occurs
+      function requestAmazon() {
+        const xhr = new XMLHttpRequest();
+
+        xhr.addEventListener('load', () => {
+        console.log(xhr.response);
+        }); //addEventListener()
+
+        xhr.addEventListener('error', () => {
+        console.log('Network error or CORS error: Request blocked by the back end.');
+        });
+  
+        xhr.addEventListener('abort', () => {
+        console.log('Request was aborted.');
+        });
+  
+        xhr.open('GET', 'https://amazon.com');
+        xhr.send();
+      }
+
+      async function requestGreetingPostNoBody() {
+        try {
+          const response = await fetch('https://supersimplebackend.dev/greeting', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          }) // fetch
+    
+          if (response.status >= 400) {
+            throw response;
+          }
+
+          const textMessage = await response.text();
+          console.log(textMessage);
+
+        } catch (error) {
+          if (error.status === 400) {
+            const errorMessage = await error.json();
+            console.log(errorMessage);
+          } else {
+            console.log(`Network error.  Please try again later: ${error}`);
+          }
+        }
+      }
+      
+      requestGreetingXhr();
+      requestGreetingFetch();
+      requestGreetingAsyncAwait();
+      requestGreetingPost();
+      requestAmazon();
+      requestGreetingPostNoBody();
+    </script>
+  </body>
+</html> 

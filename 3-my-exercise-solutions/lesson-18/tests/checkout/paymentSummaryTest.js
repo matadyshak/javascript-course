@@ -1,9 +1,8 @@
 import {renderOrderSummary} from '../../scripts/checkout/orderSummary.js';
 import {renderPaymentSummary} from '../../scripts/checkout/paymentSummary.js';
-import {renderCheckoutHeader} from '../../scripts/checkout/checkoutHeader.js';
 import {calculateDeliveryDateTest} from './orderSummaryTest.js';
 import {getDeliveryOption} from '../../data/deliveryOptions.js';
-import {loadProducts, loadProductsFetch} from '../../data/products.js';
+import {loadProductsFetch} from '../../data/products.js';
 import {cart} from '../../data/cart-class.js';
 
 describe('test suite: Integration test', () => {
@@ -12,12 +11,11 @@ describe('test suite: Integration test', () => {
   const productId2 = '5968897c-4d27-4872-89f6-5bcb052746d7'; // Women's Chiffon Beachware Cover Up (Clothing)
   const productId3 = '77a845b1-16ed-4eac-bdf9-5b591882113d'; // Countertop Blender (Appliance)
 
-  beforeAll((done) => {
-    loadProductsFetch().then(() => {
-      done();
-    });
+  beforeAll(async () => {
+    await loadProductsFetch();
+    console.log('Products loaded');
   });
- 
+  
   beforeEach( () => {
     spyOn(localStorage, 'setItem');
     spyOn(localStorage, 'getItem').and.callFake(() => {
@@ -26,6 +24,8 @@ describe('test suite: Integration test', () => {
 
   document.querySelector('.js-test-container').innerHTML = `
     <div class="checkout-header js-cart-quantity-order"></div>
+    <div class="cart-empty js-cart-empty hidden">Your cart is empty.</div>
+    <button class="view-products-button js-view-products-button hidden">View products</button>
     <div class="order-summary js-order-summary"></div>
     <div class="payment-summary js-payment-summary"></div>
     <div class="product-quantity-container">
@@ -89,8 +89,6 @@ describe('test suite: Integration test', () => {
       renderOrderSummary();
       // This will display all zeros in a payment summary
       renderPaymentSummary();
-      // This will display zero items
-      renderCheckoutHeader();
   }); // beforeEach
 
   afterEach( () => {
@@ -135,7 +133,7 @@ describe('test suite: Integration test', () => {
     // Need to render now or else the tags below will be undefined
     renderOrderSummary();
     renderPaymentSummary();
-    renderCheckoutHeader();
+    
 
     expect(document.querySelector(`.js-product-name-${productId1}`).innerText)
       .toContain('10-Piece Mixing Bowl Set with Lids - Floral');
@@ -280,7 +278,7 @@ describe('test suite: Integration test', () => {
       cart.updateCartQuantity(productId2, 100);
       renderOrderSummary();
       renderPaymentSummary();
-      renderCheckoutHeader();
+      
 
       expect(document.querySelector('.js-cart-quantity-amazon').innerText).toContain('229');
       expect(document.querySelector('.js-cart-quantity-order').innerText).toContain('229');

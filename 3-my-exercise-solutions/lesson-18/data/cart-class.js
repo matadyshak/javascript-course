@@ -50,15 +50,11 @@ addToCart(productId) {
       //${productId} should be in blue color
       // Convert to number to prevent appending to a string
       //In test mode has amazon.js run already?
-      let value;
-      let selectValue;
+      let value = '1';
+      let selectValue = 1;
 
       const element = document.querySelector(`.js-quantity-selector-${productId}`);
-      if (!element) {
-        console.log(`.js-quantity-selector-${productId} is ${element}` );
-        value = '1';
-        selectValue = 1;
-      } else {
+      if (element) {
         value = element.value;
         selectValue = Number(value);
       }
@@ -74,22 +70,24 @@ addToCart(productId) {
         })};
 
       const messageElement = document.querySelector(`.js-added-to-cart-${productId}`);
-      messageElement.classList.add("is-showing");
+      if (messageElement) {
+        messageElement.classList.add("is-showing");
         
-      if ( firstTime ) {
-        firstTime = false;
-      } else {
-        clearTimeout(myTimeoutId);
-      }
+        if ( firstTime ) {
+          firstTime = false;
+        } else {
+          clearTimeout(myTimeoutId);
+        }
 
-      // setTimeout takes an anonymous function and a timeout value
-      myTimeoutId = setTimeout(() => {  
-        messageElement.classList.remove("is-showing");
-      }, 2000);
+        // setTimeout takes an anonymous function and a timeout value
+        myTimeoutId = setTimeout(() => {  
+          messageElement.classList.remove("is-showing");
+        }, 2000);
 
-      this.updateCartQuantityIcon();
+        this.updateCartQuantityIcon();
+      } // if(messageElement
       this.saveToStorage();
-    }
+    } 
 
     removeFromCart(productId) {
       const newCart = [];
@@ -150,11 +148,9 @@ updateCartQuantity(productId, newQuantity) {
 updateCartQuantityIcon() {
   const cartTotalQuantity = this.calculateCartQuantity();
   const element = document.querySelector('.js-cart-quantity-amazon');
-  if (!element) {
-    console.log(`updateCartQuantityIcon(): ${element}`)
-  } else {
+  if (element) {
     element.innerText = cartTotalQuantity; 
-   } 
+  }
 }
 
 showLocalStorage() {
@@ -171,7 +167,14 @@ initCartForTest(cartItems) {
   return this.cartItems;
 }
 
-loadCart(fun) {
+clearCart() {
+  this.cartItems = [];
+  //updateCartQuantityIcon(); => causes error
+  this.saveToStorage();
+}
+
+/*
+loadCartXhr(fun) {
   const xhr = new XMLHttpRequest();
   xhr.addEventListener('load', () => {
         console.log('xhr.response');
@@ -181,7 +184,45 @@ loadCart(fun) {
     xhr.open('GET', 'https://supersimplebackend.dev/cart');
     xhr.send();
   }
-  
+
+  async loadCartFetch() {
+    return fetch('https://supersimplebackend.dev/cart')
+
+    .then((response) => {
+      if (response.ok) {
+        return response.text();
+      }
+      throw new Error('Network response was not OK');
+    })
+            
+    .then((text) => {
+      console.log('Cart:', text);
+      return text; // Return text data for promise.all
+    })
+
+    .catch((error) => {
+      console.log(`Unexpected error: ${error.message} Status: ${error.status}`);
+      return 'Error';
+    });
+  }
+
+  async loadCartAsyncAwait() {
+    try {
+      const response = await fetch('https://supersimplebackend.dev/cart');
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const textMessage = await response.text();
+      console.log(textMessage);
+
+    } catch (error) {
+      console.log(`Error: ${error} Status: ${error.status}`);
+    }
+  }
+*/
+
 } //class cart
 
 export const cart = new Cart('cart-class');

@@ -1,8 +1,7 @@
 import {cart} from '../../data/cart-class.js';
 import {renderOrderSummary} from '../../scripts/checkout/orderSummary.js';
 import {renderPaymentSummary} from '../../scripts/checkout/paymentSummary.js';
-import {renderCheckoutHeader} from '../../scripts/checkout/checkoutHeader.js';
-import {loadProducts, loadProductsFetch} from '../../data/products.js';
+import {loadProductsFetch} from '../../data/products.js';
 
 describe('test suite: addToCart', () => {
 
@@ -14,6 +13,8 @@ describe('test suite: addToCart', () => {
 
   document.querySelector('.js-test-container').innerHTML = `
     <div class="checkout-header js-cart-quantity-order"></div>
+    <div class="cart-empty js-cart-empty hidden">Your cart is empty.</div>
+    <button class="view-products-button js-view-products-button hidden">View products</button>
     <div class="order-summary js-order-summary"></div>
     <div class="payment-summary js-payment-summary"></div>
     <div class="product-quantity-container">
@@ -127,6 +128,8 @@ describe('test suite: removeFromCart', () => {
   
     document.querySelector('.js-test-container').innerHTML = `
       <div class="checkout-header js-cart-quantity-order"></div>
+      <div class="cart-empty js-cart-empty hidden">Your cart is empty.</div>
+      <button class="view-products-button js-view-products-button hidden">View products</button>
       <div class="order-summary js-order-summary"></div>
       <div class="payment-summary js-payment-summary"></div>
       `;
@@ -189,12 +192,11 @@ describe('test suite: change delivery option', () => {
   const productId3 = '8a53b080-6d40-4a65-ab26-b24ecf700bce'; // Cotton bath towels
   const productId4 = 'd37a651a-d501-483b-aae6-a9659b0757a0'; // Food storage containers (not in cart)
 
-  beforeAll((done) => {
-    loadProductsFetch().then(() => {
-      done();
-    });
+  beforeAll(async() => {
+  await loadProductsFetch();
+  console.log('loaded products');
   });
-  
+
   beforeEach( () => {
     spyOn(localStorage, 'setItem');
     spyOn(localStorage, 'getItem').and.callFake(() => {
@@ -203,6 +205,8 @@ describe('test suite: change delivery option', () => {
 
     document.querySelector('.js-test-container').innerHTML = `
       <div class="checkout-header js-cart-quantity-order"></div>
+      <div class="cart-empty js-cart-empty hidden">Your cart is empty.</div>
+      <button class="view-products-button js-view-products-button hidden">View products</button>
       <div class="order-summary js-order-summary"></div>
       <div class="payment-summary js-payment-summary"></div>
       `;
@@ -265,7 +269,7 @@ describe('test suite: change delivery option', () => {
       // Update the view
       renderOrderSummary();
       renderPaymentSummary();
-      renderCheckoutHeader();
+      
 
       element = document.querySelector(`.js-delivery-option-input-${productId3}-1`);
       expect(element.checked).toEqual(false); 

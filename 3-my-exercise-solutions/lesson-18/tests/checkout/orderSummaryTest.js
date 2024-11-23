@@ -2,17 +2,16 @@ import {renderOrderSummary} from '../../scripts/checkout/orderSummary.js';
 import {getDeliveryOption} from '../../data/deliveryOptions.js';
 import {cart} from '../../data/cart-class.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
-import isWeekend from '../../scripts/utils/datetime.js';
-import {loadProducts, loadProductsFetch} from '../../data/products.js';
+import {isWeekend} from '../../scripts/utils/datetime.js';
+import {loadProductsFetch} from '../../data/products.js';
 
 describe('test suite: renderOrderSummary', () => {
   const productId1 = 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6';
   const productId2 = '15b6fc6f-327a-4ec4-896f-486349e85a3d';
 
-  beforeAll((done) => {
-    loadProductsFetch().then(() => {
-      done();
-    });
+  beforeAll(async () => {
+    await loadProductsFetch();
+    console.log('Products loaded');
   });
   
   beforeEach( () => {
@@ -20,6 +19,8 @@ describe('test suite: renderOrderSummary', () => {
 
   document.querySelector('.js-test-container').innerHTML = `
     <div class="checkout-header js-cart-quantity-order"></div>
+    <div class="cart-empty js-cart-empty hidden">Your cart is empty.</div>
+    <button class="view-products-button js-view-products-button hidden">View products</button>
     <div class="order-summary js-order-summary"></div>
     <div class="payment-summary js-payment-summary"></div>
     <div class="product-quantity-container">
@@ -111,10 +112,9 @@ describe('test suite: delivery options', () => {
   const productId2 = 'a93a101d-79ef-4cf3-a6cf-6dbe532a1b4a'; // Bathroom rug
   const productId3 = '8a53b080-6d40-4a65-ab26-b24ecf700bce'; // Cotton bath towels
 
-  beforeAll((done) => {
-    loadProductsFetch().then(() => {
-      done();
-    });
+  beforeAll(async() => {
+    await loadProductsFetch();
+    console.log('loaded products');
   });
 
   beforeEach( () => {
@@ -122,6 +122,8 @@ describe('test suite: delivery options', () => {
   
     document.querySelector('.js-test-container').innerHTML = `
       <div class="checkout-header js-cart-quantity-order"></div>
+      <div class="cart-empty js-cart-empty hidden">Your cart is empty.</div>
+      <button class="view-products-button js-view-products-button hidden">View products</button>
       <div class="order-summary js-order-summary"></div>
       <div class="payment-summary js-payment-summary"></div>
       <div class="main">
@@ -186,8 +188,6 @@ describe('test suite: delivery options', () => {
       expect(document.querySelector(`.js-product-price-${productId1}`).innerText).toEqual('$15.60');
       expect(document.querySelector('.js-payment-summary-shipping').innerText).toEqual('$9.99');
       expect(document.querySelector('.js-payment-summary-total').innerText).toEqual('$182.59');
-
-
 
       element = document.querySelector(`.js-delivery-option-input-${productId1}-2`);
       element.click();

@@ -1,24 +1,36 @@
 import {cart} from '../data/cart-class.js';
-import {products, loadProducts} from '../data/products.js';
+import {products, loadProductsFetch} from '../data/products.js';
 
-// Top level code - runs after module loads
-loadProducts(renderProductsGrid);
-
-/*
-export function loadProductsData() {
-  loadProducts().then(() => {
-    renderProductsGrid();
-  })
-  .catch((error) => {
-    console.log(`Error: Failed to load products:`);
-  });
+async function loadAmazonPage(fcn) {
+  try {
+    await loadProductsFetch();
+    fcn();
+  } catch (error) {
+    console.log(`Unexpected error in loadAmazonPage(): ${error}. Please try again later.`);
+  }
 }
-*/
 
 function renderProductsGrid() {
   let productsHTML = '';
+  let numberIncluded = 0;
+  const searchString = new URLSearchParams(window.location.search).get('search') || '';
 
   products.forEach((product) => {
+    numberIncluded += product.setSearchIncluded(product.name, searchString, product.keywords);
+  });
+
+  const errorMessage = document.querySelector('.js-error-message');
+  if (numberIncluded === 0) {
+    errorMessage.classList.remove('hidden');
+  } else {
+    errorMessage.classList.add('hidden');
+  }
+
+  products.forEach((product) => {
+    if (!product.getSearchIncluded()) {
+      return; // skip this iteration
+    }
+
     productsHTML += `
       <div class="product-container">
       <div class="product-image-container">
@@ -104,9 +116,38 @@ function renderProductsGrid() {
 
       cart.addToCart(productId);
       displayCartQuantity();
-
       }) // button.addEventListener
     }) //forEach(button)
+
+    // Triggered by clicking search button on Amazon page
+    //Add a click event listener for the search button
+    const buttonElement = document.querySelector('.js-search-button');
+      buttonElement.addEventListener('click', () => {
+      const searchString = document.querySelector('.js-search-bar').value; 
+      const searchURL = new URL('amazon.html', window.location.origin);
+      searchURL.searchParams.set('search', searchString);
+      //Update URL without reloading
+      history.pushState(null, '', searchURL); 
+      renderProductsGrid();
+      displayCartQuantity();
+    }) // buttonElement.addEventListener
+
+    // Triggered by ENTER key while in the search text box
+    // Add a click event listener for the ENTER button
+    const searchInput = document.querySelector('.js-search-bar');
+    searchInput.addEventListener('keydown', function(event) {
+      //Get the search box text
+      if (event.key === 'Enter') {
+        const searchString = searchInput.value;
+        const searchURL = new URL('amazon.html', window.location.origin);
+        searchURL.searchParams.set('search', searchString);
+        //Update URL without reloading
+        history.pushState(null, '', searchURL); 
+        renderProductsGrid();
+        displayCartQuantity();
+      }
+    
+    }); // searchInput.addEventListener
   }
 
   function displayCartQuantity()
@@ -117,14 +158,5 @@ function renderProductsGrid() {
     document.querySelector('.js-cart-quantity-amazon').innerHTML = cartQuantity;
     return;
   }
-  
-  ////////////////////////////////////////////////////////////////////////////////
-// Get a variable out of a file
-// 1. Add type="module" attribute
-// 2. Export
-// 3. Import
-//
-// Put all imports at top of the file.
-// Must use Live Server to open HTML files that use modules.
-// 13:04:04
-////////////////////////////////////////////////////////////////////////////////
+
+  loadAmazonPage(renderProductsGrid);
