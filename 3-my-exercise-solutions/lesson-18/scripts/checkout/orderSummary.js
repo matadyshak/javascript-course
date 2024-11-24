@@ -89,11 +89,11 @@ cart.cartItems.forEach((cartItem) => {
   `;
 }); //forEach((cartItem
 
-const element = document.querySelector('.js-cart-quantity-order');
+const element = document.querySelector('.js-order-summary');
 if (element) {
   element.innerHTML = cartSummaryHTML;
 } else {
-  console.log(`Error: Element js-cart-quantity-order is: ${element}`);
+  console.log(`Error: Element js-order-summary is: ${element}`);
 }
 
 document.querySelectorAll('.js-delete-link')
